@@ -1,0 +1,12 @@
+---
+import Layout from "@layouts/BaseLayout.astro";
+import MembersGrid from "@components/MembersGrid";
+import { LEAGUE } from "@content/constants";
+---
+
+<Layout content={{ title: "SIBA Owners" }}>
+  <section class="content">
+    <h1>SIBA Owners</h1>
+  </section>
+  <MembersGrid league={LEAGUE.pro} client:load />
+</Layout>

@@ -1,0 +1,99 @@
+---
+layout: "@layouts/MarkdownLayout.astro"
+title: "SICBA Rules"
+---
+
+import EventsCalendar from "@components/EventsCalendar";
+import events from "@content/college-dates";
+import { LEAGUE } from "@content/constants";
+
+Thanks for checking our college basketball league. You will find the rules and other important information about the league below. If you have any questions, please reach out to us on either [Slack](https://join.slack.com/t/sibabball/shared_invite/zt-grkrrq9i-je57xB2Y7NGoPTh0GlKNNg) or [Twitter](https://twitter.com/SIBA_AveryINC). And don't forget to [join](/join)!
+
+## General Information
+
+The Simulation Internet College Basketball (SICBA) league is powered by Draft Day Sports: College Basketball **2021** version 9.7. We are skipping DDS:CB 2022 and will move to DDS:CB 2023 once it becomes available.
+
+Simulations run three times per week, every Tuesday, Thursday, and Saturday. The export file must be uploaded by **4:00 PM (Central Time)** on a sim day to ensure that it will included in the sim. After 4PM, there is no guarantee your changes will be included. To export, check out the pinned messages in the `#sicba-news` channel in Slack.
+
+## Important Game Dates
+
+<EventsCalendar league={LEAGUE.college} events={events} client:load />
+
+## Team Tiers and Rankings
+
+Teams each have a tier ranking and a recruiting region. Tier 1 teams are the best of the best and the most well-known. Tier 2 teams have the broadest range of skill and recognition. And finally Tier 3 teams are usually from smaller schools and/or have mediocre records.
+
+These rankings are re-evaluated every pre-season. The [pre-season rankings](/college/rankings) show the current rankings for the season. Below shows how the rankings determine the tier.
+
+- Tier 1: 1–40
+- Tier 2: 41–199
+- Tier 3: 200–357
+
+The recruiting region of a team is determined by the state where the school is located. There are five regions: Atlantic East, Midwest, Southeast, Great Plains, and West. If a school is based in California, their region would be West, for example. Refer to the map below to see which states belong to which region.
+
+![Regions for the SICBA](/images/recruiting-regions.svg)
+
+**NOTE:** Each person is allowed to coach up to three (3) teams, all of different tiers and different regions. None of your selected teams can share a tier or a recruiting region.
+
+Here are examples of valid and invalid team choices based on this sample school list.
+
+| School           | Tier | Region        |
+| ---------------- | ---- | ------------- |
+| Tennessee        | 1    | Southeast     |
+| West Virginia    | 1    | Atlantic East |
+| Michigan         | 1    | Midwest       |
+| Georgia Tech     | 2    | Southeast     |
+| New Mexico State | 2    | West          |
+| Wisconsin        | 2    | Midwest       |
+| Longwood         | 3    | Atlantic East |
+| Alabama A&M      | 3    | Southeast     |
+| Denver           | 3    | Great Plains  |
+
+**❌ Invalid - Shared Tiers**
+
+- Tennessee ❌
+- Michigan ❌
+- Denver
+
+**❌ Invalid - Shared Regions**
+
+- West Virginia
+- Georgia Tech ❌
+- Alabama A&M ❌
+
+**✅ Valid**
+
+- Michigan
+- New Mexico State
+- Longwood
+
+## Coach Creation
+
+When creating your coach(es), the following is required:
+
+- **Name:** First and last (**NOTE:** If you have selected to coach multiple teams, each coach must have a different name, though the last names can be the same, e.g. John Doe and Jane Doe)
+- **Login Password:** A password that is easy for you to remember
+- **Age:** 25 and up
+- **Personality:** (uses the following scale: very low, low, average, high, very high)
+  - Temper
+  - Ambition
+  - Academics
+  - Discipline
+  - Integrity
+
+## Coach Skill Attributes and Ability Points
+
+Coach skill attributes are determined by the tier of their team. There are five categories: Offense, Defense, Scouting, Recruiting, Player Development. Potentials will be capped at 95 possible in the 5 categories.
+
+1. Tier 1 Team - You will be set up in the **Power 5 Coach Model** and have 325 points to use. Each category must have a value of 10-85.
+2. Tier 2 Team - You will be set up in the **Mid-Major Coach Model** and have 240 points to use. Each category must have a value of 5-65.
+3. Tier 3 Team - You will be set up in the **Rookie Coach Model** and have 150 points to use. Each category must have a value of 5-45.
+
+## Vacation/Time Away from League
+
+If you are going to have limited or no access to the computer/internet for a few days, please let one of the commissioners know (Kelley Avery or Brittani Avery). You can also let another person in the league act as a proxy coach for your team if you will be away for an extended period of time.
+\
+\
+\
+SICBA Commissioners,\
+Brittani Avery & Kelley Avery

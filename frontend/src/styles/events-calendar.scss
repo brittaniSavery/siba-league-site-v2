@@ -1,0 +1,52 @@
+.recruiting {
+  &-none {
+    background-color: black !important;
+    color: white;
+  }
+
+  &-quiet {
+    background-color: #2185d0 !important;
+    color: white;
+  }
+
+  &-evaluation {
+    background-color: #f2711c !important;
+    color: white;
+  }
+
+  &-dead {
+    background-color: #db2828 !important;
+    color: white;
+  }
+
+  &-contact {
+    background-color: #21ba45 !important;
+    color: white;
+  }
+
+  &-loi {
+    background-color: #767676 !important;
+    color: white;
+  }
+}
+
+.tournament {
+  background-color: #8f6ead !important;
+  color: white;
+}
+
+.rbc-agenda-date-cell {
+  background-color: white;
+  color: black;
+}
+
+.rbc-month-header,
+.rbc-agenda-time-cell,
+.rbc-agenda-table th:nth-child(2) {
+  display: none !important;
+}
+
+$event-bg: #6e93ad;
+$today-highlight-bg: #dff1ff;
+
+@import "react-big-calendar/lib/sass/styles";

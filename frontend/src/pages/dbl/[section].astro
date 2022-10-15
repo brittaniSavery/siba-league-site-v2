@@ -1,0 +1,12 @@
+---
+import ProGenereatedPage from "@components/ProGenereatedPage.astro";
+
+type Props = {
+  section: string;
+};
+
+const { section } = Astro.params as Props;
+
+---
+
+<ProGenereatedPage league="dbl" section={section} />

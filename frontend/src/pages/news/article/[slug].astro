@@ -1,0 +1,61 @@
+---
+import ArticleDisplay from "@components/articles/ArticleDisplay";
+import Layout from "@layouts/BaseLayout.astro";
+import type { Article } from "@lib/global.d";
+import {
+  generateArticleTags,
+  getDataFromApi,
+  getFormattedDate,
+} from "@lib/utils";
+
+const { slug } = Astro.params;
+
+const search = await getDataFromApi<Article[]>(
+  `${import.meta.env.PUBLIC_CMS_URL}/articles?slug=${slug}`
+);
+
+const currentArticle = search[0];
+const { title, author, published_at, updatedAt } = currentArticle;
+const tags = generateArticleTags(currentArticle);
+---
+
+<Layout content={{ title: title }}>
+  <div class="content">
+    <h1 class="title">{title}</h1>
+    <div class="tags subtitle">
+      {tags.map(({ name }) => <span class="tag is-primary">{name}</span>)}
+    </div>
+  </div>
+  <div class="media">
+    <figure class="media-left">
+      <p class="image is-64x64">
+        <img
+          src={author.picture.url}
+          alt={author.picture.alternativeText}
+          class="is-rounded"
+        />
+      </p>
+    </figure>
+    <div class="media-content">
+      <div class="content">
+        <h2 class="is-family-primary title is-4">{author.name}</h2>
+        <p class="subtitle is-6">
+          Published on {getFormattedDate(published_at)} | Last Updated on {
+            getFormattedDate(updatedAt)
+          }
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="mt-3" />
+  <ArticleDisplay article={currentArticle} />
+  <a href="/news/articles">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fa-solid fa-caret-left"></i>
+      </span>
+      <span>Back to Articles</span>
+    </span>
+  </a>
+</Layout>

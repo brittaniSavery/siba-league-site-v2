@@ -1,0 +1,36 @@
+org: brittanisavery
+app: siba
+service: siba-api
+
+custom:
+  vars: ${file(vars.json)}
+  defaultStage: dev
+  serverless-offline:
+    httpPort: 4000
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-west-2
+  stage: ${opt:stage, self:custom.defaultStage}
+  environment:
+    COMMISSIONER: ${self:custom.vars.${self:provider.stage}_commis_email}
+    NO_REPLY: ${self:custom.vars.no_reply_email}
+    SITE_URL: ${self:custom.vars.site_url}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "ses:SendEmail"
+      Resource: "*"
+
+plugins:
+  - serverless-offline
+
+functions:
+  join:
+    handler: handler.join
+    events:
+      - http:
+          path: siba/join
+          method: post
+          cors: true

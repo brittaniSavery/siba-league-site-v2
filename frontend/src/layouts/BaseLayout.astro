@@ -1,0 +1,48 @@
+---
+import Nav from "@components/Nav";
+import Footer from "@components/Footer.astro";
+import clsx from "clsx";
+import "@styles/main.scss";
+
+const { content, fullWidth } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <title>{content.title} | SIBA</title>
+
+    <!-- Matomo Analytics -->
+    <script>
+      var _paq = (window._paq = window._paq || []);
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(["trackPageView"]);
+      _paq.push(["enableLinkTracking"]);
+      (function () {
+        var u = `${import.meta.env.PUBLIC_ANALYTICS_URL}`;
+        _paq.push(["setTrackerUrl", u + "matomo.php"]);
+        _paq.push(["setSiteId", `${import.meta.env.PUBLIC_ANALYTICS_SITE_ID}`]);
+        var d = document,
+          g = d.createElement("script"),
+          s = d.getElementsByTagName("script")[0];
+        g.async = true;
+        g.src = u + "matomo.js";
+        s.parentNode.insertBefore(g, s);
+      })();
+    </script>
+    <!-- End Matomo Code -->
+    <script
+      src="https://kit.fontawesome.com/205447cb05.js"
+      crossorigin="anonymous"></script>
+  </head>
+  <body class="has-navbar-fixed-top">
+    <Nav client:load />
+    <main class={clsx(!fullWidth && "container is-max-widescreen mt-2")}>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

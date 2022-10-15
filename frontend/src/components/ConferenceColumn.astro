@@ -1,0 +1,32 @@
+---
+import { linkify } from "@lib/utils";
+
+export type Props = {
+  title: string;
+  link: string;
+  image: string;
+};
+
+const { title, link, image } = Astro.props as Props;
+---
+
+<div
+  class="column is-3-widescreen is-4-desktop is-half-tablet has-text-centered"
+>
+  <div class="card is-shadowless">
+    <div class="card-image">
+      <img
+        src={`${
+          import.meta.env.SITE
+        }files/college/Website/images/1CM_${image}.png`}
+        alt={title}
+      />
+    </div>
+    <div class="card-footer">
+      <a
+        href={`/college/standings/${linkify(link)}`}
+        class="card-footer-item is-size-4">{title}</a
+      >
+    </div>
+  </div>
+</div>

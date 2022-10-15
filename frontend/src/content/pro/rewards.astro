@@ -1,0 +1,46 @@
+---
+import Layout from "@layouts/BaseLayout.astro";
+import type { RewardPoints } from "@lib/global.d";
+import { getDataFromApi, getFormattedDate } from "@lib/utils";
+import { Content as AllStar } from "./rewards/allstar.md";
+import { Content as Intro } from "./rewards/intro.md";
+import { Content as SeasonEnd } from "./rewards/seasonEnd.md";
+
+const rewardPoints = await getDataFromApi<RewardPoints>(
+  `${import.meta.env.PUBLIC_CMS_URL}/reward-points`
+);
+
+const updated = rewardPoints.updatedAt;
+const teamPoints = rewardPoints.data;
+---
+
+<Layout content={{ title: "SIBA Rewards" }}>
+  <section class="content">
+    <h1>SIBA Rewards</h1>
+    <Intro />
+    <div class="columns is-multiline">
+      <div class="column is-half">
+        <AllStar />
+      </div>
+      <div class="column is-half">
+        <SeasonEnd />
+      </div>
+      <div class="column is-half">
+        <h3>Current Team Reward Points</h3>
+        <p>Last Updated: {getFormattedDate(updated)}</p>
+        <table class="table">
+          <tr>
+            <th>Teams</th>
+            <th>Points</th>
+          </tr>
+          {teamPoints.map(p => (
+            <tr>
+              <td>{p.team}</td>  
+              <td>{p.points}</td>  
+            </tr>
+          ))}
+        </table>
+      </div>
+    </div>
+  </section>
+</Layout>

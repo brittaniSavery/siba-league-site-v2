@@ -1,0 +1,18 @@
+---
+import Layout from "@layouts/BaseLayout.astro";
+import JoinForm from "@components/join/JoinForm";
+const title = "Join";
+---
+
+<Layout content={{ title: title }}>
+  <section class="content">
+    <h1>{title}</h1>
+    <p>
+      Interested in joining the SIBA as the general manager of your own
+      professional basketball team or as the head coach of your own college
+      basketball team? Fill out the form below, selecting your teams and coach,
+      and the commissioner take your information and add you to our league.
+    </p>
+    <JoinForm client:load />
+  </section>
+</Layout>

@@ -1,0 +1,12 @@
+---
+import Layout from "@layouts/BaseLayout.astro";
+import MembersGrid from "@components/MembersGrid";
+import { LEAGUE } from "@content/constants";
+---
+
+<Layout content={{ title: "SIBA Head Coaches" }}>
+  <section class="content">
+    <h1>SIBA Head Coaches</h1>
+  </section>
+  <MembersGrid league={LEAGUE.college} client:load />
+</Layout>
