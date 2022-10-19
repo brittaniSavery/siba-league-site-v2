@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/reward-points",
+      "handler": "reward-points.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/reward-points",
+      "handler": "reward-points.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/reward-points",
+      "handler": "reward-points.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

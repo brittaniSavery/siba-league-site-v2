@@ -1,0 +1,19 @@
+{
+  "kind": "singleType",
+  "collectionName": "reward_points",
+  "info": {
+    "name": "Reward Points",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "data": {
+      "type": "json"
+    }
+  }
+}

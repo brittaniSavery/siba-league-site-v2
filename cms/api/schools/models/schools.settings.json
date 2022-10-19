@@ -1,0 +1,19 @@
+{
+  "kind": "singleType",
+  "collectionName": "schools",
+  "info": {
+    "name": "Schools",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "data": {
+      "type": "json"
+    }
+  }
+}

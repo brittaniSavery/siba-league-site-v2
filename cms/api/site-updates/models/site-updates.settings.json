@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "site_updates",
+  "info": {
+    "name": "Site Updates",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "content": {
+      "type": "richtext"
+    },
+    "summary": {
+      "type": "string",
+      "private": true,
+      "required": true
+    }
+  }
+}

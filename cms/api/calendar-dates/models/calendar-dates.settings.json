@@ -1,0 +1,22 @@
+{
+  "kind": "singleType",
+  "collectionName": "calendar_dates",
+  "info": {
+    "name": "Calendar Dates",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "pro": {
+      "type": "date"
+    },
+    "college": {
+      "type": "date"
+    }
+  }
+}

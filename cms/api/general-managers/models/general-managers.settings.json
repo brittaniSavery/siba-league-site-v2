@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "general_managers",
+  "info": {
+    "name": "General Managers"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "team": {
+      "type": "string",
+      "unique": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "logo": {
+      "type": "string"
+    }
+  }
+}

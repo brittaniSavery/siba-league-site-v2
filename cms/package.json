@@ -9,24 +9,35 @@
     "build": "strapi build",
     "strapi": "strapi"
   },
+  "devDependencies": {},
   "dependencies": {
-    "@_sh/strapi-plugin-ckeditor": "^1.1.2",
-    "@strapi/plugin-i18n": "4.4.3",
-    "@strapi/plugin-users-permissions": "4.4.3",
-    "@strapi/provider-email-amazon-ses": "^4.4.3",
-    "@strapi/provider-upload-aws-s3": "^4.4.3",
-    "@strapi/strapi": "4.4.3",
-    "pg": "8.6.0"
+    "knex": "^0.21.19",
+    "objectid": "^3.2.1",
+    "pg": "^8.7.3",
+    "slugify": "^1.5.3",
+    "strapi": "3.6.9",
+    "strapi-admin": "^3.6.9",
+    "strapi-connector-bookshelf": "^3.6.9",
+    "strapi-plugin-content-manager": "^3.6.9",
+    "strapi-plugin-content-type-builder": "^3.6.9",
+    "strapi-plugin-documentation": "^3.6.9",
+    "strapi-plugin-email": "3.6.9",
+    "strapi-plugin-i18n": "3.6.9",
+    "strapi-plugin-upload": "^3.6.9",
+    "strapi-plugin-users-permissions": "^3.6.9",
+    "strapi-provider-email-amazon-ses": "^3.6.9",
+    "strapi-provider-upload-aws-s3": "^3.6.9",
+    "strapi-utils": "3.6.9"
   },
   "author": {
     "name": "A Strapi developer"
   },
   "strapi": {
-    "uuid": "07d0fa7e-8cfb-4264-840f-ea75c9972afd"
+    "uuid": "e385a770-fd31-462f-8181-d3c691fea9d6"
   },
   "engines": {
-    "node": ">=14.19.1 <=18.x.x",
-    "npm": ">=6.0.0"
+    "node": ">=10.16.0 <=14.x.x",
+    "npm": "^6.0.0"
   },
   "license": "MIT"
 }
