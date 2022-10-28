@@ -1,5 +1,5 @@
 {
-  "/site-updates": {
+  "/upload/files": {
     "get": {
       "responses": {
         "200": {
@@ -7,7 +7,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SiteUpdateListResponse"
+                "$ref": "#/components/schemas/UploadFileListResponse"
               }
             }
           }
@@ -64,7 +64,7 @@
         }
       },
       "tags": [
-        "Site-update"
+        "Upload - File"
       ],
       "parameters": [
         {
@@ -159,89 +159,10 @@
           "style": "deepObject"
         }
       ],
-      "operationId": "get/site-updates"
-    },
-    "post": {
-      "responses": {
-        "200": {
-          "description": "OK",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SiteUpdateResponse"
-              }
-            }
-          }
-        },
-        "400": {
-          "description": "Bad Request",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Error"
-              }
-            }
-          }
-        },
-        "401": {
-          "description": "Unauthorized",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Error"
-              }
-            }
-          }
-        },
-        "403": {
-          "description": "Forbidden",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Error"
-              }
-            }
-          }
-        },
-        "404": {
-          "description": "Not Found",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Error"
-              }
-            }
-          }
-        },
-        "500": {
-          "description": "Internal Server Error",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Error"
-              }
-            }
-          }
-        }
-      },
-      "tags": [
-        "Site-update"
-      ],
-      "parameters": [],
-      "operationId": "post/site-updates",
-      "requestBody": {
-        "required": true,
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/SiteUpdateRequest"
-            }
-          }
-        }
-      }
+      "operationId": "get/upload/files"
     }
   },
-  "/site-updates/{id}": {
+  "/upload/files/{id}": {
     "get": {
       "responses": {
         "200": {
@@ -249,7 +170,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SiteUpdateResponse"
+                "$ref": "#/components/schemas/UploadFileResponse"
               }
             }
           }
@@ -306,7 +227,7 @@
         }
       },
       "tags": [
-        "Site-update"
+        "Upload - File"
       ],
       "parameters": [
         {
@@ -320,97 +241,7 @@
           }
         }
       ],
-      "operationId": "get/site-updates/{id}"
-    },
-    "put": {
-      "responses": {
-        "200": {
-          "description": "OK",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SiteUpdateResponse"
-              }
-            }
-          }
-        },
-        "400": {
-          "description": "Bad Request",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Error"
-              }
-            }
-          }
-        },
-        "401": {
-          "description": "Unauthorized",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Error"
-              }
-            }
-          }
-        },
-        "403": {
-          "description": "Forbidden",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Error"
-              }
-            }
-          }
-        },
-        "404": {
-          "description": "Not Found",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Error"
-              }
-            }
-          }
-        },
-        "500": {
-          "description": "Internal Server Error",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Error"
-              }
-            }
-          }
-        }
-      },
-      "tags": [
-        "Site-update"
-      ],
-      "parameters": [
-        {
-          "name": "id",
-          "in": "path",
-          "description": "",
-          "deprecated": false,
-          "required": true,
-          "schema": {
-            "type": "number"
-          }
-        }
-      ],
-      "operationId": "put/site-updates/{id}",
-      "requestBody": {
-        "required": true,
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/SiteUpdateRequest"
-            }
-          }
-        }
-      }
+      "operationId": "get/upload/files/{id}"
     },
     "delete": {
       "responses": {
@@ -477,7 +308,7 @@
         }
       },
       "tags": [
-        "Site-update"
+        "Upload - File"
       ],
       "parameters": [
         {
@@ -491,7 +322,7 @@
           }
         }
       ],
-      "operationId": "delete/site-updates/{id}"
+      "operationId": "delete/upload/files/{id}"
     }
   }
 }
