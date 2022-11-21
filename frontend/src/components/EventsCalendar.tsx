@@ -1,99 +1,90 @@
 import { LEAGUE, RECRUITING } from "@content/constants";
-import { CollegeEvent, ProEvent } from "@lib/global";
+import type { CollegeEvent, ProEvent } from "@lib/types";
 import "@styles/events-calendar.scss";
-import { DateTime, Settings } from "luxon";
-import { useMemo, useState } from "react";
-import {
-  Calendar,
-  DateLocalizer,
-  Formats,
-  luxonLocalizer,
-  Culture,
-} from "react-big-calendar";
+import { addDays, format, getDay, parse, startOfWeek } from "date-fns";
+import enUS from "date-fns/locale/en-US";
+import { useState } from "react";
+import { Calendar, dateFnsLocalizer } from "react-big-calendar";
+import CollegeEvents from "@content/rules/collegeDates";
+import ProEvents from "@content/rules/proDates";
+const locales = {
+  "en-US": enUS,
+};
+
+const localizer = dateFnsLocalizer({
+  format,
+  parse,
+  startOfWeek,
+  getDay,
+  locales,
+});
 
 type EventsCalendarProps = {
   league: LEAGUE;
-  events: Array<CollegeEvent | ProEvent>;
+  currentDate: Date;
 };
 
 export default function EventsCalendar({
   league,
-  events = [],
+  currentDate,
 }: EventsCalendarProps) {
-  //TODO: Add api call to change date to match Slack
-  const currentDate = new Date(2022, 6, 4);
-  const [calendarDate, setCalendarDate] = useState<Date>(currentDate);
-  const { localizer } = useMemo(() => {
-    Settings.defaultZone = import.meta.env.TIMEZONE;
+  const [calendarDate, setCalendarDate] = useState<Date>();
+  const events = league === LEAGUE.college ? CollegeEvents : ProEvents;
 
-    return {
-      localizer: luxonLocalizer(DateTime),
-    };
-  }, []);
+  const EventCalendar = Calendar<CollegeEvent | ProEvent>;
 
-  const formats: Formats = useMemo(
-    () => ({
-      monthHeaderFormat: (
-        date: Date,
-        culture?: Culture,
-        localizer?: DateLocalizer
-      ): string => {
-        return localizer.format(date, "LLLL");
-      },
-      agendaDateFormat: (
-        date: Date,
-        culture?: Culture,
-        localizer?: DateLocalizer
-      ): string => {
-        return localizer.format(date, "LLL dd");
-      },
-      agendaHeaderFormat: (
-        range: { start: Date; end: Date },
-        culture?: string,
-        localizer?: DateLocalizer
-      ): string => {
-        const startFormatted = localizer.format(range.start, "LLL dd");
-        const endFormatted = localizer.format(range.end, "LLL dd");
-        return `${startFormatted}–${endFormatted}`;
-      },
-    }),
-    []
-  );
+  // const formats: Formats = useMemo(
+  //   () => ({
+  //     monthHeaderFormat: (date: Date, localizer: DateLocalizer): string => {
+  //       return localizer.format(date, "LLLL");
+  //     },
+  //     agendaDateFormat: (date: Date, localizer: DateLocalizer): string => {
+  //       return localizer.format(date, "LLL dd");
+  //     },
+  //     agendaHeaderFormat: (
+  //       range: { start: Date; end: Date },
+  //       localizer: DateLocalizer
+  //     ): string => {
+  //       const startFormatted = localizer.format(range.start, "LLL dd");
+  //       const endFormatted = localizer.format(range.end, "LLL dd");
+  //       return `${startFormatted}–${endFormatted}`;
+  //     },
+  //   }),
+  //   []
+  // );
 
   return (
     <>
       <div style={{ height: "80vh" }}>
-        <Calendar
+        <EventCalendar
           popup
           localizer={localizer}
           date={calendarDate}
           events={events}
-          formats={formats}
+          //formats={formats}
           views={["month", "agenda"]}
           length={7}
-          min={DateTime.fromObject({ hour: 9 }).toJSDate()}
           eventPropGetter={(event) => getEventClass(league, event)}
           endAccessor={(event) => {
-            let endDate = DateTime.fromJSDate(event.end);
-            endDate = endDate.set({ hour: 23, minute: 59, second: 59 });
-
-            return endDate.toJSDate();
+            let endDate = event.end as Date;
+            return addDays(endDate, 1);
           }}
           getNow={() => currentDate}
           onNavigate={(newDate) => {
             setCalendarDate(newDate);
           }}
-          onRangeChange={(range: { start: Date; end: Date }) => {
-            const endDate = DateTime.fromJSDate(range.end);
-            const lastDay2022 = DateTime.fromISO("2022-12-31");
-            const firstDay2022 = DateTime.fromISO("2022-01-01");
-            const duration = lastDay2022.diff(endDate, "days").toObject().days;
+          onRangeChange={(range) => {
+            console.log(range);
+            // const endDate = range.end;
+            // const lastDay2022 = new Date(2022, 11, 31);
+            // const firstDay2022 = new Date(2022, 0, 1);
+            // const duration = differenceInDays(lastDay2022, endDate);
 
-            if (duration < -1) {
-              setCalendarDate(firstDay2022.toJSDate());
-            } else if (duration > 360) {
-              setCalendarDate(lastDay2022.toJSDate());
-            }
+            // if (duration < -1) {
+            //   setCalendarDate(firstDay2022);
+            // } else if (duration > 360) {
+            //   setCalendarDate(lastDay2022);
+            // }
           }}
         />
       </div>
@@ -107,7 +98,7 @@ function getEventClass(
 ): {
   className: string;
 } {
-  let className: string = null;
+  let className: string = "";
 
   if (league === LEAGUE.college) {
     const collegeEvent = event as CollegeEvent;

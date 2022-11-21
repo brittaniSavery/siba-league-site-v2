@@ -1,0 +1,41 @@
+---
+const currentYear = new Date().getFullYear();
+const copyright = `2018–${currentYear}`;
+---
+
+<footer class="footer">
+  <div class="container is-max-widescreen level">
+    <div class="level-left">
+      <div class="level-item">
+        <p>Find us on social media!</p>
+        <a
+          href="https://twitter.com/SIBA_AveryINC"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img
+            class="navbar-img"
+            src={`/images/Twitter_Logo_Blue.svg`}
+            alt="Follow us on Twitter!"
+          />
+        </a>
+        <a
+          href="https://join.slack.com/t/sibabball/shared_invite/zt-grkrrq9i-je57xB2Y7NGoPTh0GlKNNg"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img
+            class="navbar-img"
+            src={`/images/Slack_Mark.svg`}
+            alt="Join us on Slack!"
+          />
+        </a>
+      </div>
+    </div>
+    <div class="level-left">
+      <p class="level-item is-size-7">
+        &copy; {copyright} Avery Incorporated
+      </p>
+    </div>
+  </div>
+</footer>

@@ -30,6 +30,9 @@ html {
   h2 {
     font-family: $family-secondary;
   }
+  ul ol {
+    margin-top: 0.5em;
+  }
 }
 
 body > .container {

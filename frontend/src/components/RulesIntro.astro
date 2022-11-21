@@ -1,0 +1,121 @@
+---
+import { LEAGUE } from "@content/constants";
+import type {
+  LeagueInfo,
+  StrapiLeagueInfo,
+  StrapiSingleTypeResponse,
+} from "@lib/types";
+import { getDataFromApi } from "@lib/utils";
+import { capitalize, lowerCase } from "lodash-es";
+import EventsCalendar from "./EventsCalendar";
+
+export type Props = {
+  league: LeagueInfo;
+};
+
+const { league } = Astro.props as Props;
+
+const strapileague = await getDataFromApi<
+  StrapiSingleTypeResponse<StrapiLeagueInfo>
+>(`${import.meta.env.PUBLIC_CMS_URL}/${league.type}-info`);
+const currentSim = new Date(
+  `${strapileague.data.attributes.currentSim}T00:00:00`
+);
+---
+
+<p>
+  Thanks for checking our {league.typeFull} basketball league. You will find the
+  rules and other important information about the league below. If you have any questions,
+  please reach out to us on either <a
+    href="https://join.slack.com/t/sibabball/shared_invite/zt-grkrrq9i-je57xB2Y7NGoPTh0GlKNNg"
+    target="_blank"
+  >
+    Slack</a
+  >
+  or <a href="https://twitter.com/SIBA_AveryINC" target="_blank">Twitter</a>.
+  And don't forget to <a href="/join"><b>join</b></a>!
+</p>
+
+<h2>General Information</h2>
+<ul>
+  <li><b>League Name:</b> {league.name}</li>
+  <li>
+    <b>Program:</b> Draft Day Sports: {capitalize(league.type)} Basketball <b
+      ><i>2021</i>
+    </b> version {league.version} powered by <a
+      href="https://www.wolverinestudios.com/"
+      target="_blank">Wolverine Studios</a
+    >
+    <ul>
+      <li>
+        Note: We are skipping DDS:{league.typeAbbv} 2022 and will move to DDS:DDS:{
+          league.typeAbbv
+        } 2023 once it becomes available.
+      </li>
+    </ul>
+  </li>
+  <li>
+    <b>Export File Deadlines:</b>
+    {league.simDays} at <b><i>4:00 PM CENTRAL TIME</i></b>
+    <ul>
+      <li>
+        Note: After 4PM, there is no guarantee your changes will be included. Be
+        sure to check when 4PM Central is in your timezone. This <a
+          href="https://www.timeanddate.com/worldclock/converter.html?iso=20221121T030000&p1=tz_ct"
+          target="_blank">time zone converter</a
+        > has been very reliable.
+      </li>
+    </ul>
+  </li>
+  <li>
+    <b>How to Export Your File:</b>
+    <ol>
+      <li>Load the {league.abbv} association from the main menu</li>
+      <li>
+        Complete all changes for team ({
+          league.type === LEAGUE.college && "recruiting, "
+        }updating depth chart and strategy, talking with players, etc.)
+      </li>
+      {
+        league.type === LEAGUE.pro && (
+          <li>
+            <b>
+              SAVE
+              <span class="icon-text">
+                <span class="icon">
+                  <i class="fa-solid fa-floppy-disk" />
+                </span>
+              </span>
+            </b>
+          </li>
+        )
+      }
+      <li>
+        Go to your office (the <span class="icon-text">
+          <span class="icon"><i class="fa-solid fa-briefcase"></i></span>
+        </span> briefcase icon at the top)
+      </li>
+      <li>
+        Click the {league.color} "{
+          league.type === LEAGUE.college && "Save & "
+        }Export MP File" button at the bottom right-hand corner
+      </li>
+    </ol>
+  </li>
+  1. 2. 3. Load the SIBA association from the main menu 4. You're good to go! :+1::skin-tone-5:
+  (edited)
+  <li>
+    <b>How to Download the League File In-Game:</b>
+    <ol>
+      <li>On the main menu, click the "Update Multiplayer League" option</li>
+      <li>
+        Select and open the {league.abbv}.{lowerCase(league.typeAbbv)}b file
+      </li>
+      <li>Wait until the sign-in page appears</li>
+      <li>Sign in</li>
+    </ol>
+  </li>
+</ul>
+
+<h2><b>Important Game Dates</b></h2>
+<EventsCalendar league={league.type} currentDate={currentSim} client:load />

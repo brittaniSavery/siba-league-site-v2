@@ -1,29 +1,12 @@
-import { Article, Tag } from "./global";
-import { capitalize, sortBy } from "lodash-es";
+import { format } from "date-fns";
 
 export function getFormattedDate(date: string | Date): string {
-  const MONTHS = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-
   let dateObj: Date;
   if (typeof date === "string") {
     dateObj = new Date(date);
   } else dateObj = date;
 
-  return `${MONTHS[dateObj.getMonth()]}
-   ${dateObj.getDate()}, ${dateObj.getFullYear()}`;
+  return format(dateObj, "MMM d, yyyy");
 }
 
 export function linkify(data: string, original = false): string {
@@ -39,8 +22,8 @@ export async function getDataFromApi<T>(url: string): Promise<T> {
   return await (response.json() as Promise<T>);
 }
 
-export function generateArticleTags(article: Article): Tag[] {
-  const { league, tags } = article;
-  const sortedTags = sortBy([...tags, { name: capitalize(league) }], ["name"]);
-  return sortedTags;
-}
+// export function generateArticleTags(article: Article): Tag[] {
+//   const { league, tags } = article;
+//   const sortedTags = sortBy([...tags, { name: capitalize(league) }], ["name"]);
+//   return sortedTags;
+// }

@@ -1,0 +1,22 @@
+{
+  "kind": "singleType",
+  "collectionName": "college_infos",
+  "info": {
+    "singularName": "college-info",
+    "pluralName": "college-infos",
+    "displayName": "College Info"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "currentSim": {
+      "type": "date",
+      "required": true
+    },
+    "schools": {
+      "type": "json",
+      "required": true
+    }
+  }
+}

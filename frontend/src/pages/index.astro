@@ -1,20 +1,26 @@
 ---
 import { Content as Intro } from "@content/indexIntro.md";
 import Layout from "@layouts/BaseLayout.astro";
-import type { Article, SiteUpdate } from "@lib/global";
+import type { Article, SiteUpdate, StrapiCollectionResponse } from "@lib/types";
 import { getDataFromApi, getFormattedDate } from "@lib/utils";
 
-const updates = await getDataFromApi<SiteUpdate[]>(
+const updatesResponse = await getDataFromApi<
+  StrapiCollectionResponse<SiteUpdate>
+>(
   `${
     import.meta.env.PUBLIC_CMS_URL
-  }/site-updates?_limit=5&_start=0&_sort=published_at:DESC`
+  }/site-updates?pagination[pageSize]=5&sort=publishedAt:desc`
 );
+const updates = updatesResponse.data.map((u) => u.attributes);
 
-const latestArticles = await getDataFromApi<Article[]>(
+const articlesResponse = await getDataFromApi<
+  StrapiCollectionResponse<Article>
+>(
   `${
     import.meta.env.PUBLIC_CMS_URL
-  }/articles?_limit=5&_start=0&_sort=published_at:DESC`
+  }/articles?populate=author&pagination[pageSize]=5&sort=publishedAt:desc`
 );
+const articles = articlesResponse.data.map((a) => a.attributes);
 ---
 
 <Layout content={{ title: "Welcome" }}>
@@ -28,7 +34,7 @@ const latestArticles = await getDataFromApi<Article[]>(
       {
         updates.map((u) => (
           <>
-            <h3>{getFormattedDate(u.published_at)}</h3>
+            <h3>{getFormattedDate(u.publishedAt)}</h3>
             <p>{u.content}</p>
           </>
         ))
@@ -37,20 +43,24 @@ const latestArticles = await getDataFromApi<Article[]>(
     <div class="column">
       <h2>Latest Articles</h2>
       {
-        latestArticles.map((a) => (
-          <div class="mb-5">
-            <p>
-              <a class="is-size-5" href={`/news/article/${a.slug}`}>
-                {a.title}
-              </a>
-              <br />
-              <span class="is-size-7">
-                {getFormattedDate(a.published_at)} · {a.author.name}
-              </span>
-            </p>
-            <p>{a.summary}</p>
-          </div>
-        ))
+        articles.map((a) => {
+          const author = a.author.data.attributes;
+
+          return (
+            <div class="mb-5">
+              <p>
+                <a class="is-size-5" href={`/news/article/${a.slug}`}>
+                  {a.title}
+                </a>
+                <br />
+                <span class="is-size-7">
+                  {getFormattedDate(a.publishedAt)} · {author.name}
+                </span>
+              </p>
+              <p>{a.summary}</p>
+            </div>
+          );
+        })
       }
     </div>
   </div>

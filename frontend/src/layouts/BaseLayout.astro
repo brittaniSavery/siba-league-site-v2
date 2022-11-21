@@ -15,7 +15,6 @@ const { content, fullWidth } = Astro.props;
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <title>{content.title} | SIBA</title>
 
-    <!-- Matomo Analytics -->
     <script>
       var _paq = (window._paq = window._paq || []);
       /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
@@ -30,13 +29,13 @@ const { content, fullWidth } = Astro.props;
           s = d.getElementsByTagName("script")[0];
         g.async = true;
         g.src = u + "matomo.js";
-        s.parentNode.insertBefore(g, s);
+        s.parentNode && s.parentNode.insertBefore(g, s);
       })();
     </script>
-    <!-- End Matomo Code -->
     <script
       src="https://kit.fontawesome.com/205447cb05.js"
-      crossorigin="anonymous"></script>
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body class="has-navbar-fixed-top">
     <Nav client:load />

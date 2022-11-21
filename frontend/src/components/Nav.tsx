@@ -2,11 +2,10 @@ import clsx from "clsx";
 import { useState } from "react";
 
 const navItems = [
-  { title: "About", link: "/about", dropdown: false },
+  { title: "About", link: "/about" },
   {
     title: "SIBA Info",
     link: "/siba",
-    dropdown: true,
     sublinks: [
       { title: "Rules", link: "/rules" },
       { title: "Owners", link: "/owners" },
@@ -17,7 +16,6 @@ const navItems = [
   {
     title: "SIBA Season",
     link: "/siba",
-    dropdown: true,
     sublinks: [
       { title: "League Standings", link: "/standings" },
       { title: "League Leaders", link: "/leaders" },
@@ -31,7 +29,6 @@ const navItems = [
   {
     title: "College",
     link: "/college",
-    dropdown: true,
     sublinks: [
       { title: "Rules", link: "/rules" },
       { title: "League Standings", link: "/standings" },
@@ -43,7 +40,6 @@ const navItems = [
   {
     title: "DBL",
     link: "/dbl",
-    dropdown: true,
     sublinks: [
       { title: "League Standings", link: "/standings" },
       { title: "League Leaders", link: "/leaders" },
@@ -52,13 +48,12 @@ const navItems = [
   {
     title: "News",
     link: "/news",
-    dropdown: true,
     sublinks: [
       { title: "Pro Headlines", link: "/headlines" },
       { title: "Articles", link: "/articles" },
     ],
   },
-  { title: "Join", link: "/join", dropdown: false },
+  { title: "Join", link: "/join" },
 ];
 
 export default function Nav() {
@@ -72,7 +67,7 @@ export default function Nav() {
     >
       <section className="container is-max-widescreen">
         <div className="navbar-brand">
-          <a className="navbar-item" href={import.meta.env.SITE}>
+          <a className="navbar-item" href="/">
             <img src="/images/logo-blank.svg" alt="" className="navbar-img" />
             <span className="is-family-secondary has-text-weight-bold has-text-primary ml-2 is-size-3-touch is-size-2">
               SIBA
@@ -98,7 +93,7 @@ export default function Nav() {
         >
           <div className="navbar-start">
             {navItems.map((i) => {
-              if (i.dropdown)
+              if (i.sublinks)
                 return (
                   <NavDropdown
                     key={i.title}

@@ -1,0 +1,22 @@
+{
+  "kind": "singleType",
+  "collectionName": "pro_infos",
+  "info": {
+    "singularName": "pro-info",
+    "pluralName": "pro-infos",
+    "displayName": "Pro Info"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "currentSim": {
+      "type": "date",
+      "required": true
+    },
+    "rewardPoints": {
+      "type": "json",
+      "required": true
+    }
+  }
+}

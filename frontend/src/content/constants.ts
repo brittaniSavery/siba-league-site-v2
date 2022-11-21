@@ -20,6 +20,45 @@ export const enum TOURNAMENT_TYPE {
   postseason,
 }
 
+export const enum MONTHS {
+  Jan,
+  Feb,
+  Mar,
+  Apr,
+  May,
+  Jun,
+  Jul,
+  Aug,
+  Sep,
+  Oct,
+  Nov,
+  Dec,
+}
+
+export const PRO_LEAGUE_INFO = {
+  name: "Simulation Internet Professional Basketball",
+  abbv: "SIBA",
+  type: LEAGUE.pro,
+  typeAbbv: "PB",
+  typeFull: "professional",
+  simDays: "Monday, Wednesday, and Friday",
+  channel: "siba-league-news",
+  version: 10.11,
+  color: "blue",
+};
+
+export const COLLEGE_LEAGUE_INFO = {
+  name: "Simulation Internet College Basketball",
+  abbv: "SICBA",
+  type: LEAGUE.college,
+  typeAbbv: "CB",
+  typeFull: "college",
+  simDays: "Tuesday, Thursday, and Saturday",
+  channel: "sicba-news",
+  version: 9.7,
+  color: "orange",
+};
+
 export const CONFERENCES = [
   { file: "A-Sun", title: "Atlantic Sun Conference" },
   { file: "A10", title: "Atlantic 10 Conference" },
