@@ -1,0 +1,22 @@
+---
+import type { LEAGUE } from "@content/constants";
+import Layout from "@layouts/BaseLayout.astro";
+
+export type Props = {
+  title: string;
+  league: LEAGUE | string;
+  file: string;
+};
+
+const { title, league, file } = Astro.props as Props;
+---
+
+<Layout content={{ title: title }} fullWidth>
+  <section class="hero is-fullheight">
+    <iframe
+      id="websitePage"
+      title={title}
+      src={`${import.meta.env.SITE}files/${league}/Website/${file}.html`}
+      style="height: 100vh; width: 100%;"></iframe>
+  </section>
+</Layout>

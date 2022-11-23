@@ -17,6 +17,25 @@ html {
   min-height: 100%;
 }
 
+a:not(.navbar-item, .navbar-link) {
+  &:link {
+    text-decoration: underline;
+    color: #0f85ec;
+  }
+
+  &:visited {
+    color: #760fec;
+  }
+
+  &:hover,
+  &:focus {
+    color: $primary;
+    border-color: $primary;
+    border-style: dashed;
+    border-width: 1px;
+  }
+}
+
 .card {
   border: 1px solid $grey-lighter;
 

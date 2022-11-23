@@ -9,9 +9,9 @@ export function getFormattedDate(date: string | Date): string {
   return format(dateObj, "MMM d, yyyy");
 }
 
-export function linkify(data: string, original = false): string {
+export function linkify(data: string): string {
   const formatted = data.replace(/\s/g, "_");
-  return original ? formatted : formatted.toLowerCase();
+  return formatted;
 }
 
 export async function getDataFromApi<T>(url: string): Promise<T> {

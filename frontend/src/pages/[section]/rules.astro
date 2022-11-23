@@ -10,11 +10,11 @@ import { Content as CollegeRules } from "@content/rules/collegeRules.md";
 import { Content as ProRules } from "@content/rules/proRules.md";
 
 export function getStaticPaths() {
-  return [{ params: { league: "college" } }, { params: { league: "siba" } }];
+  return [{ params: { section: "college" } }, { params: { section: "siba" } }];
 }
 
-const { league } = Astro.params;
-const isCollege = league === LEAGUE.college;
+const { section } = Astro.params;
+const isCollege = section === LEAGUE.college;
 const leagueInfo = isCollege ? COLLEGE_LEAGUE_INFO : PRO_LEAGUE_INFO;
 ---
 

@@ -54,41 +54,40 @@ export default function EventsCalendar({
   // );
 
   return (
-    <>
-      <div style={{ height: "80vh" }}>
-        <EventCalendar
-          popup
-          localizer={localizer}
-          date={calendarDate}
-          events={events}
-          //formats={formats}
-          views={["month", "agenda"]}
-          length={7}
-          eventPropGetter={(event) => getEventClass(league, event)}
-          endAccessor={(event) => {
-            let endDate = event.end as Date;
-            return addDays(endDate, 1);
-          }}
-          getNow={() => currentDate}
-          onNavigate={(newDate) => {
-            setCalendarDate(newDate);
-          }}
-          onRangeChange={(range) => {
-            console.log(range);
-            // const endDate = range.end;
-            // const lastDay2022 = new Date(2022, 11, 31);
-            // const firstDay2022 = new Date(2022, 0, 1);
-            // const duration = differenceInDays(lastDay2022, endDate);
+    <div style={{ height: "80vh" }}>
+      <EventCalendar
+        popup
+        localizer={localizer}
+        date={calendarDate}
+        events={events}
+        //formats={formats}
+        views={["month", "agenda"]}
+        length={7}
+        eventPropGetter={(event) => getEventClass(league, event)}
+        endAccessor={(event) => {
+          let endDate = event.end as Date;
+          return addDays(endDate, 1);
+        }}
+        getNow={() => currentDate}
+        onNavigate={(newDate) => {
+          setCalendarDate(newDate);
+        }}
+        onRangeChange={(range) => {
+          const rangeObj = range as { start: Date; end: Date };
+          console.log(rangeObj);
+          // const endDate = range.end;
+          // const lastDay2022 = new Date(2022, 11, 31);
+          // const firstDay2022 = new Date(2022, 0, 1);
+          // const duration = differenceInDays(lastDay2022, endDate);
 
-            // if (duration < -1) {
-            //   setCalendarDate(firstDay2022);
-            // } else if (duration > 360) {
-            //   setCalendarDate(lastDay2022);
-            // }
-          }}
-        />
-      </div>
-    </>
+          // if (duration < -1) {
+          //   setCalendarDate(firstDay2022);
+          // } else if (duration > 360) {
+          //   setCalendarDate(lastDay2022);
+          // }
+        }}
+      />
+    </div>
   );
 }
 
@@ -104,7 +103,7 @@ function getEventClass(
     const collegeEvent = event as CollegeEvent;
 
     if (collegeEvent.tournament) {
-      className = "tournament";
+      className = "college-tournament";
     } else {
       switch (event.title) {
         case RECRUITING.Contact:
@@ -126,7 +125,22 @@ function getEventClass(
         case RECRUITING.Quiet:
           className = "recruiting-quiet";
           break;
+        default:
+          className = "college-important";
       }
+    }
+  } else {
+    const proEvent = event as ProEvent;
+
+    switch (proEvent.league) {
+      case LEAGUE.development:
+        className = "league-dev";
+        break;
+      case LEAGUE.european:
+        className = "league-euro";
+        break;
+      default:
+        className = "league-pro";
     }
   }
 

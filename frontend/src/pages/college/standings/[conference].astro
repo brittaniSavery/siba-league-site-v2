@@ -1,0 +1,24 @@
+---
+import IFrameContainer from "@components/IFrameContainer.astro";
+import { CONFERENCES, LEAGUE } from "@content/constants";
+import type { Conference } from "@lib/types";
+import { linkify } from "@lib/utils";
+
+const { conference } = Astro.params;
+
+export function getStaticPaths() {
+  return Object.keys(CONFERENCES).map((c) => ({
+    params: {
+      conference: c,
+    },
+  }));
+}
+
+const conferenceStr = conference as string;
+const selected = CONFERENCES[conferenceStr] as Conference;
+
+const title = `${selected.title} Standings`;
+const file = `${linkify(selected.file)}_Standings`;
+---
+
+<IFrameContainer title={title} file={file} league={LEAGUE.college} />

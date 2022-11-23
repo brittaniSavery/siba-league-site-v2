@@ -210,7 +210,7 @@ const events: ProEvent[] = [
   },
   {
     title: "Free Agency",
-    league: LEAGUE.pro,
+    league: LEAGUE.european,
     start: new Date(2022, MONTHS.Jul, 16),
     end: new Date(2022, MONTHS.Aug, 4),
   },

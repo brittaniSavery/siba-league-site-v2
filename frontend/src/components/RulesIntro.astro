@@ -7,7 +7,8 @@ import type {
 } from "@lib/types";
 import { getDataFromApi } from "@lib/utils";
 import { capitalize, lowerCase } from "lodash-es";
-import EventsCalendar from "./EventsCalendar";
+import EventsCalendar from "@components/EventCalendar/";
+import Legend from "./EventCalendar/Legend.astro";
 
 export type Props = {
   league: LeagueInfo;
@@ -33,7 +34,7 @@ const currentSim = new Date(
     Slack</a
   >
   or <a href="https://twitter.com/SIBA_AveryINC" target="_blank">Twitter</a>.
-  And don't forget to <a href="/join"><b>join</b></a>!
+  And don't forget to <a href="/join">join</a>!
 </p>
 
 <h2>General Information</h2>
@@ -102,8 +103,6 @@ const currentSim = new Date(
       </li>
     </ol>
   </li>
-  1. 2. 3. Load the SIBA association from the main menu 4. You're good to go! :+1::skin-tone-5:
-  (edited)
   <li>
     <b>How to Download the League File In-Game:</b>
     <ol>
@@ -118,4 +117,6 @@ const currentSim = new Date(
 </ul>
 
 <h2><b>Important Game Dates</b></h2>
+<h3>Legend</h3>
+<Legend league={league.type} />
 <EventsCalendar league={league.type} currentDate={currentSim} client:load />

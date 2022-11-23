@@ -72,6 +72,12 @@ export type Schools = {
   updatedAt: Date;
 };
 
+export type Conference = {
+  file: string;
+  title: string;
+  img?: string;
+};
+
 //#endregion
 
 //#region CALENDAR TYPES
