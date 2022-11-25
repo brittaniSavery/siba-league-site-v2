@@ -1,0 +1,34 @@
+---
+import type { StrapiSingleTypeResponse, StrapiLeagueInfo } from "@lib/types";
+import { PRO_LEAGUE_INFO } from "@content/constants";
+import { getDataFromApi, getFormattedDate } from "@lib/utils";
+import { Content as RewardsIntro } from "@content/rewardsIntro.md";
+import MarkdownLayout from "@layouts/MarkdownLayout.astro";
+
+const proInfo = await getDataFromApi<
+  StrapiSingleTypeResponse<StrapiLeagueInfo>
+>(`${import.meta.env.PUBLIC_CMS_URL}/pro-info`);
+const rewards = proInfo.data.attributes.rewardPoints;
+const lastUpdated = proInfo.data.attributes.updatedAt;
+---
+
+<MarkdownLayout content={{ title: `${PRO_LEAGUE_INFO.abbv} Rewards` }}>
+  <RewardsIntro />
+  <h3>Current Team Reward Points</h3>
+  <p>Last Updated: {getFormattedDate(lastUpdated)}</p>
+  <table>
+    <tr>
+      <th>Team</th>
+      <th>Points</th>
+    </tr>
+    {
+      rewards?.map((r) => (
+        <tr>
+          <td>{r.team}</td>
+          <td>{r.points}</td>
+        </tr>
+      ))
+    }
+
+  </table>
+</MarkdownLayout>

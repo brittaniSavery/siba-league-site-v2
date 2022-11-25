@@ -9,7 +9,7 @@ export type ChildrenProps = {
 
 export type StrapiObject<T> = {
   id: number;
-  attributes: T;
+  attributes: T & {createdAt: Date,updatedAt:Date, publishedAt?: Date};
 };
 
 export type StrapiCollectionResponse<T> = {
