@@ -15,7 +15,7 @@ const lastUpdated = proInfo.data.attributes.updatedAt;
 <MarkdownLayout content={{ title: `${PRO_LEAGUE_INFO.abbv} Rewards` }}>
   <RewardsIntro />
   <h3>Current Team Reward Points</h3>
-  <p>Last Updated: {getFormattedDate(lastUpdated)}</p>
+  <p><b>Last Updated:</b> {getFormattedDate(lastUpdated)}</p>
   <table>
     <tr>
       <th>Team</th>
@@ -29,6 +29,7 @@ const lastUpdated = proInfo.data.attributes.updatedAt;
         </tr>
       ))
     }
+
 
   </table>
 </MarkdownLayout>

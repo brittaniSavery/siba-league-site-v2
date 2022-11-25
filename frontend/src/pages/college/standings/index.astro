@@ -1,12 +1,14 @@
 ---
 import ConferenceColumn from "@components/ConferenceColumn.astro";
-import { CONFERENCES } from "@content/constants";
+import { COLLEGE_LEAGUE_INFO, CONFERENCES } from "@content/constants";
 import Layout from "@layouts/BaseLayout.astro";
+
+const title = `${COLLEGE_LEAGUE_INFO.abbv} College League Standings`;
 ---
 
-<Layout content={{ title: "College League Standings" }}>
+<Layout content={{ title: title }}>
   <section class="content">
-    <h1>College League Standings</h1>
+    <h1>{title}</h1>
   </section>
   <div class="columns is-multiline is-centered">
     {

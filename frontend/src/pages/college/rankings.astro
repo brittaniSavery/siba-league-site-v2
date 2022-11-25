@@ -1,0 +1,55 @@
+---
+import TierRankings from "@components/TierRankings";
+import { COLLEGE_LEAGUE_INFO } from "@content/constants";
+import Layout from "@layouts/BaseLayout.astro";
+import type {
+  Member,
+  School,
+  StrapiCollectionResponse,
+  StrapiLeagueInfo,
+  StrapiSingleTypeResponse,
+} from "@lib/types";
+import { getDataFromApi, getFormattedDate } from "@lib/utils";
+
+const coaches = await getDataFromApi<StrapiCollectionResponse<Member>>(
+  `${import.meta.env.PUBLIC_CMS_URL}/coaches`
+);
+const collegeInfo = await getDataFromApi<
+  StrapiSingleTypeResponse<StrapiLeagueInfo>
+>(`${import.meta.env.PUBLIC_CMS_URL}/college-info`);
+const schools: School[] = collegeInfo.data.attributes.schools || [];
+
+const title = `${COLLEGE_LEAGUE_INFO.abbv} Pre-Season Tier Rankings`;
+---
+
+<Layout content={{ title: title }}>
+  <section class="content">
+    <h1>{title}</h1>
+    <p>
+      All teams in SICBA are ranked and those rankings are used to determine the
+      school's tier. #1–40 are Tier 1, #41–196 are Tier 2, and #197–353 are Tier
+      3. Points used for creating a coach's attributes are also determined by
+      the tier of the school: 325 points (Tier 1), 240 points (Tier 2), 150
+      points (Tier 3). For more information, check the <a href="/college/rules"
+        >SICBA Rules</a
+      >.
+    </p>
+    <p>
+      <b>Note:</b> Teams that are <span class="highlighted p-1"
+        >highlighted</span
+      > and have a head coach are unavailable. Teams that have an exclamation icon
+      <span class="icon-text"
+        >(<span class="icon has-text-danger-dark">
+          <i class="fa-solid fa-circle-exclamation"></i>
+        </span>)</span
+      > are on probation. <span class="is-hidden-touch">Hover over</span><span
+        class="is-hidden-desktop">Click</span
+      > the icon to view the details of the probation.
+    </p>
+    <p>
+      <b>Last Updated:</b>
+      {getFormattedDate(collegeInfo.data.attributes.updatedAt)}
+    </p>
+  </section>
+  <TierRankings coaches={coaches.data} schools={schools} client:load />
+</Layout>
