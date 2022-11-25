@@ -9,6 +9,7 @@ import { getDataFromApi } from "@lib/utils";
 import { capitalize, lowerCase } from "lodash-es";
 import EventsCalendar from "@components/EventCalendar/";
 import Legend from "./EventCalendar/Legend.astro";
+import FontAwesomeIcon from "./FontAwesomeIcon";
 
 export type Props = {
   league: LeagueInfo;
@@ -49,7 +50,7 @@ const currentSim = new Date(
     >
     <ul>
       <li>
-        Note: We are skipping DDS:{league.typeAbbv} 2022 and will move to DDS:DDS:{
+        Note: We are skipping DDS:{league.typeAbbv} 2022 and will move to DDS:{
           league.typeAbbv
         } 2023 once it becomes available.
       </li>
@@ -81,20 +82,17 @@ const currentSim = new Date(
         league.type === LEAGUE.pro && (
           <li>
             <b>
-              SAVE
-              <span class="icon-text">
-                <span class="icon">
-                  <i class="fa-solid fa-floppy-disk" />
-                </span>
-              </span>
+              <FontAwesomeIcon
+                icon="fa-solid fa-floppy-disk"
+                frontText="SAVE!"
+              />
             </b>
           </li>
         )
       }
       <li>
-        Go to your office (the <span class="icon-text">
-          <span class="icon"><i class="fa-solid fa-briefcase"></i></span>
-        </span> briefcase icon at the top)
+        Go to your office (the <FontAwesomeIcon icon="fa-solid fa-briefcase" /> briefcase
+        icon at the top)
       </li>
       <li>
         Click the {league.color} "{

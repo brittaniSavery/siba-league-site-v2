@@ -69,7 +69,7 @@ export default function TierRankings({ coaches, schools }: TierRankingsProps) {
                   <span className="icon-text">
                     {school.probation && (
                       <span
-                        className="icon has-tooltip-right"
+                        className="icon has-tooltip-arrow"
                         data-tooltip={school.probation}
                       >
                         <i className="fa-solid fa-circle-exclamation has-text-danger-dark" />
