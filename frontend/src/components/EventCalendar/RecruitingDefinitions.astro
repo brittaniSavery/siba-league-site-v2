@@ -1,0 +1,67 @@
+---
+import FontAwesomeIcon from "@components/FontAwesomeIcon";
+import clsx from "clsx";
+import { lowerCase } from "lodash-es";
+
+const periods = [
+  {
+    name: "Quiet",
+    details: [
+      "Call Recruit",
+      "Watch Game Film",
+      "Host Recruit for Campus Visit",
+    ],
+  },
+  {
+    name: "Evaluation",
+    details: [
+      "Call Recruit",
+      "Watch Game Film",
+      "Host Recruit for Campus Visit",
+      "Watch Recruit in Live Games",
+    ],
+  },
+  {
+    name: "Contact",
+    details: [
+      "Call Recruit",
+      "Watch Game Film",
+      "Host Recruit for Campus Visit",
+      "Visit Recruit at Home",
+    ],
+  },
+  {
+    name: "Dead",
+    details: ["Call Recruit", "Watch Game Film"],
+  },
+  {
+    name: "Early/Late LOI Signings",
+    color: "loi",
+    details: ["Recruit Signs a Letter of Intent to Attend School"],
+  },
+];
+---
+
+<h3>Recruiting Period Definitions</h3>
+<div class="columns is-desktop">
+  {
+    periods.map((p) => (
+      <div class="column is-one-fifth">
+        <div
+          class={clsx(
+            "tag is-medium",
+            `recruiting-${p.color || lowerCase(p.name)}`
+          )}
+          style="width: 100%;"
+        >
+          {p.name}
+        </div>
+        <ul>
+          {p.details.map((pd) => (
+            <li>{pd}</li>
+          ))}
+        </ul>
+      </div>
+    ))
+  }
+</div>

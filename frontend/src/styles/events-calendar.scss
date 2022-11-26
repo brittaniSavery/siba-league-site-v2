@@ -1,30 +1,56 @@
+@mixin calendar-icon($iconCode) {
+  &.tag {
+    padding-left: 0.5rem;
+  }
+
+  &.tag,
+  .rbc-event-content,
+  .rbc-agenda-event-cell {
+    &::before {
+      align-items: center;
+      display: inline-flex;
+      justify-content: center;
+      height: 1.5rem;
+      width: 1.5rem;
+      font-family: FontAwesome;
+      content: $iconCode;
+    }
+  }
+}
+
 .recruiting {
   &-none {
+    @include calendar-icon("\f00d"); //xmark
     background-color: black !important;
     color: white !important;
   }
 
   &-quiet {
+    @include calendar-icon("\f027"); //speaker with low volume
     background-color: #2185d0 !important;
     color: white !important;
   }
 
   &-evaluation {
+    @include calendar-icon("\f002"); //magnifying-glass
     background-color: #f2711c !important;
     color: white !important;
   }
 
   &-dead {
+    @include calendar-icon("\f244"); //empty battery
     background-color: #db2828 !important;
     color: white !important;
   }
 
   &-contact {
+    @include calendar-icon("\e3af"); //house-chimney
     background-color: #21ba45 !important;
     color: white !important;
   }
 
   &-loi {
+    @include calendar-icon("\f305"); //pen
     background-color: #767676 !important;
     color: white !important;
   }
@@ -32,28 +58,33 @@
 
 .college {
   &-tournament {
+    @include calendar-icon("\f091"); //trophy
     background-color: #8f6ead !important;
     color: white !important;
   }
 
   &-important {
-    background-color: #cb841b !important;
+    @include calendar-icon("\21"); //exclaimation
+    background-color: #6e93ad !important;
     color: white !important;
   }
 }
 
 .league {
   &-pro {
+    @include calendar-icon("\50"); //The letter 'P'
     background-color: #3260a4 !important;
     color: white !important;
   }
 
   &-dev {
+    @include calendar-icon("\44"); //The letter 'D'
     background-color: #a43260 !important;
     color: white !important;
   }
 
   &-euro {
+    @include calendar-icon("\45"); //The letter 'E'
     background-color: #60a432 !important;
     color: white !important;
   }

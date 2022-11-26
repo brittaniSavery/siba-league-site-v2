@@ -10,6 +10,7 @@ import { capitalize, lowerCase } from "lodash-es";
 import EventsCalendar from "@components/EventCalendar/";
 import Legend from "./EventCalendar/Legend.astro";
 import FontAwesomeIcon from "./FontAwesomeIcon";
+import RecruitingDefinitions from "./EventCalendar/RecruitingDefinitions.astro";
 
 export type Props = {
   league: LeagueInfo;
@@ -115,6 +116,7 @@ const currentSim = new Date(
 </ul>
 
 <h2><b>Important Game Dates</b></h2>
+{league.type === LEAGUE.college && <RecruitingDefinitions />}
 <h3>Legend</h3>
 <Legend league={league.type} />
 <EventsCalendar league={league.type} currentDate={currentSim} client:load />
