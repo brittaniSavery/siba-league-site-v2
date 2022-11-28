@@ -3,6 +3,8 @@ import { Content as Intro } from "@content/indexIntro.md";
 import Layout from "@layouts/BaseLayout.astro";
 import type { Article, SiteUpdate, StrapiCollectionResponse } from "@lib/types";
 import { getDataFromApi, getFormattedDate } from "@lib/utils";
+import { micromark } from "micromark";
+import { Fragment } from "react";
 
 const updatesResponse = await getDataFromApi<
   StrapiCollectionResponse<SiteUpdate>
@@ -35,7 +37,7 @@ const articles = articlesResponse.data.map((a) => a.attributes);
         updates.map((u) => (
           <>
             <h3>{getFormattedDate(u.publishedAt)}</h3>
-            <p>{u.content}</p>
+            <Fragment set:html={micromark(u.content)} />
           </>
         ))
       }
@@ -57,7 +59,7 @@ const articles = articlesResponse.data.map((a) => a.attributes);
                   {getFormattedDate(a.publishedAt)} · {author.name}
                 </span>
               </p>
-              <p>{a.summary}</p>
+              <Fragment set:html={micromark(a.summary)} />
             </div>
           );
         })
