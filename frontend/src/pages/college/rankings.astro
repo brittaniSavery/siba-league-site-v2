@@ -6,16 +6,22 @@ import type {
   Member,
   School,
   StrapiCollectionResponse,
-  StrapiLeagueInfo,
+  StrapiCollegeInfo,
   StrapiSingleTypeResponse,
 } from "@lib/types";
 import { getDataFromApi, getFormattedDate } from "@lib/utils";
 
-const coaches = await getDataFromApi<StrapiCollectionResponse<Member>>(
+const strapiCoaches = await getDataFromApi<StrapiCollectionResponse<Member>>(
   `${import.meta.env.PUBLIC_CMS_URL}/coaches`
 );
+const coaches: Member[] = strapiCoaches.data.map((sc) => ({
+  team: sc.attributes.team,
+  logo: sc.attributes.logo,
+  name: sc.attributes.name,
+}));
+
 const collegeInfo = await getDataFromApi<
-  StrapiSingleTypeResponse<StrapiLeagueInfo>
+  StrapiSingleTypeResponse<StrapiCollegeInfo>
 >(`${import.meta.env.PUBLIC_CMS_URL}/college-info`);
 const schools: School[] = collegeInfo.data.attributes.schools || [];
 
@@ -51,5 +57,5 @@ const title = `${COLLEGE_LEAGUE_INFO.abbv} Pre-Season Tier Rankings`;
       {getFormattedDate(collegeInfo.data.attributes.updatedAt)}
     </p>
   </section>
-  <TierRankings coaches={coaches.data} schools={schools} client:load />
+  <TierRankings coaches={coaches} schools={schools} client:load />
 </Layout>

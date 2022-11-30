@@ -4,16 +4,13 @@
   "info": {
     "singularName": "college-info",
     "pluralName": "college-infos",
-    "displayName": "College Info"
+    "displayName": "College Info",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
   },
   "attributes": {
-    "currentSim": {
-      "type": "date",
-      "required": true
-    },
     "schools": {
       "type": "json",
       "required": true

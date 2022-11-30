@@ -1,16 +1,16 @@
 ---
+import EventsCalendar from "@components/EventCalendar/";
 import { LEAGUE } from "@content/constants";
 import type {
   LeagueInfo,
-  StrapiLeagueInfo,
+  StrapiSimInfo,
   StrapiSingleTypeResponse,
 } from "@lib/types";
 import { getDataFromApi } from "@lib/utils";
 import { capitalize, lowerCase } from "lodash-es";
-import EventsCalendar from "@components/EventCalendar/";
 import Legend from "./EventCalendar/Legend.astro";
-import FontAwesomeIcon from "./FontAwesomeIcon";
 import RecruitingDefinitions from "./EventCalendar/RecruitingDefinitions.astro";
+import FontAwesomeIcon from "./FontAwesomeIcon";
 
 export type Props = {
   league: LeagueInfo;
@@ -18,11 +18,15 @@ export type Props = {
 
 const { league } = Astro.props as Props;
 
-const strapileague = await getDataFromApi<
-  StrapiSingleTypeResponse<StrapiLeagueInfo>
->(`${import.meta.env.PUBLIC_CMS_URL}/${league.type}-info`);
+const strapiSimInfo = await getDataFromApi<
+  StrapiSingleTypeResponse<StrapiSimInfo>
+>(`${import.meta.env.PUBLIC_CMS_URL}/sim-info`);
 const currentSim = new Date(
-  `${strapileague.data.attributes.currentSim}T00:00:00`
+  `${
+    league.type === LEAGUE.pro
+      ? strapiSimInfo.data.attributes.proCurrentDate
+      : strapiSimInfo.data.attributes.collegeCurrentDate
+  }T00:00:00`
 );
 ---
 
@@ -32,11 +36,15 @@ const currentSim = new Date(
   please reach out to us on either <a
     href="https://join.slack.com/t/sibabball/shared_invite/zt-grkrrq9i-je57xB2Y7NGoPTh0GlKNNg"
     target="_blank"
+    rel="noreferrer"
   >
     Slack</a
   >
-  or <a href="https://twitter.com/SIBA_AveryINC" target="_blank">Twitter</a>.
-  And don't forget to <a href="/join">join</a>!
+  or <a
+    href="https://twitter.com/SIBA_AveryINC"
+    target="_blank"
+    rel="noreferrer">Twitter</a
+  >. And don&apos;t forget to <a href="/join">join</a>!
 </p>
 
 <h2>General Information</h2>
@@ -47,7 +55,8 @@ const currentSim = new Date(
       ><i>2021</i>
     </b> version {league.version} powered by <a
       href="https://www.wolverinestudios.com/"
-      target="_blank">Wolverine Studios</a
+      target="_blank"
+      rel="noreferrer">Wolverine Studios</a
     >
     <ul>
       <li>
@@ -65,7 +74,8 @@ const currentSim = new Date(
         Note: After 4PM, there is no guarantee your changes will be included. Be
         sure to check when 4PM Central is in your timezone. This <a
           href="https://www.timeanddate.com/worldclock/converter.html?iso=20221121T030000&p1=tz_ct"
-          target="_blank">time zone converter</a
+          target="_blank"
+          rel="noreferrer">time zone converter</a
         > has been very reliable.
       </li>
     </ul>
@@ -96,16 +106,18 @@ const currentSim = new Date(
         icon at the top)
       </li>
       <li>
-        Click the {league.color} "{
+        Click the {league.color} &quot;{
           league.type === LEAGUE.college && "Save & "
-        }Export MP File" button at the bottom right-hand corner
+        }Export MP File&quot; button at the bottom right-hand corner
       </li>
     </ol>
   </li>
   <li>
     <b>How to Download the League File In-Game:</b>
     <ol>
-      <li>On the main menu, click the "Update Multiplayer League" option</li>
+      <li>
+        On the main menu, click the &quot;Update Multiplayer League&quot; option
+      </li>
       <li>
         Select and open the {league.abbv}.{lowerCase(league.typeAbbv)}b file
       </li>

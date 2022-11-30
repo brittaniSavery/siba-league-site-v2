@@ -1,9 +1,9 @@
-import type { Member, School, StrapiObject } from "@lib/types";
+import type { Member, School } from "@lib/types";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 
 type TierRankingsProps = {
-  coaches: StrapiObject<Member>[];
+  coaches: Member[];
   schools: School[];
 };
 
@@ -47,21 +47,22 @@ export default function TierRankings({ coaches, schools }: TierRankingsProps) {
       </div>
       <table className="table is-fullwidth">
         <thead>
-          <th>#</th>
-          <th>School</th>
-          <th>Mascot</th>
-          <th>Region</th>
-          <th>Head Coach</th>
+          <tr>
+            <th>#</th>
+            <th>School</th>
+            <th>Mascot</th>
+            <th>Region</th>
+            <th>Head Coach</th>
+          </tr>
         </thead>
         <tbody>
           {currentSchools.map((school) => {
             const humanCoach = coaches.find(
-              (coach) =>
-                coach.attributes.team === `${school.name} ${school.mascot}`
+              (coach) => coach.team === `${school.name} ${school.mascot}`
             );
             return (
               <tr
-                key={school.name}
+                key={school.ranking}
                 className={clsx(humanCoach && "highlighted")}
               >
                 <td>{school.ranking}</td>
@@ -80,7 +81,7 @@ export default function TierRankings({ coaches, schools }: TierRankingsProps) {
                 </td>
                 <td>{school.mascot}</td>
                 <td>{school.region}</td>
-                <td>{humanCoach && humanCoach.attributes.name}</td>
+                <td>{humanCoach && humanCoach.name}</td>
               </tr>
             );
           })}

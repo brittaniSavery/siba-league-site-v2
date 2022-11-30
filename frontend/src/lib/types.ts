@@ -9,7 +9,7 @@ export type ChildrenProps = {
 
 export type StrapiObject<T> = {
   id: number;
-  attributes: T & {createdAt: Date,updatedAt:Date, publishedAt?: Date};
+  attributes: T & { createdAt: Date; updatedAt: Date; publishedAt?: Date };
 };
 
 export type StrapiCollectionResponse<T> = {
@@ -26,13 +26,20 @@ export type StrapiSingleTypeResponse<T> = {
   data: StrapiObject<T>;
 };
 
-export type StrapiLeagueInfo = {
-  currentSim: Date;
-  rewardPoints?: {
+export type StrapiSimInfo = {
+  proCurrentDate: Date;
+  collegeCurrentDate: Date;
+};
+
+export type StrapiProInfo = {
+  rewardPoints: {
     team: string;
     points: number;
   }[];
-  schools?: School[];
+};
+
+export type StrapiCollegeInfo = {
+  schools: School[];
 };
 
 export type LeagueInfo = {
