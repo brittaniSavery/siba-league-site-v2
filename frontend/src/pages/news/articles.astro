@@ -9,7 +9,7 @@ import { capitalize } from "lodash-es";
 const articles = await getDataFromApi<StrapiCollectionResponse<Article>>(
   `${
     import.meta.env.PUBLIC_CMS_URL
-  }/articles?sort=publishedAt:desc&populate=*&pagination[limit]=100`
+  }/articles?sort=publishedAt:desc&populate=tags,image,author.picture&pagination[limit]=100`
 );
 
 const strapiTags = await getDataFromApi<StrapiCollectionResponse<Tag>>(
@@ -28,10 +28,10 @@ const title = "League News and Opinion Articles";
 <Layout content={{ title: title }}>
   <section class="content">
     <h1>{title}</h1>
-    <ArticlesTable
-      articles={articles.data.map((article) => article.attributes)}
-      tags={tags}
-      client:load
-    />
   </section>
+  <ArticlesTable
+    articles={articles.data.map((article) => article.attributes)}
+    tags={tags}
+    client:load
+  />
 </Layout>

@@ -1,6 +1,8 @@
-import type { Article, Tag } from "@lib/types";
+import { LEAGUE } from "@content/constants";
+import type { Article } from "@lib/types";
 import clsx from "clsx";
-import { useState } from "react";
+import { lowerCase } from "lodash-es";
+import { useEffect, useState } from "react";
 import ArticleCard from "./ArticleCard";
 
 type ArticlesTableProps = {
@@ -10,6 +12,32 @@ type ArticlesTableProps = {
 
 export default function ArticlesTable({ articles, tags }: ArticlesTableProps) {
   const [activeTag, setActiveTag] = useState("all");
+  const [currentArticles, setCurrentArticles] = useState<Article[]>(articles);
+
+  useEffect(() => {
+    const lowerCaseActiveTag = lowerCase(activeTag);
+
+    switch (lowerCaseActiveTag) {
+      case "all":
+        setCurrentArticles(articles);
+        break;
+      case LEAGUE.college:
+      case LEAGUE.pro: {
+        const articlesByLeague = articles.filter(
+          (article) => article.league === lowerCaseActiveTag
+        );
+        setCurrentArticles(articlesByLeague);
+        break;
+      }
+      default: {
+        const articlesByTag = articles.filter((article) =>
+          article.tags.data.some((tag) => tag.attributes.name === activeTag)
+        );
+        setCurrentArticles(articlesByTag);
+      }
+    }
+  }, [activeTag]);
+
   return (
     <>
       <div className="tags are-medium">
@@ -30,7 +58,7 @@ export default function ArticlesTable({ articles, tags }: ArticlesTableProps) {
         ))}
       </div>
       <div className="columns is-multiline">
-        {articles.map((article) => (
+        {currentArticles.map((article) => (
           <ArticleCard key={article.slug} article={article} />
         ))}
       </div>

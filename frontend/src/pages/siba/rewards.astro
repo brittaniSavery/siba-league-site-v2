@@ -1,13 +1,13 @@
 ---
-import type { StrapiSingleTypeResponse, StrapiLeagueInfo } from "@lib/types";
+import type { StrapiSingleTypeResponse, StrapiProInfo } from "@lib/types";
 import { PRO_LEAGUE_INFO } from "@content/constants";
 import { getDataFromApi, getFormattedDate } from "@lib/utils";
 import { Content as RewardsIntro } from "@content/rewardsIntro.md";
 import MarkdownLayout from "@layouts/MarkdownLayout.astro";
 
-const proInfo = await getDataFromApi<
-  StrapiSingleTypeResponse<StrapiLeagueInfo>
->(`${import.meta.env.PUBLIC_CMS_URL}/pro-info`);
+const proInfo = await getDataFromApi<StrapiSingleTypeResponse<StrapiProInfo>>(
+  `${import.meta.env.PUBLIC_CMS_URL}/pro-info`
+);
 const rewards = proInfo.data.attributes.rewardPoints;
 const lastUpdated = proInfo.data.attributes.updatedAt;
 ---

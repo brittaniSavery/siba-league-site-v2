@@ -1,0 +1,16 @@
+[
+  {
+    "_id": "6d304e12-4481-4e8a-8c24-e60141284b36",
+    "colName": "SIBA CMS (local)",
+    "created": "2022-12-01T01:54:47.188Z",
+    "sortNum": 10000,
+    "folders": [],
+    "settings": {
+      "headers": [],
+      "tests": [],
+      "options": {
+        "baseUrl": "http://localhost:1337/api"
+      }
+    }
+  }
+]

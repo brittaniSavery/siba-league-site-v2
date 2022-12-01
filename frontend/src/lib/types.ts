@@ -105,10 +105,14 @@ export type ProEvent = Event & {
 export type Article = {
   author: { data: StrapiObject<Author> };
   content: string;
-  image: Picture & {
-    formats: {
-      thumbnail: Picture;
-    };
+  image: {
+    data: StrapiObject<
+      Picture & {
+        formats: {
+          thumbnail: Picture;
+        };
+      }
+    >;
   };
   league: "pro" | "college";
   publishedAt: string;
@@ -129,7 +133,7 @@ export type Picture = {
 export type Author = {
   name: string;
   url: string;
-  picture: Picture;
+  picture: { data: StrapiObject<Picture> };
 };
 
 export type Tag = {
