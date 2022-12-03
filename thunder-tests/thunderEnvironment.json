@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "_id": "0dec7eaa-716e-42ad-bdcd-e4a642680faa",
+    "name": "local SIBA CMS",
+    "default": false,
+    "sortNum": 10000,
+    "created": "2022-12-01T23:36:52.861Z",
+    "modified": "2022-12-01T23:36:52.862Z",
+    "data": [
+      {
+        "name": "BASE_URL",
+        "value": "http://localhost:1337/api"
+      }
+    ]
+  },
+  {
+    "_id": "1354b282-b3f0-4500-a707-68ef2b5d1b45",
+    "name": "prod SIBA CMS",
+    "default": true,
+    "sortNum": 20000,
+    "created": "2022-12-01T23:37:53.680Z",
+    "modified": "2022-12-01T23:37:53.680Z",
+    "data": [
+      {
+        "name": "BASE_URL",
+        "value": "https://siba-league-site-v2-production.up.railway.app/api"
+      }
+    ]
+  }
+]

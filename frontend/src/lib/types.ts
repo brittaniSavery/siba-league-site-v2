@@ -34,6 +34,7 @@ export type StrapiSimInfo = {
 export type StrapiProInfo = {
   rewardPoints: {
     team: string;
+    mascot: string;
     points: number;
   }[];
 };

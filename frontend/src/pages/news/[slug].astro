@@ -1,9 +1,9 @@
 ---
+import Layout from "@layouts/BaseLayout.astro";
 import type { Article, StrapiCollectionResponse } from "@lib/types";
 import { getDataFromApi, getFormattedDate } from "@lib/utils";
-import Layout from "@layouts/BaseLayout.astro";
+import { differenceInDays } from "date-fns";
 import { capitalize } from "lodash-es";
-import { differenceInDays, differenceInSeconds } from "date-fns";
 import { micromark } from "micromark";
 import { Fragment } from "react";
 
@@ -48,7 +48,7 @@ const tags = [
       {tags.map((tag) => <div class="tag">{tag}</div>)}
     </div>
   </section>
-  <div class="media">
+  <div class="media mb-2">
     <div class="media-left">
       <figure class="image is-64x64">
         <img
@@ -75,4 +75,12 @@ const tags = [
   <div class="content">
     <Fragment set:html={micromark(content)} />
   </div>
+  <a class="icon-link" href="/news/articles">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fa-solid fa-circle-arrow-left"></i>
+      </span>
+      <span>Back to Articles</span>
+    </span>
+  </a>
 </Layout>

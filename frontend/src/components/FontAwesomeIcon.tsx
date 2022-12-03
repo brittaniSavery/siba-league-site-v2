@@ -15,11 +15,11 @@ export default function FontAwesomeIcon({
 }: FontAwesomeIconProps) {
   return (
     <span className="icon-text">
-      {frontText}
+      {frontText && <span>{frontText}</span>}
       <span className={clsx("icon", color && `has-text-${color}`)}>
         <i className={icon} />
       </span>
-      {backText}
+      {backText && <span>{backText}</span>}
     </span>
   );
 }

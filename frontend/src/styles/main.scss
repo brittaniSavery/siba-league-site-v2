@@ -3,6 +3,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Secular+One&family=Maven+Pro:wght@400;500;600;700;800;900&display=swap");
 
 $primary: #3260a4;
+$link: #0f85ec;
+$link-visited: #760fec;
 $family-sans-serif: "Maven Pro", sans-serif;
 $family-secondary: "Secular One", sans-serif;
 $navbar-height: 6rem;
@@ -19,20 +21,44 @@ html {
 
 a:not(.navbar-item, .navbar-link) {
   &:link {
+    color: $link;
     text-decoration: underline;
-    color: #0f85ec;
   }
 
   &:visited {
-    color: #760fec;
+    color: $link-visited;
   }
 
   &:hover,
   &:focus {
     color: $primary;
-    border-color: $primary;
-    border-style: dashed;
-    border-width: 1px;
+    border: 1px dashed $primary;
+  }
+}
+
+a.icon-link {
+  &:link {
+    text-decoration: none;
+
+    span.icon-text > span:not(.icon) {
+      border-bottom: 1px solid $link;
+    }
+  }
+
+  &:visited:not(:hover, :focus) {
+    span.icon-text {
+      color: $link-visited !important;
+      > span:not(.icon) {
+        border-bottom: 1px solid $link-visited;
+      }
+    }
+  }
+
+  &:hover,
+  &:focus {
+    span.icon-text > span:not(.icon) {
+      border-bottom: none;
+    }
   }
 }
 
