@@ -11,7 +11,7 @@
     "draftAndPublish": false
   },
   "attributes": {
-    "rewardPoints": {
+    "teams": {
       "type": "json",
       "required": true
     }

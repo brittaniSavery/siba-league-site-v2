@@ -32,11 +32,7 @@ export type StrapiSimInfo = {
 };
 
 export type StrapiProInfo = {
-  rewardPoints: {
-    team: string;
-    mascot: string;
-    points: number;
-  }[];
+  teams: ProTeam[];
 };
 
 export type StrapiCollegeInfo = {
@@ -58,6 +54,12 @@ export type LeagueInfo = {
 export type SiteUpdate = {
   content: string;
   publishedAt: string;
+};
+
+export type ProTeam = {
+  name: string;
+  mascot: string;
+  points: number;
 };
 
 export type Member = {

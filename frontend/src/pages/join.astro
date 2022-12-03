@@ -1,0 +1,62 @@
+---
+import JoinForm from "@components/JoinForm";
+import { COLLEGE_LEAGUE_INFO, PRO_LEAGUE_INFO } from "@content/constants";
+import Layout from "@layouts/BaseLayout.astro";
+import type {
+  Member,
+  School,
+  StrapiCollectionResponse,
+  StrapiCollegeInfo,
+  StrapiProInfo,
+  StrapiSingleTypeResponse,
+} from "@lib/types";
+import { getDataFromApi } from "@lib/utils";
+
+const collegeInfo = await getDataFromApi<
+  StrapiSingleTypeResponse<StrapiCollegeInfo>
+>(`${import.meta.env.PUBLIC_CMS_URL}/college-info`);
+const schools: School[] = collegeInfo.data.attributes.schools || [];
+
+const strapiCoaches = await getDataFromApi<StrapiCollectionResponse<Member>>(
+  `${import.meta.env.PUBLIC_CMS_URL}/${
+    COLLEGE_LEAGUE_INFO.strapiMembers
+  }?pagination[limit]=100`
+);
+
+const coaches: Member[] = strapiCoaches.data.map((member) => ({
+  team: member.attributes.team,
+  logo: member.attributes.logo,
+  name: member.attributes.name,
+}));
+
+const proInfo = await getDataFromApi<StrapiSingleTypeResponse<StrapiProInfo>>(
+  `${import.meta.env.PUBLIC_CMS_URL}/pro-info`
+);
+const teams = proInfo.data.attributes.teams;
+
+const strapiGMs = await getDataFromApi<StrapiCollectionResponse<Member>>(
+  `${import.meta.env.PUBLIC_CMS_URL}/${
+    PRO_LEAGUE_INFO.strapiMembers
+  }?pagination[limit]=100`
+);
+
+const gms: Member[] = strapiGMs.data.map((member) => ({
+  team: member.attributes.team,
+  logo: member.attributes.logo,
+  name: member.attributes.name,
+}));
+---
+
+<Layout content={{ title: "Join" }}>
+  <section class="content">
+    <h1>Join</h1>
+    <p>
+      Interested in joining the SIBA as the general manager of your own
+      professional basketball team or as the head coach of your own university
+      basketball team? Fill out the form below, selecting your teams and coach,
+      and one of the commissioners will take your information and add you to the
+      league.
+    </p>
+  </section>
+  <JoinForm client:load />
+</Layout>

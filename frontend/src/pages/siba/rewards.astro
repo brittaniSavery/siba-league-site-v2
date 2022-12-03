@@ -8,7 +8,7 @@ import MarkdownLayout from "@layouts/MarkdownLayout.astro";
 const proInfo = await getDataFromApi<StrapiSingleTypeResponse<StrapiProInfo>>(
   `${import.meta.env.PUBLIC_CMS_URL}/pro-info`
 );
-const rewards = proInfo.data.attributes.rewardPoints;
+const teams = proInfo.data.attributes.teams;
 const lastUpdated = proInfo.data.attributes.updatedAt;
 ---
 
@@ -22,10 +22,10 @@ const lastUpdated = proInfo.data.attributes.updatedAt;
       <th>Points</th>
     </tr>
     {
-      rewards?.map((r) => (
+      teams?.map((team) => (
         <tr>
-          <td>{r.team}</td>
-          <td>{r.points}</td>
+          <td>{team.name}</td>
+          <td>{team.points}</td>
         </tr>
       ))
     }
