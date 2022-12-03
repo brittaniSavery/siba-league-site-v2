@@ -75,11 +75,24 @@ a.icon-link {
   h2 {
     font-family: $family-secondary;
   }
-  ul ol {
+
+  ul + ol {
     margin-top: 0.5em;
   }
+
   table {
     width: 50% !important;
+  }
+
+  dt {
+    font-size: $size-4;
+    border-bottom: 1px solid $text;
+    margin-bottom: $size-6;
+  }
+
+  dd + dt,
+  dd + dd {
+    margin-top: $size-6;
   }
 }
 
