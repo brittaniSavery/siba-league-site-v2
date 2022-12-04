@@ -133,6 +133,24 @@ body > .container {
   width: 5vh;
 }
 
+#join .card {
+  .tabs ul {
+    border-bottom-color: transparent;
+
+    li {
+      &.is-active a {
+        border-bottom-color: white !important;
+      }
+
+      a:hover,
+      a:focus {
+        color: $primary;
+        border: 1px dashed $primary;
+      }
+    }
+  }
+}
+
 #downloads {
   &-pro::after {
     content: "";

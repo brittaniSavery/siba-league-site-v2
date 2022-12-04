@@ -32,7 +32,7 @@ export default function TierRankings({ coaches, schools }: TierRankingsProps) {
 
   return (
     <>
-      <div className="tabs mb-2">
+      <div className="tabs is-boxed mb-2">
         <ul>
           <li className={clsx(activeTab === 1 && "is-active")}>
             <a onClick={() => setActiveTab(1)}>Tier 1</a>

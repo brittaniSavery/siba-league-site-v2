@@ -60,6 +60,8 @@ export type JoinSchema = {
   collegeTeams?: CollegeTeam[];
 };
 
+export const proTeamValidation: Joi.Schema<ProTeam> = Joi.object({});
+
 export const joinValidation: Joi.Schema<JoinSchema> = Joi.object({
   name: Joi.string().required().messages({
     "string.empty": "Please enter your name. First name is okay.",
@@ -82,7 +84,7 @@ export const joinValidation: Joi.Schema<JoinSchema> = Joi.object({
     .empty("")
     .when("found", {
       is: "other",
-      then: Joi.string().required().min(20),
+      then: Joi.string().required().min(15),
     })
     .messages({
       "any.required":

@@ -1,7 +1,9 @@
-import { capitalize } from "lodash-es";
-import type { BasicInput } from "./fieldTypes";
+import clsx from "clsx";
+import type { JoinSchema } from "../schema";
+import type { RegisteredInputProps } from "./BaseInput";
+import BaseInput from "./BaseInput";
 
-type SelectDropdownProps<T> = BasicInput & {
+type SelectDropdownProps<T> = RegisteredInputProps<JoinSchema> & {
   options: T[];
   renderOptionValue: (option: T) => string;
   renderOptionLabel: (option: T) => string;
@@ -18,9 +20,8 @@ export default function SelectDropdown<T>({
   registerOptions,
 }: SelectDropdownProps<T>) {
   return (
-    <div className="field">
-      <label className="label">{label ?? capitalize(name)}</label>
-      <div className="select">
+    <BaseInput name={name} label={label} error={error}>
+      <div className={clsx("select", error && "is-danger")}>
         <select {...register(name, registerOptions)}>
           <option value={""} />
           {options.map((option) => {
@@ -34,7 +35,6 @@ export default function SelectDropdown<T>({
           })}
         </select>
       </div>
-      {error && <p className="help is-danger">{error.message}</p>}
-    </div>
+    </BaseInput>
   );
 }

@@ -1,5 +1,7 @@
-import { capitalize } from "lodash-es";
-import type { BasicInput } from "./fieldTypes";
+import clsx from "clsx";
+import type { JoinSchema } from "../schema";
+import type { RegisteredInputProps } from "./BaseInput";
+import BaseInput from "./BaseInput";
 
 export default function TextInput({
   name,
@@ -8,19 +10,15 @@ export default function TextInput({
   error,
   register,
   registerOptions,
-}: BasicInput) {
+}: RegisteredInputProps<JoinSchema>) {
   return (
-    <div className="field">
-      <label className="label">{label ?? capitalize(name)}</label>
-      <div className="control">
-        <input
-          className="input"
-          type="text"
-          placeholder={placeHolder ?? ""}
-          {...register(name, registerOptions)}
-        />
-      </div>
-      {error && <p className="help is-danger">{error.message}</p>}
-    </div>
+    <BaseInput name={name} label={label} error={error}>
+      <input
+        className={clsx("input", error && "is-danger")}
+        type="text"
+        placeholder={placeHolder ?? ""}
+        {...register(name, registerOptions)}
+      />
+    </BaseInput>
   );
 }
