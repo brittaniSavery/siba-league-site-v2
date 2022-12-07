@@ -1,6 +1,7 @@
 import type { Member, School } from "@lib/types";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
+import ProbationIcon from "./ProbationIcon";
 
 type TierRankingsProps = {
   coaches: Member[];
@@ -56,35 +57,28 @@ export default function TierRankings({ coaches, schools }: TierRankingsProps) {
           </tr>
         </thead>
         <tbody>
-          {currentSchools.map((school) => {
-            const humanCoach = coaches.find(
-              (coach) => coach.team === `${school.name} ${school.mascot}`
-            );
-            return (
-              <tr
-                key={school.ranking}
-                className={clsx(humanCoach && "highlighted")}
-              >
-                <td>{school.ranking}</td>
-                <td>
-                  <span className="icon-text">
-                    {school.probation && (
-                      <span
-                        className="icon has-tooltip-arrow"
-                        data-tooltip={school.probation}
-                      >
-                        <i className="fa-solid fa-circle-exclamation has-text-danger-dark" />
-                      </span>
+          {currentSchools.map(
+            ({ name, mascot, ranking, probation, region }) => {
+              const humanCoach = coaches.find(
+                (coach) => coach.team === `${name} ${mascot}`
+              );
+              return (
+                <tr key={ranking} className={clsx(humanCoach && "highlighted")}>
+                  <td>{ranking}</td>
+                  <td>
+                    {probation ? (
+                      <ProbationIcon school={name} details={probation} />
+                    ) : (
+                      name
                     )}
-                    {school.name}
-                  </span>
-                </td>
-                <td>{school.mascot}</td>
-                <td>{school.region}</td>
-                <td>{humanCoach && humanCoach.name}</td>
-              </tr>
-            );
-          })}
+                  </td>
+                  <td>{mascot}</td>
+                  <td>{region}</td>
+                  <td>{humanCoach && humanCoach.name}</td>
+                </tr>
+              );
+            }
+          )}
         </tbody>
       </table>
     </>

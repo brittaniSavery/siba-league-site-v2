@@ -1,4 +1,5 @@
 ---
+import ProbationIcon from "@components/ProbationIcon";
 import TierRankings from "@components/TierRankings";
 import { COLLEGE_LEAGUE_INFO } from "@content/constants";
 import Layout from "@layouts/BaseLayout.astro";
@@ -44,13 +45,10 @@ const title = `${COLLEGE_LEAGUE_INFO.abbv} Pre-Season Tier Rankings`;
       <b>Note:</b> Teams that are <span class="highlighted p-1"
         >highlighted</span
       > and have a head coach are unavailable. Teams that have an exclamation icon
-      <span class="icon-text"
-        >(<span class="icon has-text-danger-dark">
-          <i class="fa-solid fa-circle-exclamation"></i>
-        </span>)</span
-      > are on probation. <span class="is-hidden-touch">Hover over</span><span
-        class="is-hidden-desktop">Click</span
-      > the icon to view the details of the probation.
+      (<ProbationIcon iconOnly />) are on probation. <span
+        class="is-hidden-touch">Hover over</span
+      ><span class="is-hidden-desktop">Click</span> the icon to view the details
+      of the probation.
     </p>
     <p>
       <b>Last Updated:</b>

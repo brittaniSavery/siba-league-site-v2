@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import type { JoinSchema } from "../schema";
-import type { RegisteredInputProps } from "./BaseInput";
-import BaseInput from "./BaseInput";
+import type { RegisteredFieldProps } from "../../FormControls/FieldBase";
+import FieldBase from "../../FormControls/FieldBase";
 
 export default function TextInput({
   name,
@@ -10,15 +10,17 @@ export default function TextInput({
   error,
   register,
   registerOptions,
-}: RegisteredInputProps<JoinSchema>) {
+  ...rest
+}: RegisteredFieldProps<JoinSchema>) {
   return (
-    <BaseInput name={name} label={label} error={error}>
+    <FieldBase name={name} label={label} error={error}>
       <input
         className={clsx("input", error && "is-danger")}
         type="text"
         placeholder={placeHolder ?? ""}
         {...register(name, registerOptions)}
+        {...rest}
       />
-    </BaseInput>
+    </FieldBase>
   );
 }

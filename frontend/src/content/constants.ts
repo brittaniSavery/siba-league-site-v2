@@ -47,8 +47,9 @@ export const PRO_LEAGUE_INFO = {
   channel: "siba-league-news",
   version: 10.11,
   color: "orange",
-  members: "Owners",
+  pageTitle: "Owners",
   strapiMembers: "general-managers",
+  singleMember: "general manager",
 };
 
 export const COLLEGE_LEAGUE_INFO = {
@@ -61,8 +62,9 @@ export const COLLEGE_LEAGUE_INFO = {
   channel: "sicba-news",
   version: 9.7,
   color: "blue",
-  members: "Head Coaches",
+  pageTitle: "Head Coaches",
   strapiMembers: "coaches",
+  singleMember: "head coach",
 };
 
 export const CONFERENCES: Record<string, Conference> = {

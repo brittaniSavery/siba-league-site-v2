@@ -64,13 +64,13 @@ export const proTeamValidation: Joi.Schema<ProTeam> = Joi.object({});
 
 export const joinValidation: Joi.Schema<JoinSchema> = Joi.object({
   name: Joi.string().required().messages({
-    "string.empty": "Please enter your name. First name is okay.",
+    "any.required": "Please enter your name. First name is okay.",
   }),
   email: Joi.string()
     .email({ tlds: { allow: false } })
     .required()
     .messages({
-      "string.empty": "Please enter your email address.",
+      "any.required": "Please enter your email address.",
       "string.email":
         "This email is not valid. Be sure to double check for typos.",
     }),

@@ -1,22 +1,22 @@
 import clsx from "clsx";
-import type { JoinSchema } from "../schema";
-import type { RegisteredFieldProps } from "../../FormControls/FieldBase";
-import FieldBase from "../../FormControls/FieldBase";
+import type { FieldValues } from "react-hook-form";
+import type { RegisteredFieldProps } from "./FieldBase";
+import FieldBase from "./FieldBase";
 
-export default function TextareaInput({
+export default function Textarea<T extends FieldValues>({
   name,
   label,
-  placeHolder,
   error,
   register,
   registerOptions,
-}: RegisteredFieldProps<JoinSchema>) {
+  ...rest
+}: RegisteredFieldProps<T>) {
   return (
     <FieldBase name={name} label={label} error={error}>
       <textarea
         className={clsx("textarea", error && "is-danger")}
-        placeholder={placeHolder ?? ""}
         {...register(name, registerOptions)}
+        {...rest}
       />
     </FieldBase>
   );
