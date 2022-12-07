@@ -1,19 +1,16 @@
 import Form from "@components/FormControls/Form";
 import Input from "@components/FormControls/Input";
-import TextInput from "@components/JoinForm/Fields/TextInput";
+import Select from "@components/FormControls/Select";
+import Textarea from "@components/FormControls/Textarea";
 import ProbationIcon from "@components/ProbationIcon";
 import { LEAGUE } from "@content/constants";
 
-import { joiResolver } from "@hookform/resolvers/joi";
 import clsx from "clsx";
 import { capitalize } from "lodash-es";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 
 // import type { Member, ProTeam, School } from "@lib/types";
-import { useForm } from "react-hook-form";
-import SelectDropdown from "./Fields/SelectDropdown";
-import TextareaInput from "./Fields/TextareaInput";
 import { FoundChoices, JoinSchema, joinValidation } from "./schema";
 import TeamModal from "./TeamModal";
 
@@ -33,8 +30,9 @@ export default function JoinForm() {
     console.log(showModal);
   });
 
-  const onSubmit: React.FormEventHandler<HTMLFormElement> &
-    SubmitHandler<JoinSchema> = (data) => {
+  const onSubmit: SubmitHandler<JoinSchema> = (data, event) => {
+    event?.preventDefault();
+    event?.stopPropagation();
     console.log(data);
   };
 
@@ -47,6 +45,15 @@ export default function JoinForm() {
       >
         <Input name="name" />
         <Input name="email" type="email" />
+        <Select<JoinSchema, { label: string; name: string }>
+          name="found"
+          label="Found SIBA from"
+          options={FoundChoices}
+          renderOptionValue={(option) => option.name}
+          renderOptionLabel={(option) => option.label}
+          rules={{ deps: "reason" }}
+        />
+        <Textarea name="reason" />
         {/* <TextInput name="name" error={errors.name} register={register} />
         <TextInput name="email" error={errors.email} register={register} />
         <SelectDropdown

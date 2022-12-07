@@ -1,30 +1,33 @@
 import clsx from "clsx";
 import type { InputHTMLAttributes } from "react";
-import { Controller } from "react-hook-form";
-import type { UseControllerProps } from "react-hook-form/dist/types";
+import { useController } from "react-hook-form";
+import type {
+  FieldValues,
+  UseControllerProps,
+} from "react-hook-form/dist/types";
 import FieldBase from "./FieldBase";
 
-interface InputProps extends UseControllerProps {
+type InputProps<T extends FieldValues> = UseControllerProps<T> & {
   label?: string;
-}
+};
 
-export default function Input({
-  name,
-  rules,
-  label,
-  ...rest
-}: InputProps & InputHTMLAttributes<HTMLInputElement>) {
+export default function Input<T extends FieldValues>(
+  props: InputProps<T> & InputHTMLAttributes<HTMLElement>
+) {
+  const {
+    field,
+    fieldState: { error },
+  } = useController(props);
+
+  const { name, label, ...rest } = props;
+
   return (
-    <Controller
-      name={name}
-      rules={rules}
-      render={({ fieldState: { error } }) => {
-        return (
-          <FieldBase name={name} label={label} error={error}>
-            <input className={clsx("input", error && "is-danger")} {...rest} />
-          </FieldBase>
-        );
-      }}
-    />
+    <FieldBase name={name} label={label} error={error}>
+      <input
+        {...field}
+        className={clsx("input", error && "is-danger")}
+        {...rest}
+      />
+    </FieldBase>
   );
 }

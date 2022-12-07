@@ -1,29 +1,40 @@
 import clsx from "clsx";
-import type { FieldValues } from "react-hook-form";
-import type { RegisteredFieldProps } from "./FieldBase";
+import type { InputHTMLAttributes } from "react";
+import { useController } from "react-hook-form";
+import type {
+  FieldValues,
+  UseControllerProps,
+} from "react-hook-form/dist/types";
 import FieldBase from "./FieldBase";
 
-type SelectProps<T extends FieldValues> = RegisteredFieldProps<T> & {
-  options: T[];
-  renderOptionValue: (option: T) => string;
-  renderOptionLabel: (option: T) => string;
+type SelectProps<T extends FieldValues, K> = UseControllerProps<T> & {
+  label?: string;
+  options: K[];
+  renderOptionValue: (option: K) => string;
+  renderOptionLabel: (option: K) => string;
 };
 
-export default function Select<T extends FieldValues>({
-  name,
-  label,
-  options,
-  renderOptionValue,
-  renderOptionLabel,
-  error,
-  register,
-  registerOptions,
-  ...rest
-}: SelectProps<T>) {
+export default function Select<T extends FieldValues, K>(
+  props: SelectProps<T, K> & InputHTMLAttributes<HTMLElement>
+) {
+  const {
+    field,
+    fieldState: { error },
+  } = useController(props);
+
+  const {
+    name,
+    label,
+    options,
+    renderOptionLabel,
+    renderOptionValue,
+    ...rest
+  } = props;
+
   return (
     <FieldBase name={name} label={label} error={error}>
       <div className={clsx("select", error && "is-danger")}>
-        <select {...register(name, registerOptions)} {...rest}>
+        <select {...field} {...rest}>
           <option value={""} />
           {options.map((option) => {
             const optionValue = renderOptionValue(option);

@@ -8,14 +8,15 @@ import type {
 } from "react-hook-form";
 import { FormProvider, useForm } from "react-hook-form";
 
-type FormProps<T extends FieldValues> = React.PropsWithChildren &
-  React.HTMLAttributes<HTMLFormElement> & {
-    defaultValues?: DefaultValues<T>;
-    validation?: Joi.Schema<T>;
-    onSubmit: SubmitHandler<T>;
-  };
+type FormProps<T extends FieldValues> = React.PropsWithChildren & {
+  id?: string;
+  defaultValues?: DefaultValues<T>;
+  validation?: Joi.Schema<T>;
+  onSubmit: SubmitHandler<T>;
+};
 
 export default function Form<T extends FieldValues>({
+  id,
   defaultValues,
   validation,
   children,
@@ -33,8 +34,9 @@ export default function Form<T extends FieldValues>({
   }, [methods.formState]);
 
   return (
-    <FormProvider {...methods}>
+    <FormProvider<T> {...methods}>
       <form
+        id={id}
         noValidate={!!validation}
         onSubmit={methods.handleSubmit(onSubmit)}
         {...rest}
