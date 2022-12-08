@@ -37,13 +37,13 @@ type Basics = {
   playerDev: number;
 };
 
-type ProTeam = Basics & {
+export type FormProTeam = Basics & {
   memberPersonality: PRO_PERSONALITY;
   memberGreed: LOW_HIGH_LEVELS;
   potential: number;
 };
 
-type CollegeTeam = Basics & {
+export type FormCollegeTeam = Basics & {
   memberAmbition: LOW_HIGH_LEVELS;
   memberAcademics: LOW_HIGH_LEVELS;
   memberDiscipline: LOW_HIGH_LEVELS;
@@ -56,11 +56,11 @@ export type JoinSchema = {
   email: string;
   found: "developers" | "referral" | "google" | "twitter" | "other";
   reason?: string;
-  proTeam?: ProTeam;
-  collegeTeams?: CollegeTeam[];
+  proTeam?: FormProTeam;
+  collegeTeams?: FormCollegeTeam[];
 };
 
-export const proTeamValidation: Joi.Schema<ProTeam> = Joi.object({});
+export const proTeamValidation: Joi.Schema<FormProTeam> = Joi.object({});
 
 export const joinValidation: Joi.Schema<JoinSchema> = Joi.object({
   name: Joi.string().required().messages({

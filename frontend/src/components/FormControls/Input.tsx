@@ -5,24 +5,22 @@ import type {
   FieldValues,
   UseControllerProps,
 } from "react-hook-form/dist/types";
-import FieldBase from "./FieldBase";
-
-type InputProps<T extends FieldValues> = UseControllerProps<T> & {
-  label?: string;
-};
+import FieldBase, { AllFieldProps } from "./FieldBase";
 
 export default function Input<T extends FieldValues>(
-  props: InputProps<T> & InputHTMLAttributes<HTMLElement>
+  props: AllFieldProps<T> &
+    UseControllerProps<T> &
+    InputHTMLAttributes<HTMLElement>
 ) {
   const {
     field,
     fieldState: { error },
   } = useController(props);
 
-  const { name, label, ...rest } = props;
+  const { name, label, size, help, ...rest } = props;
 
   return (
-    <FieldBase name={name} label={label} error={error}>
+    <FieldBase name={name} label={label} error={error} size={size} help={help}>
       <input
         {...field}
         className={clsx("input", error && "is-danger")}

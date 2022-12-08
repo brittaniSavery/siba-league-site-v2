@@ -5,11 +5,10 @@ import type {
   FieldValues,
   UseControllerProps,
 } from "react-hook-form/dist/types";
-import FieldBase from "./FieldBase";
+import FieldBase, { AllFieldProps } from "./FieldBase";
 
-type TextareaProps<T extends FieldValues> = UseControllerProps<T> & {
-  label?: string;
-};
+type TextareaProps<T extends FieldValues> = AllFieldProps<T> &
+  UseControllerProps<T>;
 
 export default function Textarea<T extends FieldValues>(
   props: TextareaProps<T> & InputHTMLAttributes<HTMLElement>
@@ -19,10 +18,17 @@ export default function Textarea<T extends FieldValues>(
     fieldState: { error },
   } = useController(props);
 
-  const { name, label, ...rest } = props;
+  const { name, label, size, help, horizontal, ...rest } = props;
 
   return (
-    <FieldBase name={name} label={label} error={error}>
+    <FieldBase
+      name={name}
+      label={label}
+      error={error}
+      size={size}
+      help={help}
+      horizontal={horizontal}
+    >
       <textarea
         {...field}
         className={clsx("textarea", error && "is-danger")}

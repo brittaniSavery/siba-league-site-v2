@@ -5,14 +5,14 @@ import type {
   FieldValues,
   UseControllerProps,
 } from "react-hook-form/dist/types";
-import FieldBase from "./FieldBase";
+import FieldBase, { AllFieldProps } from "./FieldBase";
 
-type SelectProps<T extends FieldValues, K> = UseControllerProps<T> & {
-  label?: string;
-  options: K[];
-  renderOptionValue: (option: K) => string;
-  renderOptionLabel: (option: K) => string;
-};
+type SelectProps<T extends FieldValues, K> = AllFieldProps<T> &
+  UseControllerProps<T> & {
+    options: K[];
+    renderOptionValue?: (option: K) => string;
+    renderOptionLabel?: (option: K) => string;
+  };
 
 export default function Select<T extends FieldValues, K>(
   props: SelectProps<T, K> & InputHTMLAttributes<HTMLElement>
@@ -25,15 +25,31 @@ export default function Select<T extends FieldValues, K>(
   const {
     name,
     label,
+    size,
+    help,
+    horizontal,
     options,
-    renderOptionLabel,
-    renderOptionValue,
+    renderOptionLabel = (option) => option as string,
+    renderOptionValue = (option) => option as string,
     ...rest
   } = props;
 
   return (
-    <FieldBase name={name} label={label} error={error}>
-      <div className={clsx("select", error && "is-danger")}>
+    <FieldBase
+      name={name}
+      label={label}
+      error={error}
+      size={size}
+      help={help}
+      horizontal={horizontal}
+    >
+      <div
+        className={clsx(
+          "select",
+          error && "is-danger",
+          size && size !== "narrow" && "is-fullwidth"
+        )}
+      >
         <select {...field} {...rest}>
           <option value={""} />
           {options.map((option) => {
