@@ -28,14 +28,26 @@ export default function FieldBase<T extends FieldValues>({
   horizontal = false,
   children,
 }: FieldBaseProps<T>) {
-  const LabelContainer = ({ children }: React.PropsWithChildren) =>
-    horizontal ? (
-      <div className="field-label">{children}</div>
-    ) : (
-      <>{children}</>
+  if (horizontal) {
+    return (
+      <div
+        className={clsx("field is-horizontal", !!size && `column is-${size}`)}
+      >
+        <div className="field-label">
+          <label className="label">{label ?? capitalize(name)}</label>
+        </div>
+        <div className="field-body">
+          <div className="field">
+            <div className="control">{children}</div>
+            {error && (
+              <p className="help has-text-danger-dark">{error.message}</p>
+            )}
+            {!error && help && <p className="help">{help}</p>}
+          </div>
+        </div>
+      </div>
     );
-  const FieldContainer = ({ children }: React.PropsWithChildren) =>
-    horizontal ? <div className="field-body">{children}</div> : <>{children}</>;
+  }
 
   return (
     <div className={clsx("field", !!size && `column is-${size}`)}>

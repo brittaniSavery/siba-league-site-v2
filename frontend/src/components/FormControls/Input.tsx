@@ -17,10 +17,17 @@ export default function Input<T extends FieldValues>(
     fieldState: { error },
   } = useController(props);
 
-  const { name, label, size, help, ...rest } = props;
+  const { name, label, size, help, horizontal, ...rest } = props;
 
   return (
-    <FieldBase name={name} label={label} error={error} size={size} help={help}>
+    <FieldBase
+      name={name}
+      label={label}
+      error={error}
+      size={size}
+      help={help}
+      horizontal={horizontal}
+    >
       <input
         {...field}
         className={clsx("input", error && "is-danger")}

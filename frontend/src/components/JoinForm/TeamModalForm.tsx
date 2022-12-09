@@ -14,6 +14,25 @@ export default function TeamModalForm({
   const isPro = league === LEAGUE.pro;
   const isCollege = league === LEAGUE.college;
   const lowHighOptions = Object.keys(LOW_HIGH_LEVELS);
+  const abilityPoints = [
+    {
+      name: "offense",
+      label: isCollege ? "Offensive Concepts" : "Evaluating Offense",
+    },
+    {
+      name: "defense",
+      label: isCollege ? "Defensive Concepts" : "Evaluating Defense",
+    },
+    {
+      name: isCollege ? "scouting" : "potential",
+      label: isCollege ? "Scouting Ability" : "Evaluating Potential",
+    },
+    {
+      name: isCollege ? "recruiting" : "gameStrategy",
+      label: isCollege ? "Recruiting Ability" : "Game Strategy",
+    },
+    { name: "playerDev", label: "Player Development" },
+  ];
 
   return (
     <div className="columns is-multiline">
@@ -96,49 +115,41 @@ export default function TeamModalForm({
           player ratings. However, the head coach has the biggest influence in
           determining a player&apos;s rating, followed by the General Manager
           and then the assistant coaches in order of job seniority. In terms of
-          player development, the General Manager serves <em>NO</em> role.
+          player development, the General Manager plays <em>NO</em> role.
         </p>
       )}
 
-      <Input
-        name="offense"
-        label={isCollege ? "Offensive Concepts" : "Evaluating Offense"}
-        type={"number"}
-        size="full"
-        style={{ width: "4rem" }}
-        min={10}
-        max={85}
-        horizontal
-      />
-      <Input
-        name="defense"
-        label={isCollege ? "Defensive Concepts" : "Evaluating Defense"}
-        type={"number"}
-        size="full"
-        horizontal
-      />
+      {abilityPoints.map(({ name, label }) => (
+        <Input
+          key={`${singleMember}-${name}`}
+          name={name}
+          label={label}
+          type={"number"}
+          size="full"
+          style={{ width: "6rem" }}
+          min={10}
+          max={85}
+          horizontal
+        />
+      ))}
 
-      <Input
-        name={isCollege ? "scouting" : "potential"}
-        label={isCollege ? "Scouting Ability" : "Evaluating Potential"}
-        type={"number"}
-        size="full"
-        horizontal
-      />
-      <Input
-        name={isCollege ? "recruiting" : "gameStrategy"}
-        label={isCollege ? "Recruiting Ability" : "Game Strategy"}
-        type={"number"}
-        size="full"
-        horizontal
-      />
-      <Input
-        name="playerDev"
-        label="Player Development"
-        type={"number"}
-        size="full"
-        horizontal
-      />
+      <div className="column is-full field is-horizontal">
+        <div className="field-label is-normal">
+          <label className="label">Points Remaining</label>
+        </div>
+        <div className="field-body">
+          <div className="field">
+            <p className="control">
+              <input
+                className="input is-static"
+                type="number"
+                value="325"
+                readOnly
+              />
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
