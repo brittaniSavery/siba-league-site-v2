@@ -1,15 +1,19 @@
 import Input from "@components/FormControls/Input";
 import Select from "@components/FormControls/Select";
 import { LEAGUE } from "@content/constants";
+import type { ProTeam, School } from "@lib/types";
 import { startCase } from "lodash-es";
 import { LOW_HIGH_LEVELS, PRO_PERSONALITY } from "./schema";
+import SchoolSelect from "./SchoolSelect";
 
 export default function TeamModalForm({
   singleMember,
   league,
+  options,
 }: {
   singleMember: string;
   league: LEAGUE;
+  options: School[] | ProTeam[];
 }) {
   const isPro = league === LEAGUE.pro;
   const isCollege = league === LEAGUE.college;
@@ -37,7 +41,9 @@ export default function TeamModalForm({
   return (
     <div className="columns is-multiline">
       <p className="column is-full is-size-5">Team Basics</p>
-      <Input name="teamName" label="Team Selection" size="half" />
+      {/* {isPro && <ProTeamSelect teams={options as ProTeam[]} />} */}
+
+      {isCollege && <SchoolSelect schools={options as School[]} />}
       <Input name="teamPassword" label="Team Password" size="half" />
 
       <p className="column is-full is-size-5">

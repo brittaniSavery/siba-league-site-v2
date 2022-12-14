@@ -5,6 +5,7 @@ import {
   LEAGUE,
   PRO_LEAGUE_INFO,
 } from "@content/constants";
+import type { ProTeam, School } from "@lib/types";
 import clsx from "clsx";
 import { capitalize } from "lodash-es";
 import type { SubmitHandler } from "react-hook-form";
@@ -16,17 +17,18 @@ type TeamModalProps = {
   close: () => void;
   league: LEAGUE;
   importedTeam?: FormProTeam | FormCollegeTeam;
+  options: School[] | ProTeam[];
 };
-export default function TeamModal({ isOpen, close, league }: TeamModalProps) {
+export default function TeamModal({
+  isOpen,
+  close,
+  league,
+  options,
+}: TeamModalProps) {
   const leagueInfo =
     league === LEAGUE.pro ? PRO_LEAGUE_INFO : COLLEGE_LEAGUE_INFO;
 
-  const onSubmit: SubmitHandler<FormProTeam | FormCollegeTeam> = (
-    data,
-    event
-  ) => {
-    event?.preventDefault();
-    event?.stopPropagation();
+  const onSubmit: SubmitHandler<FormProTeam | FormCollegeTeam> = (data) => {
     console.log(data);
   };
 
@@ -69,6 +71,7 @@ export default function TeamModal({ isOpen, close, league }: TeamModalProps) {
             <TeamModalForm
               league={league}
               singleMember={leagueInfo.singleMember}
+              options={options}
             />
           </section>
           <footer className="modal-card-foot">

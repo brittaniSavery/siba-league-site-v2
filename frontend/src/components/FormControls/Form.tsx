@@ -28,11 +28,6 @@ export default function Form<T extends FieldValues>({
     resolver: validation && joiResolver(validation),
   });
 
-  useEffect(() => {
-    console.log(methods.getValues());
-    console.log(methods.formState.errors);
-  }, [methods.formState]);
-
   return (
     <FormProvider<T> {...methods}>
       <form

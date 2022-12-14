@@ -32,7 +32,7 @@ const coaches: Member[] = strapiCoaches.data.map((member) => ({
 const proInfo = await getDataFromApi<StrapiSingleTypeResponse<StrapiProInfo>>(
   `${import.meta.env.PUBLIC_CMS_URL}/pro-info`
 );
-const teams = proInfo.data.attributes.teams;
+const proTeams = proInfo.data.attributes.teams;
 
 const strapiGMs = await getDataFromApi<StrapiCollectionResponse<Member>>(
   `${import.meta.env.PUBLIC_CMS_URL}/${
@@ -58,5 +58,11 @@ const gms: Member[] = strapiGMs.data.map((member) => ({
       league.
     </p>
   </section>
-  <JoinForm client:load />
+  <JoinForm
+    coaches={coaches}
+    gms={gms}
+    proTeams={proTeams}
+    schools={schools}
+    client:load
+  />
 </Layout>

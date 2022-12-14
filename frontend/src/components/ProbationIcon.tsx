@@ -28,8 +28,8 @@ export default function ProbationIcon({
 
   return (
     <span className="icon-text">
-      <IconOnly />
       {school && <span>{school}</span>}
+      <IconOnly />
     </span>
   );
 }

@@ -29,7 +29,8 @@ export default function Input<T extends FieldValues>(
       horizontal={horizontal}
     >
       <input
-        {...field}
+        onChange={field.onChange}
+        onBlur={field.onBlur}
         className={clsx("input", error && "is-danger")}
         {...rest}
       />

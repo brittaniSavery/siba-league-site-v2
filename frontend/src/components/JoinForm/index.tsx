@@ -4,6 +4,7 @@ import Select from "@components/FormControls/Select";
 import Textarea from "@components/FormControls/Textarea";
 import ProbationIcon from "@components/ProbationIcon";
 import { LEAGUE } from "@content/constants";
+import type { Member, ProTeam, School } from "@lib/types";
 
 import clsx from "clsx";
 import { capitalize } from "lodash-es";
@@ -14,21 +15,38 @@ import type { SubmitHandler } from "react-hook-form";
 import { FoundChoices, JoinSchema, joinValidation } from "./schema";
 import TeamModal from "./TeamModal";
 
-// type JoinFormProps = {
-//   schools: School[];
-//   coaches: Member[];
-//   proTeams: ProTeam[];
-//   gms: Member[];
-// };
+type JoinFormProps = {
+  schools: School[];
+  coaches: Member[];
+  proTeams: ProTeam[];
+  gms: Member[];
+};
 
-export default function JoinForm() {
+export default function JoinForm({
+  schools,
+  proTeams,
+  coaches,
+  gms,
+}: JoinFormProps) {
   const [teamView, setTeamView] = useState(LEAGUE.pro);
   const [showModal, setShowModal] = useState(false);
+  const [options, setOptions] = useState<School[] | ProTeam[]>(proTeams);
 
   useEffect(() => {
-    console.log(teamView);
-    console.log(showModal);
-  });
+    if (teamView === LEAGUE.pro) {
+      const unavailable = gms.map((member) => member.team);
+      const available = proTeams.filter(
+        (team) => !unavailable.includes(`${team.name} ${team.mascot}`)
+      );
+      setOptions(available);
+    } else {
+      const unavailable = coaches.map((member) => member.team);
+      const available = schools.filter(
+        (team) => !unavailable.includes(`${team.name} ${team.mascot}`)
+      );
+      setOptions(available);
+    }
+  }, [teamView]);
 
   const onSubmit: SubmitHandler<JoinSchema> = (data, event) => {
     event?.preventDefault();
@@ -130,6 +148,7 @@ export default function JoinForm() {
         isOpen={showModal}
         league={teamView}
         close={() => setShowModal(false)}
+        options={options}
       />
     </>
   );
