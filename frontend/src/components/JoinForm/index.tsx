@@ -72,23 +72,6 @@ export default function JoinForm({
           rules={{ deps: "reason" }}
         />
         <Textarea name="reason" />
-        {/* <TextInput name="name" error={errors.name} register={register} />
-        <TextInput name="email" error={errors.email} register={register} />
-        <SelectDropdown
-          name="found"
-          label="Found SIBA from"
-          options={FoundChoices}
-          renderOptionValue={(option) => option.name}
-          renderOptionLabel={(option) => option.label}
-          error={errors.found}
-          register={register}
-          registerOptions={{ deps: "reason" }}
-        />
-        <TextareaInput
-          name="reason"
-          error={errors.reason}
-          register={register}
-        /> */}
         <div className="content mt-5">
           <h2>Pick Your Teams</h2>
           <p>

@@ -5,6 +5,8 @@ import type { ProTeam, School } from "@lib/types";
 import { startCase } from "lodash-es";
 import { LOW_HIGH_LEVELS, PRO_PERSONALITY } from "./schema";
 import SchoolSelect from "./SchoolSelect";
+import ProTeamSelect from "./ProTeamSelect";
+import { useFormContext } from "react-hook-form";
 
 export default function TeamModalForm({
   singleMember,
@@ -15,6 +17,8 @@ export default function TeamModalForm({
   league: LEAGUE;
   options: School[] | ProTeam[];
 }) {
+  const { register } = useFormContext();
+
   const isPro = league === LEAGUE.pro;
   const isCollege = league === LEAGUE.college;
   const lowHighOptions = Object.keys(LOW_HIGH_LEVELS);
@@ -41,9 +45,12 @@ export default function TeamModalForm({
   return (
     <div className="columns is-multiline">
       <p className="column is-full is-size-5">Team Basics</p>
-      {/* {isPro && <ProTeamSelect teams={options as ProTeam[]} />} */}
 
+      <input type={"hidden"} {...register("league")} value={league} />
+
+      {isPro && <ProTeamSelect teams={options as ProTeam[]} />}
       {isCollege && <SchoolSelect schools={options as School[]} />}
+
       <Input name="teamPassword" label="Team Password" size="half" />
 
       <p className="column is-full is-size-5">

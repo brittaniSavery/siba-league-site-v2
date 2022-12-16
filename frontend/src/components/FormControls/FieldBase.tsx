@@ -27,11 +27,13 @@ export default function FieldBase<T extends FieldValues>({
   help,
   horizontal = false,
   children,
+  ...rest
 }: FieldBaseProps<T>) {
   if (horizontal) {
     return (
       <div
         className={clsx("field is-horizontal", !!size && `column is-${size}`)}
+        {...rest}
       >
         <div className="field-label">
           <label className="label">{label ?? capitalize(name)}</label>
@@ -50,7 +52,7 @@ export default function FieldBase<T extends FieldValues>({
   }
 
   return (
-    <div className={clsx("field", !!size && `column is-${size}`)}>
+    <div className={clsx("field", !!size && `column is-${size}`)} {...rest}>
       <label className="label">{label ?? capitalize(name)}</label>
       <div className="control">{children}</div>
       {error && <p className="help has-text-danger-dark">{error.message}</p>}

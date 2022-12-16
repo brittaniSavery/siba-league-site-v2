@@ -63,6 +63,10 @@ a.icon-link {
   }
 }
 
+.is-borderless {
+  border: none;
+}
+
 .card {
   border: 1px solid $grey-lighter;
 
@@ -132,6 +136,27 @@ body > .container {
 
 .navbar-img {
   width: 5vh;
+}
+
+.listbox {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+  position: absolute;
+  list-style: none;
+  background-color: white;
+  overflow: auto;
+  max-height: 200px;
+  border: 1px solid $grey-lighter;
+  border-top: none;
+
+  & li.Mui-focused,
+  li:active {
+    background-color: $link;
+    color: white;
+    cursor: pointer;
+  }
 }
 
 #join .card {
