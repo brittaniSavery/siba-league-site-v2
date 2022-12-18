@@ -1,6 +1,11 @@
+import {
+  COLLEGE_LEAGUE_INFO,
+  LEAGUE,
+  PRO_LEAGUE_INFO,
+} from "@content/constants";
 import Joi from "joi";
 
-export const FoundChoices = [
+export const FOUND_CHOICES = [
   { name: "developers", label: "Wolverine Studios Forums" },
   { name: "referral", label: "Family/Friend" },
   { name: "google", label: "Google" },
@@ -35,6 +40,7 @@ type Basics = {
   offense: number;
   defense: number;
   playerDev: number;
+  pointSum: number;
 };
 
 export type FormProTeam = Basics & {
@@ -60,9 +66,52 @@ export type JoinSchema = {
   collegeTeams?: FormCollegeTeam[];
 };
 
-export const proTeamValidation: Joi.Schema<FormProTeam> = Joi.object({});
+const teamBasicValidation = {
+  team: Joi.required(),
+  password: Joi.string().required(),
+  firstName: Joi.string().required(),
+  lastName: Joi.string().required(),
+  picture: Joi.number().min(1).required(),
+  outfit: Joi.number().min(1).required(),
+  age: Joi.number().min(25).max(75).required(),
+};
 
-export const joinValidation: Joi.Schema<JoinSchema> = Joi.object({
+const pointsValidation = (league: LEAGUE, tier?: 1 | 2 | 3) => {
+  let apm;
+  if (league === LEAGUE.college && tier)
+    apm = COLLEGE_LEAGUE_INFO.allowedPointsMax[tier];
+  else apm = PRO_LEAGUE_INFO.allowedPointsMax;
+
+  return Joi.number().min(apm.min).max(apm.max).required();
+};
+
+const proTeamValidation = {
+  personality: Joi.valid(...Object.keys(PRO_PERSONALITY)).required(),
+  greed: Joi.valid(...Object.keys(LOW_HIGH_LEVELS)).required(),
+  offense: pointsValidation(LEAGUE.pro),
+  defense: pointsValidation(LEAGUE.pro),
+  potential: pointsValidation(LEAGUE.pro),
+  gameStrategy: pointsValidation(LEAGUE.pro),
+  playerDev: pointsValidation(LEAGUE.pro),
+  // pointsSum: Joi.number()
+  //   .max(PRO_LEAGUE_INFO.allowedPointsMax.total)
+  //   .required(),
+};
+
+export const proTeamValidationSchema: Joi.Schema<FormProTeam> = Joi.object({
+  ...teamBasicValidation,
+  ...proTeamValidation,
+})
+  .custom((parent) => {
+    const { offense, defense, potential, gameStrategy, playerDev } = parent;
+    const sum = offense + defense + potential + gameStrategy + playerDev;
+
+    if (sum > 325)
+      throw new Error("Ability Points Sum cannot be more than 325.");
+  })
+  .unknown();
+
+export const joinValidationSchema: Joi.Schema<JoinSchema> = Joi.object({
   name: Joi.string().required().messages({
     "any.required": "Please enter your name. First name is okay.",
   }),
@@ -75,7 +124,7 @@ export const joinValidation: Joi.Schema<JoinSchema> = Joi.object({
         "This email is not valid. Be sure to double check for typos.",
     }),
   found: Joi.string()
-    .valid(...FoundChoices.map((choice) => choice.name))
+    .valid(...FOUND_CHOICES.map((choice) => choice.name))
     .messages({
       "any.only":
         "Please select how your found the league. Best guess is okay if you don't remember.",

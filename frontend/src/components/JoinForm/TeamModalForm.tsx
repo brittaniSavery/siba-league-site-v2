@@ -1,12 +1,17 @@
 import Input from "@components/FormControls/Input";
 import Select from "@components/FormControls/Select";
-import { LEAGUE } from "@content/constants";
+import {
+  COLLEGE_LEAGUE_INFO,
+  LEAGUE,
+  PRO_LEAGUE_INFO,
+} from "@content/constants";
 import type { ProTeam, School } from "@lib/types";
 import { startCase } from "lodash-es";
 import { LOW_HIGH_LEVELS, PRO_PERSONALITY } from "./schema";
 import SchoolSelect from "./SchoolSelect";
 import ProTeamSelect from "./ProTeamSelect";
 import { useFormContext } from "react-hook-form";
+import { useEffect } from "react";
 
 export default function TeamModalForm({
   singleMember,
@@ -17,7 +22,12 @@ export default function TeamModalForm({
   league: LEAGUE;
   options: School[] | ProTeam[];
 }) {
-  const { register } = useFormContext();
+  const {
+    register,
+    watch,
+    getValues,
+    formState: { errors },
+  } = useFormContext();
 
   const isPro = league === LEAGUE.pro;
   const isCollege = league === LEAGUE.college;
@@ -42,41 +52,64 @@ export default function TeamModalForm({
     { name: "playerDev", label: "Player Development" },
   ];
 
+  const abilityPointsValues = watch(abilityPoints.map((ap) => ap.name));
+  const currentTeam = watch("team");
+  const calculatePointsTotal = () =>
+    abilityPointsValues.reduce((prev, curr) => {
+      const currAsNum = Number.parseInt(curr);
+      return Number.isNaN(currAsNum) ? prev : currAsNum + prev;
+    }, 0);
+
+  const calculatePointsLeft = () => {
+    let allowedMax: number;
+
+    if (isPro) {
+      allowedMax = PRO_LEAGUE_INFO.allowedPointsMax.total;
+    } else {
+      const school = currentTeam as School;
+      allowedMax = COLLEGE_LEAGUE_INFO.allowedPointsMax[school.tier].total;
+    }
+
+    const currentAmount = calculatePointsTotal();
+    return allowedMax - currentAmount;
+  };
+
+  useEffect(() => {
+    console.log(errors);
+    console.log(getValues());
+  }, [errors]);
+
   return (
     <div className="columns is-multiline">
       <p className="column is-full is-size-5">Team Basics</p>
 
       <input type={"hidden"} {...register("league")} value={league} />
+      {/* <input
+        type={"hidden"}
+        {...register("pointsSum")}
+        value={calculatePointsTotal()}
+      /> */}
 
       {isPro && <ProTeamSelect teams={options as ProTeam[]} />}
       {isCollege && <SchoolSelect schools={options as School[]} />}
 
-      <Input name="teamPassword" label="Team Password" size="half" />
+      <Input name="password" label="Team Password" size="half" />
 
       <p className="column is-full is-size-5">
         {startCase(singleMember)} Basics
       </p>
+      <Input name="firstName" label="First Name" size={isPro ? 5 : "half"} />
+      <Input name="lastName" label="Last Name" size={isPro ? 5 : "half"} />
       <Input
-        name="memberFirstName"
-        label="First Name"
-        size={isPro ? 5 : "half"}
-      />
-      <Input
-        name="memberLastName"
-        label="Last Name"
-        size={isPro ? 5 : "half"}
-      />
-      <Input
-        name="memberAge"
-        label="Age"
+        name="age"
         type="number"
         size={isPro ? 2 : "one-third"}
         min={25}
         max={90}
-        help="Range: 25-90"
+        help="Range: 25-75"
       />
       <Input
-        name="memberPicture"
+        name="picture"
         label="Face Picture Number"
         type={"number"}
         size={isPro ? "one-quarter" : "one-third"}
@@ -85,7 +118,7 @@ export default function TeamModalForm({
         }/fac.`}
       />
       <Input
-        name="memberOutfit"
+        name="outfit"
         label="Outfit Picture Number"
         type={"number"}
         size={isPro ? "one-quarter" : "one-third"}
@@ -97,13 +130,12 @@ export default function TeamModalForm({
       {isPro && (
         <>
           <Select
-            name="memberPersonality"
-            label="Personality"
+            name="personality"
             options={Object.keys(PRO_PERSONALITY)}
             size="one-quarter"
           />
           <Select
-            name="memberGreed"
+            name="greed"
             label="Greed Level"
             options={lowHighOptions}
             size="one-quarter"
@@ -156,7 +188,7 @@ export default function TeamModalForm({
               <input
                 className="input is-static"
                 type="number"
-                value="325"
+                value={calculatePointsLeft()}
                 readOnly
               />
             </p>

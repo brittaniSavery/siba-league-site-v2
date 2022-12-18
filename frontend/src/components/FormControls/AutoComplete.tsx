@@ -57,20 +57,22 @@ export default function AutoComplete<T extends FieldValues, K>(
         {label ?? capitalize(name)}
       </label>
       <div className="control">
-        <input className="input" {...getInputProps()} />
-        {groupedOptions.length > 0 ? (
-          <ul className="listbox" {...getListboxProps()}>
-            {(groupedOptions as typeof options).map((option, index) => (
-              <li
-                key={`${name}-option-${index}`}
-                className="input is-borderless"
-                {...getOptionProps({ option, index })}
-              >
-                {renderOption(option)}
-              </li>
-            ))}
-          </ul>
-        ) : null}
+        <div className="select is-fullwidth">
+          <input className="input" {...getInputProps()} />
+          {groupedOptions.length > 0 ? (
+            <ul className="listbox" {...getListboxProps()}>
+              {(groupedOptions as typeof options).map((option, index) => (
+                <li
+                  key={`${name}-option-${index}`}
+                  className="input is-borderless"
+                  {...getOptionProps({ option, index })}
+                >
+                  {renderOption(option)}
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </div>
       </div>
       {error && <p className="help has-text-danger-dark">{error.message}</p>}
       {!error && help && <p className="help">{help}</p>}

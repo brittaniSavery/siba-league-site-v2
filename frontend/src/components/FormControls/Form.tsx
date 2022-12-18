@@ -25,6 +25,7 @@ export default function Form<T extends FieldValues>({
 }: FormProps<T>) {
   const methods = useForm<T>({
     defaultValues,
+    criteriaMode: "all",
     resolver: validation && joiResolver(validation),
   });
 

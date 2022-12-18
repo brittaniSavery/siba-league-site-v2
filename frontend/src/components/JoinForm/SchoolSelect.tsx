@@ -18,7 +18,7 @@ export default function SchoolSelect<T extends FieldValues>({
   return (
     <AutoComplete<T, School>
       id="schoolSelect"
-      name={"teamSelect" as Path<T>}
+      name={"team" as Path<T>}
       label="Team Selection"
       size="half"
       options={schools}

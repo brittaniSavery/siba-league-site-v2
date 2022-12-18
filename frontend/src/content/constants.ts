@@ -50,6 +50,11 @@ export const PRO_LEAGUE_INFO = {
   pageTitle: "Owners",
   strapiMembers: "general-managers",
   singleMember: "general manager",
+  allowedPointsMax: {
+    min: 10,
+    max: 85,
+    total: 325,
+  },
 };
 
 export const COLLEGE_LEAGUE_INFO = {
@@ -65,6 +70,23 @@ export const COLLEGE_LEAGUE_INFO = {
   pageTitle: "Head Coaches",
   strapiMembers: "coaches",
   singleMember: "head coach",
+  allowedPointsMax: {
+    1: {
+      min: 10,
+      max: 85,
+      total: 325,
+    },
+    2: {
+      min: 5,
+      max: 65,
+      total: 240,
+    },
+    3: {
+      min: 5,
+      max: 45,
+      total: 150,
+    },
+  },
 };
 
 export const CONFERENCES: Record<string, Conference> = {

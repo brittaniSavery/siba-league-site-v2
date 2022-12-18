@@ -9,7 +9,11 @@ import type { ProTeam, School } from "@lib/types";
 import clsx from "clsx";
 import { capitalize } from "lodash-es";
 import type { SubmitHandler } from "react-hook-form";
-import type { FormCollegeTeam, FormProTeam } from "./schema";
+import {
+  FormCollegeTeam,
+  FormProTeam,
+  proTeamValidationSchema,
+} from "./schema";
 import TeamModalForm from "./TeamModalForm";
 
 type TeamModalProps = {
@@ -27,13 +31,18 @@ export default function TeamModal({
 }: TeamModalProps) {
   const leagueInfo =
     league === LEAGUE.pro ? PRO_LEAGUE_INFO : COLLEGE_LEAGUE_INFO;
+  const validation =
+    league === LEAGUE.pro ? proTeamValidationSchema : undefined;
 
   const onSubmit: SubmitHandler<FormProTeam | FormCollegeTeam> = (data) => {
     console.log(data);
   };
 
   return (
-    <Form<FormProTeam | FormCollegeTeam> onSubmit={onSubmit}>
+    <Form<FormProTeam | FormCollegeTeam>
+      onSubmit={onSubmit}
+      validation={validation}
+    >
       <div className={clsx("modal", isOpen && "is-active")}>
         <div className="modal-background" onClick={close} />
         <div className="modal-card">

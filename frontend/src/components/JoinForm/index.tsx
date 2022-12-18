@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 
 // import type { Member, ProTeam, School } from "@lib/types";
-import { FoundChoices, JoinSchema, joinValidation } from "./schema";
+import { FOUND_CHOICES, JoinSchema, joinValidationSchema } from "./schema";
 import TeamModal from "./TeamModal";
 
 type JoinFormProps = {
@@ -59,14 +59,14 @@ export default function JoinForm({
       <Form<JoinSchema>
         id="join"
         onSubmit={onSubmit}
-        validation={joinValidation}
+        validation={joinValidationSchema}
       >
         <Input name="name" />
         <Input name="email" type="email" />
         <Select<JoinSchema, { label: string; name: string }>
           name="found"
           label="Found SIBA from"
-          options={FoundChoices}
+          options={FOUND_CHOICES}
           renderOptionValue={(option) => option.name}
           renderOptionLabel={(option) => option.label}
           rules={{ deps: "reason" }}
