@@ -50,7 +50,7 @@ export const PRO_LEAGUE_INFO = {
   pageTitle: "Owners",
   strapiMembers: "general-managers",
   singleMember: "general manager",
-  allowedPointsMax: {
+  pointLimits: {
     min: 10,
     max: 85,
     total: 325,
@@ -70,7 +70,7 @@ export const COLLEGE_LEAGUE_INFO = {
   pageTitle: "Head Coaches",
   strapiMembers: "coaches",
   singleMember: "head coach",
-  allowedPointsMax: {
+  pointLimits: {
     1: {
       min: 10,
       max: 85,

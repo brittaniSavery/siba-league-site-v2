@@ -1,9 +1,9 @@
-import { useAutocomplete } from "@mui/base";
 import clsx from "clsx";
+import { useAutocomplete } from "@mui/base";
+import { useController } from "react-hook-form";
 import { capitalize } from "lodash-es";
 import type { ReactNode } from "react";
 import type { FieldValues, UseControllerProps } from "react-hook-form";
-import { useController } from "react-hook-form";
 import type { AllFieldProps } from "./FieldBase";
 
 type AutoCompleteProps<T extends FieldValues, K> = AllFieldProps<T> &
@@ -13,6 +13,7 @@ type AutoCompleteProps<T extends FieldValues, K> = AllFieldProps<T> &
     renderOption: (option: K) => ReactNode;
     renderOptionLabel?: (option: K) => string;
     renderInput?: (option: K) => string | ReactNode;
+    isOptionEqualToValue?: (option: K, value: K) => boolean;
   };
 
 export default function AutoComplete<T extends FieldValues, K>(
@@ -27,6 +28,7 @@ export default function AutoComplete<T extends FieldValues, K>(
     options,
     renderOption,
     renderOptionLabel,
+    isOptionEqualToValue,
   } = props;
 
   const {
@@ -44,7 +46,10 @@ export default function AutoComplete<T extends FieldValues, K>(
   } = useAutocomplete({
     id: id,
     options: options,
+    value: field.value ?? null,
     getOptionLabel: renderOptionLabel || ((option: K) => option as string),
+    isOptionEqualToValue:
+      isOptionEqualToValue || ((option, value) => option === value),
     onChange: (_, value) => field.onChange(value),
   });
 
@@ -57,8 +62,11 @@ export default function AutoComplete<T extends FieldValues, K>(
         {label ?? capitalize(name)}
       </label>
       <div className="control">
-        <div className="select is-fullwidth">
-          <input className="input" {...getInputProps()} />
+        <div className={clsx("select is-fullwidth", error && "is-danger")}>
+          <input
+            className={clsx("input", error && "is-danger")}
+            {...getInputProps()}
+          />
           {groupedOptions.length > 0 ? (
             <ul className="listbox" {...getListboxProps()}>
               {(groupedOptions as typeof options).map((option, index) => (

@@ -12,6 +12,7 @@ type FormProps<T extends FieldValues> = React.PropsWithChildren & {
   id?: string;
   defaultValues?: DefaultValues<T>;
   validation?: Joi.Schema<T>;
+  isCancelled?: boolean;
   onSubmit: SubmitHandler<T>;
 };
 
@@ -20,6 +21,7 @@ export default function Form<T extends FieldValues>({
   defaultValues,
   validation,
   children,
+  isCancelled,
   onSubmit,
   ...rest
 }: FormProps<T>) {
@@ -28,6 +30,18 @@ export default function Form<T extends FieldValues>({
     criteriaMode: "all",
     resolver: validation && joiResolver(validation),
   });
+
+  useEffect(() => {
+    const isSubmitGood = methods.formState.isSubmitSuccessful;
+
+    if (isSubmitGood || isCancelled) {
+      console.log("Calling Reset", {
+        isSubmitSuccessful: methods.formState.isSubmitSuccessful,
+        isCancelled,
+      });
+      methods.reset(defaultValues);
+    }
+  }, [methods.formState.isSubmitSuccessful, isCancelled]);
 
   return (
     <FormProvider<T> {...methods}>

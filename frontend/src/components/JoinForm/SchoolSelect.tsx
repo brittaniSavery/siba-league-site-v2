@@ -24,6 +24,9 @@ export default function SchoolSelect<T extends FieldValues>({
       options={schools}
       renderOption={formatSchoolTitle}
       renderOptionLabel={formatSchoolTitle}
+      isOptionEqualToValue={(option: School, value: School) =>
+        option.name === value.name
+      }
     />
   );
 }

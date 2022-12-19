@@ -79,8 +79,8 @@ const teamBasicValidation = {
 const pointsValidation = (league: LEAGUE, tier?: 1 | 2 | 3) => {
   let apm;
   if (league === LEAGUE.college && tier)
-    apm = COLLEGE_LEAGUE_INFO.allowedPointsMax[tier];
-  else apm = PRO_LEAGUE_INFO.allowedPointsMax;
+    apm = COLLEGE_LEAGUE_INFO.pointLimits[tier];
+  else apm = PRO_LEAGUE_INFO.pointLimits;
 
   return Joi.number().min(apm.min).max(apm.max).required();
 };
@@ -93,23 +93,20 @@ const proTeamValidation = {
   potential: pointsValidation(LEAGUE.pro),
   gameStrategy: pointsValidation(LEAGUE.pro),
   playerDev: pointsValidation(LEAGUE.pro),
-  // pointsSum: Joi.number()
-  //   .max(PRO_LEAGUE_INFO.allowedPointsMax.total)
-  //   .required(),
+  currentTotal: Joi.number().max(PRO_LEAGUE_INFO.pointLimits.total).required(),
 };
 
 export const proTeamValidationSchema: Joi.Schema<FormProTeam> = Joi.object({
   ...teamBasicValidation,
   ...proTeamValidation,
-})
-  .custom((parent) => {
-    const { offense, defense, potential, gameStrategy, playerDev } = parent;
-    const sum = offense + defense + potential + gameStrategy + playerDev;
+}).unknown();
+// .custom((parent) => {
+//   const { offense, defense, potential, gameStrategy, playerDev } = parent;
+//   const sum = offense + defense + potential + gameStrategy + playerDev;
 
-    if (sum > 325)
-      throw new Error("Ability Points Sum cannot be more than 325.");
-  })
-  .unknown();
+//   if (sum > 325)
+//     throw new Error("Ability Points Sum cannot be more than 325.");
+// })
 
 export const joinValidationSchema: Joi.Schema<JoinSchema> = Joi.object({
   name: Joi.string().required().messages({

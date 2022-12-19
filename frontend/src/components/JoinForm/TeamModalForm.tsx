@@ -7,11 +7,11 @@ import {
 } from "@content/constants";
 import type { ProTeam, School } from "@lib/types";
 import { startCase } from "lodash-es";
+import { useEffect, useState } from "react";
+import { useFormContext } from "react-hook-form";
+import ProTeamSelect from "./ProTeamSelect";
 import { LOW_HIGH_LEVELS, PRO_PERSONALITY } from "./schema";
 import SchoolSelect from "./SchoolSelect";
-import ProTeamSelect from "./ProTeamSelect";
-import { useFormContext } from "react-hook-form";
-import { useEffect } from "react";
 
 export default function TeamModalForm({
   singleMember,
@@ -25,7 +25,7 @@ export default function TeamModalForm({
   const {
     register,
     watch,
-    getValues,
+    setValue,
     formState: { errors },
   } = useFormContext();
 
@@ -52,43 +52,36 @@ export default function TeamModalForm({
     { name: "playerDev", label: "Player Development" },
   ];
 
+  const [pointLimits, setPointLimits] = useState(PRO_LEAGUE_INFO.pointLimits);
+
   const abilityPointsValues = watch(abilityPoints.map((ap) => ap.name));
   const currentTeam = watch("team");
-  const calculatePointsTotal = () =>
-    abilityPointsValues.reduce((prev, curr) => {
+
+  const calculatePointsLeft = () => {
+    const currentAmount = abilityPointsValues.reduce((prev, curr) => {
       const currAsNum = Number.parseInt(curr);
       return Number.isNaN(currAsNum) ? prev : currAsNum + prev;
     }, 0);
-
-  const calculatePointsLeft = () => {
-    let allowedMax: number;
-
-    if (isPro) {
-      allowedMax = PRO_LEAGUE_INFO.allowedPointsMax.total;
-    } else {
-      const school = currentTeam as School;
-      allowedMax = COLLEGE_LEAGUE_INFO.allowedPointsMax[school.tier].total;
-    }
-
-    const currentAmount = calculatePointsTotal();
-    return allowedMax - currentAmount;
+    setValue("currentTotal", currentAmount);
+    return pointLimits.total - currentAmount;
   };
 
   useEffect(() => {
-    console.log(errors);
-    console.log(getValues());
-  }, [errors]);
+    if (isCollege && currentTeam) {
+      const school = currentTeam as School;
+      const limits = COLLEGE_LEAGUE_INFO.pointLimits[school.tier];
+      setPointLimits(limits);
+    } else {
+      setPointLimits(COLLEGE_LEAGUE_INFO.pointLimits[1]);
+    }
+  }, [currentTeam]);
 
   return (
     <div className="columns is-multiline">
       <p className="column is-full is-size-5">Team Basics</p>
 
       <input type={"hidden"} {...register("league")} value={league} />
-      {/* <input
-        type={"hidden"}
-        {...register("pointsSum")}
-        value={calculatePointsTotal()}
-      /> */}
+      <input type={"hidden"} {...register("currentTotal")} />
 
       {isPro && <ProTeamSelect teams={options as ProTeam[]} />}
       {isCollege && <SchoolSelect schools={options as School[]} />}
@@ -192,6 +185,11 @@ export default function TeamModalForm({
                 readOnly
               />
             </p>
+            {errors.currentTotal && (
+              <p className="help has-text-danger-dark">
+                {errors.currentTotal.message as string}
+              </p>
+            )}
           </div>
         </div>
       </div>
