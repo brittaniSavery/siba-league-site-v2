@@ -42,7 +42,6 @@ export default function TeamModal({
     <Form<FormProTeam | FormCollegeTeam>
       onSubmit={onSubmit}
       validation={validation}
-      isCancelled={!isOpen}
     >
       <div className={clsx("modal", isOpen && "is-active")}>
         <div className="modal-background" onClick={close} />

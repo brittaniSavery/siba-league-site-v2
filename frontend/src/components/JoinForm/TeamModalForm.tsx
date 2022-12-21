@@ -6,7 +6,7 @@ import {
   PRO_LEAGUE_INFO,
 } from "@content/constants";
 import type { ProTeam, School } from "@lib/types";
-import { startCase } from "lodash-es";
+import { capitalize, startCase } from "lodash-es";
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import ProTeamSelect from "./ProTeamSelect";
@@ -141,11 +141,12 @@ export default function TeamModalForm({
         {startCase(singleMember)} Ability Points
       </p>
 
-      <p className="column is-full">
-        These are the skills that your {singleMember} will have in evaluating
-        players. The minimum that each category can have is 10 and the maximum
-        is 85. The maximum sum of the categories is 325.
-      </p>
+      <AbilityPointsInfo
+        memberType={singleMember}
+        currentTeam={currentTeam}
+        pointLimits={pointLimits}
+        isCollege={isCollege}
+      />
 
       {isPro && (
         <p className="column is-full">
@@ -167,6 +168,7 @@ export default function TeamModalForm({
           style={{ width: "6rem" }}
           min={10}
           max={85}
+          disabled={isCollege && !currentTeam}
           horizontal
         />
       ))}
@@ -194,6 +196,41 @@ export default function TeamModalForm({
         </div>
       </div>
     </div>
+  );
+}
+
+type AbilityPointsInfoProps = {
+  isCollege: boolean;
+  memberType: string;
+  currentTeam?: ProTeam | School;
+  pointLimits: { total: number; min: number; max: number };
+};
+
+function AbilityPointsInfo({
+  isCollege,
+  currentTeam,
+  memberType,
+  pointLimits,
+}: AbilityPointsInfoProps) {
+  const numbersInfo = `the minimum that each category can have is ${pointLimits.min} and the maximum
+  is ${pointLimits.max}. The maximum sum of the categories is ${pointLimits.total}.`;
+
+  let pointDetails: string;
+
+  if (isCollege) {
+    const school = currentTeam as School;
+    pointDetails = school
+      ? `For a Tier ${school.tier} school, ${numbersInfo}"`
+      : "Please select a team to view point limitations.";
+  } else {
+    pointDetails = capitalize(numbersInfo);
+  }
+
+  return (
+    <p className="column is-full">
+      These are the skills that your {memberType} will have in evaluating
+      players. {pointDetails}
+    </p>
   );
 }
 

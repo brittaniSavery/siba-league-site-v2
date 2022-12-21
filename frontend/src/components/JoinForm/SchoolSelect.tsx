@@ -22,7 +22,14 @@ export default function SchoolSelect<T extends FieldValues>({
       label="Team Selection"
       size="half"
       options={schools}
-      renderOption={formatSchoolTitle}
+      renderOption={(school: School) => (
+        <>
+          <p>{formatSchoolTitle(school)}</p>
+          <p>
+            Tier {school.tier} | Region: {school.region}
+          </p>
+        </>
+      )}
       renderOptionLabel={formatSchoolTitle}
       isOptionEqualToValue={(option: School, value: School) =>
         option.name === value.name
