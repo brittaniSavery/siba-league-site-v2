@@ -1,53 +1,36 @@
-import Form from "@components/FormControls/Form";
 import Input from "@components/FormControls/Input";
 import Select from "@components/FormControls/Select";
 import Textarea from "@components/FormControls/Textarea";
 import ProbationIcon from "@components/ProbationIcon";
 import { LEAGUE } from "@content/constants";
+import { joiResolver } from "@hookform/resolvers/joi";
 import type { Member, ProTeam, School } from "@lib/types";
 
 import clsx from "clsx";
 import { capitalize } from "lodash-es";
 import { useEffect, useState } from "react";
-import type { SubmitHandler } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 // import type { Member, ProTeam, School } from "@lib/types";
 import { FOUND_CHOICES, JoinSchema, joinValidationSchema } from "./schema";
-import TeamModal from "./TeamModal";
+import TeamModal from "./ProTeamModal";
+import ProTeamModal from "./ProTeamModal";
+import SchoolModal from "./SchoolModal";
 
 type JoinFormProps = {
   schools: School[];
-  coaches: Member[];
   proTeams: ProTeam[];
-  gms: Member[];
 };
 
-export default function JoinForm({
-  schools,
-  proTeams,
-  coaches,
-  gms,
-}: JoinFormProps) {
+export default function JoinForm({ schools, proTeams }: JoinFormProps) {
   const [teamView, setTeamView] = useState(LEAGUE.pro);
   const [showModal, setShowModal] = useState(false);
-  const [options, setOptions] = useState<School[] | ProTeam[]>(proTeams);
 
-  useEffect(() => {
-    if (teamView === LEAGUE.pro) {
-      const unavailable = gms.map((member) => member.team);
-      const available = proTeams.filter(
-        (team) => !unavailable.includes(`${team.name} ${team.mascot}`)
-      );
-      setOptions(available);
-    } else {
-      const unavailable = coaches.map((member) => member.team);
-      const available = schools.filter(
-        (team) => !unavailable.includes(`${team.name} ${team.mascot}`)
-      );
-      setOptions(available);
-    }
-  }, [teamView]);
+  const { handleSubmit, control } = useForm<JoinSchema>({
+    resolver: joiResolver(joinValidationSchema),
+  });
 
+  // Submitting all the info for the join form
   const onSubmit: SubmitHandler<JoinSchema> = (data, event) => {
     event?.preventDefault();
     event?.stopPropagation();
@@ -56,22 +39,19 @@ export default function JoinForm({
 
   return (
     <>
-      <Form<JoinSchema>
-        id="join"
-        onSubmit={onSubmit}
-        validation={joinValidationSchema}
-      >
-        <Input name="name" />
-        <Input name="email" type="email" />
+      <form id="joinForm" onSubmit={handleSubmit(onSubmit)} noValidate>
+        <Input name="name" control={control} />
+        <Input name="email" type="email" control={control} />
         <Select<JoinSchema, { label: string; name: string }>
           name="found"
           label="Found SIBA from"
+          control={control}
           options={FOUND_CHOICES}
           renderOptionValue={(option) => option.name}
           renderOptionLabel={(option) => option.label}
           rules={{ deps: "reason" }}
         />
-        <Textarea name="reason" />
+        <Textarea name="reason" control={control} />
         <div className="content mt-5">
           <h2>Pick Your Teams</h2>
           <p>
@@ -125,13 +105,18 @@ export default function JoinForm({
         <button type="submit" className="button is-primary">
           Join
         </button>
-      </Form>
+      </form>
 
-      <TeamModal
-        isOpen={showModal}
-        league={teamView}
+      <ProTeamModal
+        isOpen={showModal && teamView === LEAGUE.pro}
         close={() => setShowModal(false)}
-        options={options}
+        options={proTeams}
+      />
+
+      <SchoolModal
+        isOpen={showModal && teamView === LEAGUE.college}
+        close={() => setShowModal(false)}
+        options={schools}
       />
     </>
   );

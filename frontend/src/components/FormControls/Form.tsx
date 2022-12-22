@@ -1,6 +1,6 @@
 import { joiResolver } from "@hookform/resolvers/joi";
 import type Joi from "joi";
-import { useEffect } from "react";
+import { useEffect, createElement } from "react";
 import type {
   DefaultValues,
   FieldValues,
@@ -23,26 +23,32 @@ export default function Form<T extends FieldValues>({
   onSubmit,
   ...rest
 }: FormProps<T>) {
-  const methods = useForm<T>({
+  const { handleSubmit, register } = useForm<T>({
     defaultValues,
     criteriaMode: "all",
     resolver: validation && joiResolver(validation),
   });
 
-  useEffect(() => {
-    methods.reset(defaultValues);
-  }, [methods.formState.isSubmitSuccessful]);
-
   return (
-    <FormProvider<T> {...methods}>
-      <form
-        id={id}
-        noValidate={!!validation}
-        onSubmit={methods.handleSubmit(onSubmit)}
-        {...rest}
-      >
-        {children}
-      </form>
-    </FormProvider>
+    <form
+      id={id}
+      noValidate={!!validation}
+      onSubmit={handleSubmit(onSubmit)}
+      {...rest}
+    >
+      {Array.isArray(children)
+        ? children.map((child) => {
+            return child.props.name && !child.props.control
+              ? createElement(child.type, {
+                  ...{
+                    ...child.props,
+                    register,
+                    key: child.props.name,
+                  },
+                })
+              : child;
+          })
+        : children}
+    </form>
   );
 }

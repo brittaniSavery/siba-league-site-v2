@@ -23,11 +23,12 @@ const strapiCoaches = await getDataFromApi<StrapiCollectionResponse<Member>>(
   }?pagination[limit]=100`
 );
 
-const coaches: Member[] = strapiCoaches.data.map((member) => ({
-  team: member.attributes.team,
-  logo: member.attributes.logo,
-  name: member.attributes.name,
-}));
+const unavailableSchools = strapiCoaches.data.map(
+  (member) => member.attributes.team
+);
+const availableSchools = schools.filter(
+  (school) => !unavailableSchools.includes(`${school.name} ${school.mascot}`)
+);
 
 const proInfo = await getDataFromApi<StrapiSingleTypeResponse<StrapiProInfo>>(
   `${import.meta.env.PUBLIC_CMS_URL}/pro-info`
@@ -40,11 +41,12 @@ const strapiGMs = await getDataFromApi<StrapiCollectionResponse<Member>>(
   }?pagination[limit]=100`
 );
 
-const gms: Member[] = strapiGMs.data.map((member) => ({
-  team: member.attributes.team,
-  logo: member.attributes.logo,
-  name: member.attributes.name,
-}));
+const unavailableProTeams = strapiGMs.data.map(
+  (member) => member.attributes.team
+);
+const availableProTeams = proTeams.filter(
+  (team) => !unavailableProTeams.includes(`${team.name} ${team.mascot}`)
+);
 ---
 
 <Layout content={{ title: "Join" }}>
@@ -59,10 +61,8 @@ const gms: Member[] = strapiGMs.data.map((member) => ({
     </p>
   </section>
   <JoinForm
-    coaches={coaches}
-    gms={gms}
-    proTeams={proTeams}
-    schools={schools}
+    proTeams={availableProTeams}
+    schools={availableSchools}
     client:load
   />
 </Layout>
