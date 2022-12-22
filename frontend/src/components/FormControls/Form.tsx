@@ -1,18 +1,20 @@
 import { joiResolver } from "@hookform/resolvers/joi";
 import type Joi from "joi";
-import { useEffect, createElement } from "react";
+import { createElement } from "react";
 import type {
   DefaultValues,
   FieldValues,
   SubmitHandler,
+  UseFormReturn,
 } from "react-hook-form";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
-type FormProps<T extends FieldValues> = React.PropsWithChildren & {
+type FormProps<T extends FieldValues> = {
   id?: string;
   defaultValues?: DefaultValues<T>;
   validation?: Joi.Schema<T>;
   onSubmit: SubmitHandler<T>;
+  children: (methods: UseFormReturn<T>) => React.ReactNode;
 };
 
 export default function Form<T extends FieldValues>({
@@ -23,7 +25,7 @@ export default function Form<T extends FieldValues>({
   onSubmit,
   ...rest
 }: FormProps<T>) {
-  const { handleSubmit, register } = useForm<T>({
+  const methods = useForm<T>({
     defaultValues,
     criteriaMode: "all",
     resolver: validation && joiResolver(validation),
@@ -33,22 +35,10 @@ export default function Form<T extends FieldValues>({
     <form
       id={id}
       noValidate={!!validation}
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={methods.handleSubmit(onSubmit)}
       {...rest}
     >
-      {Array.isArray(children)
-        ? children.map((child) => {
-            return child.props.name && !child.props.control
-              ? createElement(child.type, {
-                  ...{
-                    ...child.props,
-                    register,
-                    key: child.props.name,
-                  },
-                })
-              : child;
-          })
-        : children}
+      {children(methods)}
     </form>
   );
 }

@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { capitalize } from "lodash-es";
 import type { ReactNode } from "react";
 
 type ModalSkeletonProps = React.PropsWithChildren & {
@@ -24,7 +25,7 @@ export default function ModalSkeleton({
       <div className="modal-background" onClick={close} />
       <div className="modal-card">
         <header className="modal-card-head">
-          <p className="modal-card-title">Add {type} Team</p>
+          <p className="modal-card-title">Add {capitalize(type)} Team</p>
           <button className="delete" aria-label="close" />
         </header>
         <section className="modal-card-body">
@@ -32,7 +33,7 @@ export default function ModalSkeleton({
             <p>
               This form includes all the details needed for your team and{" "}
               {member}. When selecting your {member}&apos;s face and outfit, be
-              sure to use the graphics found in
+              sure to use the graphics found in{" "}
               <a
                 href={`/${htmlSection}/downloads`}
                 target="_blank"

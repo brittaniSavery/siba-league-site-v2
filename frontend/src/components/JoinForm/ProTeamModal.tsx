@@ -27,15 +27,17 @@ export default function SchoolModal({
       onSubmit={onSubmit}
       // validation={validation}
     >
-      <ModalSkeleton
-        type={LEAGUE.pro}
-        member={PRO_LEAGUE_INFO.singleMember}
-        htmlSection="siba"
-        isOpen={isOpen}
-        close={close}
-      >
-        {/* TODO */}
-      </ModalSkeleton>
+      {() => (
+        <ModalSkeleton
+          type={LEAGUE.pro}
+          member={PRO_LEAGUE_INFO.singleMember}
+          htmlSection="siba"
+          isOpen={isOpen}
+          close={close}
+        >
+          {/* TODO */}
+        </ModalSkeleton>
+      )}
     </Form>
   );
 }

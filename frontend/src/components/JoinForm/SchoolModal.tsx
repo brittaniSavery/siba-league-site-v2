@@ -29,21 +29,23 @@ export default function SchoolModal({
       onSubmit={onSubmit}
       // validation={validation}
     >
-      <ModalSkeleton
-        type={LEAGUE.college}
-        member={COLLEGE_LEAGUE_INFO.singleMember}
-        htmlSection="college"
-        isOpen={isOpen}
-        close={close}
-        extraInfo={
-          <p>
-            Teams that have an exclamation icon (
-            <ProbationIcon iconOnly />) are on probation.
-          </p>
-        }
-      >
-        {/* TODO */}
-      </ModalSkeleton>
+      {() => (
+        <ModalSkeleton
+          type={LEAGUE.college}
+          member={COLLEGE_LEAGUE_INFO.singleMember}
+          htmlSection="college"
+          isOpen={isOpen}
+          close={close}
+          extraInfo={
+            <p>
+              Teams that have an exclamation icon (
+              <ProbationIcon iconOnly />) are on probation.
+            </p>
+          }
+        >
+          {/* TODO */}
+        </ModalSkeleton>
+      )}
     </Form>
   );
 }
