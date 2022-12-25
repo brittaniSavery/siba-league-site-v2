@@ -3,6 +3,7 @@ import {
   LEAGUE,
   PRO_LEAGUE_INFO,
 } from "@content/constants";
+import type { ProTeam, School } from "@lib/types";
 import Joi from "joi";
 
 export const FOUND_CHOICES = [
@@ -13,67 +14,54 @@ export const FOUND_CHOICES = [
   { name: "other", label: "Other" },
 ];
 
-export enum PRO_PERSONALITY {
-  Terrible = "Terrible",
-  Low = "Low",
-  Average = "Average",
-  High = "High",
-  Great = "Great",
-}
+export const PRO_PERSONALITY = ["Terrible", "Low", "Average", "High", "Great"];
+export const LOW_HIGH_LEVELS = [
+  "Very Low",
+  "Low",
+  "Average",
+  "High",
+  "Very High",
+];
 
-export enum LOW_HIGH_LEVELS {
-  VeryLow = "Very Low",
-  Low = "Low",
-  Average = "Average",
-  High = "High",
-  VeryHigh = "Very High",
-}
-
-type Basics = {
-  teamName: string;
-  teamPassword: string;
-  memberFirstName: string;
-  memberLastName: string;
-  memberPicture: number;
-  memberOutfit: number;
-  memberAge: number;
+type SharedFields = {
+  password: string;
+  firstName: string;
+  lastName: string;
+  picture: number;
+  outfit: number;
+  age: number;
   offense: number;
   defense: number;
   playerDev: number;
-  pointSum: number;
+  currentPointsTotal: number;
 };
 
-export type FormProTeam = Basics & {
-  memberPersonality: PRO_PERSONALITY;
-  memberGreed: LOW_HIGH_LEVELS;
+export type ProTeamForm = SharedFields & {
+  team: ProTeam | null;
+  personality: string;
+  greed: string;
   potential: number;
+  gameStrategy: number;
 };
 
-export type FormCollegeTeam = Basics & {
-  memberAmbition: LOW_HIGH_LEVELS;
-  memberAcademics: LOW_HIGH_LEVELS;
-  memberDiscipline: LOW_HIGH_LEVELS;
-  memberIntegrity: LOW_HIGH_LEVELS;
-  memberTemper: LOW_HIGH_LEVELS;
+export type CollegeTeamForm = SharedFields & {
+  team: School | null;
+  ambition: string;
+  academics: string;
+  discipline: string;
+  integrity: string;
+  temper: string;
+  recruiting: number;
+  scouting: number;
 };
 
-export type JoinSchema = {
+export type JoinForm = {
   name: string;
   email: string;
   found: "developers" | "referral" | "google" | "twitter" | "other";
   reason?: string;
-  proTeam?: FormProTeam;
-  collegeTeams?: FormCollegeTeam[];
-};
-
-const teamBasicValidation = {
-  team: Joi.required(),
-  password: Joi.string().required(),
-  firstName: Joi.string().required(),
-  lastName: Joi.string().required(),
-  picture: Joi.number().min(1).required(),
-  outfit: Joi.number().min(1).required(),
-  age: Joi.number().min(25).max(75).required(),
+  proTeam?: ProTeamForm;
+  collegeTeams?: CollegeTeamForm[];
 };
 
 const pointsValidation = (league: LEAGUE, tier?: 1 | 2 | 3) => {
@@ -85,7 +73,17 @@ const pointsValidation = (league: LEAGUE, tier?: 1 | 2 | 3) => {
   return Joi.number().min(apm.min).max(apm.max).required();
 };
 
+const sharedFieldsValidation = {
+  password: Joi.string().required(),
+  firstName: Joi.string().required(),
+  lastName: Joi.string().required(),
+  picture: Joi.number().min(1).required(),
+  outfit: Joi.number().min(1).required(),
+  age: Joi.number().min(25).max(75).required(),
+};
+
 const proTeamValidation = {
+  team: Joi.object().empty(null).required(),
   personality: Joi.valid(...Object.keys(PRO_PERSONALITY)).required(),
   greed: Joi.valid(...Object.keys(LOW_HIGH_LEVELS)).required(),
   offense: pointsValidation(LEAGUE.pro),
@@ -96,19 +94,16 @@ const proTeamValidation = {
   currentTotal: Joi.number().max(PRO_LEAGUE_INFO.pointLimits.total).required(),
 };
 
-export const proTeamValidationSchema: Joi.Schema<FormProTeam> = Joi.object({
-  ...teamBasicValidation,
+const collegeValidation = {
+  // TODO
+};
+
+export const proTeamFormSchema: Joi.Schema<ProTeamForm> = Joi.object({
+  ...sharedFieldsValidation,
   ...proTeamValidation,
 }).unknown();
-// .custom((parent) => {
-//   const { offense, defense, potential, gameStrategy, playerDev } = parent;
-//   const sum = offense + defense + potential + gameStrategy + playerDev;
 
-//   if (sum > 325)
-//     throw new Error("Ability Points Sum cannot be more than 325.");
-// })
-
-export const joinValidationSchema: Joi.Schema<JoinSchema> = Joi.object({
+export const joinFormSchema: Joi.Schema<JoinForm> = Joi.object({
   name: Joi.string().required().messages({
     "any.required": "Please enter your name. First name is okay.",
   }),

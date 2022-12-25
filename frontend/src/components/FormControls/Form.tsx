@@ -1,6 +1,6 @@
 import { joiResolver } from "@hookform/resolvers/joi";
 import type Joi from "joi";
-import { createElement } from "react";
+import { useEffect } from "react";
 import type {
   DefaultValues,
   FieldValues,
@@ -31,14 +31,25 @@ export default function Form<T extends FieldValues>({
     resolver: validation && joiResolver(validation),
   });
 
+  const {
+    reset,
+    formState: { isSubmitSuccessful },
+  } = methods;
+
+  useEffect(() => {
+    if (isSubmitSuccessful) reset(defaultValues);
+  }, [reset, isSubmitSuccessful]);
+
   return (
-    <form
-      id={id}
-      noValidate={!!validation}
-      onSubmit={methods.handleSubmit(onSubmit)}
-      {...rest}
-    >
-      {children(methods)}
-    </form>
+    <>
+      <form
+        id={id}
+        noValidate={!!validation}
+        onSubmit={methods.handleSubmit(onSubmit)}
+        {...rest}
+      >
+        {children(methods)}
+      </form>
+    </>
   );
 }

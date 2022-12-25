@@ -1,5 +1,5 @@
 {
-  "name": "@example/basics",
+  "name": "@averyinc/siba-frontend",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -12,6 +12,7 @@
   "devDependencies": {
     "@astrojs/mdx": "^0.8.3",
     "@astrojs/react": "^1.0.0",
+    "@hookform/devtools": "^4.3.0",
     "@types/lodash-es": "^4.17.6",
     "@types/luxon": "^2.3.2",
     "@types/react": "^18.0.9",

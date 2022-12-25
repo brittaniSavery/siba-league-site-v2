@@ -26,6 +26,7 @@ export default function AutoComplete<T extends FieldValues, K>(
     size,
     help,
     options,
+    control,
     renderOption,
     renderOptionLabel,
     isOptionEqualToValue,
@@ -34,7 +35,7 @@ export default function AutoComplete<T extends FieldValues, K>(
   const {
     field,
     fieldState: { error },
-  } = useController(props);
+  } = useController({ name, control });
 
   const {
     getRootProps,

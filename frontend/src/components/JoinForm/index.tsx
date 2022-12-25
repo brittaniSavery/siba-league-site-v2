@@ -13,7 +13,7 @@ import { useState } from "react";
 // import type { Member, ProTeam, School } from "@lib/types";
 import Form from "@components/FormControls/Form";
 import ProTeamModal from "./ProTeamModal";
-import { FOUND_CHOICES, JoinSchema } from "./schema";
+import { FOUND_CHOICES, JoinForm, joinFormSchema } from "./schema";
 import SchoolModal from "./SchoolModal";
 
 type JoinFormProps = {
@@ -26,7 +26,7 @@ export default function JoinForm({ schools, proTeams }: JoinFormProps) {
   const [showModal, setShowModal] = useState(false);
 
   // Submitting all the info for the join form
-  const onSubmit: SubmitHandler<JoinSchema> = (data, event) => {
+  const onSubmit: SubmitHandler<JoinForm> = (data, event) => {
     event?.preventDefault();
     event?.stopPropagation();
     console.log(data);
@@ -34,12 +34,16 @@ export default function JoinForm({ schools, proTeams }: JoinFormProps) {
 
   return (
     <>
-      <Form<JoinSchema> onSubmit={onSubmit}>
+      <Form<JoinForm>
+        onSubmit={onSubmit}
+        validation={joinFormSchema}
+        defaultValues={{ name: "", email: "" }}
+      >
         {({ control }) => (
           <>
             <Input name="name" control={control} />
             <Input name="email" type="email" control={control} />
-            <Select<JoinSchema, { label: string; name: string }>
+            <Select<JoinForm, { label: string; name: string }>
               name="found"
               label="Found SIBA from"
               control={control}

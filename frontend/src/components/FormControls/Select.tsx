@@ -18,21 +18,22 @@ export default function Select<T extends FieldValues, K>(
   props: SelectProps<T, K> & InputHTMLAttributes<HTMLElement>
 ) {
   const {
-    field,
-    fieldState: { error },
-  } = useController(props);
-
-  const {
     name,
     label,
     size,
     help,
     horizontal,
     options,
+    control,
     renderOptionLabel = (option) => option as string,
     renderOptionValue = (option) => option as string,
     ...rest
   } = props;
+
+  const {
+    field,
+    fieldState: { error },
+  } = useController({ name, control });
 
   return (
     <FieldBase

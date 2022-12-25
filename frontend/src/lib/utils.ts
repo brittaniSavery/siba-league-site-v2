@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import type { ProTeam, School } from "./types";
 
 export function getFormattedDate(date: string | Date): string {
   let dateObj: Date;
@@ -22,8 +23,6 @@ export async function getDataFromApi<T>(url: string): Promise<T> {
   return await (response.json() as Promise<T>);
 }
 
-// export function generateArticleTags(article: Article): Tag[] {
-//   const { league, tags } = article;
-//   const sortedTags = sortBy([...tags, { name: capitalize(league) }], ["name"]);
-//   return sortedTags;
-// }
+export function formatTeamTitle(team: ProTeam | School) {
+  return `${team.name} ${team.mascot}`;
+}

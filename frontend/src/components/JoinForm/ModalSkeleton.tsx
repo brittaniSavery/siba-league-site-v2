@@ -45,13 +45,16 @@ export default function ModalSkeleton({
             </p>
             {extraInfo}
           </div>
-          {children}
+          <div className="columns is-multiline">
+            <p className="column is-full is-size-5">Team Basics</p>
+            {children}
+          </div>
         </section>
         <footer className="modal-card-foot">
           <button type="submit" className="button is-primary">
             Add
           </button>
-          <button className="button" onClick={close}>
+          <button type="button" className="button" onClick={close}>
             Cancel
           </button>
         </footer>

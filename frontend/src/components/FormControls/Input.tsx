@@ -12,12 +12,12 @@ export default function Input<T extends FieldValues>(
     UseControllerProps<T> &
     InputHTMLAttributes<HTMLElement>
 ) {
+  const { name, label, size, help, horizontal, control, ...rest } = props;
+
   const {
     field,
     fieldState: { error },
-  } = useController(props);
-
-  const { name, label, size, help, horizontal, ...rest } = props;
+  } = useController({ name, control });
 
   return (
     <FieldBase
@@ -29,9 +29,8 @@ export default function Input<T extends FieldValues>(
       horizontal={horizontal}
     >
       <input
-        onChange={field.onChange}
-        onBlur={field.onBlur}
         className={clsx("input", error && "is-danger")}
+        {...field}
         {...rest}
       />
     </FieldBase>
