@@ -84,8 +84,8 @@ const sharedFieldsValidation = {
 
 const proTeamValidation = {
   team: Joi.object().empty(null).required(),
-  personality: Joi.valid(...Object.keys(PRO_PERSONALITY)).required(),
-  greed: Joi.valid(...Object.keys(LOW_HIGH_LEVELS)).required(),
+  personality: Joi.valid(...PRO_PERSONALITY).required(),
+  greed: Joi.valid(...LOW_HIGH_LEVELS).required(),
   offense: pointsValidation(LEAGUE.pro),
   defense: pointsValidation(LEAGUE.pro),
   potential: pointsValidation(LEAGUE.pro),
@@ -94,13 +94,65 @@ const proTeamValidation = {
   currentTotal: Joi.number().max(PRO_LEAGUE_INFO.pointLimits.total).required(),
 };
 
+const collegePointsValidation = Joi.number().when("team.tier", [
+  {
+    is: 1,
+    then: pointsValidation(LEAGUE.college, 1),
+  },
+  {
+    is: 2,
+    then: pointsValidation(LEAGUE.college, 2),
+  },
+  {
+    is: 3,
+    then: pointsValidation(LEAGUE.college, 3),
+  },
+]);
+
 const collegeValidation = {
-  // TODO
+  team: Joi.object({
+    tier: Joi.number().min(1).max(3),
+  }).required(),
+  ambition: Joi.valid(...LOW_HIGH_LEVELS).required(),
+  academics: Joi.valid(...LOW_HIGH_LEVELS).required(),
+  discipline: Joi.valid(...LOW_HIGH_LEVELS).required(),
+  integrity: Joi.valid(...LOW_HIGH_LEVELS).required(),
+  temper: Joi.valid(...LOW_HIGH_LEVELS).required(),
+  offense: collegePointsValidation,
+  defense: collegePointsValidation,
+  recruiting: collegePointsValidation,
+  scouting: collegePointsValidation,
+  playerDev: collegePointsValidation,
+  currentTotal: Joi.number().when("team.tier", [
+    {
+      is: 1,
+      then: Joi.number()
+        .max(COLLEGE_LEAGUE_INFO.pointLimits[1].total)
+        .required(),
+    },
+    {
+      is: 2,
+      then: Joi.number()
+        .max(COLLEGE_LEAGUE_INFO.pointLimits[2].total)
+        .required(),
+    },
+    {
+      is: 3,
+      then: Joi.number()
+        .max(COLLEGE_LEAGUE_INFO.pointLimits[3].total)
+        .required(),
+    },
+  ]),
 };
 
 export const proTeamFormSchema: Joi.Schema<ProTeamForm> = Joi.object({
   ...sharedFieldsValidation,
   ...proTeamValidation,
+}).unknown();
+
+export const collegeTeamFormSchema: Joi.Schema<CollegeTeamForm> = Joi.object({
+  ...sharedFieldsValidation,
+  ...collegeValidation,
 }).unknown();
 
 export const joinFormSchema: Joi.Schema<JoinForm> = Joi.object({

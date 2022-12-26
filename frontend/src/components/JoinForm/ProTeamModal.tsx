@@ -2,19 +2,18 @@ import AutoComplete from "@components/FormControls/AutoComplete";
 import Form from "@components/FormControls/Form";
 import Input from "@components/FormControls/Input";
 import Select from "@components/FormControls/Select";
-import ModalSkeleton from "./ModalSkeleton";
 import { LEAGUE, PRO_LEAGUE_INFO } from "@content/constants";
-import { DevTool } from "@hookform/devtools";
+import type { ProTeam } from "@lib/types";
 import { formatTeamTitle } from "@lib/utils";
 import { startCase } from "lodash-es";
+import type { Path, SubmitHandler } from "react-hook-form";
+import ModalSkeleton from "./ModalSkeleton";
 import {
   LOW_HIGH_LEVELS,
   ProTeamForm,
   proTeamFormSchema,
   PRO_PERSONALITY,
 } from "./schema";
-import type { ProTeam } from "@lib/types";
-import type { Path, SubmitHandler } from "react-hook-form";
 
 type ProTeamModalProps = {
   isOpen: boolean;
@@ -88,6 +87,7 @@ export default function ProTeamModal({
 
         const calculatePointsLeft = () => {
           const currentAmount = abilityPointsValues.reduce((prev, curr) => {
+            curr = typeof curr !== "number" ? Number.parseInt(curr, 10) : curr;
             return curr + prev;
           }, 0);
           setValue("currentPointsTotal", currentAmount);
@@ -228,8 +228,6 @@ export default function ProTeamModal({
                 </div>
               </div>
             </div>
-
-            <DevTool control={control} />
           </ModalSkeleton>
         );
       }}

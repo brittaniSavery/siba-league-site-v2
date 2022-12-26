@@ -75,8 +75,30 @@ export default function SchoolModal({
       defaultValues={defaultValues}
       // validation={validation}
     >
-      {({ control, watch }) => {
+      {({ control, formState: { errors }, watch, setValue }) => {
         const currentTeam = watch("team");
+        const abilityPointsValues = watch([
+          "offense",
+          "defense",
+          "scouting",
+          "recruiting",
+          "playerDev",
+        ]);
+
+        const calculatePointsLeft = () => {
+          if (!currentTeam) return 0;
+
+          const currentAmount = abilityPointsValues.reduce((prev, curr) => {
+            curr = typeof curr !== "number" ? Number.parseInt(curr, 10) : curr;
+            return curr + prev;
+          }, 0);
+
+          setValue("currentPointsTotal", currentAmount);
+          return (
+            COLLEGE_LEAGUE_INFO.pointLimits[currentTeam.tier].total -
+            currentAmount
+          );
+        };
 
         return (
           <ModalSkeleton
@@ -208,6 +230,28 @@ export default function SchoolModal({
                 disabled={!currentTeam}
               />
             ))}
+            <div className="column is-full field is-horizontal">
+              <div className="field-label is-normal">
+                <label className="label">Points Remaining</label>
+              </div>
+              <div className="field-body">
+                <div className="field">
+                  <p className="control">
+                    <input
+                      className="input is-static"
+                      type="number"
+                      value={calculatePointsLeft()}
+                      readOnly
+                    />
+                  </p>
+                  {errors.currentPointsTotal && (
+                    <p className="help has-text-danger-dark">
+                      {errors.currentPointsTotal.message as string}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
           </ModalSkeleton>
         );
       }}
