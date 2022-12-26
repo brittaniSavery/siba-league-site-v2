@@ -147,15 +147,23 @@ body > .container {
   list-style: none;
   background-color: white;
   overflow: auto;
-  max-height: 200px;
+  max-height: 250px;
   border: 1px solid $grey-lighter;
   border-top: none;
 
-  & li.Mui-focused,
-  li:active {
-    background-color: $link;
-    color: white;
-    cursor: pointer;
+  & li {
+    padding: 0.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: fit-content;
+
+    &.Mui-focused,
+    &:active {
+      background-color: $link;
+      color: white;
+      cursor: pointer;
+    }
   }
 }
 

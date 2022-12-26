@@ -120,14 +120,26 @@ export default function SchoolModal({
               label="Team Selection"
               size="half"
               options={options}
-              renderOption={(school: School) => (
-                <>
-                  <p>{formatTeamTitle(school)}</p>
-                  <p>
-                    Tier {school.tier} | Region: {school.region}
-                  </p>
-                </>
-              )}
+              renderOption={(school: School) => {
+                const schoolTitle = formatTeamTitle(school);
+                return (
+                  <>
+                    <p>
+                      {school.probation ? (
+                        <ProbationIcon
+                          school={schoolTitle}
+                          details={school.probation}
+                        />
+                      ) : (
+                        schoolTitle
+                      )}
+                    </p>
+                    <p className="help">
+                      Tier {school.tier} | Region: {school.region}
+                    </p>
+                  </>
+                );
+              }}
               renderOptionLabel={formatTeamTitle}
               isOptionEqualToValue={(option: School, value: School) =>
                 option.name === value.name
