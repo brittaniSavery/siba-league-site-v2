@@ -12,7 +12,7 @@ type AutoCompleteProps<T extends FieldValues, K> = AllFieldProps<T> &
     options: K[];
     renderOption: (option: K) => ReactNode;
     renderOptionLabel?: (option: K) => string;
-    renderInput?: (option: K) => string | ReactNode;
+    renderHelp?: (value: K) => ReactNode;
     isOptionEqualToValue?: (option: K, value: K) => boolean;
   };
 
@@ -29,6 +29,7 @@ export default function AutoComplete<T extends FieldValues, K>(
     control,
     renderOption,
     renderOptionLabel,
+    renderHelp,
     isOptionEqualToValue,
   } = props;
 
@@ -44,6 +45,7 @@ export default function AutoComplete<T extends FieldValues, K>(
     getListboxProps,
     getOptionProps,
     groupedOptions,
+    value,
   } = useAutocomplete({
     id: id,
     options: options,
@@ -53,6 +55,14 @@ export default function AutoComplete<T extends FieldValues, K>(
       isOptionEqualToValue || ((option, value) => option === value),
     onChange: (_, value) => field.onChange(value),
   });
+
+  const displayHelp = () => {
+    if (value && renderHelp) {
+      return renderHelp(value);
+    }
+
+    return help;
+  };
 
   return (
     <div
@@ -84,7 +94,7 @@ export default function AutoComplete<T extends FieldValues, K>(
         </div>
       </div>
       {error && <p className="help has-text-danger-dark">{error.message}</p>}
-      {!error && help && <p className="help">{help}</p>}
+      {!error && <p className="help">{displayHelp()}</p>}
     </div>
   );
 }
