@@ -163,6 +163,7 @@ export default function SchoolModal({
               control={control}
             />
             <Input
+              type="password"
               name="password"
               label="Team Password"
               size="half"

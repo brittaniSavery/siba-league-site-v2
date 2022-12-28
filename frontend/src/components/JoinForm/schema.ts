@@ -91,7 +91,9 @@ const proTeamValidation = {
   potential: pointsValidation(LEAGUE.pro),
   gameStrategy: pointsValidation(LEAGUE.pro),
   playerDev: pointsValidation(LEAGUE.pro),
-  currentTotal: Joi.number().max(PRO_LEAGUE_INFO.pointLimits.total).required(),
+  currentPointsTotal: Joi.number()
+    .max(PRO_LEAGUE_INFO.pointLimits.total)
+    .required(),
 };
 
 const collegePointsValidation = Joi.number().when("team.tier", [
@@ -123,7 +125,7 @@ const collegeValidation = {
   recruiting: collegePointsValidation,
   scouting: collegePointsValidation,
   playerDev: collegePointsValidation,
-  currentTotal: Joi.number().when("team.tier", [
+  currentPointsTotal: Joi.number().when("team.tier", [
     {
       is: 1,
       then: Joi.number()
@@ -185,4 +187,25 @@ export const joinFormSchema: Joi.Schema<JoinForm> = Joi.object({
       "string.min":
         "Please detail how you found the league. Just a few words is fine.",
     }),
-});
+  proTeam: Joi.object()
+    .when("collegeTeams", {
+      not: Joi.exist(),
+      then: Joi.object().required(),
+    })
+    .messages({
+      "any.required": "At least one team (either pro or college) is required.",
+    }),
+  collegeTeams: Joi.array()
+    .items(
+      Joi.object({
+        tier: Joi.number(),
+        region: Joi.string(),
+      })
+    )
+    .max(3)
+    .unique((a, b) => a.tier === b.tier || a.region === b.region)
+    .messages({
+      "any.unique":
+        "Schools cannot share a ranking tier or a recruiting region.",
+    }),
+}).unknown();

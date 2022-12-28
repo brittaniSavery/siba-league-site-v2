@@ -8,24 +8,28 @@ import { formatTeamTitle } from "@lib/utils";
 import { startCase } from "lodash-es";
 import type { Path, SubmitHandler } from "react-hook-form";
 import ModalSkeleton from "./ModalSkeleton";
+import { DevTool } from "@hookform/devtools";
 import {
   LOW_HIGH_LEVELS,
   ProTeamForm,
   proTeamFormSchema,
   PRO_PERSONALITY,
 } from "./schema";
+import { useEffect } from "react";
 
 type ProTeamModalProps = {
   isOpen: boolean;
-  close: () => void;
-  defaultValues?: ProTeamForm;
   options: ProTeam[];
+  defaultValues?: ProTeamForm;
+  close: () => void;
+  sendToMainForm: (data: ProTeamForm) => void;
 };
 
 export default function ProTeamModal({
   isOpen,
-  close,
   options,
+  close,
+  sendToMainForm,
 }: ProTeamModalProps) {
   const defaultValues: ProTeamForm = {
     team: null,
@@ -66,7 +70,7 @@ export default function ProTeamModal({
   ];
 
   const onSubmit: SubmitHandler<ProTeamForm> = (data) => {
-    console.log(data);
+    sendToMainForm(data);
     close();
   };
 
@@ -77,6 +81,10 @@ export default function ProTeamModal({
       defaultValues={defaultValues}
     >
       {({ control, formState: { errors }, reset, watch, setValue }) => {
+        useEffect(() => {
+          console.log(errors);
+        }, [errors]);
+
         const abilityPointsValues = watch([
           "offense",
           "defense",
@@ -120,6 +128,7 @@ export default function ProTeamModal({
             />
 
             <Input
+              type="password"
               name="password"
               label="Team Password"
               size="half"
@@ -191,6 +200,16 @@ export default function ProTeamModal({
               {PRO_LEAGUE_INFO.pointLimits.max}. The maximum sum of the
               categories is {PRO_LEAGUE_INFO.pointLimits.total}.
             </p>
+
+            <p className="column is-full">
+              <b>Note:</b> All staff members play some role in the evaluation of
+              player ratings. However, the head coach has the biggest influence
+              in determining a player&apos;s rating, followed by the General
+              Manager and then the assistant coaches in order of job seniority.
+              In terms of player development, the General Manager plays{" "}
+              <em>NO</em> role.
+            </p>
+
             {abilityPoints.map(({ name, label }) => (
               <Input
                 key={`${PRO_LEAGUE_INFO.singleMember}-${name}`}
@@ -228,6 +247,7 @@ export default function ProTeamModal({
                 </div>
               </div>
             </div>
+            <DevTool control={control} />
           </ModalSkeleton>
         );
       }}

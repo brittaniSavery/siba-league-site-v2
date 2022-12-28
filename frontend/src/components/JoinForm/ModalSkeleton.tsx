@@ -7,6 +7,7 @@ type ModalSkeletonProps = React.PropsWithChildren & {
   member: string;
   htmlSection: "siba" | "college";
   isOpen: boolean;
+  mode?: "add" | "edit";
   close: () => void;
   extraInfo?: ReactNode | ReactNode[];
 };
@@ -15,6 +16,7 @@ export default function ModalSkeleton({
   type,
   member,
   htmlSection,
+  mode = "add",
   isOpen,
   close,
   children,
@@ -52,7 +54,7 @@ export default function ModalSkeleton({
         </section>
         <footer className="modal-card-foot">
           <button type="submit" className="button is-primary">
-            Add
+            {capitalize(mode)}
           </button>
           <button type="button" className="button" onClick={close}>
             Cancel
