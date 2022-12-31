@@ -14,7 +14,7 @@ import {
   ProTeamForm,
   proTeamFormSchema,
   PRO_PERSONALITY,
-} from "./schema";
+} from "@lib/joinForm";
 import { useEffect } from "react";
 
 type ProTeamModalProps = {
@@ -48,26 +48,6 @@ export default function ProTeamModal({
     playerDev: 0,
     currentPointsTotal: 0,
   };
-
-  const abilityPoints = [
-    {
-      name: "offense",
-      label: "Evaluating Offense",
-    },
-    {
-      name: "defense",
-      label: "Evaluating Defense",
-    },
-    {
-      name: "potential",
-      label: "Evaluating Potential",
-    },
-    {
-      name: "gameStrategy",
-      label: "Game Strategy",
-    },
-    { name: "playerDev", label: "Player Development" },
-  ];
 
   const onSubmit: SubmitHandler<ProTeamForm> = (data) => {
     sendToMainForm(data);
@@ -164,7 +144,7 @@ export default function ProTeamModal({
               label="Face Picture Number"
               type={"number"}
               size={"one-quarter"}
-              help={`Fill in the number of the matching picture from graphics/nonplayers/fac.`}
+              help={`Fill in the number of the matching picture from graphics/${PRO_LEAGUE_INFO.pictureFolder}/fac.`}
               control={control}
             />
             <Input
@@ -172,7 +152,7 @@ export default function ProTeamModal({
               label="Outfit Picture Number"
               type={"number"}
               size={"one-quarter"}
-              help={`Fill in the number of the matching picture from graphics/nonplayers/clothes.`}
+              help={`Fill in the number of the matching picture from graphics/${PRO_LEAGUE_INFO.pictureFolder}/clothes.`}
               control={control}
             />
             <Select
@@ -210,11 +190,11 @@ export default function ProTeamModal({
               <em>NO</em> role.
             </p>
 
-            {abilityPoints.map(({ name, label }) => (
+            {PRO_LEAGUE_INFO.pointLabels.map(({ key, label: { pro } }) => (
               <Input
-                key={`${PRO_LEAGUE_INFO.singleMember}-${name}`}
-                name={name as Path<ProTeamForm>}
-                label={label}
+                key={`${PRO_LEAGUE_INFO.singleMember}-${key}`}
+                name={key as Path<ProTeamForm>}
+                label={pro}
                 type={"number"}
                 size="full"
                 style={{ width: "6rem" }}
@@ -247,7 +227,6 @@ export default function ProTeamModal({
                 </div>
               </div>
             </div>
-            <DevTool control={control} />
           </ModalSkeleton>
         );
       }}

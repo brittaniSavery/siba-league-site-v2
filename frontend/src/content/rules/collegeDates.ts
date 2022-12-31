@@ -1,85 +1,85 @@
 import type { CollegeEvent } from "@lib/types";
-import { RECRUITING, TOURNAMENT_TYPE } from "../constants";
+import { RECRUITING_STATES, TOURNAMENT_TYPE } from "../constants";
 
 const events: CollegeEvent[] = [
   //#region RECRUITING
   {
-    title: RECRUITING.Evaluation,
+    title: RECRUITING_STATES.Evaluation,
     start: new Date(2022, 0, 1),
     end: new Date(2022, 2, 18),
   },
   {
-    title: RECRUITING.Contact,
+    title: RECRUITING_STATES.Contact,
     start: new Date(2022, 2, 19),
     end: new Date(2022, 2, 25),
   },
   {
-    title: RECRUITING.Quiet,
+    title: RECRUITING_STATES.Quiet,
     start: new Date(2022, 2, 26),
     end: new Date(2022, 3, 1),
   },
   {
-    title: RECRUITING.Dead,
+    title: RECRUITING_STATES.Dead,
     start: new Date(2022, 3, 2),
     end: new Date(2022, 3, 8),
   },
   {
-    title: RECRUITING.Contact,
+    title: RECRUITING_STATES.Contact,
     start: new Date(2022, 3, 9),
     end: new Date(2022, 3, 30),
   },
   {
-    title: RECRUITING.LateLOI,
+    title: RECRUITING_STATES.LateLOI,
     start: new Date(2022, 3, 9),
     end: new Date(2022, 3, 30),
   },
   {
-    title: RECRUITING.None,
+    title: RECRUITING_STATES.None,
     start: new Date(2022, 4, 1),
     end: new Date(2022, 5, 25),
   },
   {
-    title: RECRUITING.Quiet,
+    title: RECRUITING_STATES.Quiet,
     start: new Date(2022, 5, 26),
     end: new Date(2022, 6, 2),
   },
   {
-    title: RECRUITING.Evaluation,
+    title: RECRUITING_STATES.Evaluation,
     start: new Date(2022, 6, 3),
     end: new Date(2022, 6, 16),
   },
   {
-    title: RECRUITING.Dead,
+    title: RECRUITING_STATES.Dead,
     start: new Date(2022, 6, 17),
     end: new Date(2022, 6, 23),
   },
   {
-    title: RECRUITING.Evaluation,
+    title: RECRUITING_STATES.Evaluation,
     start: new Date(2022, 6, 24),
     end: new Date(2022, 6, 30),
   },
   {
-    title: RECRUITING.Quiet,
+    title: RECRUITING_STATES.Quiet,
     start: new Date(2022, 6, 31),
     end: new Date(2022, 8, 10),
   },
   {
-    title: RECRUITING.Contact,
+    title: RECRUITING_STATES.Contact,
     start: new Date(2022, 8, 11),
     end: new Date(2022, 9, 8),
   },
   {
-    title: RECRUITING.Quiet,
+    title: RECRUITING_STATES.Quiet,
     start: new Date(2022, 9, 9),
     end: new Date(2022, 10, 19),
   },
   {
-    title: RECRUITING.EarlyLOI,
+    title: RECRUITING_STATES.EarlyLOI,
     start: new Date(2022, 10, 13),
     end: new Date(2022, 10, 19),
   },
   {
-    title: RECRUITING.Evaluation,
+    title: RECRUITING_STATES.Evaluation,
     start: new Date(2022, 10, 20),
     end: new Date(2022, 11, 31),
   },

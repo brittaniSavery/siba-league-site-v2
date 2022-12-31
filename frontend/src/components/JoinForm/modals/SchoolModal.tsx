@@ -9,7 +9,11 @@ import { formatTeamTitle } from "@lib/utils";
 import { capitalize, startCase } from "lodash-es";
 import type { Path, SubmitHandler } from "react-hook-form";
 import ModalSkeleton from "./ModalSkeleton";
-import { CollegeTeamForm, LOW_HIGH_LEVELS } from "./schema";
+import {
+  CollegeTeamForm,
+  collegeTeamFormSchema,
+  LOW_HIGH_LEVELS,
+} from "@lib/joinForm";
 
 type SchoolModalProps = {
   isOpen: boolean;
@@ -22,8 +26,6 @@ export default function SchoolModal({
   close,
   options,
 }: SchoolModalProps) {
-  // const validation = schoolValidationSchema
-
   const defaultValues: CollegeTeamForm = {
     team: null,
     password: "",
@@ -45,26 +47,6 @@ export default function SchoolModal({
     currentPointsTotal: 0,
   };
 
-  const abilityPoints = [
-    {
-      name: "offense",
-      label: "Offensive Concepts",
-    },
-    {
-      name: "defense",
-      label: "Defensive Concepts",
-    },
-    {
-      name: "scouting",
-      label: "Scouting Ability",
-    },
-    {
-      name: "recruiting",
-      label: "Recruiting Ability",
-    },
-    { name: "playerDev", label: "Player Development" },
-  ];
-
   const onSubmit: SubmitHandler<CollegeTeamForm> = (data) => {
     console.log(data);
   };
@@ -73,7 +55,7 @@ export default function SchoolModal({
     <Form<CollegeTeamForm>
       onSubmit={onSubmit}
       defaultValues={defaultValues}
-      // validation={validation}
+      //validation={collegeTeamFormSchema}
     >
       {({ control, formState: { errors }, watch, setValue }) => {
         const currentTeam = watch("team");
@@ -199,7 +181,7 @@ export default function SchoolModal({
               label="Face Picture Number"
               type="number"
               size="one-third"
-              help="Fill in the number of the matching picture from graphics/coaches/fac."
+              help={`Fill in the number of the matching picture from graphics/${COLLEGE_LEAGUE_INFO.pictureFolder}/fac.`}
               control={control}
             />
             <Input
@@ -207,7 +189,7 @@ export default function SchoolModal({
               label="Outfit Picture Number"
               type="number"
               size="one-third"
-              help="Fill in the number of the matching picture from graphics/coaches/clothes."
+              help={`Fill in the number of the matching picture from graphics/${COLLEGE_LEAGUE_INFO.pictureFolder}/clothes.`}
               control={control}
             />
             <div className="column is-full">
@@ -244,21 +226,23 @@ export default function SchoolModal({
 
             <AbilityPointsInfo currentTeam={currentTeam} />
 
-            {abilityPoints.map(({ name, label }) => (
-              <Input
-                key={`${COLLEGE_LEAGUE_INFO.singleMember}-${name}`}
-                name={name as Path<CollegeTeamForm>}
-                label={label}
-                type={"number"}
-                size="full"
-                style={{ width: "6rem" }}
-                min={10}
-                max={85}
-                horizontal
-                control={control}
-                disabled={!currentTeam}
-              />
-            ))}
+            {COLLEGE_LEAGUE_INFO.pointLabels.map(
+              ({ key, label: { college } }) => (
+                <Input
+                  key={`${COLLEGE_LEAGUE_INFO.singleMember}-${key}`}
+                  name={key as Path<CollegeTeamForm>}
+                  label={college}
+                  type={"number"}
+                  size="full"
+                  style={{ width: "6rem" }}
+                  min={10}
+                  max={85}
+                  horizontal
+                  control={control}
+                  disabled={!currentTeam}
+                />
+              )
+            )}
             <div className="column is-full field is-horizontal">
               <div className="field-label is-normal">
                 <label className="label">Points Remaining</label>

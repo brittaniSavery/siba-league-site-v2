@@ -1,4 +1,4 @@
-import { LEAGUE, RECRUITING } from "@content/constants";
+import { LEAGUE, RECRUITING_STATES } from "@content/constants";
 import CollegeEvents from "@content/rules/collegeDates";
 import ProEvents from "@content/rules/proDates";
 import type { CollegeEvent, ProEvent } from "@lib/types";
@@ -128,23 +128,23 @@ function getEventClass(
       className = "college-tournament";
     } else {
       switch (event.title) {
-        case RECRUITING.Contact:
+        case RECRUITING_STATES.Contact:
           className = "recruiting-contact";
           break;
-        case RECRUITING.Dead:
+        case RECRUITING_STATES.Dead:
           className = "recruiting-dead";
           break;
-        case RECRUITING.EarlyLOI:
-        case RECRUITING.LateLOI:
+        case RECRUITING_STATES.EarlyLOI:
+        case RECRUITING_STATES.LateLOI:
           className = "recruiting-loi";
           break;
-        case RECRUITING.Evaluation:
+        case RECRUITING_STATES.Evaluation:
           className = "recruiting-evaluation";
           break;
-        case RECRUITING.None:
+        case RECRUITING_STATES.None:
           className = "recruiting-none";
           break;
-        case RECRUITING.Quiet:
+        case RECRUITING_STATES.Quiet:
           className = "recruiting-quiet";
           break;
         default:

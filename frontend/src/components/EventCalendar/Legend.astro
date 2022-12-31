@@ -1,5 +1,5 @@
 ---
-import { LEAGUE, RECRUITING } from "@content/constants";
+import { LEAGUE, RECRUITING_STATES } from "@content/constants";
 import clsx from "clsx";
 import { lowerCase } from "lodash-es";
 
@@ -23,7 +23,7 @@ if (league === LEAGUE.college) {
     description: "Be sure to export your file on these dates!",
   });
 
-  for (const [key, value] of Object.entries(RECRUITING)) {
+  for (const [key, value] of Object.entries(RECRUITING_STATES)) {
     if (!value.includes("LOI")) {
       fields.push({ class: `recruiting-${lowerCase(key)}`, label: value });
     }

@@ -1,6 +1,6 @@
-import type { Conference } from "@lib/types";
+import type { AbilityPoint, Conference, LeagueInfo } from "@lib/types";
 
-export enum RECRUITING {
+export enum RECRUITING_STATES {
   None = "No Recruiting",
   Quiet = "Quiet",
   Evaluation = "Evaluation",
@@ -37,6 +37,58 @@ export const enum MONTHS {
   Dec,
 }
 
+export const Offense: AbilityPoint = {
+  key: "offense",
+  label: {
+    pro: "Evaluating Offense",
+    college: "Offensive Concepts",
+  },
+};
+
+export const Defense: AbilityPoint = {
+  key: "defense",
+  label: {
+    pro: "Evaluating Offense",
+    college: "Offensive Concepts",
+  },
+};
+
+export const Potential: AbilityPoint = {
+  key: "potential",
+  label: {
+    pro: "Evaluating Potential",
+  },
+};
+
+export const GameStrategy: AbilityPoint = {
+  key: "gameStrategy",
+  label: {
+    pro: "Game Strategy",
+  },
+};
+
+export const PlayerDev: AbilityPoint = {
+  key: "playerDev",
+  label: {
+    pro: "Player Development",
+    college: "Player Development",
+  },
+};
+
+export const Scouting: AbilityPoint = {
+  key: "scouting",
+  label: {
+    college: "Scouting Ability",
+  },
+};
+
+export const Recruiting: AbilityPoint = {
+  key: "recruiting",
+  label: {
+    college: "Recruiting Ability",
+  },
+};
+
 export const PRO_LEAGUE_INFO = {
   name: "Simulation Internet Professional Basketball",
   abbv: "SIBA",
@@ -55,6 +107,8 @@ export const PRO_LEAGUE_INFO = {
     max: 85,
     total: 325,
   },
+  pointLabels: [Offense, Defense, Potential, GameStrategy, PlayerDev],
+  pictureFolder: "nonplayers",
 };
 
 export const COLLEGE_LEAGUE_INFO = {
@@ -87,6 +141,8 @@ export const COLLEGE_LEAGUE_INFO = {
       total: 150,
     },
   },
+  pointLabels: [Offense, Defense, Scouting, Recruiting, PlayerDev],
+  pictureFolder: "coaches",
 };
 
 export const CONFERENCES: Record<string, Conference> = {

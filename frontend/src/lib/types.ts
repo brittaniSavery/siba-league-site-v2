@@ -39,18 +39,6 @@ export type StrapiCollegeInfo = {
   schools: School[];
 };
 
-export type LeagueInfo = {
-  name: string;
-  abbv: string;
-  type: LEAGUE;
-  typeAbbv: string;
-  typeFull: string;
-  simDays: string;
-  channel: string;
-  version: number;
-  color: string;
-};
-
 export type SiteUpdate = {
   content: string;
   publishedAt: string;
@@ -86,6 +74,38 @@ export type Conference = {
   file: string;
   title: string;
   img?: string;
+};
+
+export type AbilityPoint = {
+  key: string;
+  label: {
+    pro?: string;
+    college?: string;
+  };
+};
+
+type PointLimit = {
+  min: number;
+  max: number;
+  total: number;
+};
+
+export type LeagueInfo = {
+  name: string;
+  abbv: string;
+  type: LEAGUE.pro | LEAGUE.college;
+  typeAbbv: string;
+  typeFull: string;
+  simDays: string;
+  channel: string;
+  version: number;
+  color: string;
+  pageTitle: string;
+  strapiMembers: string;
+  singleMember: string;
+  pointLimits: PointLimit | { 1: PointLimit; 2: PointLimit; 3: PointLimit };
+  pointLabels: AbilityPoint[];
+  pictureFolder: string;
 };
 
 //#endregion

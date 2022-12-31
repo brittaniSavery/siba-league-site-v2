@@ -12,9 +12,16 @@ import { useState } from "react";
 
 // import type { Member, ProTeam, School } from "@lib/types";
 import { joiResolver } from "@hookform/resolvers/joi";
-import ProTeamModal from "./ProTeamModal";
-import { FOUND_CHOICES, JoinForm, joinFormSchema, ProTeamForm } from "./schema";
-import SchoolModal from "./SchoolModal";
+import ProTeamModal from "./modals/ProTeamModal";
+import {
+  CollegeTeamForm,
+  FOUND_CHOICES,
+  JoinForm,
+  joinFormSchema,
+  ProTeamForm,
+} from "@lib/joinForm";
+import SchoolModal from "./modals/SchoolModal";
+import TeamCard from "./JoinCard";
 
 type JoinFormProps = {
   schools: School[];
@@ -24,11 +31,63 @@ type JoinFormProps = {
 export default function JoinForm({ schools, proTeams }: JoinFormProps) {
   const [teamView, setTeamView] = useState(LEAGUE.pro);
   const [showModal, setShowModal] = useState(false);
+  const [defaultValues, setDefaultValues] = useState<
+    ProTeamForm | CollegeTeamForm
+  >();
 
-  const { handleSubmit, control, setValue } = useForm<JoinForm>({
+  const { handleSubmit, control, setValue, watch } = useForm<JoinForm>({
     defaultValues: { name: "", email: "" },
     resolver: joiResolver(joinFormSchema),
   });
+
+  const testProTeam: ProTeamForm = {
+    team: { mascot: "Sunbirds", name: "Miami", points: 0 },
+    password: "Testing12345",
+    firstName: "Jake",
+    lastName: "Peterson",
+    age: 55,
+    picture: 115,
+    outfit: 26,
+    greed: "Low",
+    personality: "Average",
+    offense: 85,
+    defense: 85,
+    potential: 85,
+    gameStrategy: 60,
+    playerDev: 10,
+    currentPointsTotal: 325,
+  };
+
+  const testCollegeTeam: CollegeTeamForm = {
+    team: {
+      name: "Akron",
+      tier: 1,
+      mascot: "Zips",
+      region: "Midwest",
+      ranking: 25,
+      probation: "",
+    },
+    password: "zxcsdf",
+    firstName: "sdfs",
+    lastName: "sdfsdf",
+    age: 25,
+    picture: 1,
+    outfit: 1,
+    academics: "High",
+    ambition: "Very Low",
+    discipline: "Very High",
+    integrity: "Average",
+    temper: "High",
+    offense: 85,
+    defense: 85,
+    recruiting: 45,
+    scouting: 65,
+    playerDev: 45,
+    currentPointsTotal: 325,
+  };
+
+  const proTeam = watch("proTeam");
+  const collegeTeams = watch("collegeTeams");
 
   // Submitting all the info for the join form
   const onSubmit: SubmitHandler<JoinForm> = (data, event) => {
@@ -81,21 +140,59 @@ export default function JoinForm({ schools, proTeams }: JoinFormProps) {
             </div>
           </div>
           <div className="card-content">
-            <p className={clsx(teamView !== LEAGUE.pro && "is-hidden")}>
-              If you&apos;re an artist and would like to create a new logo for
-              your team, be sure to let the commissioners when joining our
-              community on Slack. We love creativity!
-            </p>
+            <div className={clsx(teamView !== LEAGUE.pro && "is-hidden")}>
+              <p>
+                If you&apos;re an artist and would like to create a new logo for
+                your team, be sure to let the commissioners when joining our
+                community on Slack. We love creativity!
+              </p>
+              {testProTeam && (
+                <div className="columns pt-4">
+                  <div className="column is-narrow">
+                    <TeamCard
+                      league={LEAGUE.pro}
+                      form={testProTeam}
+                      onEdit={() => {
+                        setDefaultValues(proTeam);
+                        setShowModal(true);
+                      }}
+                      onDelete={() => console.log("Delete clicked!")}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
 
-            <p className={clsx(teamView !== LEAGUE.college && "is-hidden")}>
-              Remember that you can coach up to three (3) teams. They each must
-              be in different tiers and different recruiting regions. Teams that
-              have an exclamation icon (
-              <ProbationIcon iconOnly />) are on probation.
-            </p>
+            <div className={clsx(teamView !== LEAGUE.college && "is-hidden")}>
+              <p>
+                Remember that you can coach up to three (3) teams. They each
+                must be in different tiers and different recruiting regions.
+                Teams that have an exclamation icon (
+                <ProbationIcon iconOnly />) are on probation.
+              </p>
+              {testCollegeTeam && (
+                <div className="columns pt-4">
+                  <div className="column is-narrow">
+                    <TeamCard
+                      league={LEAGUE.college}
+                      form={testCollegeTeam}
+                      onEdit={() => {
+                        setDefaultValues(testCollegeTeam);
+                        setShowModal(true);
+                      }}
+                      onDelete={() => console.log("Delete clicked!")}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
             <button
               type="button"
-              className="button is-primary is-light mt-2"
+              className="button is-primary is-light mt-4"
+              disabled={
+                (teamView === LEAGUE.pro && !!proTeam) ||
+                (teamView === LEAGUE.college && collegeTeams?.length === 3)
+              }
               onClick={() => setShowModal(true)}
             >
               Add {capitalize(teamView)} Team
@@ -111,6 +208,7 @@ export default function JoinForm({ schools, proTeams }: JoinFormProps) {
         isOpen={showModal && teamView === LEAGUE.pro}
         close={() => setShowModal(false)}
         options={proTeams}
+        defaultValues={defaultValues as ProTeamForm}
         sendToMainForm={(data: ProTeamForm) => setValue("proTeam", data)}
       />
 
@@ -118,6 +216,7 @@ export default function JoinForm({ schools, proTeams }: JoinFormProps) {
         isOpen={showModal && teamView === LEAGUE.college}
         close={() => setShowModal(false)}
         options={schools}
+        defaultValues={defaultValues as CollegeTeamForm}
       />
     </>
   );
