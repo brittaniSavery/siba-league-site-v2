@@ -30,6 +30,7 @@ type SharedFields = {
   picture: number;
   outfit: number;
   age: number;
+  gender: "male" | "female";
   offense: number;
   defense: number;
   playerDev: number;
@@ -77,9 +78,20 @@ const sharedFieldsValidation = {
   password: Joi.string().required(),
   firstName: Joi.string().required(),
   lastName: Joi.string().required(),
-  picture: Joi.number().min(1).required(),
-  outfit: Joi.number().min(1).required(),
   age: Joi.number().min(25).max(75).required(),
+  gender: Joi.valid("male", "female").required(),
+  picture: Joi.number()
+    .required()
+    .when("gender", [
+      { is: "male", then: Joi.number().min(1).max(179) },
+      { is: "female", then: Joi.number().min(1000).max(1022) },
+    ]),
+  outfit: Joi.number()
+    .required()
+    .when("gender", [
+      { is: "male", then: Joi.number().min(1).max(55) },
+      { is: "female", then: Joi.number().min(1000).max(1006) },
+    ]),
 };
 
 const proTeamValidation = {
@@ -114,7 +126,9 @@ const collegePointsValidation = Joi.number().when("team.tier", [
 const collegeValidation = {
   team: Joi.object({
     tier: Joi.number().min(1).max(3),
-  }).required(),
+  })
+    .unknown()
+    .required(),
   ambition: Joi.valid(...LOW_HIGH_LEVELS).required(),
   academics: Joi.valid(...LOW_HIGH_LEVELS).required(),
   discipline: Joi.valid(...LOW_HIGH_LEVELS).required(),

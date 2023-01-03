@@ -1,26 +1,25 @@
 import AutoComplete from "@components/FormControls/AutoComplete";
 import Form from "@components/FormControls/Form";
 import Input from "@components/FormControls/Input";
+import Radio from "@components/FormControls/Radio";
 import Select from "@components/FormControls/Select";
 import { LEAGUE, PRO_LEAGUE_INFO } from "@content/constants";
-import type { ProTeam } from "@lib/types";
-import { formatTeamTitle } from "@lib/utils";
-import { startCase } from "lodash-es";
-import type { Path, SubmitHandler } from "react-hook-form";
-import ModalSkeleton from "./ModalSkeleton";
-import { DevTool } from "@hookform/devtools";
 import {
   LOW_HIGH_LEVELS,
   ProTeamForm,
   proTeamFormSchema,
   PRO_PERSONALITY,
 } from "@lib/joinForm";
-import { useEffect } from "react";
+import type { ProTeam } from "@lib/types";
+import { formatTeamTitle } from "@lib/utils";
+import { startCase } from "lodash-es";
+import type { Path, SubmitHandler } from "react-hook-form";
+import ModalSkeleton from "./ModalSkeleton";
 
 type ProTeamModalProps = {
   isOpen: boolean;
   options: ProTeam[];
-  defaultValues?: ProTeamForm;
+  selectedForm?: ProTeamForm;
   close: () => void;
   sendToMainForm: (data: ProTeamForm) => void;
 };
@@ -28,15 +27,17 @@ type ProTeamModalProps = {
 export default function ProTeamModal({
   isOpen,
   options,
+  selectedForm,
   close,
   sendToMainForm,
 }: ProTeamModalProps) {
-  const defaultValues: ProTeamForm = {
+  const blankForm: ProTeamForm = {
     team: null,
     password: "",
     firstName: "",
     lastName: "",
     age: 0,
+    gender: "male",
     picture: 0,
     outfit: 0,
     greed: "",
@@ -58,13 +59,9 @@ export default function ProTeamModal({
     <Form<ProTeamForm>
       onSubmit={onSubmit}
       validation={proTeamFormSchema}
-      defaultValues={defaultValues}
+      defaultValues={selectedForm || blankForm}
     >
       {({ control, formState: { errors }, reset, watch, setValue }) => {
-        useEffect(() => {
-          console.log(errors);
-        }, [errors]);
-
         const abilityPointsValues = watch([
           "offense",
           "defense",
@@ -89,7 +86,7 @@ export default function ProTeamModal({
             htmlSection="siba"
             isOpen={isOpen}
             close={() => {
-              reset(defaultValues);
+              reset(blankForm);
               close();
             }}
           >
@@ -121,13 +118,13 @@ export default function ProTeamModal({
             <Input
               name="firstName"
               label="First Name"
-              size={5}
+              size={4}
               control={control}
             />
             <Input
               name="lastName"
               label="Last Name"
-              size={5}
+              size={4}
               control={control}
             />
             <Input
@@ -139,10 +136,21 @@ export default function ProTeamModal({
               help="Range: 25-75"
               control={control}
             />
+            <Radio
+              name="gender"
+              size={2}
+              options={[
+                { label: "Male", value: "male" },
+                { label: "Female", value: "female" },
+              ]}
+              control={control}
+            />
             <Input
               name="picture"
               label="Face Picture Number"
               type={"number"}
+              min={1}
+              max={1022}
               size={"one-quarter"}
               help={`Fill in the number of the matching picture from graphics/${PRO_LEAGUE_INFO.pictureFolder}/fac.`}
               control={control}
@@ -151,6 +159,8 @@ export default function ProTeamModal({
               name="outfit"
               label="Outfit Picture Number"
               type={"number"}
+              min={1}
+              max={1006}
               size={"one-quarter"}
               help={`Fill in the number of the matching picture from graphics/${PRO_LEAGUE_INFO.pictureFolder}/clothes.`}
               control={control}

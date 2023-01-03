@@ -7,8 +7,8 @@ import clsx from "clsx";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { LEAGUE } from "@content/constants";
-import { capitalize } from "lodash-es";
-import { useState } from "react";
+import { capitalize, isEmpty } from "lodash-es";
+import { useEffect, useState } from "react";
 
 // import type { Member, ProTeam, School } from "@lib/types";
 import { joiResolver } from "@hookform/resolvers/joi";
@@ -28,66 +28,40 @@ type JoinFormProps = {
   proTeams: ProTeam[];
 };
 
+type Modal = {
+  open: boolean;
+  proValues?: ProTeamForm;
+  collegeValues?: CollegeTeamForm;
+};
+
 export default function JoinForm({ schools, proTeams }: JoinFormProps) {
   const [teamView, setTeamView] = useState(LEAGUE.pro);
-  const [showModal, setShowModal] = useState(false);
-  const [defaultValues, setDefaultValues] = useState<
-    ProTeamForm | CollegeTeamForm
-  >();
+  const [modal, setModal] = useState<Modal>({ open: false });
+  const [availableSchools, setAvailableSchools] = useState<School[]>(schools);
 
   const { handleSubmit, control, setValue, watch } = useForm<JoinForm>({
     defaultValues: { name: "", email: "" },
     resolver: joiResolver(joinFormSchema),
   });
 
-  const testProTeam: ProTeamForm = {
-    team: { mascot: "Sunbirds", name: "Miami", points: 0 },
-    password: "Testing12345",
-    firstName: "Jake",
-    lastName: "Peterson",
-    age: 55,
-    picture: 115,
-    outfit: 26,
-    greed: "Low",
-    personality: "Average",
-    offense: 85,
-    defense: 85,
-    potential: 85,
-    gameStrategy: 60,
-    playerDev: 10,
-    currentPointsTotal: 325,
-  };
-
-  const testCollegeTeam: CollegeTeamForm = {
-    team: {
-      name: "Akron",
-      tier: 1,
-      mascot: "Zips",
-      region: "Midwest",
-      ranking: 25,
-      probation: "",
-    },
-    password: "zxcsdf",
-    firstName: "sdfs",
-    lastName: "sdfsdf",
-    age: 25,
-    picture: 1,
-    outfit: 1,
-    academics: "High",
-    ambition: "Very Low",
-    discipline: "Very High",
-    integrity: "Average",
-    temper: "High",
-    offense: 85,
-    defense: 85,
-    recruiting: 45,
-    scouting: 65,
-    playerDev: 45,
-    currentPointsTotal: 325,
-  };
-
   const proTeam = watch("proTeam");
   const collegeTeams = watch("collegeTeams");
+
+  useEffect(() => {
+    if (!collegeTeams) return;
+
+    const selectedSchools = collegeTeams
+      ? collegeTeams.map((form) => form.team)
+      : [];
+
+    if (isEmpty(selectedSchools)) return;
+
+    setAvailableSchools(
+      schools.filter((school) =>
+        selectedSchools.every((selected) => selected?.name !== school.name)
+      )
+    );
+  }, [collegeTeams]);
 
   // Submitting all the info for the join form
   const onSubmit: SubmitHandler<JoinForm> = (data, event) => {
@@ -141,22 +115,17 @@ export default function JoinForm({ schools, proTeams }: JoinFormProps) {
           </div>
           <div className="card-content">
             <div className={clsx(teamView !== LEAGUE.pro && "is-hidden")}>
-              <p>
-                If you&apos;re an artist and would like to create a new logo for
-                your team, be sure to let the commissioners when joining our
-                community on Slack. We love creativity!
-              </p>
-              {testProTeam && (
+              <p>You are able to manage only one (1) pro team.</p>
+              {proTeam && (
                 <div className="columns pt-4">
                   <div className="column is-narrow">
                     <TeamCard
                       league={LEAGUE.pro}
-                      form={testProTeam}
-                      onEdit={() => {
-                        setDefaultValues(proTeam);
-                        setShowModal(true);
-                      }}
-                      onDelete={() => console.log("Delete clicked!")}
+                      form={proTeam}
+                      onEdit={() =>
+                        setModal({ open: true, proValues: proTeam })
+                      }
+                      onDelete={() => setValue("proTeam", undefined)}
                     />
                   </div>
                 </div>
@@ -165,24 +134,35 @@ export default function JoinForm({ schools, proTeams }: JoinFormProps) {
 
             <div className={clsx(teamView !== LEAGUE.college && "is-hidden")}>
               <p>
-                Remember that you can coach up to three (3) teams. They each
-                must be in different tiers and different recruiting regions.
-                Teams that have an exclamation icon (
+                You are allowed to coach up to three (3) teams. They each must
+                be in different tiers and different recruiting regions. Teams
+                that have an exclamation icon (
                 <ProbationIcon iconOnly />) are on probation.
               </p>
-              {testCollegeTeam && (
+              {collegeTeams && collegeTeams.length > 0 && (
                 <div className="columns pt-4">
-                  <div className="column is-narrow">
-                    <TeamCard
-                      league={LEAGUE.college}
-                      form={testCollegeTeam}
-                      onEdit={() => {
-                        setDefaultValues(testCollegeTeam);
-                        setShowModal(true);
-                      }}
-                      onDelete={() => console.log("Delete clicked!")}
-                    />
-                  </div>
+                  {collegeTeams &&
+                    collegeTeams.map((current) => (
+                      <div
+                        key={`${current.team?.name}`}
+                        className="column is-narrow"
+                      >
+                        <TeamCard
+                          league={LEAGUE.college}
+                          form={current}
+                          onEdit={() =>
+                            setModal({ open: true, collegeValues: current })
+                          }
+                          onDelete={() => {
+                            const newTeams = collegeTeams.filter(
+                              (form) =>
+                                form.team?.mascot !== current.team?.mascot
+                            );
+                            setValue("collegeTeams", newTeams);
+                          }}
+                        />
+                      </div>
+                    ))}
                 </div>
               )}
             </div>
@@ -193,7 +173,7 @@ export default function JoinForm({ schools, proTeams }: JoinFormProps) {
                 (teamView === LEAGUE.pro && !!proTeam) ||
                 (teamView === LEAGUE.college && collegeTeams?.length === 3)
               }
-              onClick={() => setShowModal(true)}
+              onClick={() => setModal({ open: true })}
             >
               Add {capitalize(teamView)} Team
             </button>
@@ -205,18 +185,24 @@ export default function JoinForm({ schools, proTeams }: JoinFormProps) {
       </form>
 
       <ProTeamModal
-        isOpen={showModal && teamView === LEAGUE.pro}
-        close={() => setShowModal(false)}
+        isOpen={modal.open && teamView === LEAGUE.pro}
+        close={() => setModal({ open: false })}
         options={proTeams}
-        defaultValues={defaultValues as ProTeamForm}
+        selectedForm={modal.proValues}
         sendToMainForm={(data: ProTeamForm) => setValue("proTeam", data)}
       />
 
       <SchoolModal
-        isOpen={showModal && teamView === LEAGUE.college}
-        close={() => setShowModal(false)}
-        options={schools}
-        defaultValues={defaultValues as CollegeTeamForm}
+        isOpen={modal.open && teamView === LEAGUE.college}
+        close={() => setModal({ open: false })}
+        options={availableSchools}
+        selectedForm={modal.collegeValues}
+        sendToMainForm={(data: CollegeTeamForm) => {
+          const newCollegeTeams = collegeTeams
+            ? [...collegeTeams, data]
+            : [data];
+          setValue("collegeTeams", newCollegeTeams);
+        }}
       />
     </>
   );

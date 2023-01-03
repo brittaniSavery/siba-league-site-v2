@@ -1,37 +1,42 @@
 import AutoComplete from "@components/FormControls/AutoComplete";
 import Form from "@components/FormControls/Form";
 import Input from "@components/FormControls/Input";
+import Radio from "@components/FormControls/Radio";
 import Select from "@components/FormControls/Select";
 import ProbationIcon from "@components/ProbationIcon";
 import { COLLEGE_LEAGUE_INFO, LEAGUE } from "@content/constants";
-import type { School } from "@lib/types";
-import { formatTeamTitle } from "@lib/utils";
-import { capitalize, startCase } from "lodash-es";
-import type { Path, SubmitHandler } from "react-hook-form";
-import ModalSkeleton from "./ModalSkeleton";
 import {
   CollegeTeamForm,
   collegeTeamFormSchema,
   LOW_HIGH_LEVELS,
 } from "@lib/joinForm";
+import type { School } from "@lib/types";
+import { formatTeamTitle } from "@lib/utils";
+import { capitalize, startCase } from "lodash-es";
+import type { Path, SubmitHandler } from "react-hook-form";
+import ModalSkeleton from "./ModalSkeleton";
 
 type SchoolModalProps = {
   isOpen: boolean;
   close: () => void;
-  defaultValues?: CollegeTeamForm;
+  selectedForm?: CollegeTeamForm;
   options: School[];
+  sendToMainForm: (data: CollegeTeamForm) => void;
 };
 export default function SchoolModal({
   isOpen,
   close,
   options,
+  selectedForm,
+  sendToMainForm,
 }: SchoolModalProps) {
-  const defaultValues: CollegeTeamForm = {
+  const blankForm: CollegeTeamForm = {
     team: null,
     password: "",
     firstName: "",
     lastName: "",
     age: 0,
+    gender: "male",
     picture: 0,
     outfit: 0,
     academics: "",
@@ -48,14 +53,15 @@ export default function SchoolModal({
   };
 
   const onSubmit: SubmitHandler<CollegeTeamForm> = (data) => {
-    console.log(data);
+    sendToMainForm(data);
+    close();
   };
 
   return (
     <Form<CollegeTeamForm>
       onSubmit={onSubmit}
-      defaultValues={defaultValues}
-      //validation={collegeTeamFormSchema}
+      defaultValues={selectedForm || blankForm}
+      validation={collegeTeamFormSchema}
     >
       {({ control, formState: { errors }, watch, setValue }) => {
         const currentTeam = watch("team");
@@ -158,29 +164,40 @@ export default function SchoolModal({
             <Input
               name="firstName"
               label="First Name"
-              size="half"
+              size={4}
               control={control}
             />
             <Input
               name="lastName"
               label="Last Name"
-              size="half"
+              size={4}
               control={control}
             />
             <Input
               name="age"
               type="number"
-              size="one-third"
+              size={2}
               min={25}
               max={75}
               help="Range: 25-75"
+              control={control}
+            />
+            <Radio
+              name="gender"
+              size={2}
+              options={[
+                { label: "Male", value: "male" },
+                { label: "Female", value: "female" },
+              ]}
               control={control}
             />
             <Input
               name="picture"
               label="Face Picture Number"
               type="number"
-              size="one-third"
+              min={1}
+              max={1022}
+              size={4}
               help={`Fill in the number of the matching picture from graphics/${COLLEGE_LEAGUE_INFO.pictureFolder}/fac.`}
               control={control}
             />
@@ -188,10 +205,13 @@ export default function SchoolModal({
               name="outfit"
               label="Outfit Picture Number"
               type="number"
-              size="one-third"
+              min={1}
+              max={1006}
+              size={4}
               help={`Fill in the number of the matching picture from graphics/${COLLEGE_LEAGUE_INFO.pictureFolder}/clothes.`}
               control={control}
             />
+            <div className="column is-4" />
             <div className="column is-full">
               <div className="content">
                 <p className="is-size-5">Head Coach Personality</p>

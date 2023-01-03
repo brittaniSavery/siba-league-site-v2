@@ -36,6 +36,12 @@ export default function Form<T extends FieldValues>({
     formState: { isSubmitSuccessful },
   } = methods;
 
+  // reset the form with the defaultValues since the form's default values are cached
+  // see https://react-hook-form.com/api/useform
+  useEffect(() => {
+    reset(defaultValues);
+  }, [reset, defaultValues]);
+
   useEffect(() => {
     if (isSubmitSuccessful) reset(defaultValues);
   }, [reset, isSubmitSuccessful]);
