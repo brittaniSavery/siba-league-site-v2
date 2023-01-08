@@ -35,7 +35,7 @@ export default function TeamCard({
   const leagueInfo =
     league === LEAGUE.pro ? PRO_LEAGUE_INFO : COLLEGE_LEAGUE_INFO;
 
-  const { team, firstName, lastName, password, picture, outfit } = form;
+  const { team, firstName, lastName, password, picture, outfit, age } = form;
 
   if (!team) return null;
 
@@ -120,7 +120,7 @@ export default function TeamCard({
           </div>
           <p>{startCase(leagueInfo.singleMember)}</p>
           <p>
-            {firstName} {lastName}
+            {firstName} {lastName} ({age})
           </p>
         </div>
         {league === LEAGUE.college && (
