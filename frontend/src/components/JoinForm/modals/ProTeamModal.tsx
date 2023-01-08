@@ -17,7 +17,9 @@ import type { Path, SubmitHandler } from "react-hook-form";
 import ModalSkeleton from "./ModalSkeleton";
 
 type ProTeamModalProps = {
+  id?: string;
   isOpen: boolean;
+  mode?: "add" | "edit";
   options: ProTeam[];
   selectedForm?: ProTeamForm;
   close: () => void;
@@ -25,7 +27,9 @@ type ProTeamModalProps = {
 };
 
 export default function ProTeamModal({
+  id,
   isOpen,
+  mode,
   options,
   selectedForm,
   close,
@@ -81,10 +85,12 @@ export default function ProTeamModal({
 
         return (
           <ModalSkeleton
+            id={id}
             type={LEAGUE.pro}
             member={PRO_LEAGUE_INFO.singleMember}
             htmlSection="siba"
             isOpen={isOpen}
+            mode={mode}
             close={() => {
               reset(blankForm);
               close();

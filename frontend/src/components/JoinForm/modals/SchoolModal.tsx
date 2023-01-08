@@ -17,14 +17,18 @@ import type { Path, SubmitHandler } from "react-hook-form";
 import ModalSkeleton from "./ModalSkeleton";
 
 type SchoolModalProps = {
+  id?: string;
   isOpen: boolean;
+  mode?: "add" | "edit";
   close: () => void;
   selectedForm?: CollegeTeamForm;
   options: School[];
   sendToMainForm: (data: CollegeTeamForm) => void;
 };
 export default function SchoolModal({
+  id,
   isOpen,
+  mode,
   close,
   options,
   selectedForm,
@@ -90,10 +94,12 @@ export default function SchoolModal({
 
         return (
           <ModalSkeleton
+            id={id}
             type={LEAGUE.college}
             member={COLLEGE_LEAGUE_INFO.singleMember}
             htmlSection="college"
             isOpen={isOpen}
+            mode={mode}
             close={close}
             extraInfo={
               <p>

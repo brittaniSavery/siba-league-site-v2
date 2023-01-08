@@ -1,8 +1,9 @@
 import clsx from "clsx";
 import { capitalize } from "lodash-es";
-import type { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 
 type ModalSkeletonProps = React.PropsWithChildren & {
+  id?: string;
   type: string;
   member: string;
   htmlSection: "siba" | "college";
@@ -13,6 +14,7 @@ type ModalSkeletonProps = React.PropsWithChildren & {
 };
 
 export default function ModalSkeleton({
+  id,
   type,
   member,
   htmlSection,
@@ -22,6 +24,13 @@ export default function ModalSkeleton({
   children,
   extraInfo,
 }: ModalSkeletonProps) {
+  useEffect(() => {
+    if (id && isOpen) {
+      const modalDiv = document.querySelector(`#${id}`);
+      modalDiv?.scroll(0, 0);
+    }
+  }, [isOpen]);
+
   return (
     <div className={clsx("modal", isOpen && "is-active")}>
       <div className="modal-background" onClick={close} />
@@ -30,7 +39,7 @@ export default function ModalSkeleton({
           <p className="modal-card-title">Add {capitalize(type)} Team</p>
           <button className="delete" aria-label="close" />
         </header>
-        <section className="modal-card-body">
+        <section id={id} className="modal-card-body">
           <div className="content">
             <p>
               This form includes all the details needed for your team and{" "}

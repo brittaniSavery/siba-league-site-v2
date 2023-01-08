@@ -214,10 +214,14 @@ export const joinFormSchema: Joi.Schema<JoinForm> = Joi.object({
       Joi.object({
         tier: Joi.number(),
         region: Joi.string(),
-      })
+      }).unknown()
     )
     .max(3)
-    .unique((a, b) => a.tier === b.tier || a.region === b.region)
+    .unique((a, b) => {
+      const aTeam = a.team;
+      const bTeam = b.team;
+      return aTeam.tier === bTeam.tier || aTeam.region === bTeam.region;
+    })
     .messages({
       "any.unique":
         "Schools cannot share a ranking tier or a recruiting region.",

@@ -4,15 +4,18 @@ import Textarea from "@components/FormControls/Textarea";
 import ProbationIcon from "@components/ProbationIcon";
 import type { ProTeam, School } from "@lib/types";
 import clsx from "clsx";
-import { SubmitHandler, useForm } from "react-hook-form";
+import {
+  FieldError,
+  SubmitHandler,
+  useForm,
+  useFieldArray,
+} from "react-hook-form";
 
 import { LEAGUE } from "@content/constants";
-import { capitalize, isEmpty } from "lodash-es";
+import { capitalize, isEmpty, isNil } from "lodash-es";
 import { useEffect, useState } from "react";
 
-// import type { Member, ProTeam, School } from "@lib/types";
 import { joiResolver } from "@hookform/resolvers/joi";
-import ProTeamModal from "./modals/ProTeamModal";
 import {
   CollegeTeamForm,
   FOUND_CHOICES,
@@ -20,8 +23,9 @@ import {
   joinFormSchema,
   ProTeamForm,
 } from "@lib/joinForm";
-import SchoolModal from "./modals/SchoolModal";
 import TeamCard from "./JoinCard";
+import ProTeamModal from "./modals/ProTeamModal";
+import SchoolModal from "./modals/SchoolModal";
 
 type JoinFormProps = {
   schools: School[];
@@ -30,6 +34,8 @@ type JoinFormProps = {
 
 type Modal = {
   open: boolean;
+  mode?: "add" | "edit";
+  index?: number;
   proValues?: ProTeamForm;
   collegeValues?: CollegeTeamForm;
 };
@@ -39,29 +45,49 @@ export default function JoinForm({ schools, proTeams }: JoinFormProps) {
   const [modal, setModal] = useState<Modal>({ open: false });
   const [availableSchools, setAvailableSchools] = useState<School[]>(schools);
 
-  const { handleSubmit, control, setValue, watch } = useForm<JoinForm>({
+  const {
+    handleSubmit,
+    control,
+    setValue,
+    watch,
+    trigger,
+    formState: { errors },
+  } = useForm<JoinForm>({
     defaultValues: { name: "", email: "" },
     resolver: joiResolver(joinFormSchema),
   });
 
+  const {
+    fields: collegeTeams,
+    remove,
+    update,
+    append,
+  } = useFieldArray({
+    name: "collegeTeams",
+    control,
+  });
+
   const proTeam = watch("proTeam");
-  const collegeTeams = watch("collegeTeams");
 
   useEffect(() => {
     if (!collegeTeams) return;
 
-    const selectedSchools = collegeTeams
+    let selectedSchools = collegeTeams
       ? collegeTeams.map((form) => form.team)
       : [];
 
     if (isEmpty(selectedSchools)) return;
+
+    selectedSchools = selectedSchools.filter(
+      (school) => school?.name !== modal.collegeValues?.team?.name
+    );
 
     setAvailableSchools(
       schools.filter((school) =>
         selectedSchools.every((selected) => selected?.name !== school.name)
       )
     );
-  }, [collegeTeams]);
+  }, [collegeTeams, modal]);
 
   // Submitting all the info for the join form
   const onSubmit: SubmitHandler<JoinForm> = (data, event) => {
@@ -123,7 +149,11 @@ export default function JoinForm({ schools, proTeams }: JoinFormProps) {
                       league={LEAGUE.pro}
                       form={proTeam}
                       onEdit={() =>
-                        setModal({ open: true, proValues: proTeam })
+                        setModal({
+                          open: true,
+                          mode: "edit",
+                          proValues: proTeam,
+                        })
                       }
                       onDelete={() => setValue("proTeam", undefined)}
                     />
@@ -142,24 +172,24 @@ export default function JoinForm({ schools, proTeams }: JoinFormProps) {
               {collegeTeams && collegeTeams.length > 0 && (
                 <div className="columns pt-4">
                   {collegeTeams &&
-                    collegeTeams.map((current) => (
-                      <div
-                        key={`${current.team?.name}`}
-                        className="column is-narrow"
-                      >
+                    collegeTeams.map((current, index) => (
+                      <div key={current.id} className="column is-4">
                         <TeamCard
                           league={LEAGUE.college}
                           form={current}
-                          onEdit={() =>
-                            setModal({ open: true, collegeValues: current })
+                          error={
+                            errors.collegeTeams &&
+                            (errors.collegeTeams[index] as FieldError)
                           }
-                          onDelete={() => {
-                            const newTeams = collegeTeams.filter(
-                              (form) =>
-                                form.team?.mascot !== current.team?.mascot
-                            );
-                            setValue("collegeTeams", newTeams);
-                          }}
+                          onEdit={() =>
+                            setModal({
+                              open: true,
+                              mode: "edit",
+                              index: index,
+                              collegeValues: current,
+                            })
+                          }
+                          onDelete={() => remove(index)}
                         />
                       </div>
                     ))}
@@ -185,23 +215,30 @@ export default function JoinForm({ schools, proTeams }: JoinFormProps) {
       </form>
 
       <ProTeamModal
+        id="proModal"
         isOpen={modal.open && teamView === LEAGUE.pro}
         close={() => setModal({ open: false })}
+        mode={modal.mode}
         options={proTeams}
         selectedForm={modal.proValues}
         sendToMainForm={(data: ProTeamForm) => setValue("proTeam", data)}
       />
 
       <SchoolModal
+        id="collegeModal"
         isOpen={modal.open && teamView === LEAGUE.college}
-        close={() => setModal({ open: false })}
+        close={() => setModal({ ...modal, open: false })}
+        mode={modal.mode}
         options={availableSchools}
         selectedForm={modal.collegeValues}
-        sendToMainForm={(data: CollegeTeamForm) => {
-          const newCollegeTeams = collegeTeams
-            ? [...collegeTeams, data]
-            : [data];
-          setValue("collegeTeams", newCollegeTeams);
+        sendToMainForm={async (data: CollegeTeamForm) => {
+          if (!isNil(modal.index)) {
+            update(modal.index, data);
+          } else {
+            append(data);
+          }
+
+          await trigger("collegeTeams");
         }}
       />
     </>

@@ -1,3 +1,4 @@
+import ProbationIcon from "@components/ProbationIcon";
 import {
   COLLEGE_LEAGUE_INFO,
   Defense,
@@ -10,15 +11,15 @@ import {
   Recruiting,
   Scouting,
 } from "@content/constants";
+import type { CollegeTeamForm, ProTeamForm } from "@lib/joinForm";
+import type { FieldError } from "react-hook-form";
 import { startCase } from "lodash-es";
 import { useState } from "react";
-import type { ProTeamForm, CollegeTeamForm } from "@lib/joinForm";
-import clsx from "clsx";
-import type { Path } from "react-hook-form";
 
 type TeamCardProps = React.PropsWithChildren & {
   league: LEAGUE.pro | LEAGUE.college;
   form: ProTeamForm | CollegeTeamForm;
+  error?: FieldError;
   onEdit: () => void;
   onDelete: () => void;
 };
@@ -26,6 +27,7 @@ type TeamCardProps = React.PropsWithChildren & {
 export default function TeamCard({
   league,
   form,
+  error,
   onEdit,
   onDelete,
 }: TeamCardProps) {
@@ -69,8 +71,19 @@ export default function TeamCard({
   return (
     <div className="card is-shadowless">
       <div className="card-content">
+        {error && (
+          <div className="notification is-danger is-light">
+            <strong>Error!</strong> Schools cannot share tiers or regions.
+          </div>
+        )}
         <p className="title is-4">
           {team.name} {team.mascot}
+          {league === LEAGUE.college && collegeTeamForm.team?.probation && (
+            <span>
+              &nbsp;
+              <ProbationIcon details={collegeTeamForm.team.probation} />
+            </span>
+          )}
         </p>
         {league === LEAGUE.college && collegeTeamForm.team && (
           <p className="subtitle is-6">
@@ -89,17 +102,22 @@ export default function TeamCard({
           {showPassword && <code className="ml-2">{password}</code>}
         </p>
         <div className="mb-4">
-          <img
-            src={`${import.meta.env.SITE}/files/${league}/Website/images/${
-              leagueInfo.pictureFolder
-            }/fac/${picture}.png`}
-          />
-          <img
-            style={{ position: "absolute", right: "24px", zIndex: 1 }}
-            src={`${import.meta.env.SITE}/files/${league}/Website/images/${
-              leagueInfo.pictureFolder
-            }/clothes/${outfit}.png`}
-          />
+          <div
+            style={{ position: "relative", width: "260px", height: "190px" }}
+          >
+            <img
+              style={{ position: "absolute" }}
+              src={`${import.meta.env.SITE}files/${league}/Website/images/${
+                leagueInfo.pictureFolder
+              }/fac/${picture}.png`}
+            />
+            <img
+              style={{ position: "absolute", zIndex: 1 }}
+              src={`${import.meta.env.SITE}files/${league}/Website/images/${
+                leagueInfo.pictureFolder
+              }/clothes/${outfit}.png`}
+            />
+          </div>
           <p>{startCase(leagueInfo.singleMember)}</p>
           <p>
             {firstName} {lastName}
