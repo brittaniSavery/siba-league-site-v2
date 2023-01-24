@@ -11,7 +11,7 @@ import {
   parse,
   startOfWeek,
 } from "date-fns";
-import enUS from "date-fns/locale/en-US";
+import enUS from "date-fns/locale/en-US/index.js";
 import { useMemo, useState } from "react";
 import {
   Calendar,

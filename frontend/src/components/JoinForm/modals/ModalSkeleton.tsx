@@ -37,7 +37,12 @@ export default function ModalSkeleton({
       <div className="modal-card">
         <header className="modal-card-head">
           <p className="modal-card-title">Add {capitalize(type)} Team</p>
-          <button className="delete" aria-label="close" />
+          <button
+            type="button"
+            className="delete"
+            aria-label="close"
+            onClick={close}
+          />
         </header>
         <section id={id} className="modal-card-body">
           <div className="content">

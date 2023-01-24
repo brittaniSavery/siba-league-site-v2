@@ -2,20 +2,70 @@
 
 const aws = require("aws-sdk");
 const ses = new aws.SES();
-const join = require("./join");
+const {
+  generateMemberEmail,
+  generateCommissionerEmail,
+} = require("./join/generate-emails");
 
 exports.join = async (event) => {
   try {
     const body = JSON.parse(event.body);
-    const commissionerEmail = join.buildCommissionerEmail(body);
-    const playerEmail = join.buildPlayerEmail(
-      body.name,
-      body.email,
-      body.teams
+
+    if (!body) return generateError(400, "Event body cannot be empty.");
+
+    const { name, email, found, reason, proTeam, collegeTeams } = body;
+    const memberEmail = generateMemberEmail(name, proTeam, collegeTeams);
+    const commissionerEmail = generateCommissionerEmail(
+      name,
+      email,
+      found,
+      reason,
+      proTeam,
+      collegeTeams
     );
-    await ses.sendEmail(commissionerEmail).promise();
-    await ses.sendEmail(playerEmail).promise();
-    return generateResponse(200);
+
+    // @ts-ignore
+    const memberEmailResult = await ses
+      .sendEmail({
+        Source: process.env.NO_REPLY,
+        Destination: { ToAddresses: [email] },
+        Message: {
+          Body: {
+            Html: { Charset: "UTF-8", Data: memberEmail.html },
+            Text: { Charset: "UTF-8", Data: memberEmail.plain },
+          },
+          Subject: { Data: memberEmail.subject },
+        },
+      })
+      .promise();
+
+    const commissionerEmailResult = await ses
+      .sendEmail({
+        // @ts-ignore
+        Source: process.env.NO_REPLY,
+        Destination: { ToAddresses: [process.env.COMMISSIONER] },
+        Message: {
+          Body: {
+            Html: { Charset: "UTF-8", Data: commissionerEmail.html },
+            Text: { Charset: "UTF-8", Data: commissionerEmail.plain },
+          },
+          Subject: { Data: commissionerEmail.subject },
+        },
+      })
+      .promise();
+
+    return generateResponse(200, {
+      result: {
+        member: {
+          isSuccessful: !!memberEmailResult.$response.error,
+          error: memberEmailResult.$response.error,
+        },
+        commissioner: {
+          isSuccessful: !!commissionerEmailResult.$response.error,
+          error: commissionerEmailResult.$response.error,
+        },
+      },
+    });
   } catch (error) {
     return generateError(500, error);
   }

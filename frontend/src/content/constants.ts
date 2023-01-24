@@ -48,8 +48,8 @@ export const Offense: AbilityPoint = {
 export const Defense: AbilityPoint = {
   key: "defense",
   label: {
-    pro: "Evaluating Offense",
-    college: "Offensive Concepts",
+    pro: "Evaluating Defense",
+    college: "Defensive Concepts",
   },
 };
 

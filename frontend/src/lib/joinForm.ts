@@ -174,19 +174,22 @@ export const collegeTeamFormSchema: Joi.Schema<CollegeTeamForm> = Joi.object({
 export const joinFormSchema: Joi.Schema<JoinForm> = Joi.object({
   name: Joi.string().required().messages({
     "any.required": "Please enter your name. First name is okay.",
+    "string.empty": "Please enter your name. First name is okay.",
   }),
   email: Joi.string()
     .email({ tlds: { allow: false } })
     .required()
     .messages({
       "any.required": "Please enter your email address.",
+      "string.empty": "Please enter your email address.",
       "string.email":
         "This email is not valid. Be sure to double check for typos.",
     }),
   found: Joi.string()
     .valid(...FOUND_CHOICES.map((choice) => choice.name))
+    .required()
     .messages({
-      "any.only":
+      "any.required":
         "Please select how your found the league. Best guess is okay if you don't remember.",
     }),
   reason: Joi.string()
@@ -203,7 +206,7 @@ export const joinFormSchema: Joi.Schema<JoinForm> = Joi.object({
     }),
   proTeam: Joi.object()
     .when("collegeTeams", {
-      not: Joi.exist(),
+      is: Joi.array().length(0),
       then: Joi.object().required(),
     })
     .messages({

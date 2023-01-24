@@ -51,7 +51,8 @@ export default function JoinForm({ schools, proTeams }: JoinFormProps) {
     setValue,
     watch,
     trigger,
-    formState: { errors },
+    reset,
+    formState: { errors, isSubmitting },
   } = useForm<JoinForm>({
     defaultValues: { name: "", email: "" },
     resolver: joiResolver(joinFormSchema),
@@ -90,17 +91,41 @@ export default function JoinForm({ schools, proTeams }: JoinFormProps) {
   }, [collegeTeams, modal]);
 
   // Submitting all the info for the join form
-  const onSubmit: SubmitHandler<JoinForm> = (data, event) => {
+  const onSubmit: SubmitHandler<JoinForm> = async (data, event) => {
     event?.preventDefault();
     event?.stopPropagation();
-    console.log(data);
+
+    const sendJoinEmails = await fetch(import.meta.env.PUBLIC_JOIN_URL, {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+
+    if (sendJoinEmails.ok) {
+      const result = await sendJoinEmails.json();
+      alert(result);
+      reset();
+    }
   };
 
   return (
     <>
+      <div className="content">
+        <p>
+          Interested in joining the SIBA as the general manager of your own
+          professional basketball team or as the head coach of your own
+          university basketball team? Fill out the form below, selecting your
+          teams and coach, and one of the commissioners will take your
+          information and add you to the league.
+        </p>
+      </div>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
-        <Input name="name" control={control} />
-        <Input name="email" type="email" control={control} />
+        <Input name="name" control={control} disabled={isSubmitting} />
+        <Input
+          name="email"
+          type="email"
+          control={control}
+          disabled={isSubmitting}
+        />
         <Select<JoinForm, { label: string; name: string }>
           name="found"
           label="Found SIBA from"
@@ -109,8 +134,9 @@ export default function JoinForm({ schools, proTeams }: JoinFormProps) {
           renderOptionValue={(option) => option.name}
           renderOptionLabel={(option) => option.label}
           rules={{ deps: "reason" }}
+          disabled={isSubmitting}
         />
-        <Textarea name="reason" control={control} />
+        <Textarea name="reason" control={control} disabled={isSubmitting} />
         <div className="content mt-5">
           <h2>Pick Your Teams</h2>
           <p>
@@ -120,6 +146,11 @@ export default function JoinForm({ schools, proTeams }: JoinFormProps) {
             one team is required before submitting the form.
           </p>
         </div>
+        {errors.proTeam && (
+          <div className="notification is-danger is-light">
+            <strong>Error!</strong> {errors.proTeam.message}
+          </div>
+        )}
         <div className="field card is-shadowless">
           <div className="card-header is-shadowless has-background-light pt-2 px-2">
             <div className="tabs is-boxed">
@@ -201,7 +232,8 @@ export default function JoinForm({ schools, proTeams }: JoinFormProps) {
               className="button is-primary is-light mt-4"
               disabled={
                 (teamView === LEAGUE.pro && !!proTeam) ||
-                (teamView === LEAGUE.college && collegeTeams?.length === 3)
+                (teamView === LEAGUE.college && collegeTeams?.length === 3) ||
+                isSubmitting
               }
               onClick={() => setModal({ open: true })}
             >
@@ -209,7 +241,10 @@ export default function JoinForm({ schools, proTeams }: JoinFormProps) {
             </button>
           </div>
         </div>
-        <button type="submit" className="button is-primary">
+        <button
+          type="submit"
+          className={clsx("button is-primary", isSubmitting && "is-loading")}
+        >
           Join
         </button>
       </form>
@@ -221,7 +256,10 @@ export default function JoinForm({ schools, proTeams }: JoinFormProps) {
         mode={modal.mode}
         options={proTeams}
         selectedForm={modal.proValues}
-        sendToMainForm={(data: ProTeamForm) => setValue("proTeam", data)}
+        sendToMainForm={async (data: ProTeamForm) => {
+          setValue("proTeam", data);
+          await trigger("proTeam");
+        }}
       />
 
       <SchoolModal
