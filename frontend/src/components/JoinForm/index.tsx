@@ -12,7 +12,7 @@ import {
 } from "react-hook-form";
 
 import { LEAGUE } from "@content/constants";
-import { capitalize, isEmpty, isNil } from "lodash-es";
+import { capitalize, delay, isEmpty, isNil } from "lodash-es";
 import { useEffect, useState } from "react";
 
 import { joiResolver } from "@hookform/resolvers/joi";
@@ -26,6 +26,7 @@ import {
 import TeamCard from "./JoinCard";
 import ProTeamModal from "./modals/ProTeamModal";
 import SchoolModal from "./modals/SchoolModal";
+import JoinResults from "./JoinResults";
 
 type JoinFormProps = {
   schools: School[];
@@ -40,10 +41,24 @@ type Modal = {
   collegeValues?: CollegeTeamForm;
 };
 
+type EmailSentResults = {
+  result: {
+    member: { isSuccessful: boolean };
+    commissioner: { isSuccessful: boolean };
+  };
+};
+
+export type JoinFormResults = {
+  memberName: string;
+  isMemberEmailSuccessful: boolean;
+  isCommissionerEmailSuccessful: boolean;
+};
+
 export default function JoinForm({ schools, proTeams }: JoinFormProps) {
   const [teamView, setTeamView] = useState(LEAGUE.pro);
   const [modal, setModal] = useState<Modal>({ open: false });
   const [availableSchools, setAvailableSchools] = useState<School[]>(schools);
+  const [formResults, setFormResults] = useState<JoinFormResults>();
 
   const {
     handleSubmit,
@@ -52,7 +67,7 @@ export default function JoinForm({ schools, proTeams }: JoinFormProps) {
     watch,
     trigger,
     reset,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isSubmitSuccessful },
   } = useForm<JoinForm>({
     defaultValues: { name: "", email: "" },
     resolver: joiResolver(joinFormSchema),
@@ -95,17 +110,40 @@ export default function JoinForm({ schools, proTeams }: JoinFormProps) {
     event?.preventDefault();
     event?.stopPropagation();
 
+    if (import.meta.env.DEV) {
+      return delay(
+        () =>
+          setFormResults({
+            memberName: data.name,
+            isCommissionerEmailSuccessful: true,
+
+            isMemberEmailSuccessful: true,
+          }),
+        1000
+      );
+    }
+
     const sendJoinEmails = await fetch(import.meta.env.PUBLIC_JOIN_URL, {
       method: "POST",
       body: JSON.stringify(data),
     });
 
     if (sendJoinEmails.ok) {
-      const result = await sendJoinEmails.json();
-      alert(result);
+      const emailsSent = (await sendJoinEmails.json()) as EmailSentResults;
+
+      setFormResults({
+        memberName: data.name,
+        isCommissionerEmailSuccessful:
+          emailsSent.result.commissioner.isSuccessful,
+        isMemberEmailSuccessful: emailsSent.result.member.isSuccessful,
+      });
       reset();
     }
   };
+
+  if (isSubmitSuccessful && !!formResults) {
+    return <JoinResults {...formResults} />;
+  }
 
   return (
     <>
