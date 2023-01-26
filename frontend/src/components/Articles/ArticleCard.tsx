@@ -31,7 +31,7 @@ export default function ArticleCard({ article }: ArticleCardProps) {
         <div className="card-header is-shadowless">
           <a
             className="card-header-title is-justify-content-center title is-4"
-            href={`/news/${slug}`}
+            href={`/news/article/${slug}`}
           >
             {title}
           </a>
