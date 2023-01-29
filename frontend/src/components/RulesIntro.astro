@@ -17,17 +17,6 @@ export type Props = {
 };
 
 const { league } = Astro.props as Props;
-
-const strapiSimInfo = await getDataFromApi<
-  StrapiSingleTypeResponse<StrapiSimInfo>
->(`${import.meta.env.PUBLIC_CMS_URL}/sim-info`);
-const currentSim = new Date(
-  `${
-    league.type === LEAGUE.pro
-      ? strapiSimInfo.data.attributes.proCurrentDate
-      : strapiSimInfo.data.attributes.collegeCurrentDate
-  }T00:00:00`
-);
 ---
 
 <p>
@@ -131,4 +120,4 @@ const currentSim = new Date(
 {league.type === LEAGUE.college && <RecruitingDefinitions />}
 <h3>Legend</h3>
 <Legend league={league.type} />
-<EventsCalendar league={league.type} currentDate={currentSim} client:load />
+<EventsCalendar league={league.type} client:load />

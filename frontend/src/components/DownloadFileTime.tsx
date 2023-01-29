@@ -18,12 +18,20 @@ export default function DownloadFileTime({
   file,
 }: DownloadFileTimeProps): string {
   const [fileTimes, setFileTimes] = useState<FileTimes>();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getDataFromApi<FileTimes>(
       `${import.meta.env.PUBLIC_FILE_TIMES_URL}?league=${league}`
-    ).then((times) => setFileTimes(times));
+    ).then((times) => {
+      setLoading(false);
+      setFileTimes(times);
+    });
   }, [league]);
+
+  if (loading) {
+    return "Loading...";
+  }
 
   if (fileTimes) {
     const milliseconds = secondsToMilliseconds(fileTimes[file]);

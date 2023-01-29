@@ -93,7 +93,7 @@ type PointLimit = {
 export type LeagueInfo = {
   name: string;
   abbv: string;
-  type: LEAGUE.pro | LEAGUE.college;
+  type: LEAGUE;
   typeAbbv: string;
   typeFull: string;
   simDays: string;

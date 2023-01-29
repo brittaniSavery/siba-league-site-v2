@@ -1,7 +1,13 @@
 import { LEAGUE, RECRUITING_STATES } from "@content/constants";
 import CollegeEvents from "@content/rules/collegeDates";
 import ProEvents from "@content/rules/proDates";
-import type { CollegeEvent, ProEvent } from "@lib/types";
+import type {
+  CollegeEvent,
+  ProEvent,
+  StrapiSimInfo,
+  StrapiSingleTypeResponse,
+} from "@lib/types";
+import { getDataFromApi } from "@lib/utils";
 import "@styles/events-calendar.scss";
 import {
   addDays,
@@ -12,7 +18,7 @@ import {
   startOfWeek,
 } from "date-fns";
 import enUS from "date-fns/locale/en-US/index.js";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Calendar,
   dateFnsLocalizer,
@@ -22,7 +28,6 @@ import {
 
 type EventsCalendarProps = {
   league: LEAGUE;
-  currentDate: Date;
 };
 
 const locales = {
@@ -37,12 +42,26 @@ const localizer = dateFnsLocalizer({
   locales,
 });
 
-export default function EventsCalendar({
-  league,
-  currentDate,
-}: EventsCalendarProps) {
+export default function EventsCalendar({ league }: EventsCalendarProps) {
   const [calendarDate, setCalendarDate] = useState<Date>();
+  const [simDate, setSimDate] = useState<Date>(new Date());
   const events = league === LEAGUE.college ? CollegeEvents : ProEvents;
+
+  useEffect(() => {
+    getDataFromApi<StrapiSingleTypeResponse<StrapiSimInfo>>(
+      `${import.meta.env.PUBLIC_CMS_URL}/sim-info`
+    ).then((strapiSimInfo) => {
+      const currentSim = new Date(
+        `${
+          league === LEAGUE.pro
+            ? strapiSimInfo.data.attributes.proCurrentDate
+            : strapiSimInfo.data.attributes.collegeCurrentDate
+        }T00:00:00`
+      );
+
+      setSimDate(currentSim);
+    });
+  }, []);
 
   const EventCalendar = Calendar<CollegeEvent | ProEvent>;
   const formats: Formats = useMemo(
@@ -91,7 +110,7 @@ export default function EventsCalendar({
           const endDate = event.end as Date;
           return addDays(endDate, 1);
         }}
-        getNow={() => currentDate}
+        getNow={() => simDate}
         onNavigate={(newDate) => {
           setCalendarDate(newDate);
         }}
