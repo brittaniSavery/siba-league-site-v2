@@ -1,0 +1,43 @@
+name: 🚀 Deploy frontend (siba.averyincorporated.com) on push
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - frontend/**
+      - ".github/workflows/deploy-frontend.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - frontend/**
+
+  repository_dispatch:
+    types: [strapi-update]
+
+jobs:
+  build-deploy:
+    name: 🆕 Build and deploy latest version of frontend code
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v3
+
+      - name: 🎛️ Setup node environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: 🛠️ Build code
+        run: |
+          npm ci
+          npm run build
+
+      - name: ⬆️ Upload to website
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: ftp.averyincorporated.com
+          username: code@siba.averyincorporated.com
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: frontend/dist/
