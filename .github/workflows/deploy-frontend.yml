@@ -1,5 +1,9 @@
 name: 🚀 Deploy frontend (siba.averyincorporated.com) on push
 
+defaults:
+  run:
+    working-directory: frontend
+
 on:
   push:
     branches:
