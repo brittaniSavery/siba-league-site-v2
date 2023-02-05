@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "astro dev --port 5000 --host",
     "start": "astro dev",
-    "build": "astro build",
     "preview": "astro build && astro preview",
+    "build": "astro check && tsc --noEmit && astro build",
     "lint": "eslint . --ext .md,.mdx,.js,.jsx,.ts,.tsx,.astro --fix"
   },
   "devDependencies": {
