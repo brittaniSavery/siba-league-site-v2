@@ -100,7 +100,7 @@ export default function ProTeamModal({
               id="proTeamSelect"
               name={"team"}
               label="Team Selection"
-              size="half"
+              columnSize="half"
               options={options}
               renderOption={formatTeamTitle}
               renderOptionLabel={formatTeamTitle}
@@ -114,7 +114,7 @@ export default function ProTeamModal({
               type="password"
               name="password"
               label="Team Password"
-              size="half"
+              columnSize="half"
               control={control}
             />
 
@@ -124,19 +124,19 @@ export default function ProTeamModal({
             <Input
               name="firstName"
               label="First Name"
-              size={4}
+              columnSize={"4"}
               control={control}
             />
             <Input
               name="lastName"
               label="Last Name"
-              size={4}
+              columnSize={"4"}
               control={control}
             />
             <Input
               name="age"
               type="number"
-              size={2}
+              columnSize={2}
               min={25}
               max={90}
               help="Range: 25-75"
@@ -144,7 +144,7 @@ export default function ProTeamModal({
             />
             <Radio
               name="gender"
-              size={2}
+              columnSize={2}
               options={[
                 { label: "Male", value: "male" },
                 { label: "Female", value: "female" },
@@ -157,7 +157,7 @@ export default function ProTeamModal({
               type={"number"}
               min={1}
               max={1022}
-              size={"one-quarter"}
+              columnSize={"one-quarter"}
               help={`Fill in the number of the matching picture from graphics/${PRO_LEAGUE_INFO.pictureFolder}/fac.`}
               control={control}
             />
@@ -167,21 +167,21 @@ export default function ProTeamModal({
               type={"number"}
               min={1}
               max={1006}
-              size={"one-quarter"}
+              columnSize={"one-quarter"}
               help={`Fill in the number of the matching picture from graphics/${PRO_LEAGUE_INFO.pictureFolder}/clothes.`}
               control={control}
             />
             <Select
               name="personality"
               options={PRO_PERSONALITY}
-              size="one-quarter"
+              columnSize="one-quarter"
               control={control}
             />
             <Select
               name="greed"
               label="Greed Level"
               options={LOW_HIGH_LEVELS}
-              size="one-quarter"
+              columnSize="one-quarter"
               control={control}
             />
 
@@ -212,7 +212,7 @@ export default function ProTeamModal({
                 name={key as Path<ProTeamForm>}
                 label={pro}
                 type={"number"}
-                size="full"
+                columnSize="full"
                 style={{ width: "6rem" }}
                 min={10}
                 max={85}

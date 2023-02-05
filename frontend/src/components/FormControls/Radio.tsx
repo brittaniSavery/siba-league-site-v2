@@ -11,7 +11,7 @@ export default function Radio<T extends FieldValues>(
       options: { label: string; value: string }[];
     }
 ) {
-  const { name, label, size, help, horizontal, control, options } = props;
+  const { name, label, columnSize, help, horizontal, control, options } = props;
 
   const {
     field,
@@ -23,7 +23,7 @@ export default function Radio<T extends FieldValues>(
       name={name}
       label={label}
       error={error}
-      size={size}
+      columnSize={columnSize}
       help={help}
       horizontal={horizontal}
     >

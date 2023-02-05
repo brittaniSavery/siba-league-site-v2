@@ -23,7 +23,7 @@ export default function AutoComplete<T extends FieldValues, K>(
     id,
     name,
     label,
-    size,
+    columnSize,
     help,
     options,
     control,
@@ -66,7 +66,7 @@ export default function AutoComplete<T extends FieldValues, K>(
 
   return (
     <div
-      className={clsx("field", !!size && `column is-${size}`)}
+      className={clsx("field", !!columnSize && `column is-${columnSize}`)}
       {...getRootProps()}
     >
       <label className="label" {...getInputLabelProps()}>
