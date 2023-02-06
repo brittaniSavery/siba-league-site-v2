@@ -23,6 +23,11 @@ module.exports = {
       if (!populate.author.count || (authorRemoved && !authorAdded)) {
         throw new ApplicationError("Author is required.");
       }
+
+      // TODO Add Github Action trigger for strapi update
+      // https://api.github.com/repos/brittanisavery/siba-league-site-v2/dispatches
+      // body: { "event_type": "strapi-update" }
+      // auth: Github personal token
     }
   },
 };
