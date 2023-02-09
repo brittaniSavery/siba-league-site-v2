@@ -1,3 +1,5 @@
+const functions = require("../../../../index");
+
 const utils = require("@strapi/utils");
 const { ApplicationError } = utils.errors;
 
@@ -8,26 +10,45 @@ module.exports = {
     // getting the current version of the article
     const current = await strapi
       .service("api::article.article")
-      .findOne(where.id);
-    const isPublished = updated.publishedAt || current.publishedAt;
+      .findOne(where.id, {
+        fields: ["publishedAt"],
+        populate: { author: true },
+      });
 
-    console.log("data", updated);
-    console.log("populate", populate);
+    console.log({ current });
+
+    const isPublished = updated.publishedAt || current.publishedAt;
 
     // double-checking that there is an author for published articles
 
-    if (isPublished) {
-      const authorRemoved = updated.author.disconnect.length > 0;
-      const authorAdded = updated.author.connect.length > 0;
+    if (!!isPublished) {
+      const authorRemoved = updated.author?.disconnect.length > 0;
+      const authorAdded = updated.author?.connect.length > 0;
 
-      if (!populate.author.count || (authorRemoved && !authorAdded)) {
+      if (!current.author || (authorRemoved && !authorAdded)) {
         throw new ApplicationError("Author is required.");
       }
+    }
+  },
 
-      // TODO Add Github Action trigger for strapi update
-      // https://api.github.com/repos/brittanisavery/siba-league-site-v2/dispatches
-      // body: { "event_type": "strapi-update" }
-      // auth: Github personal token
+  async afterUpdate(event) {
+    const { where } = event.params;
+    console.dir(event.result.publishedAt);
+
+    // getting the current version of the article
+    const current = await strapi
+      .service("api::article.article")
+      .findOne(where.id, {
+        fields: ["publishedAt"],
+      });
+
+    // article is currently unpublished, so no need to trigger rebuild
+    if (!current.publishedAt) return;
+
+    if (process.env.NODE_ENV === "development") {
+      strapi.log.debug("Triggered rebuild on Github Actions");
+    } else {
+      strapi.service("api::article.article").triggerRebuild();
     }
   },
 };
