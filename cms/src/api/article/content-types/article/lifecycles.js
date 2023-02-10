@@ -1,9 +1,17 @@
-const functions = require("../../../../index");
-
+const slugify = require("slugify");
 const utils = require("@strapi/utils");
 const { ApplicationError } = utils.errors;
 
 module.exports = {
+  beforeCreate(event) {
+    const { data } = event.params;
+
+    // generating the slug if missing
+    if (!data.slug) {
+      data.slug = slugify(data.title, { strict: true, lower: true });
+    }
+  },
+
   async beforeUpdate(event) {
     const { data: updated, where, populate } = event.params;
 
