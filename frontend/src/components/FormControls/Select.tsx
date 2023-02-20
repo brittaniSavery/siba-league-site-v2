@@ -20,7 +20,7 @@ export default function Select<T extends FieldValues, K>(
   const {
     name,
     label,
-    columnSize,
+    colSize,
     help,
     horizontal,
     options,
@@ -40,7 +40,7 @@ export default function Select<T extends FieldValues, K>(
       name={name}
       label={label}
       error={error}
-      columnSize={columnSize}
+      colSize={colSize}
       help={help}
       horizontal={horizontal}
     >
@@ -48,7 +48,7 @@ export default function Select<T extends FieldValues, K>(
         className={clsx(
           "select",
           error && "is-danger",
-          columnSize && columnSize !== "narrow" && "is-fullwidth"
+          colSize && colSize !== "narrow" && "is-fullwidth"
         )}
       >
         <select {...field} {...rest}>

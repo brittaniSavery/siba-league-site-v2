@@ -112,7 +112,7 @@ export default function SchoolModal({
               id="schoolSelect"
               name={"team"}
               label="Team Selection"
-              columnSize="half"
+              colSize="half"
               options={options}
               renderOption={(school: School) => {
                 const schoolTitle = formatTeamTitle(school);
@@ -160,7 +160,7 @@ export default function SchoolModal({
               type="password"
               name="password"
               label="Team Password"
-              columnSize="half"
+              colSize="half"
               control={control}
             />
 
@@ -170,19 +170,19 @@ export default function SchoolModal({
             <Input
               name="firstName"
               label="First Name"
-              columnSize={4}
+              colSize={"4"}
               control={control}
             />
             <Input
               name="lastName"
               label="Last Name"
-              columnSize={4}
+              colSize={"4"}
               control={control}
             />
             <Input
               name="age"
               type="number"
-              columnSize={2}
+              colSize={"2"}
               min={25}
               max={75}
               help="Range: 25-75"
@@ -190,7 +190,7 @@ export default function SchoolModal({
             />
             <Radio
               name="gender"
-              columnSize={2}
+              colSize={"2"}
               options={[
                 { label: "Male", value: "male" },
                 { label: "Female", value: "female" },
@@ -203,7 +203,7 @@ export default function SchoolModal({
               type="number"
               min={1}
               max={1022}
-              columnSize={4}
+              colSize={"4"}
               help={`Fill in the number of the matching picture from graphics/${COLLEGE_LEAGUE_INFO.pictureFolder}/fac.`}
               control={control}
             />
@@ -213,7 +213,7 @@ export default function SchoolModal({
               type="number"
               min={1}
               max={1006}
-              columnSize={4}
+              colSize={"4"}
               help={`Fill in the number of the matching picture from graphics/${COLLEGE_LEAGUE_INFO.pictureFolder}/clothes.`}
               control={control}
             />
@@ -240,7 +240,7 @@ export default function SchoolModal({
                   name={cat as Path<CollegeTeamForm>}
                   label={capitalize(cat)}
                   options={Object.values(LOW_HIGH_LEVELS)}
-                  columnSize="one-fifth"
+                  colSize="one-fifth"
                   control={control}
                 />
               )
@@ -259,7 +259,7 @@ export default function SchoolModal({
                   name={key as Path<CollegeTeamForm>}
                   label={college}
                   type={"number"}
-                  columnSize="full"
+                  colSize="full"
                   style={{ width: "6rem" }}
                   min={10}
                   max={85}

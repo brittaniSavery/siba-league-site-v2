@@ -12,7 +12,7 @@ export default function Input<T extends FieldValues>(
     UseControllerProps<T> &
     InputHTMLAttributes<HTMLElement>
 ) {
-  const { name, label, columnSize, help, horizontal, control, ...rest } = props;
+  const { name, label, colSize, help, horizontal, control, ...rest } = props;
 
   const {
     field,
@@ -24,7 +24,7 @@ export default function Input<T extends FieldValues>(
       name={name}
       label={label}
       error={error}
-      columnSize={columnSize}
+      colSize={colSize}
       help={help}
       horizontal={horizontal}
     >

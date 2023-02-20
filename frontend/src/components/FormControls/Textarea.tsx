@@ -13,7 +13,7 @@ type TextareaProps<T extends FieldValues> = AllFieldProps<T> &
 export default function Textarea<T extends FieldValues>(
   props: TextareaProps<T> & InputHTMLAttributes<HTMLElement>
 ) {
-  const { name, label, columnSize, help, horizontal, control, ...rest } = props;
+  const { name, label, colSize, help, horizontal, control, ...rest } = props;
 
   const {
     field,
@@ -25,7 +25,7 @@ export default function Textarea<T extends FieldValues>(
       name={name}
       label={label}
       error={error}
-      columnSize={columnSize}
+      colSize={colSize}
       help={help}
       horizontal={horizontal}
     >

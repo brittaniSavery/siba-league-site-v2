@@ -9,7 +9,7 @@ import type {
 export type AllFieldProps<T extends FieldValues> = {
   name: FieldPath<T>;
   label?: string;
-  columnSize?: string | number;
+  colSize?: string;
   help?: string;
   horizontal?: boolean;
 };
@@ -22,7 +22,7 @@ type FieldBaseProps<T extends FieldValues> = AllFieldProps<T> &
 export default function FieldBase<T extends FieldValues>({
   name,
   label,
-  columnSize,
+  colSize,
   error,
   help,
   horizontal = false,
@@ -34,7 +34,7 @@ export default function FieldBase<T extends FieldValues>({
       <div
         className={clsx(
           "field is-horizontal",
-          !!columnSize && `column is-${columnSize}`
+          colSize && `column is-${colSize}`
         )}
         {...rest}
       >
@@ -55,10 +55,7 @@ export default function FieldBase<T extends FieldValues>({
   }
 
   return (
-    <div
-      className={clsx("field", !!columnSize && `column is-${columnSize}`)}
-      {...rest}
-    >
+    <div className={clsx("field", colSize && `column is-${colSize}`)} {...rest}>
       <label className="label">{label ?? capitalize(name)}</label>
       <div className="control">{children}</div>
       {error && <p className="help has-text-danger-dark">{error.message}</p>}
