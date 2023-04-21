@@ -1,6 +1,7 @@
 org: brittanisavery
 app: siba
 service: siba-api
+useDotenv: true
 
 custom:
   vars: ${file(vars.json)}
@@ -10,18 +11,19 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs18.x
   region: us-west-2
-  stage: ${opt:stage, self:custom.defaultStage}
   environment:
     COMMISSIONER: ${self:custom.vars.${self:provider.stage}_commis_email}
     NO_REPLY: ${self:custom.vars.no_reply_email}
     SITE_URL: ${self:custom.vars.site_url}
-  iamRoleStatements:
-    - Effect: "Allow"
-      Action:
-        - "ses:SendEmail"
-      Resource: "*"
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "ses:SendEmail"
+          Resource: "*"
 
 plugins:
   - serverless-offline

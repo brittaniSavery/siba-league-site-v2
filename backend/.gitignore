@@ -5,6 +5,7 @@ node_modules
 .serverless
 
 #project files
+.env.dev
+.env.prod
 .vscode
-vars.json
-test/files
+dist/
