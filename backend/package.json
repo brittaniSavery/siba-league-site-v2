@@ -6,17 +6,22 @@
   "license": "MIT",
   "dependencies": {
     "aws-sdk": "^2.678.0",
+    "dotenv": "^16.0.3",
     "lodash": "^4.17.21",
     "node-fetch": "^2.6.1",
     "parse5": "^6.0.0",
     "typescript": "^5.0.4"
   },
   "devDependencies": {
-    "serverless-offline": "^12.0.4"
+    "aws-ses-v2-local": "^2.2.0",
+    "serverless-offline": "^12.0.4",
+    "serverless-offline-ses-v2": "^1.0.4"
   },
   "scripts": {
-    "start": "sls offline",
-    "deploy-dev": "sls deploy --stage dev",
-    "deploy-prod": "sls deploy --stage prod"
+    "start": "sls offline start",
+    "deploy:dev": "sls deploy --stage dev",
+    "deploy:prod": "sls deploy --stage prod",
+    "deploy:dev:join": "sls deploy --stage dev --function join",
+    "deploy:dev:upload": "sls deploy --stage dev --function upload"
   }
 }
