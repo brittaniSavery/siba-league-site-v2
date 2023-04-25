@@ -33,7 +33,7 @@ export default function DownloadFileTime({
     return "Loading...";
   }
 
-  if (fileTimes) {
+  if (fileTimes && fileTimes[file]) {
     const milliseconds = secondsToMilliseconds(fileTimes[file]);
     const fileTime = new Date(milliseconds);
 
@@ -45,5 +45,5 @@ export default function DownloadFileTime({
     return formattedTime;
   }
 
-  return "Sorry, there was an error and the time could not be retrieved.";
+  return "Currently unavailable";
 }

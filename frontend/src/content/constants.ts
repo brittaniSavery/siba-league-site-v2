@@ -1,4 +1,4 @@
-import type { AbilityPoint, Conference, LeagueInfo } from "@lib/types";
+import type { AbilityPoint, Conference } from "@lib/types";
 
 export enum RECRUITING_STATES {
   None = "No Recruiting",
@@ -97,7 +97,7 @@ export const PRO_LEAGUE_INFO = {
   typeFull: "professional",
   simDays: "Monday, Wednesday, and Friday",
   channel: "siba-league-news",
-  version: 10.11,
+  version: 12.5,
   color: "orange",
   pageTitle: "Owners",
   strapiMembers: "general-managers",
@@ -119,7 +119,7 @@ export const COLLEGE_LEAGUE_INFO = {
   typeFull: "college",
   simDays: "Tuesday, Thursday, and Saturday",
   channel: "sicba-news",
-  version: 9.7,
+  version: 11.3,
   color: "blue",
   pageTitle: "Head Coaches",
   strapiMembers: "coaches",

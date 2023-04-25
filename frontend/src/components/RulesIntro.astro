@@ -36,19 +36,12 @@ const { league } = Astro.props as Props;
   <li><b>League Name:</b> {league.name}</li>
   <li>
     <b>Program:</b> Draft Day Sports: {capitalize(league.type)} Basketball <b
-      ><i>2021</i>
+      ><i>2023</i>
     </b> version {league.version} powered by <a
       href="https://www.wolverinestudios.com/"
       target="_blank"
       rel="noreferrer">Wolverine Studios</a
     >
-    <ul>
-      <li>
-        Note: We are skipping DDS:{league.typeAbbv} 2022 and will move to DDS:{
-          league.typeAbbv
-        } 2023 once it becomes available.
-      </li>
-    </ul>
   </li>
   <li>
     <b>Export File Deadlines:</b>
