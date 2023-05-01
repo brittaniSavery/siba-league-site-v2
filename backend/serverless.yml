@@ -4,23 +4,19 @@ service: siba-api
 useDotenv: true
 
 custom:
+  vars: ${file(vars.json)}
+  defaultStage: dev
   serverless-offline:
     httpPort: 4000
-  serverless-offline-ses-v2:
-    port: 8005
 
 provider:
   name: aws
-  runtime: nodejs16.x
+  runtime: nodejs18.x
   region: us-west-2
   environment:
-    COMMISSIONER: ${env:COMMISSIONER_EMAIL}
-    NO_REPLY: ${env:NO_REPLY_EMAIL}
-    SITE_URL: ${env:SITE_URL}
-    DB_NAME: ${env:DB_NAME}
-    DB_USER: ${env:DB_USER}
-    DB_PASSWORD: ${env:DB_DB_NAME}
-
+    COMMISSIONER: ${self:custom.vars.${self:provider.stage}_commis_email}
+    NO_REPLY: ${self:custom.vars.no_reply_email}
+    SITE_URL: ${self:custom.vars.site_url}
   iam:
     role:
       statements:
@@ -31,19 +27,12 @@ provider:
 
 plugins:
   - serverless-offline
-  - serverless-offline-ses-v2
 
 functions:
   join:
     handler: handler.join
     events:
-      - httpApi:
-          path: /join
-          method: POST
-
-  upload:
-    handler: handler.upload
-    events:
-      - httpApi:
-          path: /member-uploads
-          method: GET
+      - http:
+          path: siba/join
+          method: post
+          cors: true

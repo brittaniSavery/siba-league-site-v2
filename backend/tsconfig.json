@@ -8,5 +8,5 @@
     "skipLibCheck": true,
     "outDir": "./dist"
   },
-  "include": ["upload/*", "join/*"]
+  "include": ["src/**/*"]
 }

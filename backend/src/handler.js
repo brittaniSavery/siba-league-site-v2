@@ -24,6 +24,7 @@ exports.join = async (event) => {
       collegeTeams
     );
 
+    // @ts-ignore
     const memberEmailResult = await ses
       .sendEmail({
         Source: process.env.NO_REPLY,
@@ -40,6 +41,7 @@ exports.join = async (event) => {
 
     const commissionerEmailResult = await ses
       .sendEmail({
+        // @ts-ignore
         Source: process.env.NO_REPLY,
         Destination: { ToAddresses: [process.env.COMMISSIONER] },
         Message: {
@@ -67,20 +69,6 @@ exports.join = async (event) => {
   } catch (error) {
     return generateError(500, error);
   }
-};
-
-exports.upload = async (event) => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify(
-      {
-        message: `${process.env.NO_REPLY_EMAIL}`,
-        input: event,
-      },
-      null,
-      2
-    ),
-  };
 };
 
 function generateResponse(code, payload) {
