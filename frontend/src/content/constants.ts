@@ -119,7 +119,7 @@ export const COLLEGE_LEAGUE_INFO = {
   typeFull: "college",
   simDays: "Tuesday, Thursday, and Saturday",
   channel: "sicba-news",
-  version: 11.3,
+  version: 11.4,
   color: "blue",
   pageTitle: "Head Coaches",
   strapiMembers: "coaches",
