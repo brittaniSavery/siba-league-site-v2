@@ -1,0 +1,16 @@
+[
+  {
+    "_id": "8567e710-9b03-40d1-b835-9e53b04e8d59",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:4000/",
+    "url": "http://localhost:4000/",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-05-13T06:30:17.541Z",
+    "modified": "2023-05-13T06:30:17.541Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  }
+]
