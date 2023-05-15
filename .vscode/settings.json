@@ -1,5 +1,6 @@
 {
   "cSpell.words": [
+    "averyinc",
     "creativebulma",
     "fullwidth",
     "micromark",
@@ -8,5 +9,6 @@
     "siba",
     "sicba",
     "tlds"
-  ]
+  ],
+  "typescript.tsdk": "./frontend/node_modules/typescript/lib"
 }
