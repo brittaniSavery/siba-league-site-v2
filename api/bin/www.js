@@ -4,15 +4,12 @@
  * Module dependencies.
  */
 
-const app = require("../app");
-const debug = require("debug")("siba:server");
-const http = require("http");
+import "dotenv/config";
 
-/**
- * Set up environment variables
- */
-
-require("dotenv").config();
+import http from "http";
+import app from "../app.js";
+import debugFactory from "debug";
+const debug = debugFactory("siba:server");
 
 /**
  * Get port from environment and store in Express.
