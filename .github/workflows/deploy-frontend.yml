@@ -20,6 +20,8 @@ on:
   repository_dispatch:
     types: [strapi-update]
 
+  workflow_dispatch:
+
 jobs:
   build-deploy:
     name: 🆕 Build and deploy latest version of frontend code
