@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-02-09T08:19:32.750Z"
+    "x-generation-date": "2023-05-16T03:21:19.590Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -12134,11 +12134,11 @@
         "properties": {
           "data": {
             "required": [
-              "schools"
+              "teams"
             ],
             "type": "object",
             "properties": {
-              "schools": {}
+              "teams": {}
             }
           }
         }
@@ -12152,7 +12152,7 @@
           "attributes": {
             "type": "object",
             "properties": {
-              "schools": {},
+              "teams": {},
               "createdAt": {
                 "type": "string",
                 "format": "date-time"
@@ -12459,7 +12459,7 @@
           "attributes": {
             "type": "object",
             "properties": {
-              "schools": {},
+              "teams": {},
               "createdAt": {
                 "type": "string",
                 "format": "date-time"
@@ -12799,7 +12799,7 @@
           "attributes": {
             "type": "object",
             "properties": {
-              "schools": {},
+              "teams": {},
               "createdAt": {
                 "type": "string",
                 "format": "date-time"
@@ -13106,7 +13106,7 @@
           "attributes": {
             "type": "object",
             "properties": {
-              "schools": {},
+              "teams": {},
               "createdAt": {
                 "type": "string",
                 "format": "date-time"

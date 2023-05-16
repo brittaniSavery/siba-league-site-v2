@@ -36,7 +36,7 @@ export type StrapiProInfo = {
 };
 
 export type StrapiCollegeInfo = {
-  schools: School[];
+  teams: School[];
 };
 
 export type SiteUpdate = {
