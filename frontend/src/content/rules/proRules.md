@@ -11,7 +11,6 @@
 - Players are allowed to enter into the SIBA from the SICBA (college league)
 - High school players **cannot** enter the SIBA directly.
 - Foreign players are allowed to enter the SIBA
-- A human-controlled GM can be fired for their team in game, but there is an ability to regain control of the team.
 
 ## Multiplayer
 
@@ -45,6 +44,26 @@ The following are the changes to sign the free agent depending on the number of 
 **NOTE:** Only four teams can claim a free agent. After the fourth team has
 claimed him, the claims are finalized. Only the first four teams will
 have the chance of signing the player.
+
+## SIBA Luxury Tax Penalties
+
+### Lost of Draft Picks
+
+Teams that are over the Luxury Tax Cap for 2 consecutive seasons by $25 million will have to forfeit their highest second round pick in next draft.
+
+Teams that are over the Luxury Tax Cap for 2 consecutive seasons by $50 million will have to forfeit their highest first round pick in next draft.
+
+These Draft Picks will go to the teams with the worst record in order of highest **pick**. The highest 1st round pick would go to the worst team. Then the next pick would go to the 2nd worst team and so on until all the penalized teams pick are accounted for.
+
+### Lost of Reward Points
+
+If teams that are over the Luxury Tax Cap for 2 consecutive seasons by $25 million and do not have draft picks will forfeit Reward points for the 2nd season.
+
+These Reward Points will go to the teams with the worst record in order of highest **points**. The highest amount of points would go to the worst team. Then the next amount would go to the 2nd worst team and so on until all the penalized teams pick are accounted for.
+
+### Additional Salary
+
+If teams that are over the Luxury Tax Cap for 2 consecutive seasons by $25 million and do not have reward points then $10 million will be added to salary.
 
 ## Definitions
 
