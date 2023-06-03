@@ -16,11 +16,21 @@ router.get("/uploads", async (req, res, next) => {
     return;
   }
 
+  const dbUploads = await fetchQuery(
+    `SELECT * FROM ${league}_team_uploads ORDER BY teamID`
+  );
+
   const uploads = {};
+  dbUploads.forEach(({ teamID, fileType, latestUpload }) => {
+    if (Object.hasOwn(uploads, teamID)) {
+      const current = uploads[teamID];
+      current[fileType] = latestUpload;
+    } else {
+      uploads[teamID] = { [fileType]: latestUpload };
+    }
+  });
 
-  await fetchQuery(`SELECT * FROM ${league}_team_uploads ORDER BY teamID`);
-
-  res.end();
+  res.json(uploads);
 });
 
 export default router;

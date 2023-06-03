@@ -10,5 +10,5 @@ export async function fetchQuery(query, params) {
 
   const [rows, fields] = await connection.execute(query, params || []);
 
-  console.log(rows);
+  return rows;
 }
