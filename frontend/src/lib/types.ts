@@ -31,6 +31,10 @@ export type StrapiSimInfo = {
   collegeCurrentDate: Date;
 };
 
+export type StrapiTeamInfo = {
+  teams: Team[];
+};
+
 export type StrapiProInfo = {
   teams: ProTeam[];
 };
@@ -44,23 +48,25 @@ export type SiteUpdate = {
   publishedAt: string;
 };
 
-export type ProTeam = {
-  name: string;
-  mascot: string;
-  points: number;
-};
-
 export type Member = {
   team: string;
   logo: string;
   name: string;
 };
 
-export type School = {
-  ranking: number;
-  tier: 1 | 2 | 3;
+export type Team = {
+  id: number;
   name: string;
   mascot: string;
+};
+
+export type ProTeam = Team & {
+  points: number;
+};
+
+export type School = Team & {
+  ranking: number;
+  tier: 1 | 2 | 3;
   region: string;
   probation: "";
 };

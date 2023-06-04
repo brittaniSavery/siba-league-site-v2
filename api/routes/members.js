@@ -17,18 +17,33 @@ router.get("/uploads", async (req, res, next) => {
   }
 
   const dbUploads = await fetchQuery(
-    `SELECT * FROM ${league}_team_uploads ORDER BY teamID`
+    `SELECT * FROM ${league}_team_uploads ORDER BY teamID, latestUpload DESC`
   );
 
-  const uploads = {};
-  dbUploads.forEach(({ teamID, fileType, latestUpload }) => {
-    if (Object.hasOwn(uploads, teamID)) {
-      const current = uploads[teamID];
-      current[fileType] = latestUpload;
+  const uploads = [];
+  let current = {};
+
+  dbUploads.forEach(({ teamID, fileType, latestUpload }, i) => {
+    if (Object.hasOwn(current, "id") && current.id === teamID) {
+      current.uploads.push({
+        fileType,
+        latestUpload,
+      });
     } else {
-      uploads[teamID] = { [fileType]: latestUpload };
+      current = {
+        id: teamID,
+        uploads: [
+          {
+            fileType,
+            latestUpload,
+          },
+        ],
+      };
+      uploads.push(current);
     }
   });
+
+  uploads.push(current);
 
   res.json(uploads);
 });
