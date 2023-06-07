@@ -22,6 +22,8 @@ echo "Using the following credentials: " .
     $database . " " . $username . " " . $password . "\n";
 
 $mysqli = new mysqli('localhost', $username, $password, $database);
+$mysqli->query("SET time_zone = 'UTC'");
+
 $path = dirname(__DIR__) . "/LeagueFiles/LeagueFiles/";
 
 echo "Current path: " . $path . "\n";
@@ -88,3 +90,5 @@ foreach ($proFiles as $file) {
 }
 
 echo "Pro files complete!\n\n";
+
+$mysqli->close();

@@ -1,7 +1,7 @@
 import type { LEAGUE } from "@content/constants";
 import type { Member, Team } from "@lib/types";
 import { getDataFromApi } from "@lib/utils";
-import { format } from "date-fns";
+import { format, formatRelative } from "date-fns";
 import { useEffect, useState } from "react";
 
 type Upload = {
@@ -21,15 +21,34 @@ type MemberUploadsProps = {
 };
 
 function UploadDisplay({ uploads }: { uploads: Upload[] }) {
+  const [selected, setSelected] = useState<Upload>(uploads[0]);
+
+  console.log(uploads[0].latestUpload);
+  console.log(new Date(uploads[0].latestUpload));
+
   return (
-    <div className="columns is-multiline">
-      {uploads.map(({ fileType, latestUpload }) => (
-        <div key={fileType} className="column">
-          {fileType}:{" "}
-          {format(new Date(latestUpload), "MMM dd, yyyy 'at' hh:mm aa")}
-        </div>
-      ))}
-    </div>
+    <>
+      <div className="select is-fullwidth">
+        <select
+          onChange={(event) => {
+            const newValue = uploads.find(
+              (u) => u.fileType === event.target.value
+            );
+            console.log(newValue?.latestUpload);
+            if (newValue) setSelected(newValue);
+          }}
+        >
+          {uploads.map(({ fileType }) => (
+            <option key={fileType} value={fileType}>
+              {`.${fileType}`}
+            </option>
+          ))}
+        </select>
+      </div>
+      <p className="box">
+        {formatRelative(new Date(selected.latestUpload), new Date())}
+      </p>
+    </>
   );
 }
 
@@ -53,7 +72,7 @@ export default function MemberUploads({
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <table className="table is-fullwidth">
+    <table className="table" style={{ tableLayout: "fixed" }}>
       <thead>
         <tr>
           <th>Team</th>
@@ -72,7 +91,10 @@ export default function MemberUploads({
               <td>{name}</td>
               <td>
                 {currentUploads && (
-                  <UploadDisplay uploads={currentUploads.uploads} />
+                  <UploadDisplay
+                    key={`${team} (${id})`}
+                    uploads={currentUploads.uploads}
+                  />
                 )}
                 {!currentUploads && (
                   <div className="icon-text">

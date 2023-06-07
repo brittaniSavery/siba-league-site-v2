@@ -6,6 +6,7 @@ export async function fetchQuery(query, params) {
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: "averyinc_siba",
+    timezone: "Z",
   });
 
   const [rows, fields] = await connection.execute(query, params || []);
