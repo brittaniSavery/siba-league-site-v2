@@ -1,7 +1,7 @@
 import type { LEAGUE } from "@content/constants";
 import type { Member, Team } from "@lib/types";
 import { getDataFromApi } from "@lib/utils";
-import { format, formatRelative } from "date-fns";
+import { formatRelative } from "date-fns";
 import { useEffect, useState } from "react";
 
 type Upload = {
