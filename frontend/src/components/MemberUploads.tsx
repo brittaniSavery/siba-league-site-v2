@@ -9,6 +9,10 @@ type Upload = {
   latestUpload: Date;
 };
 
+type ApiResult = {
+  members: (Upload & { teamID: string })[];
+};
+
 type TeamUploads = {
   id: number;
   uploads: Upload[];
@@ -22,9 +26,6 @@ type MemberUploadsProps = {
 
 function UploadDisplay({ uploads }: { uploads: Upload[] }) {
   const [selected, setSelected] = useState<Upload>(uploads[0]);
-
-  console.log(uploads[0].latestUpload);
-  console.log(new Date(uploads[0].latestUpload));
 
   return (
     <>
@@ -61,10 +62,36 @@ export default function MemberUploads({
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    getDataFromApi<TeamUploads[]>(
-      `${import.meta.env.PUBLIC_API_URL}/members/uploads?league=${league}`
-    ).then((apiUploads) => {
-      setTeamUploads(apiUploads);
+    getDataFromApi<ApiResult>(
+      `${import.meta.env.PUBLIC_FILE_TIMES_URL}?league=${league}&file=members`
+    ).then((data) => {
+      const uploads: TeamUploads[] = [];
+      let current = {} as TeamUploads;
+
+      data.members.forEach(({ teamID, fileType, latestUpload }) => {
+        const numTeamId = parseInt(teamID);
+        if (Object.hasOwn(current, "id") && current.id === numTeamId) {
+          current.uploads.push({
+            fileType,
+            latestUpload,
+          });
+        } else {
+          current = {
+            id: numTeamId,
+            uploads: [
+              {
+                fileType,
+                latestUpload,
+              },
+            ],
+          };
+          uploads.push(current);
+        }
+      });
+
+      uploads.push(current);
+
+      setTeamUploads(uploads);
       setLoading(false);
     });
   }, []);
@@ -84,7 +111,6 @@ export default function MemberUploads({
         {members.map(({ team, name }) => {
           const id = teams.find((t) => `${t.name} ${t.mascot}` === team)?.id;
           const currentUploads = teamUploads.find((u) => u.id === id);
-          console.log(currentUploads);
           return (
             <tr key={team}>
               <td>{team}</td>
