@@ -1,14 +1,19 @@
 {
   "cSpell.words": [
+    "averyinc",
     "creativebulma",
+    "DDSCB",
+    "DDSPB",
     "fullwidth",
+    "longopts",
     "micromark",
     "nonplayers",
     "Rehype",
+    "shortopts",
     "siba",
     "sicba",
-    "tlds"
+    "tlds",
+    "UNIXTIME"
   ],
-  "typescript.tsdk": "./frontend/node_modules/typescript/lib",
-  "git.ignoreLimitWarning": true
+  "typescript.tsdk": "./frontend/node_modules/typescript/lib"
 }

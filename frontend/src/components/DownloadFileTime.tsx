@@ -5,12 +5,11 @@ import { getDataFromApi } from "@lib/utils";
 
 type DownloadFileTimeProps = {
   league: LEAGUE;
-  file: "league" | "graphics";
+  file: "main" | "graphics";
 };
 
 type FileTimes = {
-  league: number;
-  graphics: number;
+  [k: string]: number;
 };
 
 export default function DownloadFileTime({
@@ -22,7 +21,7 @@ export default function DownloadFileTime({
 
   useEffect(() => {
     getDataFromApi<FileTimes>(
-      `${import.meta.env.PUBLIC_FILE_TIMES_URL}?league=${league}`
+      `${import.meta.env.PUBLIC_FILE_TIMES_URL}?league=${league}&file=${file}`
     ).then((times) => {
       setLoading(false);
       setFileTimes(times);

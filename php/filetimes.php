@@ -4,7 +4,6 @@ if (isset($_SERVER['HTTP_ORIGIN'])) {
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
 }
 header('Access-Control-Allow-Credentials: true');
-header('Access-Control-Max-Age: 86400'); // cache for 1 day
 header('Content-Type: application/json');
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
@@ -16,13 +15,48 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         return;
     }
 
+    if (!$_GET['file']) {
+        http_response_code(400);
+        echo "Missing 'file' parameter";
+        return;
+    }
+
     $response = array();
     $dir = $_GET["league"];
-    $file = $dir === "pro" ? "siba" : "sicba";
-    $graphics = $dir === "pro" ? "DDSPB2023" : "DDSCB2023";
 
-    $response["league"] = filemtime(dirname(__DIR__) . "/files/" . $dir . "/" . strtoupper($file) . ".zip");
-    $response["graphics"] = filemtime(dirname(__DIR__) . "/files/" . $dir . "/" . $graphics . ".zip");
+    switch ($_GET['file']) {
+        case 'main':
+
+            $file = $dir === "pro" ? "siba" : "sicba";
+            $response["main"] = filemtime(dirname(__DIR__) . "/files/" . $dir . "/" . strtoupper($file) . ".zip");
+            break;
+        case 'graphics':
+
+            $graphics = $dir === "pro" ? "DDSPB2023" : "DDSCB2023";
+            $response["graphics"] = filemtime(dirname(__DIR__) . "/files/" . $dir . "/" . $graphics . ".zip");
+            break;
+
+        case 'members':
+
+            $dbVars = parse_ini_file("db-php.ini");
+
+            $db = $mysqli = new mysqli('localhost', $dbVars['user'], $dbVars['pass'], $dbVars['name']);
+            $db->query("SET time_zone = 'UTC'");
+
+            $sql = "SELECT * FROM " . $dir . "_team_uploads ORDER BY teamID, latestUpload DESC";
+            $results = $db->query($sql);
+
+            $response['members'] = $results->fetch_all(MYSQLI_ASSOC);
+
+            $mysqli->close();
+            unset($dbVars);
+            break;
+
+        default:
+            http_response_code(400);
+            echo "Missing 'file' parameter";
+            break;
+    }
 
     echo json_encode($response);
 } else {
