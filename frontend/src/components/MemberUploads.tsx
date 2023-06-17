@@ -70,10 +70,13 @@ export default function MemberUploads({
 
       data.members.forEach(({ teamID, fileType, latestUpload }) => {
         const numTeamId = parseInt(teamID);
+        const localDate = new Date(`${latestUpload}Z`);
+        console.log(localDate);
+
         if (Object.hasOwn(current, "id") && current.id === numTeamId) {
           current.uploads.push({
             fileType,
-            latestUpload,
+            latestUpload: localDate,
           });
         } else {
           current = {
@@ -81,7 +84,7 @@ export default function MemberUploads({
             uploads: [
               {
                 fileType,
-                latestUpload,
+                latestUpload: localDate,
               },
             ],
           };
