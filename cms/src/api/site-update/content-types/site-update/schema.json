@@ -5,12 +5,11 @@
     "singularName": "site-update",
     "pluralName": "site-updates",
     "displayName": "Site-update",
-    "name": "site-update"
+    "name": "site-update",
+    "description": ""
   },
   "options": {
-    "increments": true,
-    "timestamps": true,
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
