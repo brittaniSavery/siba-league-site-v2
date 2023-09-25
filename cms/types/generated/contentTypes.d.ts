@@ -760,6 +760,7 @@ export interface ApiCollegeInfoCollegeInfo extends Schema.SingleType {
   };
   attributes: {
     teams: Attribute.JSON & Attribute.Required;
+    game_date: Attribute.Date;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -826,6 +827,7 @@ export interface ApiProInfoProInfo extends Schema.SingleType {
     teams: Attribute.JSON & Attribute.Required;
     salary_cap: Attribute.Integer;
     luxury_cap: Attribute.Integer;
+    game_date: Attribute.Date;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2023-09-25T05:07:20.179Z"
+    "x-generation-date": "2023-09-25T05:16:22.331Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -2382,7 +2382,11 @@
             ],
             "type": "object",
             "properties": {
-              "teams": {}
+              "teams": {},
+              "game_date": {
+                "type": "string",
+                "format": "date"
+              }
             }
           }
         }
@@ -2440,6 +2444,10 @@
         ],
         "properties": {
           "teams": {},
+          "game_date": {
+            "type": "string",
+            "format": "date"
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -3172,6 +3180,10 @@
               },
               "luxury_cap": {
                 "type": "integer"
+              },
+              "game_date": {
+                "type": "string",
+                "format": "date"
               }
             }
           }
@@ -3235,6 +3247,10 @@
           },
           "luxury_cap": {
             "type": "integer"
+          },
+          "game_date": {
+            "type": "string",
+            "format": "date"
           },
           "createdAt": {
             "type": "string",

@@ -20,6 +20,9 @@
     },
     "luxury_cap": {
       "type": "integer"
+    },
+    "game_date": {
+      "type": "date"
     }
   }
 }
