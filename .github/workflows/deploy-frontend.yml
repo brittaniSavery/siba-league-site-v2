@@ -1,4 +1,4 @@
-name: 🚀 Deploy frontend (siba.averyincorporated.com) on push
+name: 🚀 Deploy frontend on siba.averyincorporated.com
 
 defaults:
   run:

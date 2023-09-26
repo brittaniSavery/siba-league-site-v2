@@ -38,25 +38,4 @@ module.exports = {
       }
     }
   },
-
-  async afterUpdate(event) {
-    const { where } = event.params;
-    console.dir(event.result.publishedAt);
-
-    // getting the current version of the article
-    const current = await strapi
-      .service("api::article.article")
-      .findOne(where.id, {
-        fields: ["publishedAt"],
-      });
-
-    // article is currently unpublished, so no need to trigger rebuild
-    if (!current.publishedAt) return;
-
-    if (process.env.NODE_ENV === "development") {
-      strapi.log.debug("Triggered rebuild on Github Actions");
-    } else {
-      strapi.service("api::article.article").triggerRebuild();
-    }
-  },
 };

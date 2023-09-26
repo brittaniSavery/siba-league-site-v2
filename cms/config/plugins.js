@@ -28,4 +28,16 @@ module.exports = ({ env }) => ({
       },
     },
   },
+  "site-publisher": {
+    config: {
+      owner: "brittaniSavery",
+      repo: "siba-league-site-v2",
+      workflow_id: "deploy-frontend.yml",
+      token: env("GITHUB_TOKEN"),
+      branch: "main",
+      inputs: {
+        event_type: "strapi-update",
+      },
+    },
+  },
 });
