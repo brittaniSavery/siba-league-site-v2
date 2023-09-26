@@ -35,9 +35,6 @@ module.exports = ({ env }) => ({
       workflow_id: "deploy-frontend.yml",
       token: env("GITHUB_TOKEN"),
       branch: "main",
-      inputs: {
-        event_type: "strapi-update",
-      },
     },
   },
 });
