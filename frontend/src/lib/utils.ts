@@ -16,6 +16,7 @@ export function linkify(data: string): string {
 }
 
 export async function getDataFromApi<T>(url: string): Promise<T> {
+  console.log("Url: ", url);
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error(response.statusText);

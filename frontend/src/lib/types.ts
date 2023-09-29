@@ -37,15 +37,18 @@ export type StrapiTeamInfo = {
 
 export type StrapiProInfo = {
   teams: ProTeam[];
+  game_date: string;
 };
 
 export type StrapiCollegeInfo = {
   teams: School[];
+  game_date: string;
 };
 
 export type SiteUpdate = {
   content: string;
-  publishedAt: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type Member = {
@@ -62,13 +65,14 @@ export type Team = {
 
 export type ProTeam = Team & {
   points: number;
+  luxury_tax: number;
 };
 
 export type School = Team & {
   ranking: number;
   tier: 1 | 2 | 3;
   region: string;
-  probation: "";
+  probation: string;
 };
 
 export type Schools = {

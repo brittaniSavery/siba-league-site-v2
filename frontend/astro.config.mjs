@@ -4,6 +4,7 @@ import {
   remarkDefinitionList,
   defListHastHandlers,
 } from "remark-definition-list";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 // https://astro.build/config
 import react from "@astrojs/react";
@@ -14,6 +15,7 @@ export default defineConfig({
   markdown: {
     extendDefaultPlugins: true,
     remarkPlugins: [remarkDefinitionList],
+    rehypePlugins: [rehypeAutolinkHeadings],
     // @ts-ignore: remark plugin configuration, can't really change it
     remarkRehype: { handlers: { ...defListHastHandlers } },
   },

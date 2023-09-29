@@ -11,7 +11,7 @@ const updatesResponse = await getDataFromApi<
 >(
   `${
     import.meta.env.PUBLIC_CMS_URL
-  }/site-updates?pagination[pageSize]=5&sort=publishedAt:desc`
+  }/site-updates?sort=createdAt:desc&pagination[pageSize]=5`
 );
 const updates = updatesResponse.data.map((u) => u.attributes);
 
@@ -36,7 +36,7 @@ const articles = articlesResponse.data.map((a) => a.attributes);
       {
         updates.map((u) => (
           <>
-            <h3>{getFormattedDate(u.publishedAt)}</h3>
+            <h3>{getFormattedDate(u.createdAt)}</h3>
             <Fragment set:html={micromark(u.content)} />
           </>
         ))

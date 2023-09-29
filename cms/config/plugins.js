@@ -17,13 +17,24 @@ module.exports = ({ env }) => ({
     config: {
       provider: "aws-s3",
       providerOptions: {
-        accessKeyId: env("S3_AWS_ACCESS_KEY_ID"),
-        secretAccessKey: env("S3_AWS_ACCESS_SECRET"),
-        region: env("S3_AWS_REGION"),
-        params: {
-          Bucket: env("S3_AWS_BUCKET"),
+        s3Options: {
+          accessKeyId: env("S3_AWS_ACCESS_KEY_ID"),
+          secretAccessKey: env("S3_AWS_ACCESS_SECRET"),
+          region: env("S3_AWS_REGION"),
+          params: {
+            Bucket: env("S3_AWS_BUCKET"),
+          },
         },
       },
+    },
+  },
+  "site-publisher": {
+    config: {
+      owner: "brittaniSavery",
+      repo: "siba-league-site-v2",
+      workflow_id: "deploy-frontend.yml",
+      token: env("GITHUB_TOKEN"),
+      branch: "main",
     },
   },
 });

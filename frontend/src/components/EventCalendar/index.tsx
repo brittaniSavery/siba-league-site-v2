@@ -48,19 +48,17 @@ export default function EventsCalendar({ league }: EventsCalendarProps) {
   const events = league === LEAGUE.college ? CollegeEvents : ProEvents;
 
   useEffect(() => {
-    getDataFromApi<StrapiSingleTypeResponse<StrapiSimInfo>>(
-      `${import.meta.env.PUBLIC_CMS_URL}/sim-info`
-    ).then((strapiSimInfo) => {
-      const currentSim = new Date(
-        `${
-          league === LEAGUE.pro
-            ? strapiSimInfo.data.attributes.proCurrentDate
-            : strapiSimInfo.data.attributes.collegeCurrentDate
-        }T00:00:00`
-      );
+    const url = `${
+      import.meta.env.PUBLIC_CMS_URL
+    }/${league}-info?fields[0]=game_date`;
 
-      setSimDate(currentSim);
-    });
+    getDataFromApi<StrapiSingleTypeResponse<{ game_date: string }>>(url).then(
+      (strapiInfo) => {
+        setSimDate(
+          new Date(`${strapiInfo.data.attributes.game_date}T00:00:00`)
+        );
+      }
+    );
   }, []);
 
   const EventCalendar = Calendar<CollegeEvent | ProEvent>;

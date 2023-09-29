@@ -104,7 +104,7 @@ const { league } = Astro.props as Props;
   </li>
 </ul>
 
-<h2><b>Important Game Dates</b></h2>
+<h2 id="important-game-dates"><b>Important Game Dates</b></h2>
 {league.type === LEAGUE.college && <RecruitingDefinitions />}
 <h3>Legend</h3>
 <Legend league={league.type} />
