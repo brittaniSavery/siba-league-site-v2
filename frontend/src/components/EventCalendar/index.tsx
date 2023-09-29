@@ -4,7 +4,7 @@ import ProEvents from "@content/rules/proDates";
 import type {
   CollegeEvent,
   ProEvent,
-  StrapiSimInfo,
+  StrapiSimDates,
   StrapiSingleTypeResponse,
 } from "@lib/types";
 import { getDataFromApi } from "@lib/utils";
@@ -50,13 +50,16 @@ export default function EventsCalendar({ league }: EventsCalendarProps) {
   useEffect(() => {
     const url = `${
       import.meta.env.PUBLIC_CMS_URL
-    }/${league}-info?fields[0]=game_date`;
+    }/sim-date?fields[0]=${league}`;
 
-    getDataFromApi<StrapiSingleTypeResponse<{ game_date: string }>>(url).then(
+    getDataFromApi<StrapiSingleTypeResponse<StrapiSimDates>>(url).then(
       (strapiInfo) => {
-        setSimDate(
-          new Date(`${strapiInfo.data.attributes.game_date}T00:00:00`)
-        );
+        const simDate =
+          league === LEAGUE.college
+            ? strapiInfo.data.attributes.college
+            : strapiInfo.data.attributes.pro;
+
+        setSimDate(new Date(`${simDate}T00:00:00`));
       }
     );
   }, []);

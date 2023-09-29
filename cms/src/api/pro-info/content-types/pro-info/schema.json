@@ -14,9 +14,6 @@
     "teams": {
       "type": "json",
       "required": true
-    },
-    "game_date": {
-      "type": "date"
     }
   }
 }

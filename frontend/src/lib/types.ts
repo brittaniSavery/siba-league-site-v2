@@ -26,9 +26,9 @@ export type StrapiSingleTypeResponse<T> = {
   data: StrapiObject<T>;
 };
 
-export type StrapiSimInfo = {
-  proCurrentDate: Date;
-  collegeCurrentDate: Date;
+export type StrapiSimDates = {
+  pro: Date;
+  college: Date;
 };
 
 export type StrapiTeamInfo = {
@@ -37,12 +37,10 @@ export type StrapiTeamInfo = {
 
 export type StrapiProInfo = {
   teams: ProTeam[];
-  game_date: string;
 };
 
 export type StrapiCollegeInfo = {
   teams: School[];
-  game_date: string;
 };
 
 export type SiteUpdate = {

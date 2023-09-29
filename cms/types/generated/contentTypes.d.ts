@@ -761,7 +761,6 @@ export interface ApiCollegeInfoCollegeInfo extends Schema.SingleType {
   };
   attributes: {
     teams: Attribute.JSON & Attribute.Required;
-    game_date: Attribute.Date;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -826,7 +825,6 @@ export interface ApiProInfoProInfo extends Schema.SingleType {
   };
   attributes: {
     teams: Attribute.JSON & Attribute.Required;
-    game_date: Attribute.Date;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -837,6 +835,36 @@ export interface ApiProInfoProInfo extends Schema.SingleType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::pro-info.pro-info',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSimDateSimDate extends Schema.SingleType {
+  collectionName: 'sim_dates';
+  info: {
+    singularName: 'sim-date';
+    pluralName: 'sim-dates';
+    displayName: 'Sim Date';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    pro: Attribute.Date;
+    college: Attribute.Date;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::sim-date.sim-date',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::sim-date.sim-date',
       'oneToOne',
       'admin::user'
     > &
@@ -921,6 +949,7 @@ declare module '@strapi/types' {
       'api::college-info.college-info': ApiCollegeInfoCollegeInfo;
       'api::general-manager.general-manager': ApiGeneralManagerGeneralManager;
       'api::pro-info.pro-info': ApiProInfoProInfo;
+      'api::sim-date.sim-date': ApiSimDateSimDate;
       'api::site-update.site-update': ApiSiteUpdateSiteUpdate;
       'api::tag.tag': ApiTagTag;
     }

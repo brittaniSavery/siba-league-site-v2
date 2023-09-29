@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "sim_dates",
+  "info": {
+    "singularName": "sim-date",
+    "pluralName": "sim-dates",
+    "displayName": "Sim Date"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "pro": {
+      "type": "date"
+    },
+    "college": {
+      "type": "date"
+    }
+  }
+}
