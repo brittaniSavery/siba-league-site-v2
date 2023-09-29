@@ -67,4 +67,4 @@ If teams that are over the Luxury Tax Cap for 2 consecutive seasons by $25 milli
 
 ### Current Luxury Cap Standings
 
-Each team may be under or over the league's luxury tax cap. If the total amount of a team's salaries are over the luxury tax cap , this number will be negative (-). If it is under the cap, the number will be positive (+).
+Each team may be under or over the league's luxury tax cap. If the total amount of a team's salaries are over the luxury tax cap , this number will be negative (-). If it is under the cap, the number will be positive (+). Note: The cap status listed here is from the end of the previous season.
