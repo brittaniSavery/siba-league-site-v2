@@ -1,7 +1,7 @@
 ## League Structure
 
-- Salary Cap: \$112,414,200
-- Luxury Cap: \$137,145,324
+- Salary Cap: \$131,559,530
+- Luxury Cap: \$160,502,626
 - Rating Scale: 1-100 Point
 - Owner's Characteristics: Randomized
 
