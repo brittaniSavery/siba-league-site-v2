@@ -1,12 +1,16 @@
 {
   "name": "cms",
-  "private": true,
   "version": "0.1.0",
+  "private": true,
   "description": "A Strapi application",
+  "license": "MIT",
+  "author": {
+    "name": "Brittani S. Avery"
+  },
   "scripts": {
+    "build": "strapi build",
     "develop": "strapi develop",
     "start": "strapi start",
-    "build": "strapi build",
     "strapi": "strapi"
   },
   "dependencies": {
@@ -20,15 +24,11 @@
     "slugify": "^1.6.6",
     "strapi-plugin-site-publisher": "^0.1.2"
   },
-  "author": {
-    "name": "A Strapi developer"
-  },
-  "strapi": {
-    "uuid": "e385a770-fd31-462f-8181-d3c691fea9d6"
-  },
   "engines": {
     "node": ">=14.19.1 <=18.x.x",
     "npm": ">=6.0.0"
   },
-  "license": "MIT"
+  "strapi": {
+    "uuid": "e385a770-fd31-462f-8181-d3c691fea9d6"
+  }
 }

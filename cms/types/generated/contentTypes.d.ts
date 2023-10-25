@@ -640,16 +640,15 @@ export interface ApiArticleArticle extends Schema.CollectionType {
     pluralName: 'articles';
     displayName: 'Article';
     name: 'article';
+    description: '';
   };
   options: {
-    increments: true;
-    timestamps: true;
     draftAndPublish: true;
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
     summary: Attribute.Text & Attribute.Required;
-    slug: Attribute.UID<'api::article.article', 'title'> & Attribute.Required;
+    slug: Attribute.UID<'api::article.article', 'title'>;
     content: Attribute.RichText & Attribute.Required;
     tags: Attribute.Relation<
       'api::article.article',
