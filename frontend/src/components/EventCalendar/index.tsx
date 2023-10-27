@@ -178,9 +178,6 @@ function getEventClass(
       case LEAGUE.development:
         className = "league-dev";
         break;
-      case LEAGUE.european:
-        className = "league-euro";
-        break;
       default:
         className = "league-pro";
     }

@@ -118,7 +118,7 @@ const events: ProEvent[] = [
     end: new Date(2022, MONTHS.Aug, 4),
   },
   {
-    title: "Dealine for Rookie Options",
+    title: "Deadline for Rookie Options",
     league: LEAGUE.pro,
     start: new Date(2022, MONTHS.Sep, 30),
     end: new Date(2022, MONTHS.Sep, 4),
@@ -146,7 +146,7 @@ const events: ProEvent[] = [
     end: new Date(2022, MONTHS.Nov, 28),
   },
   {
-    title: "Playoffs Beign",
+    title: "Playoffs Begin",
     league: LEAGUE.development,
     start: new Date(2022, MONTHS.Apr, 21),
     end: new Date(2022, MONTHS.Apr, 21),
@@ -158,68 +158,6 @@ const events: ProEvent[] = [
     end: new Date(2022, MONTHS.Jun, 26),
   },
   //#endregion D-League
-
-  //#region Euro League
-  {
-    title: "Domestic League Regular Season Begins",
-    league: LEAGUE.european,
-    start: new Date(2022, MONTHS.Nov, 4),
-    end: new Date(2022, MONTHS.Nov, 4),
-  },
-  {
-    title: "Major Cup Play Begins",
-    league: LEAGUE.european,
-    start: new Date(2022, MONTHS.Nov, 9),
-    end: new Date(2022, MONTHS.Nov, 9),
-  },
-  {
-    title: "Minor Cup Play Begins",
-    league: LEAGUE.european,
-    start: new Date(2022, MONTHS.Nov, 29),
-    end: new Date(2022, MONTHS.Nov, 29),
-  },
-  {
-    title: "Domestic League Playoffs Begin",
-    league: LEAGUE.european,
-    start: new Date(2022, MONTHS.May, 13),
-    end: new Date(2022, MONTHS.May, 13),
-  },
-  {
-    title: "1st Meeting with Owner",
-    league: LEAGUE.european,
-    start: new Date(2022, MONTHS.Jun, 18),
-    end: new Date(2022, MONTHS.Jun, 18),
-  },
-  {
-    title: "GM Job Hiring",
-    league: LEAGUE.european,
-    start: new Date(2022, MONTHS.Jun, 19),
-    end: new Date(2022, MONTHS.Jun, 19),
-  },
-  {
-    title: "2nd Meeting with Owner",
-    league: LEAGUE.european,
-    start: new Date(2022, MONTHS.Jun, 20),
-    end: new Date(2022, MONTHS.Jun, 20),
-  },
-  {
-    title: "Coach Hiring",
-    league: LEAGUE.european,
-    start: new Date(2022, MONTHS.Jun, 25),
-    end: new Date(2022, MONTHS.Jun, 26),
-  },
-  {
-    title: "Free Agency",
-    league: LEAGUE.european,
-    start: new Date(2022, MONTHS.Jul, 16),
-    end: new Date(2022, MONTHS.Aug, 4),
-  },
-  {
-    title: "Training Camp",
-    league: LEAGUE.european,
-    start: new Date(2022, MONTHS.Oct, 3),
-    end: new Date(2022, MONTHS.Oct, 3),
-  },
 ];
 
 export default events;
