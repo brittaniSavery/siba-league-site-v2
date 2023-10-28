@@ -13,10 +13,11 @@ module.exports = {
   },
 
   async beforeUpdate(event) {
-    const { data } = event.params;
-    const { id, updatedAt, slug, title, publishedAt, author } = data;
+    const { data, where } = event.params;
+    const { updatedAt, slug, title, publishedAt, author } = data;
+    const { id } = where;
 
-    if (slug.includes("article")) {
+    if (/^article/.test(slug)) {
       data.slug = slugify(title, { strict: true, lower: true });
     }
 
