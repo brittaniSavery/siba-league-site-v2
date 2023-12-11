@@ -1,0 +1,32 @@
+---
+import type { StrapiProInfo, StrapiSingleTypeResponse } from "@lib/types";
+import { getDataFromApi, getFormattedDate } from "@lib/utils";
+import { Fragment } from "react";
+
+const proInfo = await getDataFromApi<StrapiSingleTypeResponse<StrapiProInfo>>(
+  `${import.meta.env.PUBLIC_CMS_URL}/pro-info`
+);
+
+const teams = proInfo.data.attributes.teams;
+const lastUpdated = proInfo.data.attributes.updatedAt;
+---
+
+<Fragment>
+  <p><b>Last Updated:&nbsp;</b> {getFormattedDate(lastUpdated)}</p>
+  <table>
+    <tr>
+      <th>Team</th>
+      <th>Points</th>
+    </tr>
+    {
+      teams?.map((team) => (
+        <tr>
+          <td>{team.name}</td>
+          <td>{team.points}</td>
+        </tr>
+      ))
+    }
+
+
+  </table>
+</Fragment>

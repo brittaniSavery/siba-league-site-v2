@@ -1,7 +1,7 @@
 ---
 import JoinForm from "@components/JoinForm";
 import { COLLEGE_LEAGUE_INFO, PRO_LEAGUE_INFO } from "@content/constants";
-import Layout from "@layouts/BaseLayout.astro";
+import MainLayout from "@layouts/MainLayout.astro";
 import type {
   Member,
   School,
@@ -49,13 +49,17 @@ const availableProTeams = proTeams.filter(
 );
 ---
 
-<Layout content={{ title: "Join" }}>
-  <section class="content">
-    <h1>Join</h1>
-  </section>
+<MainLayout content={{ title: "Join" }}>
+  <p>
+    Interested in joining the SIBA as the general manager of your own
+    professional basketball team or as the head coach of your own university
+    basketball team? Fill out the form below, selecting your teams and coach,
+    and one of the commissioners will take your information and add you to the
+    league.
+  </p>
   <JoinForm
     proTeams={availableProTeams}
     schools={availableSchools}
     client:load
   />
-</Layout>
+</MainLayout>

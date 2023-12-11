@@ -147,15 +147,6 @@ export default function JoinForm({ schools, proTeams }: JoinFormProps) {
 
   return (
     <>
-      <div className="content">
-        <p>
-          Interested in joining the SIBA as the general manager of your own
-          professional basketball team or as the head coach of your own
-          university basketball team? Fill out the form below, selecting your
-          teams and coach, and one of the commissioners will take your
-          information and add you to the league.
-        </p>
-      </div>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <Input name="name" control={control} disabled={isSubmitting} />
         <Input

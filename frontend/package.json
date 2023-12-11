@@ -10,8 +10,8 @@
     "lint": "eslint . --ext .md,.mdx,.js,.jsx,.ts,.tsx,.astro --fix"
   },
   "devDependencies": {
-    "@astrojs/mdx": "^0.8.3",
-    "@astrojs/react": "^1.0.0",
+    "@astrojs/mdx": "^2.0.0",
+    "@astrojs/react": "^3.0.7",
     "@hookform/devtools": "^4.3.0",
     "@types/lodash-es": "^4.17.6",
     "@types/luxon": "^2.3.2",
@@ -19,7 +19,7 @@
     "@types/react-big-calendar": "^0.38.2",
     "@typescript-eslint/eslint-plugin": "^5.23.0",
     "@typescript-eslint/parser": "^5.23.0",
-    "astro": "^1.0.0",
+    "astro": "^4.0.3",
     "bulma": "^0.9.4",
     "eslint": "^8.22.0",
     "eslint-config-prettier": "^8.5.0",
