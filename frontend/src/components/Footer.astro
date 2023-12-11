@@ -1,41 +1,41 @@
 ---
+import discord from "@images/discord.svg";
+import slack from "@images/slack.svg";
+import twitter from "@images/twitter-x.svg";
+import youtube from "@images/youtube.svg";
+import SocialLink from "./SocialLink.astro";
+
 const currentYear = new Date().getFullYear();
 const copyright = `2018–${currentYear}`;
 ---
 
-<footer class="footer">
-  <div class="container is-max-widescreen level">
-    <div class="level-left">
-      <div class="level-item">
-        <p>Find us on social media!</p>
-        <a
-          href="https://twitter.com/SIBA_AveryINC"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img
-            class="navbar-img"
-            src={`/images/Twitter_Logo_Blue.svg`}
-            alt="Follow us on Twitter!"
-          />
-        </a>
-        <a
-          href="https://join.slack.com/t/sibabball/shared_invite/zt-grkrrq9i-je57xB2Y7NGoPTh0GlKNNg"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img
-            class="navbar-img"
-            src={`/images/Slack_Mark.svg`}
-            alt="Join us on Slack!"
-          />
-        </a>
-      </div>
-    </div>
-    <div class="level-left">
-      <p class="level-item is-size-7">
-        &copy; {copyright} Avery Incorporated
-      </p>
-    </div>
+<footer class="footer has-text-centered">
+  <p class="is-size-5 mb-2">Join our community!</p>
+  <div class="is-flex is-justify-content-center is-align-items-center">
+    <SocialLink
+      href="https://discord.gg/ZkH4mzRkrm"
+      brand="discord"
+      alt="Discord"
+    />
+    <SocialLink
+      href="https://join.slack.com/t/sibabball/shared_invite/zt-grkrrq9i-je57xB2Y7NGoPTh0GlKNNg"
+      brand="slack"
+      alt="Slack"
+      color="#1D1C1D"
+    />
+    <SocialLink
+      href="https://www.youtube.com/@siba_aisn"
+      brand="youtube"
+      alt="YouTube Channel"
+      color="#282828"
+    />
+    <SocialLink
+      href="https://twitter.com/SIBA_AveryINC"
+      brand="x-twitter"
+      alt="Twitter (X)"
+    />
   </div>
+  <p class="mt-4 is-size-7">
+    &copy; {copyright} Avery Incorporated
+  </p>
 </footer>

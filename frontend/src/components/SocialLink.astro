@@ -1,0 +1,9 @@
+---
+const { href, brand, alt, color, ...attrs } = Astro.props;
+---
+
+<a class="mx-3 p-1" href={href} target="_blank" rel="noreferrer"
+  ><i
+    class={`fa-brands fa-${brand} fa-lg`}
+    style={`color: ${color || "#000000"};`}></i>
+</a>

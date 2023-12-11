@@ -24,6 +24,7 @@ a:not(.navbar-item, .navbar-link) {
   &:link {
     color: $link;
     text-decoration: underline;
+    border: 1px solid transparent;
   }
 
   &:visited {
@@ -34,6 +35,7 @@ a:not(.navbar-item, .navbar-link) {
   &:focus {
     color: $primary;
     border: 1px dashed $primary;
+    text-decoration: none;
   }
 }
 
