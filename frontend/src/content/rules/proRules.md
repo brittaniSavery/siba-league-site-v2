@@ -7,32 +7,25 @@
 
 ## Trade and Draft Restrictions
 
-- All trades can be veto by the Commissioners.
+- All trades can be veto by the Commissioners and the Trade Committee.
 - Players are allowed to enter into the SIBA from the SICBA (college league)
 - High school players **cannot** enter the SIBA directly.
 - Foreign players are allowed to enter the SIBA
 
 ## Multiplayer
 
-The GMs in the league will need to export their files using the fax
-machine on the office page (Export MP File). These should be imported
-prior to each of the following stages:
+Most activities can be managed within and exported from the game as detailed above. However, given that SIBA is a multiplayer league, there are some actions that can only be handled by the Commissioner. Those activities can include:
 
-- Owner/GM phone calls
-- Each Day of Coach Hiring
-- Pre-Draft Workouts
-- Each Day of Free Agency
-- Training Camp
-- D-League Assignments
-- Any Change to Depth Chart, Sub Matrix, D-League Assignments
-- Player Instructions During the Season
+- D-League or Summer League Assignments
+- Renoucements
+- Trades
+- Contract signings Outside of Off-Season Free Agency
 
-These files need to be uploaded. All other stages of the season are
-handled by the Commissioner directly, and GMs should contact him via Slack
+For these and other Commissioner-only requests, please put them in the appropriate channels in Discord/Slack.
 
-## In Season Free Agent Signing
+## In-Season Free Agent Signing
 
-In-Season Free Agent Signing is started by a team posting the player they wish to sign in the transactions-freeagent-signings channel. Then that player is available until the next sim or for 6 hours, whichever period is shorter, to give any other teams a chance of signing him. After the waiting period, Commissioner will use the website [True Random Number Generator](http://www.random.org/) to calculate the number. Three random numbers will be average together to get the free agent number of interest.
+In-Season Free Agent Signing is started by a team posting the player they wish to sign in the `#siba-transaction` channel in Discord or the `#transactions-freeagent-signings` channel in Slack. Then that player is available until the next sim or for 6 hours, whichever period is shorter, to give any other teams a chance of signing him. After the waiting period, Commissioner will use the website [True Random Number Generator](http://www.random.org/) to calculate the number. Three random numbers will be average together to get the free agent number of interest.
 
 The following are the changes to sign the free agent depending on the number of interested teams.
 
@@ -47,13 +40,13 @@ have the chance of signing the player.
 
 ## SIBA Luxury Tax Penalties
 
+Teams that are over the Luxury Tax for 2 consecutive seasons will face penalties.
+
 ### Lost of Draft Picks
 
-Teams that are over the Luxury Tax Cap for 2 consecutive seasons by $25 million will have to forfeit their highest second round pick in next draft.
+Teams that are over the Salary Cap by $29 million will have to forfeit their highest second round pick in next draft.
 
-Teams that are over the Luxury Tax Cap for 2 consecutive seasons by $50 million will have to forfeit their highest first round pick in next draft.
-
-These Draft Picks will go to the teams with the worst record in order of highest **pick**. The highest 1st round pick would go to the worst team. Then the next pick would go to the 2nd worst team and so on until all the penalized teams pick are accounted for.
+Teams that are over the Salary Cap by $54 million will have to forfeit their highest first round pick in next draft.
 
 ### Lost of Reward Points
 
@@ -61,10 +54,14 @@ If teams that are over the Luxury Tax Cap for 2 consecutive seasons by $25 milli
 
 These Reward Points will go to the teams with the worst record in order of highest **points**. The highest amount of points would go to the worst team. Then the next amount would go to the 2nd worst team and so on until all the penalized teams pick are accounted for.
 
-### Additional Salary
+### Further Penalites if Draft Picks Unavailable
 
-If teams that are over the Luxury Tax Cap for 2 consecutive seasons by $25 million and do not have reward points then $10 million will be added to salary.
+If a team remains over the luxury tax for two season and has no draft picks, they will face the following penalties.
 
-### Current Luxury Cap Standings
+1. No future draft picks can be traded until they get under the cap
+2. All future picks are last in the round until they get under the cap.
+3. Unbalanced trades are blocked. This means that in all trades you must send more money than you would receive.
+
+### Current Salary Cap Standings
 
 Each team may be under or over the league's luxury tax cap. If the total amount of a team's salaries are over the luxury tax cap , this number will be negative (-). If it is under the cap, the number will be positive (+). Note: The cap status listed here is from the end of the previous season.
