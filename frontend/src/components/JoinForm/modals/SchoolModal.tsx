@@ -3,7 +3,7 @@ import Form from "@components/FormControls/Form";
 import Input from "@components/FormControls/Input";
 import Radio from "@components/FormControls/Radio";
 import Select from "@components/FormControls/Select";
-import ProbationIcon from "@components/ProbationIcon";
+import ProbationIcon from "@components/College/ProbationIcon";
 import { COLLEGE_LEAGUE_INFO, LEAGUE } from "@content/constants";
 import {
   CollegeTeamForm,

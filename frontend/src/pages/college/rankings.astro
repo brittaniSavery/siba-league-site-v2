@@ -1,6 +1,6 @@
 ---
-import ProbationIcon from "@components/ProbationIcon";
-import TierRankings from "@components/TierRankings";
+import ProbationIcon from "@components/College/ProbationIcon";
+import TierRankings from "@components/College/TierRankings";
 import { COLLEGE_LEAGUE_INFO } from "@content/constants";
 import Layout from "@layouts/BaseLayout.astro";
 import type {
@@ -57,3 +57,4 @@ const title = `${COLLEGE_LEAGUE_INFO.abbv} Pre-Season Tier Rankings`;
   </section>
   <TierRankings coaches={coaches} schools={schools} client:load />
 </Layout>
+@components/College/ProbationIcon@components/College/TierRankings

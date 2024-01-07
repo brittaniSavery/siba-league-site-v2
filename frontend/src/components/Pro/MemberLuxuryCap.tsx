@@ -1,5 +1,5 @@
 import type { ProTeam } from "@lib/types";
-import FontAwesomeIcon from "./FontAwesomeIcon";
+import FontAwesomeIcon from "@components/FontAwesomeIcon";
 
 export default function MemberLuxuryCap({ teams }: { teams: ProTeam[] }) {
   return (

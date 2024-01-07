@@ -1,7 +1,7 @@
 import Input from "@components/FormControls/Input";
 import Select from "@components/FormControls/Select";
 import Textarea from "@components/FormControls/Textarea";
-import ProbationIcon from "@components/ProbationIcon";
+import ProbationIcon from "@components/College/ProbationIcon";
 import type { ProTeam, School } from "@lib/types";
 import clsx from "clsx";
 import {

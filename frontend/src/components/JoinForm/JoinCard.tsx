@@ -1,4 +1,4 @@
-import ProbationIcon from "@components/ProbationIcon";
+import ProbationIcon from "@components/College/ProbationIcon";
 import {
   COLLEGE_LEAGUE_INFO,
   Defense,
