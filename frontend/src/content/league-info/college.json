@@ -1,0 +1,40 @@
+{
+  "type": "college",
+  "longType": "college",
+  "extension": ".cbb",
+  "name": "SICBA",
+  "longName": "Simulation Internet College Basketball Association",
+  "color": "orange",
+  "sims": "Tuesday, Thursday, and Saturday",
+  "slack": "#sicba-news",
+  "discord": "#sicba-updates",
+  "version": 11.7,
+  "listTitle": "Head Coaches",
+  "strapiMembers": "coaches",
+  "singleMember": "head coach",
+  "pointLimits": {
+    "1": {
+      "min": 10,
+      "max": 85,
+      "total": 325
+    },
+    "2": {
+      "min": 5,
+      "max": 65,
+      "total": 240
+    },
+    "3": {
+      "min": 5,
+      "max": 45,
+      "total": 150
+    }
+  },
+  "pointLabels": {
+    "offense": "Offensive Concepts",
+    "defense": "Defensive Concepts",
+    "scouting": "Scouting Ability",
+    "recruiting": "Recruiting Ability",
+    "develop": "Player Development"
+  },
+  "pictureFolder": "coaches"
+}
