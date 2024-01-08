@@ -6,7 +6,7 @@ const pointLimit = z.object({
   total: z.number(),
 });
 
-const leagueInfo = defineCollection({
+const league = defineCollection({
   type: "data",
   schema: z.object({
     type: z.string(),
@@ -29,6 +29,31 @@ const leagueInfo = defineCollection({
   }),
 });
 
+const calendar = defineCollection({
+  type: "data",
+  schema: z.object({
+    legend: z.array(
+      z.object({
+        type: z.string(),
+        label: z.string().optional(),
+        details: z.array(z.string()).optional(),
+      })
+    ),
+    events: z.array(
+      z.object({
+        type: z.string(),
+        name: z.string().optional(),
+        start: z.string().transform((str) => new Date(str)),
+        end: z
+          .string()
+          .transform((str) => new Date(str))
+          .optional(),
+      })
+    ),
+  }),
+});
+
 export const collections = {
-  leagueInfo: leagueInfo,
+  league: league,
+  calendar: calendar,
 };

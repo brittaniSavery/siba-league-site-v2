@@ -1,4 +1,4 @@
-import { LEAGUE, MONTHS } from "@content/constants";
+import { LEAGUE, MONTHS } from "@lib/constants";
 import type { ProEvent } from "@lib/types";
 
 const events: ProEvent[] = [

@@ -11,7 +11,7 @@ import {
   useFieldArray,
 } from "react-hook-form";
 
-import { LEAGUE } from "@content/constants";
+import { LEAGUE } from "@lib/constants";
 import { capitalize, delay, isEmpty, isNil } from "lodash-es";
 import { useEffect, useState } from "react";
 

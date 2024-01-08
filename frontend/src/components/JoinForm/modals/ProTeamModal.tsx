@@ -3,10 +3,10 @@ import Form from "@components/FormControls/Form";
 import Input from "@components/FormControls/Input";
 import Radio from "@components/FormControls/Radio";
 import Select from "@components/FormControls/Select";
-import { LEAGUE, PRO_LEAGUE_INFO } from "@content/constants";
+import { LEAGUE, PRO_LEAGUE_INFO } from "@lib/constants";
 import {
   LOW_HIGH_LEVELS,
-  ProTeamForm,
+  type ProTeamForm,
   proTeamFormSchema,
   PRO_PERSONALITY,
 } from "@lib/joinForm";

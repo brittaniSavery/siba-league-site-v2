@@ -1,4 +1,4 @@
-import type { LEAGUE } from "@content/constants";
+import type { LEAGUE } from "@lib/constants";
 import { useEffect, useState } from "react";
 import { format, secondsToMilliseconds } from "date-fns";
 import { getDataFromApi } from "@lib/utils";

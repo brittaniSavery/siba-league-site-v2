@@ -3,7 +3,7 @@ import ArticlesTable from "@components/Articles/ArticlesTable";
 import type { Article, StrapiCollectionResponse, Tag } from "@lib/types";
 import { getDataFromApi } from "@lib/utils";
 import Layout from "@layouts/BaseLayout.astro";
-import { LEAGUE } from "@content/constants";
+import { LEAGUE } from "@lib/constants";
 import { capitalize } from "lodash-es";
 
 const articles = await getDataFromApi<StrapiCollectionResponse<Article>>(
@@ -34,4 +34,4 @@ const title = "League News and Opinion Articles";
     tags={tags}
     client:load
   />
-</Layout>
+</Layout>@lib/constants

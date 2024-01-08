@@ -1,14 +1,14 @@
 ---
-import { getEntry } from "astro:content";
-import { capitalize, lowerCase } from "lodash-es";
 import FontAwesomeIcon from "@components/FontAwesomeIcon";
+import { getEntry } from "astro:content";
+import { capitalize } from "lodash-es";
 
 export type Props = {
   league: "pro" | "college";
 };
 
 const { league } = Astro.props as Props;
-const { data } = await getEntry("league-info", league);
+const { data } = await getEntry("league", league);
 ---
 
 <p>

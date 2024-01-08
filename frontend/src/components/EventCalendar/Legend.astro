@@ -1,54 +1,27 @@
 ---
-import { LEAGUE, RECRUITING_STATES } from "@content/constants";
+import { getEntry } from "astro:content";
 import clsx from "clsx";
-import { lowerCase } from "lodash-es";
+import { capitalize } from "lodash-es";
+import "@styles/calendar.scss";
 
 export type Props = {
-  league: LEAGUE;
-};
-
-type Field = {
-  class: string;
-  label: string;
-  description?: string;
+  league: "pro" | "college";
 };
 
 const { league } = Astro.props as Props;
-let fields: Field[] = [];
-
-if (league === LEAGUE.college) {
-  fields.push({
-    class: "college-important",
-    label: "Important Dates",
-    description: "Be sure to export your file on these dates!",
-  });
-
-  for (const [key, value] of Object.entries(RECRUITING_STATES)) {
-    if (!value.includes("LOI")) {
-      fields.push({ class: `recruiting-${lowerCase(key)}`, label: value });
-    }
-  }
-
-  fields.push({ class: "recruiting-loi", label: "Early/Late LOI Signings" });
-  fields.push({ class: "college-tournament", label: "Tournament" });
-} else {
-  fields = [
-    {
-      class: "league-pro",
-      label: "Pro League",
-    },
-    {
-      class: "league-dev",
-      label: "D-League",
-    },
-  ];
-}
+const {
+  data: { legend },
+} = await getEntry("calendar", league);
 ---
 
 <div class="tags are-medium">
   {
-    fields.map((f) => (
-      <span class={clsx(f.class, "tag is-medium")}>{f.label}</span>
-    ))
+    legend.map(({ type, label }) => {
+      const eventClass = `events-${type}`;
+      const eventLabel = label ?? capitalize(type);
+      return (
+        <span class={clsx(eventClass, "tag is-medium")}>{eventLabel}</span>
+      );
+    })
   }
 </div>

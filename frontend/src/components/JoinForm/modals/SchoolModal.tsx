@@ -4,7 +4,7 @@ import Input from "@components/FormControls/Input";
 import Radio from "@components/FormControls/Radio";
 import Select from "@components/FormControls/Select";
 import ProbationIcon from "@components/College/ProbationIcon";
-import { COLLEGE_LEAGUE_INFO, LEAGUE } from "@content/constants";
+import { COLLEGE_LEAGUE_INFO, LEAGUE } from "@lib/constants";
 import {
   CollegeTeamForm,
   collegeTeamFormSchema,

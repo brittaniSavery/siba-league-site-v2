@@ -1,0 +1,33 @@
+---
+import "@styles/calendar.scss";
+import { getEntry } from "astro:content";
+import clsx from "clsx";
+import { capitalize } from "lodash-es";
+
+const {
+  data: { legend },
+} = await getEntry("calendar", "college");
+
+const recruiting = legend.filter((g) => !!g.details);
+---
+
+<h3>Recruiting Period Definitions</h3>
+<div class="columns is-desktop">
+  {
+    recruiting.map(({ type, label, details = [] }) => (
+      <div class="column is-one-fifth">
+        <div
+          class={clsx("tag is-medium", `events-${type}`)}
+          style="width: 100%;"
+        >
+          {label ?? capitalize(type)}
+        </div>
+        <ul>
+          {details.map((d) => (
+            <li>{d}</li>
+          ))}
+        </ul>
+      </div>
+    ))
+  }
+</div>

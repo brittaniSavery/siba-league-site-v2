@@ -1,9 +1,5 @@
 ---
-import {
-  COLLEGE_LEAGUE_INFO,
-  LEAGUE,
-  PRO_LEAGUE_INFO,
-} from "@content/constants";
+import { COLLEGE_LEAGUE_INFO, LEAGUE, PRO_LEAGUE_INFO } from "@lib/constants";
 import Layout from "@layouts/BaseLayout.astro";
 import type { Member, StrapiCollectionResponse } from "@lib/types";
 import { getDataFromApi } from "@lib/utils";
@@ -59,4 +55,4 @@ const title = `${leagueInfo.abbv} ${leagueInfo.pageTitle}`;
       ))
     }
   </div>
-</Layout>
+</Layout>@lib/constants

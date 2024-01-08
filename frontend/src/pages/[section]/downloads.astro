@@ -1,9 +1,5 @@
 ---
-import {
-  COLLEGE_LEAGUE_INFO,
-  LEAGUE,
-  PRO_LEAGUE_INFO,
-} from "@content/constants";
+import { COLLEGE_LEAGUE_INFO, LEAGUE, PRO_LEAGUE_INFO } from "@lib/constants";
 import Layout from "@layouts/BaseLayout.astro";
 import DownloadTimes from "@components/DownloadFileTime";
 import { capitalize, lowerCase, sortBy } from "lodash-es";
@@ -68,8 +64,8 @@ const teams: Team[] = teamInfo.data.attributes.teams || [];
           League File:</a
         >
       </b> This file runs all the simulation from the league. Add this to your own
-      copy of the program so you have the most updated version of the league.
-      <br />
+      copy of the program so you have the most updated version of the league.<br
+      />
       <i
         >Last Modified: <DownloadTimes
           league={leagueInfo.type}
@@ -89,8 +85,8 @@ const teams: Team[] = teamInfo.data.attributes.teams || [];
           Graphics File:</a
         >
       </b> This file runs all the simulation from the league. Add this to your own
-      copy of the program so you have the most updated version of the league.
-      <br />
+      copy of the program so you have the most updated version of the league.<br
+      />
       <i
         >Last Modified: <DownloadTimes
           league={leagueInfo.type}
@@ -111,4 +107,4 @@ const teams: Team[] = teamInfo.data.attributes.teams || [];
     league={leagueInfo.type}
     client:idle
   />
-</Layout>
+</Layout>@lib/constants

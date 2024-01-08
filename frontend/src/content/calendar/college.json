@@ -1,0 +1,51 @@
+{
+  "legend": [
+    {
+      "type": "important"
+    },
+    {
+      "type": "none",
+      "label": "No Recruiting"
+    },
+    {
+      "type": "quiet",
+      "details": [
+        "Call Recruit",
+        "Watch Game Film",
+        "Host Recruit for Campus Visit"
+      ]
+    },
+    {
+      "type": "evaluation",
+      "details": [
+        "Call Recruit",
+        "Watch Game Film",
+        "Host Recruit for Campus Visit",
+        "Watch Recruit in Live Games"
+      ]
+    },
+    { "type": "dead", "details": ["Call Recruit", "Watch Game Film"] },
+    {
+      "type": "contact",
+      "details": [
+        "Call Recruit",
+        "Watch Game Film",
+        "Host Recruit for Campus Visit",
+        "Visit Recruit at Home"
+      ]
+    },
+    {
+      "type": "loi",
+      "label": "Early/Late LOI Signings",
+      "details": ["Recruit Signs a Letter of Intent to Attend School"]
+    },
+    { "type": "tournament" }
+  ],
+  "events": [
+    {
+      "type": "pro",
+      "name": "D-League Assignments",
+      "start": "2022-10-04"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 ---
 import JoinForm from "@components/JoinForm";
-import { COLLEGE_LEAGUE_INFO, PRO_LEAGUE_INFO } from "@content/constants";
+import { COLLEGE_LEAGUE_INFO, PRO_LEAGUE_INFO } from "@lib/constants";
 import MainLayout from "@layouts/MainLayout.astro";
 import type {
   Member,
@@ -62,4 +62,4 @@ const availableProTeams = proTeams.filter(
     schools={availableSchools}
     client:load
   />
-</MainLayout>
+</MainLayout>@lib/constants

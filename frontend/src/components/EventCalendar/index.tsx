@@ -1,6 +1,6 @@
-import { LEAGUE, RECRUITING_STATES } from "@content/constants";
-import CollegeEvents from "@content/rules/collegeDates";
-import ProEvents from "@content/rules/proDates";
+import { LEAGUE, RECRUITING_STATES } from "@lib/constants";
+import CollegeEvents from "@lib/rules/collegeDates";
+import ProEvents from "@lib/rules/proDates";
 import type {
   CollegeEvent,
   ProEvent,
@@ -22,8 +22,8 @@ import { useEffect, useMemo, useState } from "react";
 import {
   Calendar,
   dateFnsLocalizer,
-  DateFormat,
-  Formats,
+  type DateFormat,
+  type Formats,
 } from "react-big-calendar";
 
 type EventsCalendarProps = {

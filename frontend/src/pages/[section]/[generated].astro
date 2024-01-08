@@ -1,6 +1,6 @@
 ---
 import IFrameContainer from "@components/IFrameContainer.astro";
-import { LEAGUE } from "@content/constants";
+import { LEAGUE } from "@lib/constants";
 
 export function getStaticPaths() {
   return [
@@ -98,4 +98,4 @@ export function getStaticPaths() {
 const { file, title } = Astro.props;
 ---
 
-<IFrameContainer file={file} league={LEAGUE.pro} title={title} />
+<IFrameContainer file={file} league={LEAGUE.pro} title={title} />@lib/constants
