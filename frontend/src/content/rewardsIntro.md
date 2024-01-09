@@ -31,7 +31,8 @@ At the end of each SIBA season, reward points are rewarded to teams based on the
 | Reward                       | Points |
 | ---------------------------- | ------ |
 | SIBA League Champion         | 20     |
-| Most Valuable Player         | 15     |
+| SIBA League MVP         | 15     |
+| Playoffs MVP|10|
 | Coach of the Year            | 10     |
 | Defensive Player of the Year | 10     |
 | Rookie of the Year           | 5      |
