@@ -8,20 +8,77 @@ export type Props = {
   league: "pro" | "college";
 };
 
+type Legend = {
+  type: string;
+  title?: string;
+  details?: string[];
+};
+
+const proLegend: Legend[] = [
+  {
+    type: "pro",
+    title: "Pro League",
+  },
+  {
+    type: "dev",
+    title: "D-League",
+  },
+];
+
+export const collegeLegend: Legend[] = [
+  {
+    type: "important",
+  },
+  {
+    type: "none",
+    title: "No Recruiting",
+  },
+  {
+    type: "quiet",
+    details: [
+      "Call Recruit",
+      "Watch Game Film",
+      "Host Recruit for Campus Visit",
+    ],
+  },
+  {
+    type: "evaluation",
+    details: [
+      "Call Recruit",
+      "Watch Game Film",
+      "Host Recruit for Campus Visit",
+      "Watch Recruit in Live Games",
+    ],
+  },
+  { type: "dead", details: ["Call Recruit", "Watch Game Film"] },
+  {
+    type: "contact",
+    details: [
+      "Call Recruit",
+      "Watch Game Film",
+      "Host Recruit for Campus Visit",
+      "Visit Recruit at Home",
+    ],
+  },
+  {
+    type: "loi",
+    title: "Early/Late LOI Signings",
+    details: ["Recruit Signs a Letter of Intent to Attend School"],
+  },
+  { type: "tournament" },
+];
+
 const { league } = Astro.props as Props;
-const {
-  data: { legend },
-} = await getEntry("calendar", league);
+
+const currentLegend = league === "college" ? collegeLegend : proLegend;
 ---
 
 <div class="tags are-medium">
   {
-    legend.map(({ type, label }) => {
-      const eventClass = `events-${type}`;
-      const eventLabel = label ?? capitalize(type);
-      return (
-        <span class={clsx(eventClass, "tag is-medium")}>{eventLabel}</span>
-      );
+    currentLegend.map(({ type, title }) => {
+      const eventClass = `event-${type}`;
+      const eventtitle = title ?? capitalize(type);
+      return <span class={clsx(eventClass, "tag")}>{eventtitle}</span>;
     })
   }
 </div>

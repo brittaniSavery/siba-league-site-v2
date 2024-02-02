@@ -87,7 +87,7 @@ a.icon-link {
     margin-top: 0.5em;
   }
 
-  table {
+  > table {
     width: 50% !important;
   }
 
@@ -127,6 +127,12 @@ body > .container {
     max-width: 100%;
     height: auto;
   }
+}
+
+.loading {
+  @include loader();
+  height: 40vh;
+  width: 40vh;
 }
 
 .navbar-img {

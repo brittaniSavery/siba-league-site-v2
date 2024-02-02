@@ -1,0 +1,16 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+const { title } = Astro.props;
+---
+
+<BaseLayout content={{ title: title }}>
+  <div class="pb-5">
+    <div class="content">
+      <h1>{title}</h1>
+      <slot name="intro" />
+    </div>
+    <slot name="calendar" />
+    <div class="content"><slot /></div>
+  </div>
+</BaseLayout>

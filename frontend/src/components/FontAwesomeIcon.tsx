@@ -17,7 +17,7 @@ export default function FontAwesomeIcon({
     <span className="icon-text">
       {frontText && <span>{frontText}</span>}
       <span className={clsx("icon", color && `has-text-${color}`)}>
-        <i className={icon} />
+        <i aria-hidden className={icon} />
       </span>
       {backText && <span>{backText}</span>}
     </span>

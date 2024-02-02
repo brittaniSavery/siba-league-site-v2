@@ -3,24 +3,21 @@ import "@styles/calendar.scss";
 import { getEntry } from "astro:content";
 import clsx from "clsx";
 import { capitalize } from "lodash-es";
+import { collegeLegend } from "@components/EventCalendar/Legend.astro";
 
-const {
-  data: { legend },
-} = await getEntry("calendar", "college");
-
-const recruiting = legend.filter((g) => !!g.details);
+const periods = collegeLegend.filter((cl) => !!cl.details);
 ---
 
 <h3>Recruiting Period Definitions</h3>
 <div class="columns is-desktop">
   {
-    recruiting.map(({ type, label, details = [] }) => (
+    periods.map(({ type, title, details = [] }) => (
       <div class="column is-one-fifth">
         <div
-          class={clsx("tag is-medium", `events-${type}`)}
+          class={clsx("tag is-medium", `event-${type}`)}
           style="width: 100%;"
         >
-          {label ?? capitalize(type)}
+          {title ?? capitalize(type)}
         </div>
         <ul>
           {details.map((d) => (

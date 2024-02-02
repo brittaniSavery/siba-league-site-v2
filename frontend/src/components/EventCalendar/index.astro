@@ -1,0 +1,19 @@
+---
+export type Props = {
+  league: "pro" | "college";
+};
+
+const { league } = Astro.props as Props;
+
+import Legend from "@components/EventCalendar/Legend.astro";
+import Calendar from "@components/EventCalendar/Calendar";
+
+console.log(league);
+---
+
+<div class="content">
+  <h2>Important Game Dates</h2>
+  <h3>Legend</h3>
+</div>
+<Legend league={league} />
+<Calendar league={league} client:idle />

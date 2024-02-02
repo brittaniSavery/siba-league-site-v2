@@ -1,18 +1,12 @@
----
-layout: "@layouts/MainLayout.astro"
-title: "SIBA Rules"
----
-
+import Layout from "@layouts/RulesLayout.astro";
 import RulesIntro from "@components/RulesIntro.astro";
-import Legend from "@components/EventCalendar/Legend.astro";
+import EventCalendar from "@components/EventCalendar/index.astro";
 
-<RulesIntro league="pro" />
+<Layout title="SIBA Rules">
 
-## Important Game Dates
+<RulesIntro league="pro" slot="intro" />
 
-### Legend
-
-<Legend league="pro" />
+<EventCalendar league="pro" slot="calendar" />
 
 ## League Structure
 
@@ -183,3 +177,5 @@ year contract. He remains there unable to be signed by another team
 until his contract runs out. You can call this player up at any time but
 doing so will remove the two way contract and replace it with a regular
 contract that does count against your salary.
+
+</Layout>

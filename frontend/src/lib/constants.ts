@@ -1,25 +1,9 @@
 import type { AbilityPoint, Conference } from "@lib/types";
 
-export enum RECRUITING_STATES {
-  None = "No Recruiting",
-  Quiet = "Quiet",
-  Evaluation = "Evaluation",
-  Dead = "Dead",
-  Contact = "Contact",
-  EarlyLOI = "Early LOI Signings",
-  LateLOI = "Late LOI Signings",
-}
-
 export enum LEAGUE {
   pro = "pro",
-  development = "development",
-  european = "european",
+  dev = "dev",
   college = "college",
-}
-
-export enum TOURNAMENT_TYPE {
-  preseason,
-  postseason,
 }
 
 export const enum MONTHS {

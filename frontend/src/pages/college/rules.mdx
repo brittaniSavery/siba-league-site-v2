@@ -1,22 +1,13 @@
----
-layout: "@layouts/MainLayout.astro"
-title: "SICBA Rules"
----
-
-import FontAwesomeIcon from "@components/FontAwesomeIcon";
+import Layout from "@layouts/RulesLayout.astro";
 import RulesIntro from "@components/RulesIntro.astro";
-import RecruitingDefinitions from "@components/College/RecruitingDefinitions.astro";
-import Legend from "@components/EventCalendar/Legend.astro";
+import EventCalendar from "@components/EventCalendar/index.astro";
+import FontAwesomeIcon from "@components/FontAwesomeIcon";
 
-<RulesIntro league="college" />
+<Layout title="SICBA Rules">
 
-## Important Game Dates
+<RulesIntro league="college" slot="intro" />
 
-<RecruitingDefinitions />
-
-### Legend
-
-<Legend league="college" />
+<EventCalendar league="college" slot="calendar" />
 
 ## Team Tiers and Rankings
 
@@ -107,3 +98,5 @@ Coach skill attributes are determined by the tier of their team. There are five 
 ## Vacation/Time Away from League
 
 If you are going to have limited or no access to the computer/internet for a few days, please let one of the commissioners know (Kelley Avery or Brittani Avery). You can also let another person in the league act as a proxy coach for your team if you will be away for an extended period of time.
+
+</Layout>

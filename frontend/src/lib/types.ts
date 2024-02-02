@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { LEAGUE, TOURNAMENT_TYPE } from "@lib/constants";
+import type { LEAGUE } from "@lib/constants";
 import type { Event } from "react-big-calendar";
 
 //#region GENERAL TYPES
@@ -27,8 +27,8 @@ export type StrapiSingleTypeResponse<T> = {
 };
 
 export type StrapiSimDates = {
-  pro: Date;
-  college: Date;
+  pro: string;
+  college: string;
 };
 
 export type StrapiTeamInfo = {
@@ -120,13 +120,8 @@ export type LeagueInfo = {
 
 //#region CALENDAR TYPES
 
-export type CollegeEvent = Event & {
-  tournament?: boolean;
-  tournamentType?: TOURNAMENT_TYPE;
-};
-
-export type ProEvent = Event & {
-  league: LEAGUE;
+export type SibaEvent = Event & {
+  type: string;
 };
 
 //#endregion
