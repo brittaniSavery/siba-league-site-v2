@@ -13,7 +13,7 @@ import type {
 import { getDataFromApi, getFormattedDate } from "@lib/utils";
 
 const strapiCoaches = await getDataFromApi<StrapiCollectionResponse<Member>>(
-  `${import.meta.env.PUBLIC_CMS_URL}/coaches`
+  `${import.meta.env.PUBLIC_CMS_URL}/coaches?pagination[limit]=100`
 );
 const coaches: Member[] = strapiCoaches.data.map((sc) => ({
   team: sc.attributes.team,
@@ -41,15 +41,7 @@ const title = `${COLLEGE_LEAGUE_INFO.abbv} Pre-Season Tier Rankings`;
         href="/college/rules">SICBA Rules</a
       >.
     </p>
-    <p>
-      <b>Note:</b> Teams that are <span class="highlighted p-1"
-        >highlighted</span
-      > and have a head coach are unavailable. Teams that have an exclamation icon
-      (<ProbationIcon iconOnly />) are on probation. <span
-        class="is-hidden-touch">Hover over</span
-      ><span class="is-hidden-desktop">Click</span> the icon to view the details
-      of the probation.
-    </p>
+
     <p>
       <b>Last Updated:</b>
       {getFormattedDate(collegeInfo.data.attributes.updatedAt)}

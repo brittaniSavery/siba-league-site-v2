@@ -1,7 +1,6 @@
 import type { Member, School } from "@lib/types";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
-import ProbationIcon from "./ProbationIcon";
 
 type TierRankingsProps = {
   coaches: Member[];
@@ -65,13 +64,7 @@ export default function TierRankings({ coaches, schools }: TierRankingsProps) {
               return (
                 <tr key={ranking} className={clsx(humanCoach && "highlighted")}>
                   <td>{ranking}</td>
-                  <td>
-                    {probation ? (
-                      <ProbationIcon school={name} details={probation} />
-                    ) : (
-                      name
-                    )}
-                  </td>
+                  <td>{name}</td>
                   <td>{mascot}</td>
                   <td>{region}</td>
                   <td>{humanCoach && humanCoach.name}</td>

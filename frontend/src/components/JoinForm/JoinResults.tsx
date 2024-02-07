@@ -47,11 +47,11 @@ export default function JoinResults({
           team(s) to the league as soon as possible. Also, be on the lookout for
           an email giving a guide on how to get started, such as by joining our{" "}
           <a
-            href="https://join.slack.com/t/sibabball/shared_invite/zt-grkrrq9i-je57xB2Y7NGoPTh0GlKNNg"
+            href="https://discord.com/invite/UqQh3zPBrV"
             target="_blank"
             rel="noreferrer"
           >
-            slack community
+            Discord
           </a>
           , verifying the game versions, and downloading the league files and
           graphics.
@@ -69,11 +69,11 @@ export default function JoinResults({
             If you need any help in downloading files or anything else
             SIBA-related, hop onto to our{" "}
             <a
-              href="https://join.slack.com/t/sibabball/shared_invite/zt-grkrrq9i-je57xB2Y7NGoPTh0GlKNNg"
+              href="https://discord.com/invite/UqQh3zPBrV"
               target="_blank"
               rel="noreferrer"
             >
-              slack
+              Discord
             </a>{" "}
             and someone will be happy to assist you. We&apos;re a friendly and
             supportive bunch!
