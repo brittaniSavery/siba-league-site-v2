@@ -7,42 +7,6 @@ export type ChildrenProps = {
   children?: ReactNode;
 };
 
-export type StrapiObject<T> = {
-  id: number;
-  attributes: T & { createdAt: Date; updatedAt: Date; publishedAt?: Date };
-};
-
-export type StrapiCollectionResponse<T> = {
-  data: [StrapiObject<T>];
-  meta: {
-    page: number;
-    pageSize: number;
-    pageCount: number;
-    total: number;
-  };
-};
-
-export type StrapiSingleTypeResponse<T> = {
-  data: StrapiObject<T>;
-};
-
-export type StrapiSimDates = {
-  pro: string;
-  college: string;
-};
-
-export type StrapiTeamInfo = {
-  teams: Team[];
-};
-
-export type StrapiProInfo = {
-  teams: ProTeam[];
-};
-
-export type StrapiCollegeInfo = {
-  teams: School[];
-};
-
 export type SiteUpdate = {
   content: string;
   createdAt: string;
@@ -114,6 +78,45 @@ export type LeagueInfo = {
   pointLimits: PointLimit | { 1: PointLimit; 2: PointLimit; 3: PointLimit };
   pointLabels: AbilityPoint[];
   pictureFolder: string;
+};
+
+//#endregion
+
+//#region STRAPI TYPES
+export type StrapiObject<T> = {
+  id: number;
+  attributes: T & { createdAt: Date; updatedAt: Date; publishedAt?: Date };
+};
+
+export type StrapiCollectionResponse<T> = {
+  data: [StrapiObject<T>];
+  meta: {
+    page: number;
+    pageSize: number;
+    pageCount: number;
+    total: number;
+  };
+};
+
+export type StrapiSingleTypeResponse<T> = {
+  data: StrapiObject<T>;
+};
+
+export type StrapiSimDates = {
+  pro: string;
+  college: string;
+};
+
+export type StrapiTeamInfo = {
+  teams: Team[];
+};
+
+export type StrapiProInfo = {
+  teams: ProTeam[];
+};
+
+export type StrapiCollegeInfo = {
+  teams: School[];
 };
 
 //#endregion

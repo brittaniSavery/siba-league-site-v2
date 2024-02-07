@@ -1,11 +1,8 @@
 import clsx from "clsx";
 import type { InputHTMLAttributes } from "react";
 import { useController } from "react-hook-form";
-import type {
-  FieldValues,
-  UseControllerProps,
-} from "react-hook-form/dist/types";
-import FieldBase, { AllFieldProps } from "./FieldBase";
+import type { FieldValues, UseControllerProps } from "react-hook-form";
+import FieldBase, { type AllFieldProps } from "./FieldBase";
 
 type SelectProps<T extends FieldValues, K> = AllFieldProps<T> &
   UseControllerProps<T> & {

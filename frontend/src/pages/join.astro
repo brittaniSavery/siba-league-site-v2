@@ -11,6 +11,7 @@ import type {
   StrapiSingleTypeResponse,
 } from "@lib/types";
 import { getDataFromApi } from "@lib/utils";
+import JoinForm2 from "@components/JoinForm2";
 
 const collegeInfo = await getDataFromApi<
   StrapiSingleTypeResponse<StrapiCollegeInfo>
@@ -47,6 +48,11 @@ const unavailableProTeams = strapiGMs.data.map(
 const availableProTeams = proTeams.filter(
   (team) => !unavailableProTeams.includes(`${team.name} ${team.mascot}`)
 );
+
+console.log({
+  pro: availableProTeams.length,
+  college: availableSchools.length,
+});
 ---
 
 <MainLayout content={{ title: "Join" }}>
@@ -57,9 +63,10 @@ const availableProTeams = proTeams.filter(
     and one of the commissioners will take your information and add you to the
     league.
   </p>
-  <JoinForm
+  <JoinForm2 client:load />
+  <!-- <JoinForm
     proTeams={availableProTeams}
     schools={availableSchools}
     client:load
-  />
-</MainLayout>@lib/constants
+  /> -->
+</MainLayout>

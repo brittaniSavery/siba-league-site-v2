@@ -13,7 +13,7 @@ import type {
 import { getDataFromApi, getFormattedDate } from "@lib/utils";
 
 const strapiCoaches = await getDataFromApi<StrapiCollectionResponse<Member>>(
-  `${import.meta.env.PUBLIC_CMS_URL}/coaches`
+  `${import.meta.env.PUBLIC_CMS_URL}/coaches?pagination[limit]=100`
 );
 const coaches: Member[] = strapiCoaches.data.map((sc) => ({
   team: sc.attributes.team,
@@ -27,6 +27,8 @@ const collegeInfo = await getDataFromApi<
 const schools: School[] = collegeInfo.data.attributes.teams || [];
 
 const title = `${COLLEGE_LEAGUE_INFO.abbv} Pre-Season Tier Rankings`;
+
+console.log(strapiCoaches.data.length);
 ---
 
 <Layout content={{ title: title }}>

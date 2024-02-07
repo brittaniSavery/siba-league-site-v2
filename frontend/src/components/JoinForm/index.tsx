@@ -5,8 +5,8 @@ import ProbationIcon from "@components/College/ProbationIcon";
 import type { ProTeam, School } from "@lib/types";
 import clsx from "clsx";
 import {
-  FieldError,
-  SubmitHandler,
+  type FieldError,
+  type SubmitHandler,
   useForm,
   useFieldArray,
 } from "react-hook-form";
