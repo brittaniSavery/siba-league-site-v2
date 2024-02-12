@@ -12,6 +12,7 @@ import type {
 } from "@lib/types";
 import { getDataFromApi } from "@lib/utils";
 import JoinForm2 from "@components/JoinForm2";
+import BaseLayout from "@layouts/BaseLayout.astro";
 
 const collegeInfo = await getDataFromApi<
   StrapiSingleTypeResponse<StrapiCollegeInfo>
@@ -48,25 +49,23 @@ const unavailableProTeams = strapiGMs.data.map(
 const availableProTeams = proTeams.filter(
   (team) => !unavailableProTeams.includes(`${team.name} ${team.mascot}`)
 );
-
-console.log({
-  pro: availableProTeams.length,
-  college: availableSchools.length,
-});
 ---
 
-<MainLayout content={{ title: "Join" }}>
-  <p>
-    Interested in joining the SIBA as the general manager of your own
-    professional basketball team or as the head coach of your own university
-    basketball team? Fill out the form below, selecting your teams and coach,
-    and one of the commissioners will take your information and add you to the
-    league.
-  </p>
+<BaseLayout content={{ title: "Join" }}>
+  <div class="content">
+    <h1>Join</h1>
+    <p>
+      Interested in joining the SIBA as the general manager of your own
+      professional basketball team or as the head coach of your own university
+      basketball team? Fill out the form below, selecting your teams and coach,
+      and one of the commissioners will take your information and add you to the
+      league.
+    </p>
+  </div>
   <JoinForm2 client:load />
   <!-- <JoinForm
     proTeams={availableProTeams}
     schools={availableSchools}
     client:load
   /> -->
-</MainLayout>
+</BaseLayout>
