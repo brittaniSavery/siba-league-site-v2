@@ -1,5 +1,4 @@
 ---
-import ProbationIcon from "@components/College/ProbationIcon";
 import TierRankings from "@components/College/TierRankings";
 import { COLLEGE_LEAGUE_INFO } from "@lib/constants";
 import Layout from "@layouts/BaseLayout.astro";
@@ -46,11 +45,7 @@ console.log(strapiCoaches.data.length);
     <p>
       <b>Note:</b> Teams that are <span class="highlighted p-1"
         >highlighted</span
-      > and have a head coach are unavailable. Teams that have an exclamation icon
-      (<ProbationIcon iconOnly />) are on probation. <span
-        class="is-hidden-touch">Hover over</span
-      ><span class="is-hidden-desktop">Click</span> the icon to view the details
-      of the probation.
+      > and have a head coach are unavailable.
     </p>
     <p>
       <b>Last Updated:</b>

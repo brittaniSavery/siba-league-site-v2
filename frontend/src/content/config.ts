@@ -16,7 +16,6 @@ const league = defineCollection({
     longName: z.string(),
     color: z.string(),
     sims: z.string(),
-    slack: z.string(),
     discord: z.string(),
     version: z.number(),
     listTitle: z.string(),

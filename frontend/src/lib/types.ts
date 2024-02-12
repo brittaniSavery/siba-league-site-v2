@@ -34,7 +34,6 @@ export type School = Team & {
   ranking: number;
   tier: 1 | 2 | 3;
   region: string;
-  probation: string;
 };
 
 export type Schools = {

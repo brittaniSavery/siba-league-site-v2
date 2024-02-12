@@ -56,22 +56,20 @@ export default function TierRankings({ coaches, schools }: TierRankingsProps) {
           </tr>
         </thead>
         <tbody>
-          {currentSchools.map(
-            ({ name, mascot, ranking, probation, region }) => {
-              const humanCoach = coaches.find(
-                (coach) => coach.team === `${name} ${mascot}`
-              );
-              return (
-                <tr key={ranking} className={clsx(humanCoach && "highlighted")}>
-                  <td>{ranking}</td>
-                  <td>{name}</td>
-                  <td>{mascot}</td>
-                  <td>{region}</td>
-                  <td>{humanCoach && humanCoach.name}</td>
-                </tr>
-              );
-            }
-          )}
+          {currentSchools.map(({ name, mascot, ranking, region }) => {
+            const humanCoach = coaches.find(
+              (coach) => coach.team === `${name} ${mascot}`
+            );
+            return (
+              <tr key={ranking} className={clsx(humanCoach && "highlighted")}>
+                <td>{ranking}</td>
+                <td>{name}</td>
+                <td>{mascot}</td>
+                <td>{region}</td>
+                <td>{humanCoach && humanCoach.name}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </>
