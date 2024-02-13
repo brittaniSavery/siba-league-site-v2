@@ -1,7 +1,7 @@
 ---
 import { COLLEGE_LEAGUE_INFO, LEAGUE, PRO_LEAGUE_INFO } from "@lib/constants";
 import Layout from "@layouts/BaseLayout.astro";
-import DownloadTimes from "@components/DownloadFileTime";
+import DownloadTimes from "@components/utils/DownloadFileTime";
 import { capitalize, lowerCase, sortBy } from "lodash-es";
 import { getDataFromApi } from "@lib/utils";
 import type {
@@ -11,7 +11,7 @@ import type {
   StrapiTeamInfo,
   Team,
 } from "@lib/types";
-import MemberUploads from "@components/MemberUploads";
+import MemberUploads from "@components/utils/MemberUploads";
 
 export function getStaticPaths() {
   return [{ params: { section: "siba" } }, { params: { section: "college" } }];

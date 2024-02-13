@@ -1,7 +1,5 @@
 ---
-import JoinForm from "@components/JoinForm";
 import { COLLEGE_LEAGUE_INFO, PRO_LEAGUE_INFO } from "@lib/constants";
-import MainLayout from "@layouts/MainLayout.astro";
 import type {
   Member,
   School,
@@ -62,7 +60,7 @@ const availableProTeams = proTeams.filter(
       league.
     </p>
   </div>
-  <JoinForm2 client:load />
+  <JoinForm2 pro={availableProTeams} college={availableSchools} client:load />
   <!-- <JoinForm
     proTeams={availableProTeams}
     schools={availableSchools}

@@ -3,8 +3,14 @@ import type { MainForm } from "./lib";
 import clsx from "clsx";
 import { useFormContext } from "react-hook-form";
 
-export default function TeamPicks() {
-  const [tabView, setTabView] = useState<"pro" | "college">("pro");
+type TeamPicksProps = {
+  isProAvailable: boolean;
+};
+
+export default function TeamPicks({ isProAvailable }: TeamPicksProps) {
+  const [tabView, setTabView] = useState<"pro" | "college">(
+    isProAvailable ? "pro" : "college"
+  );
   const methods = useFormContext<MainForm>();
 
   return (
@@ -32,8 +38,19 @@ export default function TeamPicks() {
         </div>
         <div className="card-content">
           <div className={clsx(tabView !== "pro" && "is-hidden")}>
-            <p>You are able to manage only one (1) pro team.</p>
+            {!isProAvailable && (
+              <div className="message is-danger">
+                <p className="message-header">Pro Leage Full</p>
+                <p className="message-body">
+                  Thanks for your interest in the pro league. Unfortuantly,
+                  there are no pro teams available. All 32 teams are managed by
+                  human GMs. A team may open due to inactivity, so please try
+                  again later.
+                </p>
+              </div>
+            )}
           </div>
+
           <div className={clsx(tabView !== "college" && "is-hidden")}>
             <p>
               You are allowed to coach up to three (3) teams. They each must be
