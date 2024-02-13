@@ -28,31 +28,6 @@ const league = defineCollection({
   }),
 });
 
-const calendar = defineCollection({
-  type: "data",
-  schema: z.object({
-    legend: z.array(
-      z.object({
-        type: z.string(),
-        label: z.string().optional(),
-        details: z.array(z.string()).optional(),
-      })
-    ),
-    events: z.array(
-      z.object({
-        type: z.string(),
-        name: z.string().optional(),
-        start: z.string().transform((str) => new Date(str)),
-        end: z
-          .string()
-          .transform((str) => new Date(str))
-          .optional(),
-      })
-    ),
-  }),
-});
-
 export const collections = {
   league: league,
-  calendar: calendar,
 };

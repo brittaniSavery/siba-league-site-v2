@@ -23,13 +23,16 @@ export type NewMember = {
   reason?: string;
 };
 
-export type ProForm = {
+export type CreatedPlayer = {
   firstName: string;
   lastName: string;
-  gender: "male" | "female";
   face: number;
   clothes: number;
   age: number;
+  gender?: "male" | "female";
+};
+
+export type ProForm = CreatedPlayer & {
   temper: ProTemperIds;
   greed: LowHighIds;
   team: ProTeam;
@@ -40,12 +43,7 @@ export type ProForm = {
   bballIQ: number;
 };
 
-export type CollegeForm = {
-  firstName: string;
-  lastName: string;
-  face: number;
-  clothes: number;
-  age: number;
+export type CollegeForm = CreatedPlayer & {
   team: School;
   ambition: LowHighIds;
   academics: LowHighIds;

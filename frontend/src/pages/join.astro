@@ -1,5 +1,6 @@
 ---
-import { COLLEGE_LEAGUE_INFO, PRO_LEAGUE_INFO } from "@lib/constants";
+import JoinForm2 from "@components/JoinForm2";
+import BaseLayout from "@layouts/BaseLayout.astro";
 import type {
   Member,
   School,
@@ -9,8 +10,10 @@ import type {
   StrapiSingleTypeResponse,
 } from "@lib/types";
 import { getDataFromApi } from "@lib/utils";
-import JoinForm2 from "@components/JoinForm2";
-import BaseLayout from "@layouts/BaseLayout.astro";
+import { getEntry } from "astro:content";
+
+const { data: proData } = await getEntry("league", "pro");
+const { data: collegeData } = await getEntry("league", "college");
 
 const collegeInfo = await getDataFromApi<
   StrapiSingleTypeResponse<StrapiCollegeInfo>
@@ -19,7 +22,7 @@ const schools: School[] = collegeInfo.data.attributes.teams || [];
 
 const strapiCoaches = await getDataFromApi<StrapiCollectionResponse<Member>>(
   `${import.meta.env.PUBLIC_CMS_URL}/${
-    COLLEGE_LEAGUE_INFO.strapiMembers
+    collegeData.strapiMembers
   }?pagination[limit]=100`
 );
 
@@ -37,7 +40,7 @@ const proTeams = proInfo.data.attributes.teams;
 
 const strapiGMs = await getDataFromApi<StrapiCollectionResponse<Member>>(
   `${import.meta.env.PUBLIC_CMS_URL}/${
-    PRO_LEAGUE_INFO.strapiMembers
+    proData.strapiMembers
   }?pagination[limit]=100`
 );
 

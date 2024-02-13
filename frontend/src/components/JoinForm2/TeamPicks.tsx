@@ -1,7 +1,9 @@
 import { useState } from "react";
 import type { MainForm } from "./lib";
 import clsx from "clsx";
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useFieldArray } from "react-hook-form";
+import ProModal from "./modals/ProModal";
+import CollegeModal from "./modals/CollegeModal";
 
 type TeamPicksProps = {
   isProAvailable: boolean;
@@ -11,7 +13,11 @@ export default function TeamPicks({ isProAvailable }: TeamPicksProps) {
   const [tabView, setTabView] = useState<"pro" | "college">(
     isProAvailable ? "pro" : "college"
   );
-  const methods = useFormContext<MainForm>();
+  const [open, setOpen] = useState<boolean>(false);
+  const [mode, setMode] = useState<"add" | "edit">("add");
+  const { watch } = useFormContext<MainForm>();
+  const proSelected = watch("pro");
+  const collegeSelected = watch("college");
 
   return (
     <div className="pb-4">
@@ -38,7 +44,23 @@ export default function TeamPicks({ isProAvailable }: TeamPicksProps) {
         </div>
         <div className="card-content">
           <div className={clsx(tabView !== "pro" && "is-hidden")}>
-            {!isProAvailable && (
+            {isProAvailable ? (
+              <>
+                <p>
+                  You are able to manage only one (1) pro team with the option
+                  to manage its corresponding D-League team.
+                </p>
+                <button
+                  className="button is-primary is-light mt-3"
+                  onClick={() => {
+                    setMode("add");
+                    setOpen(true);
+                  }}
+                >
+                  Add Pro Team
+                </button>
+              </>
+            ) : (
               <div className="message is-danger">
                 <p className="message-header">Pro Leage Full</p>
                 <p className="message-body">
@@ -56,9 +78,25 @@ export default function TeamPicks({ isProAvailable }: TeamPicksProps) {
               You are allowed to coach up to three (3) teams. They each must be
               in different tiers and different recruiting regions.
             </p>
+            <button
+              className="button is-primary is-light mt-3"
+              onClick={() => {
+                setMode("add");
+                setOpen(true);
+              }}
+            >
+              Add College Team
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Add Team Modal (both pro and college) */}
+      {tabView === "pro" ? (
+        <ProModal close={() => setOpen(false)} isOpen={open} mode={mode} />
+      ) : (
+        <CollegeModal close={() => setOpen(false)} isOpen={open} mode={mode} />
+      )}
     </div>
   );
 }
