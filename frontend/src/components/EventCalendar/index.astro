@@ -1,12 +1,13 @@
 ---
 export type Props = {
-  league: "pro" | "college";
+  league: LEAGUE;
 };
 
 const { league } = Astro.props as Props;
 
 import Legend from "@components/EventCalendar/Legend.astro";
 import Calendar from "@components/EventCalendar/Calendar";
+import type { LEAGUE } from "@lib/constants";
 
 console.log(league);
 ---

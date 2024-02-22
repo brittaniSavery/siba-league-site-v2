@@ -6,7 +6,7 @@ import FieldBase, { type AllFieldProps } from "./FieldBase";
 
 type SelectProps<T extends FieldValues, K> = AllFieldProps<T> &
   UseControllerProps<T> & {
-    options: K[];
+    options: readonly K[];
     renderOptionValue?: (option: K) => string;
     renderOptionLabel?: (option: K) => string;
   };
@@ -22,6 +22,7 @@ export default function Select<T extends FieldValues, K>(
     horizontal,
     options,
     control,
+    rules,
     renderOptionLabel = (option) => option as string,
     renderOptionValue = (option) => option as string,
     ...rest
@@ -30,7 +31,7 @@ export default function Select<T extends FieldValues, K>(
   const {
     field,
     fieldState: { error },
-  } = useController({ name, control });
+  } = useController({ name, control, rules });
 
   return (
     <FieldBase

@@ -142,7 +142,7 @@ export type Article = {
       }
     >;
   };
-  league: "pro" | "college";
+  league: LEAGUE;
   publishedAt: string;
   slug: string;
   summary: string;

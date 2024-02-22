@@ -26,7 +26,7 @@ import {
 } from "react-big-calendar";
 
 type EventsCalendarProps = {
-  league: "pro" | "college";
+  league: LEAGUE;
 };
 
 const locales = {

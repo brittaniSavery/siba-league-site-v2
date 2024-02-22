@@ -33,6 +33,7 @@
     "sass": "^1.51.0"
   },
   "dependencies": {
+    "@astrojs/check": "^0.5.5",
     "@creativebulma/bulma-tooltip": "^1.2.0",
     "@hookform/resolvers": "^2.9.10",
     "@mui/base": "^5.0.0-alpha.110",
@@ -45,6 +46,7 @@
     "react-dom": "^18.1.0",
     "react-hook-form": "^7.40.0",
     "remark-definition-list": "^2.0.0",
+    "typescript": "^5.3.3",
     "xss": "^1.0.14"
   }
 }

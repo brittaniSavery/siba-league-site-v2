@@ -1,11 +1,11 @@
 ---
-import { getEntry } from "astro:content";
+import { LEAGUE } from "@lib/constants";
+import "@styles/calendar.scss";
 import clsx from "clsx";
 import { capitalize } from "lodash-es";
-import "@styles/calendar.scss";
 
 export type Props = {
-  league: "pro" | "college";
+  league: LEAGUE;
 };
 
 type Legend = {
@@ -70,7 +70,7 @@ export const collegeLegend: Legend[] = [
 
 const { league } = Astro.props as Props;
 
-const currentLegend = league === "college" ? collegeLegend : proLegend;
+const currentLegend = league === LEAGUE.college ? collegeLegend : proLegend;
 ---
 
 <div class="tags are-medium">

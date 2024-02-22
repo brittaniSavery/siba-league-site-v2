@@ -11,12 +11,13 @@ export default function Radio<T extends FieldValues>(
       options: { label: string; value: string }[];
     }
 ) {
-  const { name, label, colSize, help, horizontal, control, options } = props;
+  const { name, label, colSize, help, horizontal, control, rules, options } =
+    props;
 
   const {
     field,
     fieldState: { error },
-  } = useController({ name, control });
+  } = useController({ name, control, rules });
 
   return (
     <FieldBase

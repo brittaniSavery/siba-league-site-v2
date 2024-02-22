@@ -1,3 +1,4 @@
+import type { LEAGUE } from "@lib/constants";
 import type { ChildrenProps } from "@lib/types";
 import clsx from "clsx";
 import { capitalize } from "lodash-es";
@@ -5,7 +6,7 @@ import { useEffect, type ReactNode } from "react";
 
 type BaseModalProps = ChildrenProps & {
   id?: string;
-  type: "pro" | "college";
+  type: LEAGUE;
   member: "general manager" | "head coach";
   htmlSection: "siba" | "college";
   isOpen: boolean;

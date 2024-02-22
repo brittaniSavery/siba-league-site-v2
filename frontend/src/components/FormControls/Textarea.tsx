@@ -10,12 +10,13 @@ type TextareaProps<T extends FieldValues> = AllFieldProps<T> &
 export default function Textarea<T extends FieldValues>(
   props: TextareaProps<T> & InputHTMLAttributes<HTMLElement>
 ) {
-  const { name, label, colSize, help, horizontal, control, ...rest } = props;
+  const { name, label, colSize, help, horizontal, control, rules, ...rest } =
+    props;
 
   const {
     field,
     fieldState: { error },
-  } = useController({ name, control });
+  } = useController({ name, control, rules });
 
   return (
     <FieldBase

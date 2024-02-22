@@ -1,10 +1,11 @@
 ---
 import FontAwesomeIcon from "@components/utils/FontAwesomeIcon";
+import type { LEAGUE } from "@lib/constants";
 import { getEntry } from "astro:content";
 import { capitalize } from "lodash-es";
 
 export type Props = {
-  league: "pro" | "college";
+  league: LEAGUE.pro | LEAGUE.college;
 };
 
 const { league } = Astro.props as Props;
