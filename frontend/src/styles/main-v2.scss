@@ -1,0 +1,29 @@
+@charset "utf-8";
+
+$main-blue: #3260a4;
+$link-blue: #0f85ec;
+
+@use "bulma/sass/utilities" with (
+  $family-primary: '"Maven Pro", sans-serif',
+  $primary: $main-blue,
+  $link: $link-blue
+);
+
+@use "bulma/sass/layout/footer" with (
+  $footer-padding: 1.5rem
+);
+
+@use "bulma/sass/components/navbar" with (
+  $navbar-height: 6rem
+);
+
+@use "bulma/sass/utilities/mixins";
+@forward "bulma/sass";
+
+main {
+  @include mixins.touch {
+    padding: 0 0.75rem;
+  }
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Secular+One&family=Maven+Pro:wght@400;500;600;700;800;900&display=swap");
