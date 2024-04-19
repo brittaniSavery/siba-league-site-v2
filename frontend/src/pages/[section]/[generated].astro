@@ -26,7 +26,7 @@ export function getStaticPaths() {
     },
     {
       params: { section: "siba", generated: "schedule" },
-      props: { file: "Schedule", title: "Schedule" },
+      props: { file: "Schedule", title: "SIBA Schedule" },
     },
     {
       params: {
@@ -85,17 +85,44 @@ export function getStaticPaths() {
     {
       params: {
         section: "news",
-        generated: "headlines",
+        generated: "pro",
       },
       props: {
         file: "Headlines",
-        title: "SIBA Headlines",
+        title: "Pro Headlines",
+      },
+    },
+    {
+      params: {
+        section: "news",
+        generated: "college",
+      },
+      props: {
+        file: "Headlines",
+        title: "College Headlines",
+        league: LEAGUE.college,
+      },
+    },
+    {
+      params: { section: "college", generated: "schedule" },
+      props: {
+        file: "Schedule",
+        title: "SICBA College Schedule",
+        league: LEAGUE.college,
+      },
+    },
+    {
+      params: { section: "college", generated: "polls" },
+      props: {
+        file: "Polls",
+        title: "SICBA College Polls",
+        league: LEAGUE.college,
       },
     },
   ];
 }
 
-const { file, title } = Astro.props;
+const { file, title, league } = Astro.props;
 ---
 
-<IFrameContainer file={file} league={LEAGUE.pro} title={title} />
+<IFrameContainer file={file} league={league || LEAGUE.pro} title={title} />

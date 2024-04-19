@@ -31,7 +31,9 @@ const navItems = [
     link: "/college",
     sublinks: [
       { title: "Rules", link: "/rules" },
+      { title: "Schedule", link: "/schedule" },
       { title: "League Standings", link: "/standings" },
+      { title: "Current Polls", link: "/polls" },
       { title: "Pre-season Tier Rankings", link: "/rankings" },
       { title: "Head Coaches", link: "/coaches" },
       { title: "Downloads", link: "/downloads" },
@@ -49,7 +51,8 @@ const navItems = [
     title: "News",
     link: "/news",
     sublinks: [
-      { title: "Pro Headlines", link: "/headlines" },
+      { title: "Pro Headlines", link: "/pro" },
+      { title: "College Headlines", link: "/college" },
       { title: "Articles", link: "/articles" },
     ],
   },
