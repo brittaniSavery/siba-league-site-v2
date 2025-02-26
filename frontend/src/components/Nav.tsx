@@ -64,7 +64,7 @@ export default function Nav() {
 
   return (
     <nav
-      className="navbar is-fixed-top is-light"
+      className="navbar is-fixed-top"
       role="navigation"
       aria-label="main navigation"
     >
