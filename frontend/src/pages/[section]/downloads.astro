@@ -83,7 +83,7 @@ const teams: Team[] = teamInfo.data.attributes.teams || [];
         ><a
           href={`${import.meta.env.SITE}files/${leagueInfo.type}/DDS${
             leagueInfo.typeAbbv
-          }2023.zip`}
+          }202${leagueInfo.type === LEAGUE.pro ? "5" : "3"}.zip`}
           download
         >
           Graphics File:</a

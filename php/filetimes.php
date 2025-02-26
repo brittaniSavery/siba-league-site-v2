@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             break;
         case 'graphics':
 
-            $graphics = $dir === "pro" ? "DDSPB2023" : "DDSCB2023";
+            $graphics = $dir === "pro" ? "DDSPB2025" : "DDSCB2023";
             $response["graphics"] = filemtime(dirname(__DIR__) . "/files/" . $dir . "/" . $graphics . ".zip");
             break;
 
