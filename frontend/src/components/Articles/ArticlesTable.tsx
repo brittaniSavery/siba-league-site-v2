@@ -1,4 +1,4 @@
-import { LEAGUE } from "@content/constants";
+import { LEAGUE } from "@lib/constants";
 import type { Article } from "@lib/types";
 import clsx from "clsx";
 import { lowerCase } from "lodash-es";

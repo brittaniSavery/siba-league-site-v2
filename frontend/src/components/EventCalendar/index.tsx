@@ -1,6 +1,6 @@
-import { LEAGUE, RECRUITING_STATES } from "@content/constants";
-import CollegeEvents from "@content/rules/collegeDates";
-import ProEvents from "@content/rules/proDates";
+import { LEAGUE, RECRUITING_STATES } from "@lib/constants";
+import CollegeEvents from "@components/Rules/College/collegeDates";
+import ProEvents from "@components/Rules/Pro/proDates";
 import type {
   CollegeEvent,
   ProEvent,

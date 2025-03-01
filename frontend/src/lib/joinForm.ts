@@ -1,8 +1,4 @@
-import {
-  COLLEGE_LEAGUE_INFO,
-  LEAGUE,
-  PRO_LEAGUE_INFO,
-} from "@content/constants";
+import { COLLEGE_LEAGUE_INFO, LEAGUE, PRO_LEAGUE_INFO } from "@lib/constants";
 import type { ProTeam, School } from "@lib/types";
 import Joi from "joi";
 

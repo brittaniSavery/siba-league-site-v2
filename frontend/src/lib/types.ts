@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { LEAGUE, TOURNAMENT_TYPE } from "@content/constants";
+import type { LEAGUE, TOURNAMENT_TYPE } from "@lib/constants";
 import type { Event } from "react-big-calendar";
 
 //#region GENERAL TYPES

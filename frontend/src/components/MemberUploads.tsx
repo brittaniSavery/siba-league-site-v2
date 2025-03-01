@@ -1,4 +1,4 @@
-import type { LEAGUE } from "@content/constants";
+import type { LEAGUE } from "@lib/constants";
 import type { Member, Team } from "@lib/types";
 import { getDataFromApi } from "@lib/utils";
 import { formatRelative } from "date-fns";

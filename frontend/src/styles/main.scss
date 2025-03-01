@@ -31,6 +31,8 @@ $siba-link-visited: #760fec;
 @forward "bulma/sass/elements/button";
 @forward "bulma/sass/elements/icon";
 @forward "bulma/sass/elements/content";
+@forward "bulma/sass/elements/tag";
+@forward "bulma/sass/grid/columns";
 @forward "bulma/sass/layout/container";
 
 @forward "bulma/sass/themes";
@@ -40,6 +42,30 @@ $siba-link-visited: #760fec;
 html {
   position: relative;
   min-height: 100%;
+}
+
+body > .container {
+  margin-bottom: 10rem;
+
+  @include mixins.until(iv.$desktop) {
+    padding-left: 0.75rem;
+  }
+}
+
+.navbar-img {
+  width: 5vh;
+}
+
+.footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.footer-img {
+  width: 3rem;
+  padding: 0 0.5rem;
 }
 
 // a:not(.navbar-item, .navbar-link) {
@@ -127,21 +153,6 @@ html {
 //   background-color: #d7e9f6;
 // }
 
-body > .container {
-  margin-bottom: 10rem;
-
-  @include mixins.until(iv.$desktop) {
-    padding-left: 0.75rem;
-  }
-}
-
-.footer {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
-
 // .owners-grid {
 //   display: block;
 //   text-align: center;
@@ -155,15 +166,6 @@ body > .container {
 //     height: auto;
 //   }
 // }
-
-.navbar-img {
-  width: 5vh;
-}
-
-.footer-img {
-  width: 3rem;
-  padding: 0 0.5rem;
-}
 
 // #join .card {
 //   .tabs ul {

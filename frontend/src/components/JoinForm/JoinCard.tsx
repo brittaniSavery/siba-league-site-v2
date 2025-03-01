@@ -10,7 +10,7 @@ import {
   PRO_LEAGUE_INFO,
   Recruiting,
   Scouting,
-} from "@content/constants";
+} from "@lib/constants";
 import type { CollegeTeamForm, ProTeamForm } from "@lib/joinForm";
 import type { FieldError } from "react-hook-form";
 import { startCase } from "lodash-es";

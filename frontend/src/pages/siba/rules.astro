@@ -2,8 +2,8 @@
 import MemberLuxuryCap from "@components/MemberLuxuryCap";
 import RulesIntro from "@components/Rules/RulesIntro.astro";
 import { PRO_LEAGUE_INFO } from "@lib/constants";
-import { Content as Definitions } from "@content/rules/proDefinitions.md";
-import { Content as RulesText } from "@content/rules/proRules.md";
+import { Content as Definitions } from "@components/Rules/Pro/proDefinitions.md";
+import { Content as RulesText } from "@components/Rules/Pro/proRules.md";
 import MarkdownLayout from "@layouts/MarkdownLayout.astro";
 import type { StrapiProInfo, StrapiSingleTypeResponse } from "@lib/types";
 import { getDataFromApi } from "@lib/utils";

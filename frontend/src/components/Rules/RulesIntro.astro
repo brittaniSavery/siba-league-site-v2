@@ -1,11 +1,11 @@
 ---
-import EventsCalendar from "@components/EventCalendar/";
-import { LEAGUE } from "@content/constants";
+//import EventsCalendar from "@components/EventCalendar/";
+import { LEAGUE } from "@lib/constants";
 import type { LeagueInfo } from "@lib/types";
 import { capitalize, lowerCase } from "lodash-es";
-import Legend from "./EventCalendar/Legend.astro";
-import RecruitingDefinitions from "./EventCalendar/RecruitingDefinitions.astro";
-import FontAwesomeIcon from "./FontAwesomeIcon";
+import Legend from "@components/EventCalendar/Legend.astro";
+import RecruitingDefinitions from "@components/EventCalendar/RecruitingDefinitions.astro";
+import FontAwesomeIcon from "@components/FontAwesomeIcon";
 
 export type Props = {
   league: LeagueInfo;
@@ -36,7 +36,7 @@ const { league } = Astro.props as Props;
   <li><b>League Name:</b> {league.name}</li>
   <li>
     <b>Program:</b> Draft Day Sports: {capitalize(league.type)} Basketball <b
-      ><i>2023</i>
+      ><i>2025</i>
     </b> version {league.version} powered by <a
       href="https://www.wolverinestudios.com/"
       target="_blank"
@@ -108,4 +108,4 @@ const { league } = Astro.props as Props;
 {league.type === LEAGUE.college && <RecruitingDefinitions />}
 <h3>Legend</h3>
 <Legend league={league.type} />
-<EventsCalendar league={league.type} client:load />
+<!-- <EventsCalendar league={league.type} client:load /> -->

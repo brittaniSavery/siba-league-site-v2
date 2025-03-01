@@ -1,5 +1,5 @@
 import type { CollegeEvent } from "@lib/types";
-import { RECRUITING_STATES, TOURNAMENT_TYPE } from "../constants";
+import { RECRUITING_STATES, TOURNAMENT_TYPE } from "../../../lib/constants";
 
 const events: CollegeEvent[] = [
   //#region RECRUITING
