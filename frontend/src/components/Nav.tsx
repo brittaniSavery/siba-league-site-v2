@@ -1,5 +1,7 @@
 import clsx from "clsx";
 import { useState } from "react";
+import LogoLight from "@assets/navbar-image_light.svg";
+import LogoDark from "@assets/navbar-image_dark.svg";
 
 const navItems = [
   { title: "About", link: "/about" },
@@ -71,10 +73,13 @@ export default function Nav() {
       <section className="container is-max-widescreen">
         <div className="navbar-brand">
           <a className="navbar-item" href="/">
-            <img src="/images/logo-blank.svg" alt="" className="navbar-img" />
-            <span className="is-family-secondary has-text-weight-bold has-text-primary ml-2 is-size-3-touch is-size-2">
-              SIBA
-            </span>
+            <picture>
+              <source
+                srcSet={LogoDark.src}
+                media="(prefers-color-scheme: dark)"
+              />
+              <img src={LogoLight.src} alt="" height={25} width={75} />
+            </picture>
           </a>
           <a
             role="button"
@@ -108,21 +113,6 @@ export default function Nav() {
               else
                 return <NavLink key={i.title} title={i.title} link={i.link} />;
             })}
-          </div>
-          <div className="navbar-end mr-3">
-            <div className="navbar-item">
-              <span className="is-size-7-desktop">Associated Leagues:</span>
-              <img
-                src="/images/sicba-logo-blank.svg"
-                alt="SICBA"
-                className="navbar-img"
-              />
-              <img
-                src="/images/development-logo.gif"
-                alt="DBL"
-                className="navbar-img"
-              />
-            </div>
           </div>
         </div>
       </section>

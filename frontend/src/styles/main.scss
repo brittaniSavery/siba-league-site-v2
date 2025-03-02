@@ -14,7 +14,6 @@ $siba-link-visited: #760fec;
 );
 
 @use "bulma/sass/components/navbar" with (
-  $navbar-height: 6rem,
   $navbar-item-img-max-height: none
 );
 @use "bulma/sass/components/modal" with (
@@ -51,11 +50,6 @@ body > .container {
     padding-left: 0.75rem;
   }
 }
-
-.navbar-img {
-  width: 5vh;
-}
-
 .footer {
   position: absolute;
   left: 0;
