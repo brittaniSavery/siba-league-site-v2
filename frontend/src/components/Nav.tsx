@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { useState } from "react";
 import LogoLight from "@assets/navbar-image_light.svg";
 import LogoDark from "@assets/navbar-image_dark.svg";
+import SIBAPicture from "./SIBAPicture";
 
 const navItems = [
   { title: "About", link: "/about" },
@@ -73,13 +74,12 @@ export default function Nav() {
       <section className="container is-max-widescreen">
         <div className="navbar-brand">
           <a className="navbar-item" href="/">
-            <picture>
-              <source
-                srcSet={LogoDark.src}
-                media="(prefers-color-scheme: dark)"
-              />
-              <img src={LogoLight.src} alt="" height={25} width={75} />
-            </picture>
+            <SIBAPicture
+              light={LogoLight}
+              dark={LogoDark}
+              height={28}
+              width={122}
+            />
           </a>
           <a
             role="button"

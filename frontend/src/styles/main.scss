@@ -13,9 +13,10 @@ $siba-link-visited: #760fec;
   $family-secondary: '"Secular One", sans-serif'
 );
 
-@use "bulma/sass/components/navbar" with (
-  $navbar-item-img-max-height: none
-);
+// @use "bulma/sass/components/navbar" with (
+//   $navbar-item-img-max-height: 70px
+// );
+
 @use "bulma/sass/components/modal" with (
   $modal-content-width: 820px
 );
@@ -27,6 +28,7 @@ $siba-link-visited: #760fec;
 
 @forward "bulma/sass/base";
 @forward "bulma/sass/components/card";
+@forward "bulma/sass/components/navbar";
 @forward "bulma/sass/elements/button";
 @forward "bulma/sass/elements/icon";
 @forward "bulma/sass/elements/content";

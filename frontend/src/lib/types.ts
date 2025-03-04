@@ -104,6 +104,7 @@ export type LeagueInfo = {
   type: LEAGUE;
   typeAbbv: string;
   typeFull: string;
+  link: string;
   simDays: string;
   channel: string;
   version: number;

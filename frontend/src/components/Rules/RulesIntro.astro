@@ -25,9 +25,9 @@ const { league } = Astro.props as Props;
     Discord</a
   >
   or <a
-    href="https://twitter.com/SIBA_AveryINC"
+    href="https://bsky.app/profile/siba-aisn.bsky.social"
     target="_blank"
-    rel="noreferrer">Twitter</a
+    rel="noreferrer">Bluesky</a
   >. And don&apos;t forget to <a href="/join">join</a>!
 </p>
 
@@ -83,9 +83,8 @@ const { league } = Astro.props as Props;
         icon at the top)
       </li>
       <li>
-        Click the {league.color} &quot;{
-          league.type === LEAGUE.college && "Save & "
-        }Export MP File&quot; button at the bottom right-hand corner
+        Click the &quot;Save & Export MP File&quot; button at the bottom
+        right-hand corner
       </li>
     </ol>
   </li>
@@ -103,6 +102,26 @@ const { league } = Astro.props as Props;
     </ol>
   </li>
 </ul>
+
+<h2>Inactivity</h2>
+<p>
+  Between vacations, work, family, and outages, there may be times where you may
+  have limited or no access to the computer/internet. If you will be away for
+  longer than a week or two and would like the computer to temporarily control
+  your team(s), please let one of the commissioners know (Kelley or Brittani)
+  and we can switch your team(s) to &quot;Vacation Mode.&quot; Just let us know
+  when you're back and we'll give you control back.
+</p>
+
+<p>
+  However, if it has been a couple of months of inactivity (determined by lack
+  of exports as shown on the {league.pageTitle} Exports chart on the <a
+    href={`/${league.link}/downloads`}>downloads</a
+  > page), we will reach out to you via Discord message and email. You will have
+  a week to respond or to export a file. If you have not responded or exported after
+  the week, your team(s) will be removed and made available for others. You can always
+  rejoin later!
+</p>
 
 <h2 id="important-game-dates"><b>Important Game Dates</b></h2>
 {league.type === LEAGUE.college && <RecruitingDefinitions />}

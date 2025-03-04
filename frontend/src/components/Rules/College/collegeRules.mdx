@@ -1,6 +1,7 @@
-import { Image } from "astro:assets";
 import FontAwesomeIcon from "@components/FontAwesomeIcon";
-import RecruitingRegionsSVG from "@assets/recruiting-regions_dark.svg";
+import RecruitingRegionsSVG_Dark from "@assets/recruiting-regions_dark.svg";
+import RecruitingRegionsSVG_Light from "@assets/recruiting-regions_light.svg";
+import SIBAPicture from "@components/SIBAPicture";
 
 ## Team Tiers and Rankings
 
@@ -14,13 +15,12 @@ These rankings are re-evaluated every pre-season. The [pre-season rankings](/col
 
 The recruiting region of a team is determined by the state where the school is located. There are five regions: Atlantic East, Midwest, Southeast, Great Plains, and West. If a school is based in California, their region would be West, for example. Refer to the map below to see which states belong to which region.
 
-<RecruitingRegionsSVG
-  alt={
-    "A map of the united states color-coded by the recruiting regions for the SICBA."
-  }
+<SIBAPicture
+  light={RecruitingRegionsSVG_Dark}
+  dark={RecruitingRegionsSVG_Dark}
 />
 
-**NOTE:** Each person is allowed to coach up to three (3) teams, all of different tiers and different regions. None of your selected teams can share a tier or a recruiting region.
+**NOTE:** Each person is allowed to coach up to five (5) teams. Each team must have a different region from each other. You can have a single Tier 1 team, up to 2 Tier 2 teams, and up to 2 Tier 3 teams.
 
 Here are examples of valid and invalid team choices based on this sample school list.
 
@@ -91,7 +91,3 @@ Coach skill attributes are determined by the tier of their team. There are five 
 1. Tier 1 Team - You will be set up in the **Power 5 Coach Model** and have 325 points to use. Each category must have a value of 10-85.
 2. Tier 2 Team - You will be set up in the **Mid-Major Coach Model** and have 240 points to use. Each category must have a value of 5-65.
 3. Tier 3 Team - You will be set up in the **Rookie Coach Model** and have 150 points to use. Each category must have a value of 5-45.
-
-## Vacation/Time Away from League
-
-If you are going to have limited or no access to the computer/internet for a few days, please let one of the commissioners know (Kelley Avery or Brittani Avery). You can also let another person in the league act as a proxy coach for your team if you will be away for an extended period of time.
