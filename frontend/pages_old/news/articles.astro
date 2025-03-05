@@ -1,0 +1,37 @@
+---
+import ArticlesTable from "@components/Articles/ArticlesTable";
+import type { Article, StrapiCollectionResponse, Tag } from "@lib/types";
+import { getDataFromApi } from "@lib/utils";
+import Layout from "@layouts/BaseLayout.astro";
+import { LEAGUE } from "@content/constants";
+import { capitalize } from "lodash-es";
+
+const articles = await getDataFromApi<StrapiCollectionResponse<Article>>(
+  `${
+    import.meta.env.PUBLIC_CMS_URL
+  }/articles?sort=publishedAt:desc&populate=tags,image,author.picture&pagination[limit]=100`
+);
+
+const strapiTags = await getDataFromApi<StrapiCollectionResponse<Tag>>(
+  `${import.meta.env.PUBLIC_CMS_URL}/tags?sort=name:asc&pagination[limit]=100`
+);
+
+const tags = [
+  capitalize(LEAGUE.college),
+  capitalize(LEAGUE.pro),
+  ...strapiTags.data.map((tag) => tag.attributes.name),
+].sort();
+
+const title = "League News and Opinion Articles";
+---
+
+<Layout content={{ title: title }}>
+  <section class="content">
+    <h1>{title}</h1>
+  </section>
+  <ArticlesTable
+    articles={articles.data.map((article) => article.attributes)}
+    tags={tags}
+    client:load
+  />
+</Layout>

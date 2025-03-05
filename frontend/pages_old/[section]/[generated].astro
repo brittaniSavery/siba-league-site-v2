@@ -1,0 +1,128 @@
+---
+import IFrameContainer from "@components/IFrameContainer.astro";
+import { LEAGUE } from "@content/constants";
+
+export function getStaticPaths() {
+  return [
+    {
+      params: {
+        section: "siba",
+        generated: "standings",
+      },
+      props: {
+        file: "SIBAStandings",
+        title: "SIBA League Standings",
+      },
+    },
+    {
+      params: {
+        section: "siba",
+        generated: "leaders",
+      },
+      props: {
+        file: "SIBALeagueLeaders",
+        title: "SIBA League Leaders",
+      },
+    },
+    {
+      params: { section: "siba", generated: "schedule" },
+      props: { file: "Schedule", title: "SIBA Schedule" },
+    },
+    {
+      params: {
+        section: "siba",
+        generated: "transactions",
+      },
+      props: {
+        file: "Transactions",
+        title: "Transactions",
+      },
+    },
+    {
+      params: { section: "siba", generated: "free-agents" },
+      props: { file: "FA", title: "Available Free Agents" },
+    },
+    {
+      params: {
+        section: "siba",
+        generated: "available-coaches",
+      },
+      props: {
+        file: "FACoach",
+        title: "Available Coaches",
+      },
+    },
+    {
+      params: {
+        section: "siba",
+        generated: "player-index",
+      },
+      props: {
+        file: "PlayerIndex",
+        title: "Active Player Index",
+      },
+    },
+    {
+      params: {
+        section: "dbl",
+        generated: "standings",
+      },
+      props: {
+        file: "DBLStandings",
+        title: "DBL League Standings",
+      },
+    },
+    {
+      params: {
+        section: "dbl",
+        generated: "leaders",
+      },
+      props: {
+        file: "DBLLeagueLeaders",
+        title: "DBL League Leaders",
+      },
+    },
+    {
+      params: {
+        section: "news",
+        generated: "pro",
+      },
+      props: {
+        file: "Headlines",
+        title: "Pro Headlines",
+      },
+    },
+    {
+      params: {
+        section: "news",
+        generated: "college",
+      },
+      props: {
+        file: "Headlines",
+        title: "College Headlines",
+        league: LEAGUE.college,
+      },
+    },
+    {
+      params: { section: "college", generated: "schedule" },
+      props: {
+        file: "Schedule",
+        title: "SICBA College Schedule",
+        league: LEAGUE.college,
+      },
+    },
+    {
+      params: { section: "college", generated: "polls" },
+      props: {
+        file: "Polls",
+        title: "SICBA College Polls",
+        league: LEAGUE.college,
+      },
+    },
+  ];
+}
+
+const { file, title, league } = Astro.props;
+---
+
+<IFrameContainer file={file} league={league || LEAGUE.pro} title={title} />

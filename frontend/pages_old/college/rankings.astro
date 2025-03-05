@@ -1,0 +1,51 @@
+---
+import ProbationIcon from "@components/ProbationIcon";
+import TierRankings from "@components/TierRankings";
+import { COLLEGE_LEAGUE_INFO } from "@content/constants";
+import Layout from "@layouts/BaseLayout.astro";
+import type {
+  Member,
+  School,
+  StrapiCollectionResponse,
+  StrapiCollegeInfo,
+  StrapiSingleTypeResponse,
+} from "@lib/types";
+import { getDataFromApi, getFormattedDate } from "@lib/utils";
+
+const strapiCoaches = await getDataFromApi<StrapiCollectionResponse<Member>>(
+  `${import.meta.env.PUBLIC_CMS_URL}/coaches?pagination[limit]=100`
+);
+const coaches: Member[] = strapiCoaches.data.map((sc) => ({
+  team: sc.attributes.team,
+  logo: sc.attributes.logo,
+  name: sc.attributes.name,
+}));
+
+const collegeInfo = await getDataFromApi<
+  StrapiSingleTypeResponse<StrapiCollegeInfo>
+>(`${import.meta.env.PUBLIC_CMS_URL}/college-info`);
+const schools: School[] = collegeInfo.data.attributes.teams || [];
+
+const title = `${COLLEGE_LEAGUE_INFO.abbv} Pre-Season Tier Rankings`;
+---
+
+<Layout content={{ title: title }}>
+  <section class="content">
+    <h1>{title}</h1>
+    <p>
+      All teams in SICBA are ranked and those rankings are used to determine the
+      school&apos;s tier. #1–40 are Tier 1, #41–196 are Tier 2, and #197–353 are
+      Tier 3. Points used for creating a coach&apos;s attributes are also
+      determined by the tier of the school: 325 points (Tier 1), 240 points
+      (Tier 2), 150 points (Tier 3). For more information, check the <a
+        href="/college/rules">SICBA Rules</a
+      >.
+    </p>
+
+    <p>
+      <b>Last Updated:</b>
+      {getFormattedDate(collegeInfo.data.attributes.updatedAt)}
+    </p>
+  </section>
+  <TierRankings coaches={coaches} schools={schools} client:load />
+</Layout>

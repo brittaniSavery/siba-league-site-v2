@@ -1,0 +1,114 @@
+---
+import {
+  COLLEGE_LEAGUE_INFO,
+  LEAGUE,
+  PRO_LEAGUE_INFO,
+} from "@content/constants";
+import Layout from "@layouts/BaseLayout.astro";
+import DownloadTimes from "@components/DownloadFileTime";
+import { capitalize, lowerCase, sortBy } from "lodash-es";
+import { getDataFromApi } from "@lib/utils";
+import type {
+  Member,
+  StrapiCollectionResponse,
+  StrapiSingleTypeResponse,
+  StrapiTeamInfo,
+  Team,
+} from "@lib/types";
+import MemberUploads from "@components/MemberUploads";
+
+export function getStaticPaths() {
+  return [{ params: { section: "siba" } }, { params: { section: "college" } }];
+}
+
+const { section } = Astro.params;
+const leagueInfo =
+  section === LEAGUE.college ? COLLEGE_LEAGUE_INFO : PRO_LEAGUE_INFO;
+const title = `Download ${leagueInfo.abbv} (${capitalize(
+  leagueInfo.type
+)}) Program Files`;
+
+const strapiMembers = await getDataFromApi<StrapiCollectionResponse<Member>>(
+  `${import.meta.env.PUBLIC_CMS_URL}/${
+    leagueInfo.strapiMembers
+  }?pagination[limit]=100`
+);
+
+const sortedMembers: Member[] = sortBy(
+  strapiMembers.data.map((member) => ({
+    team: member.attributes.team,
+    logo: member.attributes.logo,
+    name: member.attributes.name,
+  })),
+  ["team"]
+);
+
+const teamInfo = await getDataFromApi<StrapiSingleTypeResponse<StrapiTeamInfo>>(
+  `${import.meta.env.PUBLIC_CMS_URL}/${leagueInfo.type}-info`
+);
+const teams: Team[] = teamInfo.data.attributes.teams || [];
+---
+
+<Layout content={{ title: title }}>
+  <section class="content">
+    <h1 id={`downloads-${leagueInfo.type}`}>{title}</h1>
+    <p>
+      Below are the necessary files for the {leagueInfo.type} league ({
+        leagueInfo.name
+      }). Make sure all your files are up to date.
+    </p>
+    <p>
+      <b
+        ><a
+          href={`${import.meta.env.SITE}files/${leagueInfo.type}/${
+            leagueInfo.abbv
+          }.zip`}
+          download
+        >
+          League File:</a
+        >
+      </b> This file runs all the simulation from the league. Add this to your own
+      copy of the program so you have the most updated version of the league.
+      <br />
+      <i
+        >Last Modified: <DownloadTimes
+          league={leagueInfo.type}
+          file="main"
+          client:idle
+        />
+      </i>
+    </p>
+    <p>
+      <b
+        ><a
+          href={`${import.meta.env.SITE}files/${leagueInfo.type}/DDS${
+            leagueInfo.typeAbbv
+          }2023.zip`}
+          download
+        >
+          Graphics File:</a
+        >
+      </b> This file runs all the simulation from the league. Add this to your own
+      copy of the program so you have the most updated version of the league.
+      <br />
+      <i
+        >Last Modified: <DownloadTimes
+          league={leagueInfo.type}
+          file="graphics"
+          client:idle
+        />
+      </i>
+    </p>
+    <h2>{leagueInfo.pageTitle} Exports</h2>
+    <p>
+      Current human {lowerCase(leagueInfo.pageTitle)} can use this table to verify
+      the dates of their latest exports.
+    </p>
+  </section>
+  <MemberUploads
+    members={sortedMembers}
+    teams={teams}
+    league={leagueInfo.type}
+    client:idle
+  />
+</Layout>

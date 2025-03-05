@@ -1,0 +1,62 @@
+---
+import {
+  COLLEGE_LEAGUE_INFO,
+  LEAGUE,
+  PRO_LEAGUE_INFO,
+} from "@content/constants";
+import Layout from "@layouts/BaseLayout.astro";
+import type { Member, StrapiCollectionResponse } from "@lib/types";
+import { getDataFromApi } from "@lib/utils";
+import { sortBy } from "lodash-es";
+
+export function getStaticPaths() {
+  return [
+    { params: { section: "siba", members: "owners" } },
+    { params: { section: "college", members: "coaches" } },
+  ];
+}
+
+const { section } = Astro.params;
+
+const leagueInfo =
+  section === LEAGUE.college ? COLLEGE_LEAGUE_INFO : PRO_LEAGUE_INFO;
+
+const strapiMembers = await getDataFromApi<StrapiCollectionResponse<Member>>(
+  `${import.meta.env.PUBLIC_CMS_URL}/${
+    leagueInfo.strapiMembers
+  }?pagination[limit]=100`
+);
+
+const sortedMembers: Member[] = sortBy(
+  strapiMembers.data.map((member) => ({
+    team: member.attributes.team,
+    logo: member.attributes.logo,
+    name: member.attributes.name,
+  })),
+  ["team"]
+);
+
+const title = `${leagueInfo.abbv} ${leagueInfo.pageTitle}`;
+---
+
+<Layout content={{ title: title }}>
+  <section class="content">
+    <h1>{title}</h1>
+  </section>
+  <div class="columns is-multiline">
+    {
+      sortedMembers.map((member) => (
+        <div class="column is-3-widescreen is-4-tablet has-text-centered">
+          <img
+            src={`${import.meta.env.SITE}/files/${
+              leagueInfo.type
+            }/Website/images/${member.logo}`}
+            alt={`${member.team} logo`}
+          />
+          <p class="title is-4">{member.team}</p>
+          <p class="subtitle is-6">{member.name}</p>
+        </div>
+      ))
+    }
+  </div>
+</Layout>

@@ -1,0 +1,86 @@
+---
+import Layout from "@layouts/BaseLayout.astro";
+import type { Article, StrapiCollectionResponse } from "@lib/types";
+import { getDataFromApi, getFormattedDate } from "@lib/utils";
+import { differenceInDays } from "date-fns";
+import { capitalize } from "lodash-es";
+import { micromark } from "micromark";
+import { Fragment } from "react";
+
+export async function getStaticPaths() {
+  const articles = await getDataFromApi<StrapiCollectionResponse<Article>>(
+    `${
+      import.meta.env.PUBLIC_CMS_URL
+    }/articles?populate=tags,image,author.picture&pagination[limit]=100`
+  );
+
+  return articles.data.map((article) => ({
+    params: { slug: article.attributes.slug },
+    props: { article: article.attributes },
+  }));
+}
+
+type Props = {
+  article: Article;
+};
+
+const { article } = Astro.props as Props;
+const {
+  title,
+  publishedAt,
+  updatedAt,
+  content,
+  tags: strapiTags,
+  league,
+  author,
+} = article;
+const { name: authorName, picture: authorPic } = author.data.attributes;
+const tags = [
+  capitalize(league),
+  ...strapiTags.data.map((tag) => tag.attributes.name),
+].sort();
+---
+
+<Layout content={{ title: title }}>
+  <section class="content">
+    <h1 class="mb-1">{title}</h1>
+    <div class="tags are-medium">
+      {tags.map((tag) => <div class="tag">{tag}</div>)}
+    </div>
+  </section>
+  <div class="media mb-2">
+    <div class="media-left">
+      <figure class="image is-64x64">
+        <img
+          src={authorPic.data.attributes.url}
+          alt={authorPic.data.attributes.alternativeText}
+        />
+      </figure>
+    </div>
+    <div class="media-content">
+      <p class="title is-4">{authorName}</p>
+      <p class="subtitle is-6 mb-0">
+        Published {getFormattedDate(publishedAt)}
+        {
+          differenceInDays(new Date(updatedAt), new Date(publishedAt)) > 0 && (
+            <span>
+              &nbsp;&bull;&nbsp;
+              <i>Last Updated: {getFormattedDate(updatedAt)}</i>
+            </span>
+          )
+        }
+      </p>
+    </div>
+  </div>
+  <div class="content">
+    <Fragment set:html={micromark(content)} />
+  </div>
+  <a class="icon-link" href="/news/articles">
+    <span class="icon-text">
+      <span class="icon">
+        <i class="fa-solid fa-circle-arrow-left"></i>
+      </span>
+      <span>Back to Articles</span>
+    </span>
+  </a>
+</Layout>

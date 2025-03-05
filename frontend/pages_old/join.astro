@@ -1,0 +1,61 @@
+---
+import JoinForm from "@components/JoinForm";
+import { COLLEGE_LEAGUE_INFO, PRO_LEAGUE_INFO } from "@content/constants";
+import Layout from "@layouts/BaseLayout.astro";
+import type {
+  Member,
+  School,
+  StrapiCollectionResponse,
+  StrapiCollegeInfo,
+  StrapiProInfo,
+  StrapiSingleTypeResponse,
+} from "@lib/types";
+import { getDataFromApi } from "@lib/utils";
+
+const collegeInfo = await getDataFromApi<
+  StrapiSingleTypeResponse<StrapiCollegeInfo>
+>(`${import.meta.env.PUBLIC_CMS_URL}/college-info`);
+const schools: School[] = collegeInfo.data.attributes.teams || [];
+
+const strapiCoaches = await getDataFromApi<StrapiCollectionResponse<Member>>(
+  `${import.meta.env.PUBLIC_CMS_URL}/${
+    COLLEGE_LEAGUE_INFO.strapiMembers
+  }?pagination[limit]=100`
+);
+
+const unavailableSchools = strapiCoaches.data.map(
+  (member) => member.attributes.team
+);
+const availableSchools = schools.filter(
+  (school) => !unavailableSchools.includes(`${school.name} ${school.mascot}`)
+);
+
+const proInfo = await getDataFromApi<StrapiSingleTypeResponse<StrapiProInfo>>(
+  `${import.meta.env.PUBLIC_CMS_URL}/pro-info`
+);
+const proTeams = proInfo.data.attributes.teams;
+
+const strapiGMs = await getDataFromApi<StrapiCollectionResponse<Member>>(
+  `${import.meta.env.PUBLIC_CMS_URL}/${
+    PRO_LEAGUE_INFO.strapiMembers
+  }?pagination[limit]=100`
+);
+
+const unavailableProTeams = strapiGMs.data.map(
+  (member) => member.attributes.team
+);
+const availableProTeams = proTeams.filter(
+  (team) => !unavailableProTeams.includes(`${team.name} ${team.mascot}`)
+);
+---
+
+<Layout content={{ title: "Join" }}>
+  <section class="content">
+    <h1>Join</h1>
+  </section>
+  <JoinForm
+    proTeams={availableProTeams}
+    schools={availableSchools}
+    client:load
+  />
+</Layout>
