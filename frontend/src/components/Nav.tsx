@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { useState } from "react";
 import LogoLight from "@assets/navbar-image_light.svg";
 import LogoDark from "@assets/navbar-image_dark.svg";
+import assoicatedLeagues from "@assets/assoicated-leagues.png";
 import SIBAPicture from "./SIBAPicture";
 
 const navItems = [
@@ -113,6 +114,12 @@ export default function Nav() {
               else
                 return <NavLink key={i.title} title={i.title} link={i.link} />;
             })}
+          </div>
+          <div className="navbar-end">
+            <div className="navbar-item">
+              <p>Related Leagues</p>
+              <img src={assoicatedLeagues.src} alt="" />
+            </div>
           </div>
         </div>
       </section>
