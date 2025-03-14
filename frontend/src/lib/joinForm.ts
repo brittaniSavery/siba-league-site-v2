@@ -83,14 +83,14 @@ const sharedFieldsValidation = {
   picture: Joi.number()
     .required()
     .when("gender", [
-      { is: "male", then: Joi.number().min(1).max(179) },
-      { is: "female", then: Joi.number().min(1000).max(1022) },
+      { is: "male", then: Joi.number().min(1).max(3022) },
+      { is: "female", then: Joi.number().min(3000).max(3022) },
     ]),
   outfit: Joi.number()
     .required()
     .when("gender", [
-      { is: "male", then: Joi.number().min(1).max(55) },
-      { is: "female", then: Joi.number().min(1000).max(1006) },
+      { is: "male", then: Joi.number().min(1).max(1017) },
+      { is: "female", then: Joi.number().min(1000).max(1017) },
     ]),
 };
 
@@ -219,14 +219,13 @@ export const joinFormSchema: Joi.Schema<JoinForm> = Joi.object({
         region: Joi.string(),
       }).unknown()
     )
-    .max(3)
+    .max(5)
     .unique((a, b) => {
       const aTeam = a.team;
       const bTeam = b.team;
-      return aTeam.tier === bTeam.tier || aTeam.region === bTeam.region;
+      return aTeam.region === bTeam.region;
     })
     .messages({
-      "any.unique":
-        "Schools cannot share a ranking tier or a recruiting region.",
+      "any.unique": "Schools cannot share a recruiting region.",
     }),
 }).unknown();

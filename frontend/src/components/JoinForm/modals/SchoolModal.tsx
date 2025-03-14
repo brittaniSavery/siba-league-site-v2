@@ -1,9 +1,7 @@
 import AutoComplete from "@components/FormControls/AutoComplete";
 import Form from "@components/FormControls/Form";
 import Input from "@components/FormControls/Input";
-import Radio from "@components/FormControls/Radio";
 import Select from "@components/FormControls/Select";
-import ProbationIcon from "@components/ProbationIcon";
 import { COLLEGE_LEAGUE_INFO, LEAGUE } from "@content/constants";
 import {
   CollegeTeamForm,
@@ -101,12 +99,6 @@ export default function SchoolModal({
             isOpen={isOpen}
             mode={mode}
             close={close}
-            extraInfo={
-              <p>
-                Teams that have an exclamation icon (
-                <ProbationIcon iconOnly />) are on probation.
-              </p>
-            }
           >
             <AutoComplete<CollegeTeamForm, School>
               id="schoolSelect"
@@ -118,16 +110,7 @@ export default function SchoolModal({
                 const schoolTitle = formatTeamTitle(school);
                 return (
                   <>
-                    <p>
-                      {school.probation ? (
-                        <ProbationIcon
-                          school={schoolTitle}
-                          details={school.probation}
-                        />
-                      ) : (
-                        schoolTitle
-                      )}
-                    </p>
+                    <p>schoolTitle</p>
                     <p className="help">
                       Tier {school.tier} | Region: {school.region}
                     </p>
@@ -135,20 +118,11 @@ export default function SchoolModal({
                 );
               }}
               renderOptionLabel={formatTeamTitle}
-              renderHelp={({ tier, region, probation }) => (
+              renderHelp={({ tier, region }) => (
                 <>
                   <span>
                     Tier {tier} | Region: {region}
                   </span>
-                  {probation && (
-                    <>
-                      <br />
-                      <span className="icon-text">
-                        <ProbationIcon iconOnly />
-                        <span>Probation: {probation}</span>
-                      </span>
-                    </>
-                  )}
                 </>
               )}
               isOptionEqualToValue={(option: School, value: School) =>
@@ -188,21 +162,12 @@ export default function SchoolModal({
               help="Range: 25-75"
               control={control}
             />
-            <Radio
-              name="gender"
-              colSize={"2"}
-              options={[
-                { label: "Male", value: "male" },
-                { label: "Female", value: "female" },
-              ]}
-              control={control}
-            />
             <Input
               name="picture"
               label="Face Picture Number"
               type="number"
               min={1}
-              max={1022}
+              max={3022}
               colSize={"4"}
               help={`Fill in the number of the matching picture from graphics/${COLLEGE_LEAGUE_INFO.pictureFolder}/fac.`}
               control={control}
@@ -212,7 +177,7 @@ export default function SchoolModal({
               label="Outfit Picture Number"
               type="number"
               min={1}
-              max={1006}
+              max={1017}
               colSize={"4"}
               help={`Fill in the number of the matching picture from graphics/${COLLEGE_LEAGUE_INFO.pictureFolder}/clothes.`}
               control={control}

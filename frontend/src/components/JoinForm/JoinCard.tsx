@@ -1,4 +1,3 @@
-import ProbationIcon from "@components/ProbationIcon";
 import {
   COLLEGE_LEAGUE_INFO,
   Defense,
@@ -78,12 +77,6 @@ export default function TeamCard({
         )}
         <p className="title is-4">
           {team.name} {team.mascot}
-          {league === LEAGUE.college && collegeTeamForm.team?.probation && (
-            <span>
-              &nbsp;
-              <ProbationIcon details={collegeTeamForm.team.probation} />
-            </span>
-          )}
         </p>
         {league === LEAGUE.college && collegeTeamForm.team && (
           <p className="subtitle is-6">

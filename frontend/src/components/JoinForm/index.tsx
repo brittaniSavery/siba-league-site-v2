@@ -1,7 +1,6 @@
 import Input from "@components/FormControls/Input";
 import Select from "@components/FormControls/Select";
 import Textarea from "@components/FormControls/Textarea";
-import ProbationIcon from "@components/ProbationIcon";
 import type { ProTeam, School } from "@lib/types";
 import clsx from "clsx";
 import {
@@ -233,10 +232,9 @@ export default function JoinForm({ schools, proTeams }: JoinFormProps) {
 
             <div className={clsx(teamView !== LEAGUE.college && "is-hidden")}>
               <p>
-                You are allowed to coach up to three (3) teams. They each must
-                be in different tiers and different recruiting regions. Teams
-                that have an exclamation icon (
-                <ProbationIcon iconOnly />) are on probation.
+                You are allowed to coach up to five (5) teams: a single Tier 1,
+                two Tier 2, and two Tier 3. They each must be different
+                recruiting regions.
               </p>
               {collegeTeams && collegeTeams.length > 0 && (
                 <div className="columns pt-4">

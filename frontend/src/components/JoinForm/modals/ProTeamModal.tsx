@@ -156,7 +156,7 @@ export default function ProTeamModal({
               label="Face Picture Number"
               type={"number"}
               min={1}
-              max={1022}
+              max={3022}
               colSize={"one-quarter"}
               help={`Fill in the number of the matching picture from graphics/${PRO_LEAGUE_INFO.pictureFolder}/fac.`}
               control={control}
@@ -166,7 +166,7 @@ export default function ProTeamModal({
               label="Outfit Picture Number"
               type={"number"}
               min={1}
-              max={1006}
+              max={1017}
               colSize={"one-quarter"}
               help={`Fill in the number of the matching picture from graphics/${PRO_LEAGUE_INFO.pictureFolder}/clothes.`}
               control={control}
