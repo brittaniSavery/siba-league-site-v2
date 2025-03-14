@@ -14,7 +14,7 @@ The recruiting region of a team is determined by the state where the school is l
 
 ![Regions for the SICBA](/images/recruiting-regions.svg)
 
-**NOTE:** Each person is allowed to coach up to three (3) teams, all of different tiers and different regions. None of your selected teams can share a tier or a recruiting region.
+**NOTE:** Each person is allowed to coach up to five (5) teams. Each team must have a different region from each other. You can have a single Tier 1 team, up to 2 Tier 2 teams, and up to 2 Tier 3 teams.
 
 Here are examples of valid and invalid team choices based on this sample school list.
 
@@ -25,12 +25,14 @@ Here are examples of valid and invalid team choices based on this sample school 
 | Michigan         | 1    | Midwest       |
 | Georgia Tech     | 2    | Southeast     |
 | New Mexico State | 2    | West          |
+|Maryland|2|Atlantic East
 | Wisconsin        | 2    | Midwest       |
 | Longwood         | 3    | Atlantic East |
 | Alabama A&M      | 3    | Southeast     |
-| Denver           | 3    | Great Plains  |
+| 	Northern Colorado           | 3    | Great Plains  |
+| Texas Southern|3|Great Plains
 
-**<FontAwesomeIcon icon="fa-solid fa-xmark" color="danger" backText="Invalid - Shared Tiers" />**
+**<FontAwesomeIcon icon="fa-solid fa-xmark" color="danger" backText="Invalid - Multiple Tier 1 Teams" />**
 
 - <FontAwesomeIcon
     icon="fa-solid fa-xmark"
@@ -42,7 +44,27 @@ Here are examples of valid and invalid team choices based on this sample school 
     color="danger"
     frontText="Michigan"
   />
-- Denver
+- Wisconsin
+- Northern Colorado
+
+**<FontAwesomeIcon icon="fa-solid fa-xmark" color="danger" backText="Invalid - More than two Tier 2 Teams" />**
+
+- Tennessee
+- <FontAwesomeIcon
+    icon="fa-solid fa-xmark"
+    color="danger"
+    frontText="Maryland"
+  />
+- <FontAwesomeIcon
+    icon="fa-solid fa-xmark"
+    color="danger"
+    frontText="New Mexico State"
+  />
+  - <FontAwesomeIcon
+    icon="fa-solid fa-xmark"
+    color="danger"
+    frontText="Wisconsin"
+      />
 
 **<FontAwesomeIcon icon="fa-solid fa-xmark" color="danger" backText="Invalid - Shared Regions" />**
 
@@ -58,11 +80,14 @@ Here are examples of valid and invalid team choices based on this sample school 
     frontText="Alabama A&M"
   />
 
+
 **<FontAwesomeIcon icon="fa-solid fa-check" color="success" backText="Valid" />**
 
 - Michigan
+- Georgia Tech
 - New Mexico State
 - Longwood
+- Northern Colorado
 
 ## Coach Creation
 
