@@ -32,7 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             break;
         case 'graphics':
 
-            $response["graphics"] = filemtime(dirname(__DIR__) . "/files/" . $dir . "/DDSPB2025.zip");
+            $graphics = $dir === "pro" ? "DDSPB2025" : "DDSCB2025";
+            $response["graphics"] = filemtime(dirname(__DIR__) . "/files/" . $dir . "/" . $graphics . ".zip");
             break;
 
         case 'members':
