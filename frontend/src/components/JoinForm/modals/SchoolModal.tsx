@@ -110,7 +110,7 @@ export default function SchoolModal({
                 const schoolTitle = formatTeamTitle(school);
                 return (
                   <>
-                    <p>schoolTitle</p>
+                    <p>{schoolTitle}</p>
                     <p className="help">
                       Tier {school.tier} | Region: {school.region}
                     </p>
