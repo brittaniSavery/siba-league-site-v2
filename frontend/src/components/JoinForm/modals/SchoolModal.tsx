@@ -177,7 +177,7 @@ export default function SchoolModal({
               label="Outfit Picture Number"
               type="number"
               min={1}
-              max={1017}
+              max={75}
               colSize={"4"}
               help={`Fill in the number of the matching picture from graphics/${COLLEGE_LEAGUE_INFO.pictureFolder}/clothes.`}
               control={control}

@@ -166,7 +166,7 @@ export default function ProTeamModal({
               label="Outfit Picture Number"
               type={"number"}
               min={1}
-              max={1017}
+              max={1015}
               colSize={"one-quarter"}
               help={`Fill in the number of the matching picture from graphics/${PRO_LEAGUE_INFO.pictureFolder}/clothes.`}
               control={control}

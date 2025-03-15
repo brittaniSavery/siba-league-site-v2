@@ -79,19 +79,6 @@ const sharedFieldsValidation = {
   firstName: Joi.string().required(),
   lastName: Joi.string().required(),
   age: Joi.number().min(25).max(75).required(),
-  gender: Joi.valid("male", "female").required(),
-  picture: Joi.number()
-    .required()
-    .when("gender", [
-      { is: "male", then: Joi.number().min(1).max(3022) },
-      { is: "female", then: Joi.number().min(3000).max(3022) },
-    ]),
-  outfit: Joi.number()
-    .required()
-    .when("gender", [
-      { is: "male", then: Joi.number().min(1).max(1017) },
-      { is: "female", then: Joi.number().min(1000).max(1017) },
-    ]),
 };
 
 const proTeamValidation = {
@@ -106,6 +93,19 @@ const proTeamValidation = {
   currentPointsTotal: Joi.number()
     .max(PRO_LEAGUE_INFO.pointLimits.total)
     .required(),
+  gender: Joi.valid("male", "female").required(),
+  picture: Joi.number()
+    .required()
+    .when("gender", [
+      { is: "male", then: Joi.number().min(1).max(999) },
+      { is: "female", then: Joi.number().min(1000).max(1022) },
+    ]),
+  outfit: Joi.number()
+    .required()
+    .when("gender", [
+      { is: "male", then: Joi.number().min(1).max(75) },
+      { is: "female", then: Joi.number().min(1000).max(1015) },
+    ]),
 };
 
 const collegePointsValidation = Joi.number().when("team.tier", [
@@ -159,6 +159,8 @@ const collegeValidation = {
         .required(),
     },
   ]),
+  picture: Joi.number().required().min(1).max(3022),
+  outfit: Joi.number().required().min(1).max(75),
 };
 
 export const proTeamFormSchema: Joi.Schema<ProTeamForm> = Joi.object({
