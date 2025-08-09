@@ -1,0 +1,87 @@
+---
+import DownloadFileTime from "@components/DownloadPage/DownloadFileTime";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { GAME_YEAR_VERSION, LEAGUE } from "@lib/constants";
+import type {
+  Member,
+  StrapiCollectionResponse,
+  StrapiSingleTypeResponse,
+  StrapiTeamInfo,
+} from "@lib/types";
+import { getDataFromApi, mergeArrays } from "@lib/utils";
+
+const title = "Download SIBA (College) Collegegram Files";
+
+const strapiMembers = await getDataFromApi<StrapiCollectionResponse<Member>>(
+  `${import.meta.env.PUBLIC_CMS_URL}/coaches?sort=team&pagination[limit]=100`
+);
+const members = strapiMembers.data.map((m) => ({
+  team: m.attributes.team,
+  name: m.attributes.name,
+}));
+const teamInfo = await getDataFromApi<StrapiSingleTypeResponse<StrapiTeamInfo>>(
+  `${import.meta.env.PUBLIC_CMS_URL}/college-info`
+);
+const teams =
+  teamInfo.data.attributes.teams.map((t) => ({
+    id: t.id,
+    team: `${t.name} ${t.mascot}`,
+  })) || [];
+
+const humanTeams = mergeArrays(members, teams, "team", true);
+console.log(humanTeams);
+---
+
+<BaseLayout content={{ title }}>
+  <section class="content">
+    <h1 id={`downloads-college`}>{title}</h1>
+    <p>
+      These files are required for running the college league in Draft Day
+      Sports: College Basketball {GAME_YEAR_VERSION} by Wolverine Studios. Please
+      review the
+      <a href="/college/rules">rules</a> for more informaiton on the specific game
+      version. If you need help, drop by our <a
+        href="https://discord.com/invite/UqQh3zPBrV">Discord</a
+      >.
+    </p>
+    <p>
+      <ul>
+        <li>
+          <a href={`${import.meta.env.SITE}/files/college/SIBA.zip`}
+            >League File</a
+          >
+          - This file contains all the league information. It should be exported
+          at <code
+            >/Wolverine Studios/DDSPB{GAME_YEAR_VERSION}/app/disk/saves/</code
+          > folder location.
+          <br />
+          <i
+            >Last Modified: <DownloadFileTime
+              league={LEAGUE.college}
+              file="main"
+              client:idle
+            />
+          </i>
+          <li>
+            Graphics File - This file contains all the graphics needed,
+            including logos, players/coaches pictures, uniforms, etc. It should
+            be exported at <code>/Wolverine Studios/</code>
+            <br />
+            <i
+              >Last Modified: <DownloadFileTime
+                league={LEAGUE.college}
+                file="graphics"
+                client:idle
+              />
+            </i>
+          </li>
+        </li>
+      </ul>
+      <h2>Owners Exports</h2>
+      <p>
+        Current human owners can use this table to verify the dates of their
+        latest exports.
+      </p>
+    </p>
+  </section>
+</BaseLayout>
