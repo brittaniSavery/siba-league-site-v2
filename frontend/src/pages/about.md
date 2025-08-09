@@ -34,9 +34,7 @@ Fun Facts:
 ### Brittani Avery
 
 When not leading her fictional basketball team, Brittani enjoys a variety
-of hobbies, such as reading, writing, and playing video games. Recently,
-her hobby of writing has turned into a venture with the publication of her
-first novel, [Element Unknown](https://www.brittanisavery.com/book/element-unknown).
+of hobbies, such as reading, writing, crocheting and playing video games. In 2017, she published her first book, a science-fantasy novel, [Element Unknown](https://www.brittanisavery.com/book/element-unknown). The sequel is in the works and coming soon.
 
 Fun Facts:
 

@@ -89,6 +89,8 @@ export const Recruiting: AbilityPoint = {
   },
 };
 
+export const GAME_YEAR_VERSION = 2025;
+
 export const PRO_LEAGUE_INFO = {
   name: "Simulation Internet Professional Basketball",
   abbv: "SIBA",

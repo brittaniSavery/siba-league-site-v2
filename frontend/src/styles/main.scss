@@ -1,5 +1,9 @@
 @charset "utf-8";
 
+//Fonts
+@use "@fontsource/fira-sans-condensed";
+@use "@fontsource/fira-sans";
+
 //SIBA Brand Colors
 $siba-blue: #3260a4;
 $siba-link: #0f85ec;
@@ -9,13 +13,9 @@ $siba-link-visited: #760fec;
 @use "bulma/sass/utilities/derived-variables" as dv with (
   $primary: $siba-blue,
   $link: $siba-link,
-  $family-primary: '"Maven Pro", sans-serif',
-  $family-secondary: '"Secular One", sans-serif'
+  $family-primary: '"Fira Sans", sans-serif',
+  $family-secondary: '"Fira Sans Condensed", sans-serif'
 );
-
-// @use "bulma/sass/components/navbar" with (
-//   $navbar-item-img-max-height: 70px
-// );
 
 @use "bulma/sass/components/modal" with (
   $modal-content-width: 820px
@@ -40,8 +40,6 @@ $siba-link-visited: #760fec;
 
 @forward "bulma/sass/themes";
 
-@import url("https://fonts.googleapis.com/css2?family=Secular+One&family=Maven+Pro:wght@400;500;600;700;800;900&display=swap");
-
 html {
   position: relative;
   min-height: 100%;
@@ -65,6 +63,20 @@ body > .container {
   width: 3rem;
   padding: 0 0.5rem;
 }
+
+h1,
+h2,
+h3 {
+  font-family: "Fira Sans Condensed", sans-serif;
+}
+
+// .content {
+//   h1,
+//   h2,
+//   h3 {
+//     font-family: dv.$family-primary;
+//   }
+// }
 
 // a:not(.navbar-item, .navbar-link) {
 //   &:link {
@@ -120,12 +132,6 @@ body > .container {
 //     margin: auto 0;
 //   }
 // }
-
-// .content {
-//   h1,
-//   h2 {
-//     font-family: bulma.$family-secondary;
-//   }
 
 //   ul + ol {
 //     margin-top: 0.5em;

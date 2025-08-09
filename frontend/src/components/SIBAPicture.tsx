@@ -3,6 +3,7 @@ type SIBAPictureProps = {
   dark: ImageMetadata;
   width?: number;
   height?: number;
+  alt?: string;
 };
 
 export default function SIBAPicture({
@@ -10,16 +11,12 @@ export default function SIBAPicture({
   dark,
   width,
   height,
+  alt,
 }: SIBAPictureProps) {
   return (
     <picture>
       <source srcSet={dark.src} media="(prefers-color-scheme: dark)" />
-      <img
-        src={light.src}
-        alt="A map of the united states color-coded by the recruiting regions for the SICBA."
-        width={width}
-        height={height}
-      />
+      <img src={light.src} alt={alt || ""} width={width} height={height} />
     </picture>
   );
 }

@@ -1,11 +1,39 @@
 ---
 import { Content as Intro } from "@components/indexIntro.md";
 import Layout from "@layouts/BaseLayout.astro";
+import type { Article, SiteUpdate, StrapiCollectionResponse } from "@lib/types";
+import { getDataFromApi } from "@lib/utils";
+
+const updatesResponse = await getDataFromApi<
+  StrapiCollectionResponse<SiteUpdate>
+>(
+  `${
+    import.meta.env.PUBLIC_CMS_URL
+  }/site-updates?sort=createdAt:desc&pagination[pageSize]=5`
+);
+const updates = updatesResponse.data.map((u) => u.attributes);
+
+const articlesResponse = await getDataFromApi<
+  StrapiCollectionResponse<Article>
+>(
+  `${
+    import.meta.env.PUBLIC_CMS_URL
+  }/articles?populate=author&pagination[pageSize]=5&sort=publishedAt:desc`
+);
+const articles = articlesResponse.data.map((a) => a.attributes);
 ---
 
 <Layout content={{ title: "Welcome" }}>
   <section class="content">
     <h1>Welcome</h1>
     <Intro />
+    <div class="columns">
+      <div class="column">
+        <h2>Updates</h2>
+      </div>
+      <div class="column is-one-quarter">
+        <h2>Latest Articles</h2>
+      </div>
+    </div>
   </section>
 </Layout>
