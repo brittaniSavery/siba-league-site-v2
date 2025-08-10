@@ -1,35 +1,36 @@
 ---
 import DownloadFileTime from "@components/DownloadPage/DownloadFileTime";
+import HumanTeamFileTimes from "@components/DownloadPage/HumanTeamFileTimes";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { GAME_YEAR_VERSION, LEAGUE } from "@lib/constants";
 import type {
   Member,
+  HumanTeam,
   StrapiCollectionResponse,
   StrapiSingleTypeResponse,
   StrapiTeamInfo,
 } from "@lib/types";
 import { getDataFromApi, mergeArrays } from "@lib/utils";
 
-const title = "Download SIBA (College) Collegegram Files";
+const title = "Download SICBA (College) Program Files";
 
 const strapiMembers = await getDataFromApi<StrapiCollectionResponse<Member>>(
   `${import.meta.env.PUBLIC_CMS_URL}/coaches?sort=team&pagination[limit]=100`
 );
-const members = strapiMembers.data.map((m) => ({
+const members: HumanTeam[] = strapiMembers.data.map((m) => ({
   team: m.attributes.team,
-  name: m.attributes.name,
+  member: m.attributes.name,
 }));
 const teamInfo = await getDataFromApi<StrapiSingleTypeResponse<StrapiTeamInfo>>(
   `${import.meta.env.PUBLIC_CMS_URL}/college-info`
 );
-const teams =
+const teams: HumanTeam[] =
   teamInfo.data.attributes.teams.map((t) => ({
     id: t.id,
     team: `${t.name} ${t.mascot}`,
   })) || [];
 
-const humanTeams = mergeArrays(members, teams, "team", true);
-console.log(humanTeams);
+const humanTeams = mergeArrays(members, teams, "team");
 ---
 
 <BaseLayout content={{ title }}>
@@ -52,7 +53,7 @@ console.log(humanTeams);
           >
           - This file contains all the league information. It should be exported
           at <code
-            >/Wolverine Studios/DDSPB{GAME_YEAR_VERSION}/app/disk/saves/</code
+            >/Wolverine Studios/DDSCB{GAME_YEAR_VERSION}/app/disk/saves/</code
           > folder location.
           <br />
           <i
@@ -63,9 +64,13 @@ console.log(humanTeams);
             />
           </i>
           <li>
-            Graphics File - This file contains all the graphics needed,
-            including logos, players/coaches pictures, uniforms, etc. It should
-            be exported at <code>/Wolverine Studios/</code>
+            <a
+              href={`${import.meta.env.SITE}/files/college/DDSCB${GAME_YEAR_VERSION}.zip`}
+              >Graphics File</a
+            > - This file contains all the graphics needed, including logos, players/coaches
+            pictures, uniforms, etc. It should be exported at <code
+              >/Wolverine Studios/</code
+            >
             <br />
             <i
               >Last Modified: <DownloadFileTime
@@ -77,11 +82,16 @@ console.log(humanTeams);
           </li>
         </li>
       </ul>
-      <h2>Owners Exports</h2>
-      <p>
-        Current human owners can use this table to verify the dates of their
-        latest exports.
-      </p>
     </p>
+    <h2>Owners Exports</h2>
+    <p>
+      Current human owners can use this table to verify the dates of their
+      latest exports.
+    </p>
+    <HumanTeamFileTimes
+      league={LEAGUE.college}
+      teams={humanTeams}
+      client:idle
+    />
   </section>
 </BaseLayout>

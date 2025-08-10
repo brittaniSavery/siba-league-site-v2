@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import type { LEAGUE, TOURNAMENT_TYPE } from "@lib/constants";
-import type { Event } from "react-big-calendar";
 
 //#region GENERAL TYPES
 export type ChildrenProps = {
@@ -61,6 +60,12 @@ export type Team = {
   mascot: string;
 };
 
+export type HumanTeam = {
+  team: string;
+  id?: number;
+  member?: string;
+};
+
 export type ProTeam = Team & {
   points: number;
   luxury_tax: number;
@@ -115,19 +120,6 @@ export type LeagueInfo = {
   pointLimits: PointLimit | { 1: PointLimit; 2: PointLimit; 3: PointLimit };
   pointLabels: AbilityPoint[];
   pictureFolder: string;
-};
-
-//#endregion
-
-//#region CALENDAR TYPES
-
-export type CollegeEvent = Event & {
-  tournament?: boolean;
-  tournamentType?: TOURNAMENT_TYPE;
-};
-
-export type ProEvent = Event & {
-  league: LEAGUE;
 };
 
 //#endregion
