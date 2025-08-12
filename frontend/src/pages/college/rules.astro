@@ -1,0 +1,16 @@
+---
+import RulesIntro from "@components/RulesPage/RulesIntro.astro";
+import CollegeRules from "@components/RulesPage/CollegeRules.mdx";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { LEAGUE } from "@lib/constants";
+
+const title = "SICBA (College) Rules";
+---
+
+<BaseLayout content={{ title }}>
+  <section class="content">
+    <h1 id={`rules-college`}>{title}</h1>
+    <RulesIntro league={LEAGUE.college} />
+    <CollegeRules />
+  </section>
+</BaseLayout>

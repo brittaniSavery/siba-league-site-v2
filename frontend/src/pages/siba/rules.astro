@@ -1,0 +1,14 @@
+---
+import RulesIntro from "@components/RulesPage/RulesIntro.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { LEAGUE } from "@lib/constants";
+
+const title = "SIBA (Pro) Rules";
+---
+
+<BaseLayout content={{ title }}>
+  <section class="content">
+    <h1 id={`rules-pro`}>{title}</h1>
+    <RulesIntro league={LEAGUE.pro} />
+  </section>
+</BaseLayout>

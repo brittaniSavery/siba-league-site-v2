@@ -1,0 +1,241 @@
+import SIBAPicture from "@components/SIBAPicture";
+import RegionMapLight from "@assets/recruiting-regions_light.svg";
+import RegionMapDark from "@assets/recruiting-regions_dark.svg";
+
+## Team Tiers and Rankings
+
+Teams each have a tier ranking and a recruiting region. Tier 1 teams are
+the best of the best and the most well-known. Tier 2 teams have the
+broadest range of skill and recognition. And finally Tier 3 teams are
+usually from smaller schools and/or have mediocre records.
+
+These rankings are re-evaluated every pre-season. The [pre-season rankings](/college/rankings)
+show the current rankings for the season. Below shows how the rankings
+determine the tier.
+
+- Tier 1: 1–40
+- Tier 2: 41–199
+- Tier 3: 200+
+
+<SIBAPicture
+  light={RegionMapLight}
+  dark={RegionMapDark}
+  alt="A map of the united states color-coded to the recruiting regions for the SICBA."
+/>
+
+**NOTE:** Each person is allowed to coach up to five (5) teams.
+Each team must have a different region and conference from each other. You can have a single Tier 1 team, up to 2 Tier 2 teams, and up to 2 Tier 3 teams.
+
+Here are examples of valid and invalid team choices based on this sample school list.
+
+| School              | Tier | Region        | Conference   |
+| ------------------- | ---- | ------------- | ------------ |
+| Duke                | 1    | Atlantic East | ACC          |
+| Kansas              | 1    | Great Plains  | Big 12       |
+| Ohio                | 1    | Midwest       | MAC          |
+| Utah State          | 1    | West          | MWC          |
+| Arkansas-Pine Bluff | 2    | Southeast     | SWAC         |
+| Missouri            | 2    | Great Plains  | SEC          |
+| Utah                | 2    | West          | Big 12       |
+| Illinois-Chicago    | 3    | Midwest       | MVC          |
+| Jacksonville        | 3    | Southeast     | Atlantic Sun |
+| Norfolk State       | 3    | Atlantic East | MEAC         |
+| Kent State          | 3    | Midwest       | MAC          |
+
+<div class="columns is-desktop">
+  <div class="column">
+    <span class="icon-text">
+      <span class="icon has-text-danger">
+        <i class="fa-solid fa-xl fa-square-xmark"></i>
+      </span>
+      <span>Invalid - Multiple Tier 1 Teams</span>
+    </span>
+    <ul>
+      <li>
+        <span class="icon-text">
+          <span>Ohio</span>
+          <span class="icon has-text-danger">
+            <i class="fa-solid fa-x"></i>
+          </span>
+        </span>
+      </li>
+      <li>
+        <span class="icon-text">
+          <span>Duke</span>
+          <span class="icon has-text-danger">
+            <i class="fa-solid fa-x"></i>
+          </span>
+        </span>
+      </li>
+      <li>Jacksonville</li>
+    </ul>
+  </div>
+  <div class="column">
+    <span class="icon-text">
+      <span class="icon has-text-danger">
+        <i class="fa-solid fa-xl fa-square-xmark"></i>
+      </span>
+      <span>Invalid - More than Two (2) Tier 2 Teams</span>
+    </span>
+    <ul>
+      <li>
+        <span class="icon-text">
+          <span>Arkansas-Pine Bluff</span>
+          <span class="icon has-text-danger">
+            <i class="fa-solid fa-x"></i>
+          </span>
+        </span>
+      </li>
+      <li>
+        <span class="icon-text">
+          <span>Missouri</span>
+          <span class="icon has-text-danger">
+            <i class="fa-solid fa-x"></i>
+          </span>
+        </span>
+      </li>
+      <li>
+        <span class="icon-text">
+          <span>Utah</span>
+          <span class="icon has-text-danger">
+            <i class="fa-solid fa-x"></i>
+          </span>
+        </span>
+      </li>
+      <li>Duke</li>
+      <li>Kent State</li>
+    </ul>
+  </div>
+  <div class="column">
+    <span class="icon-text">
+      <span class="icon has-text-danger">
+        <i class="fa-solid fa-xl fa-square-xmark"></i>
+      </span>
+      <span>Invalid - More than Two (2) Tier 3 Teams</span>
+    </span>
+    <ul>
+      <li>
+        <span class="icon-text">
+          <span>Illinois-Chicago</span>
+          <span class="icon has-text-danger">
+            <i class="fa-solid fa-x"></i>
+          </span>
+        </span>
+      </li>
+      <li>
+        <span class="icon-text">
+          <span>Norfolk State</span>
+          <span class="icon has-text-danger">
+            <i class="fa-solid fa-x"></i>
+          </span>
+        </span>
+      </li>
+      <li>
+        <span class="icon-text">
+          <span>Jacksonville</span>
+          <span class="icon has-text-danger">
+            <i class="fa-solid fa-x"></i>
+          </span>
+        </span>
+      </li>
+      <li>Missouri</li>
+    </ul>
+  </div>
+</div>
+<div class="columns is-desktop">
+  <div class="column">
+    <span class="icon-text">
+      <span class="icon has-text-danger">
+        <i class="fa-solid fa-xl fa-square-xmark"></i>
+      </span>
+      <span>Invalid - Shared Regions</span>
+    </span>
+    <ul>
+      <li>
+        <span class="icon-text">
+          <span>Ohio</span>
+          <span class="icon has-text-danger">
+            <i class="fa-solid fa-x"></i>
+          </span>
+        </span>
+      </li>
+      <li>
+        <span class="icon-text">
+          <span>Illinois-Chicago</span>
+          <span class="icon has-text-danger">
+            <i class="fa-solid fa-x"></i>
+          </span>
+        </span>
+      </li>
+      <li>Missouri</li>
+    </ul>
+  </div>
+  <div class="column">
+    <span class="icon-text">
+      <span class="icon has-text-danger">
+        <i class="fa-solid fa-xl fa-square-xmark"></i>
+      </span>
+      <span>Invalid - Shared Conferences</span>
+    </span>
+    <ul>
+      <li>
+        <span class="icon-text">
+          <span>Kansas</span>
+          <span class="icon has-text-danger">
+            <i class="fa-solid fa-x"></i>
+          </span>
+        </span>
+      </li>
+      <li>
+        <span class="icon-text">
+          <span>Utah</span>
+          <span class="icon has-text-danger">
+            <i class="fa-solid fa-x"></i>
+          </span>
+        </span>
+      </li>
+      <li>Norfolk State</li>
+    </ul>
+  </div>
+  <div class="column">
+    <span class="icon-text">
+      <span class="icon has-text-success">
+        <i class="fa-solid fa-square-check fa-xl"></i>
+      </span>
+      <span>Valid</span>
+    </span>
+    <ul>
+      <li>Duke</li>
+      <li>Missouri</li>
+      <li>Utah</li>
+      <li>Jacksonville</li>
+      <li>Kent State</li>
+    </ul>
+  </div>
+</div>
+
+## Coach Creation
+
+When creating your coach(es), the following is required:
+
+- **First & Last Name:** If you have selected to coach multiple teams, each coach must have a different name. Last names can be shared, however. For example, you can have John Doe and Jake Doe as coaches.
+- **Login Password:** A password that is easy for you to remember. If you have multiple coaches, you can use the same password for all of them.
+- **Age:** 25+
+- **Personality:** (uses the following scale: very low, low, average, high, very high)
+  - Temper
+  - Ambition
+  - Academics
+  - Discipline
+  - Integrity
+
+## Coach Skill Attributes and Ability Points
+
+Coach skill attributes are determined by the tier of their team. There are five categories: Offense, Defense, Scouting, Recruiting, Player Development. Potentials will be capped at 95 possible in the 5 categories.
+
+1. Tier 1 Team - You will be set up in the Power 5 Coach Model and have 325 points to use. Each category must have a value of 10-85.
+2. Tier 2 Team - You will be set up in the Mid-Major Coach Model and have 240 points to use. Each category must have a value of 5-65.
+3. Tier 3 Team - You will be set up in the Rookie Coach Model and have 150 points to use. Each category must have a value of 5-45.
+
+## Vacation/Time Away from League
+
+If you are going to have limited or no access to the computer/internet for a few days, please let one of the commissioners know over on [Discord](https://discord.com/invite/UqQh3zPBrV). We can place your teams on "Vacation Mode" and the computer will take over during that time. If several months go by and we don't hear from you, we will remove your coaches from the league to open the teams up to others.

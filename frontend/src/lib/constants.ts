@@ -1,5 +1,12 @@
 import type { AbilityPoint, Conference } from "@lib/types";
 
+//#region GENERAL
+
+export const GAME_YEAR_VERSION = 2025;
+export const DISCORD_LINK = "https://discord.com/invite/UqQh3zPBrV";
+
+//#endregion
+
 export enum RECRUITING_STATES {
   None = "No Recruiting",
   Quiet = "Quiet",
@@ -88,8 +95,6 @@ export const Recruiting: AbilityPoint = {
     college: "Recruiting Ability",
   },
 };
-
-export const GAME_YEAR_VERSION = 2025;
 
 export const PRO_LEAGUE_INFO = {
   name: "Simulation Internet Professional Basketball",
