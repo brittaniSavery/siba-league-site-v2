@@ -1,16 +1,13 @@
 ---
-import RulesIntro from "@components/RulesPage/RulesIntro.astro";
 import CollegeRules from "@components/RulesPage/CollegeRules.mdx";
-import BaseLayout from "@layouts/BaseLayout.astro";
-import { LEAGUE } from "@lib/constants";
+import RulesIntro from "@components/RulesPage/RulesIntro.mdx";
+import MarkdownLayout from "@layouts/MarkdownLayout.astro";
+import { COLLEGE_LEAGUE_INFO } from "@lib/constants";
 
 const title = "SICBA (College) Rules";
 ---
 
-<BaseLayout content={{ title }}>
-  <section class="content">
-    <h1 id={`rules-college`}>{title}</h1>
-    <RulesIntro league={LEAGUE.college} />
-    <CollegeRules />
-  </section>
-</BaseLayout>
+<MarkdownLayout content={{ title }}>
+  <RulesIntro leagueInfo={COLLEGE_LEAGUE_INFO} />
+  <CollegeRules />
+</MarkdownLayout>

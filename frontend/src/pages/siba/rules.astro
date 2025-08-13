@@ -1,14 +1,13 @@
 ---
-import RulesIntro from "@components/RulesPage/RulesIntro.astro";
-import BaseLayout from "@layouts/BaseLayout.astro";
-import { LEAGUE } from "@lib/constants";
+import RulesIntro from "@components/RulesPage/RulesIntro.mdx";
+import MarkdownLayout from "@layouts/MarkdownLayout.astro";
+import ProRules from "@components/RulesPage/ProRules.mdx";
+import { PRO_LEAGUE_INFO } from "@lib/constants";
 
 const title = "SIBA (Pro) Rules";
 ---
 
-<BaseLayout content={{ title }}>
-  <section class="content">
-    <h1 id={`rules-pro`}>{title}</h1>
-    <RulesIntro league={LEAGUE.pro} />
-  </section>
-</BaseLayout>
+<MarkdownLayout content={{ title }}>
+  <RulesIntro leagueInfo={PRO_LEAGUE_INFO} />
+  <ProRules />
+</MarkdownLayout>

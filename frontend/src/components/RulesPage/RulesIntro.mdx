@@ -1,0 +1,32 @@
+import * as radashi from "radashi";
+import ExternalLink from "@components/ExternalLink";
+import { DISCORD_LINK, GAME_YEAR_VERSION, LEAGUE } from "@lib/constants";
+
+Thanks for checking our {props.leagueInfo.typeFull} basketball league. You will find the rules and other important information about the league below. If you have any questions, please reach out to us on <ExternalLink href={DISCORD_LINK} label="Discord" />. And don't forget to [join](/join)!
+
+## General Information
+
+- **Program:** Draft Day Sports: {radashi.capitalize(props.leagueInfo.type)} Basketball {GAME_YEAR_VERSION} powered by <ExternalLink href="https://www.wolverinestudios.com/" label="Wolverine Studios"/>.
+
+- **Export File Deadlines:** {props.leagueInfo.simDays} at **4:00 PM CENTRAL TIME!**
+  - **NOTE:** After 4PM, there is no guarantee your changes will be included. Be sure to check when 4PM Central is in your timezone. This <ExternalLink href="https://www.timeanddate.com/worldclock/converter.html?iso=20221121T030000&p1=tz_ct" label="time zone converter" /> has been very reliable.
+- **How to Export Your File:**
+  1. Load the SI{props.leagueInfo.type === LEAGUE.college && "C"}BA association from the main menu.
+  1. Complete all changes for team ({props.leagueInfo.type === LEAGUE.college && "recruiting, "}updating depth chart and strategy, talking with players, etc.)
+  1. Go to your office, located on the lefthand-side menu with the
+     <span class="icon-text">
+       <span class="icon">
+         <i class="fa-solid fa-briefcase"></i>
+       </span>
+       <span>briefcase</span>
+     </span>
+     icon
+  1. Click the {props.leagueInfo.color} "{props.leagueInfo.type === LEAGUE.college && "Save & "}Export MP File" button at the bottom right-hand corner
+- **How to Download the League File In-Game:**
+  1. On the main menu, click the "Update Multiplayer League" option.
+  1. Select and open the SI{props.leagueInfo.type === LEAGUE.college && "C"}BA.cbb file
+  1. Wait until the sign-in page appears
+  1. Sign-in
+- **Vacation / Time Away from League:**
+  - If you are going to have limited or no access to the computer/internet for a few days, please let one of the commissioners know over on <ExternalLink href={DISCORD_LINK} label="Discord"/>. We can place your teams on "Vacation Mode" and the computer will take over during that time.
+  - If some weeks go by and we don't hear from you, we will remove your {props.leagueInfo.pageTitle.toLowerCase()} from the league to open the teams up to others.

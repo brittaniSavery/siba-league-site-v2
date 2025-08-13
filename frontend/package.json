@@ -40,6 +40,7 @@
     "radashi": "^12.6.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "rehype-external-links": "^3.0.0",
     "xss": "^1.0.15"
   }
 }

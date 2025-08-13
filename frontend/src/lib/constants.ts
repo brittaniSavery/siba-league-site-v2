@@ -4,44 +4,11 @@ import type { AbilityPoint, Conference } from "@lib/types";
 
 export const GAME_YEAR_VERSION = 2025;
 export const DISCORD_LINK = "https://discord.com/invite/UqQh3zPBrV";
-
-//#endregion
-
-export enum RECRUITING_STATES {
-  None = "No Recruiting",
-  Quiet = "Quiet",
-  Evaluation = "Evaluation",
-  Dead = "Dead",
-  Contact = "Contact",
-  EarlyLOI = "Early LOI Signings",
-  LateLOI = "Late LOI Signings",
-}
-
 export enum LEAGUE {
   pro = "pro",
   development = "development",
   european = "european",
   college = "college",
-}
-
-export enum TOURNAMENT_TYPE {
-  preseason,
-  postseason,
-}
-
-export const enum MONTHS {
-  Jan,
-  Feb,
-  Mar,
-  Apr,
-  May,
-  Jun,
-  Jul,
-  Aug,
-  Sep,
-  Oct,
-  Nov,
-  Dec,
 }
 
 export const Offense: AbilityPoint = {
@@ -60,6 +27,18 @@ export const Defense: AbilityPoint = {
   },
 };
 
+export const PlayerDev: AbilityPoint = {
+  key: "playerDev",
+  label: {
+    pro: "Player Development",
+    college: "Player Development",
+  },
+};
+
+//#endregion
+
+//#region PRO CONSTANTS
+
 export const Potential: AbilityPoint = {
   key: "potential",
   label: {
@@ -71,28 +50,6 @@ export const GameStrategy: AbilityPoint = {
   key: "gameStrategy",
   label: {
     pro: "Game Strategy",
-  },
-};
-
-export const PlayerDev: AbilityPoint = {
-  key: "playerDev",
-  label: {
-    pro: "Player Development",
-    college: "Player Development",
-  },
-};
-
-export const Scouting: AbilityPoint = {
-  key: "scouting",
-  label: {
-    college: "Scouting Ability",
-  },
-};
-
-export const Recruiting: AbilityPoint = {
-  key: "recruiting",
-  label: {
-    college: "Recruiting Ability",
   },
 };
 
@@ -118,6 +75,34 @@ export const PRO_LEAGUE_INFO = {
   pointLabels: [Offense, Defense, Potential, GameStrategy, PlayerDev],
   pictureFolder: "nonplayers",
 };
+
+//#endregion
+
+//#region COLLEGE CONSTANTS
+
+export const Scouting: AbilityPoint = {
+  key: "scouting",
+  label: {
+    college: "Scouting Ability",
+  },
+};
+
+export const Recruiting: AbilityPoint = {
+  key: "recruiting",
+  label: {
+    college: "Recruiting Ability",
+  },
+};
+
+export enum RECRUITING_STATES {
+  None = "No Recruiting",
+  Quiet = "Quiet",
+  Evaluation = "Evaluation",
+  Dead = "Dead",
+  Contact = "Contact",
+  EarlyLOI = "Early LOI Signings",
+  LateLOI = "Late LOI Signings",
+}
 
 export const COLLEGE_LEAGUE_INFO = {
   name: "Simulation Internet College Basketball",
@@ -192,3 +177,5 @@ export const CONFERENCES: Record<string, Conference> = {
   wac: { file: "WAC", title: "Western Athletic Conference" },
   wcc: { file: "WCC", title: "West Coast Conference" },
 };
+
+//#endregion
