@@ -28,6 +28,7 @@
     "typescript-eslint": "^8.24.1"
   },
   "dependencies": {
+    "@fontsource-variable/phudu": "^5.2.8",
     "@fontsource/fira-sans": "^5.2.5",
     "@fontsource/fira-sans-condensed": "^5.2.5",
     "@fortawesome/fontawesome-svg-core": "^7.0.0",
@@ -40,7 +41,7 @@
     "radashi": "^12.6.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "rehype-external-links": "^3.0.0",
+    "remark-definition-list": "^2.0.0",
     "xss": "^1.0.15"
   }
 }

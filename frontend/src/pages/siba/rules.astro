@@ -3,11 +3,22 @@ import RulesIntro from "@components/RulesPage/RulesIntro.mdx";
 import MarkdownLayout from "@layouts/MarkdownLayout.astro";
 import ProRules from "@components/RulesPage/ProRules.mdx";
 import { PRO_LEAGUE_INFO } from "@lib/constants";
+import { getDataFromApi } from "@lib/utils";
+import type { StrapiProInfo, StrapiSingleTypeResponse } from "@lib/types";
 
 const title = "SIBA (Pro) Rules";
+
+const strapiProInfo = await getDataFromApi<
+  StrapiSingleTypeResponse<StrapiProInfo>
+>(`${import.meta.env.PUBLIC_CMS_URL}/pro-info`);
+
+const proInfo = {
+  teams: strapiProInfo.data.attributes.teams,
+  latestUpdate: strapiProInfo.data.attributes.updatedAt,
+};
 ---
 
 <MarkdownLayout content={{ title }}>
   <RulesIntro leagueInfo={PRO_LEAGUE_INFO} />
-  <ProRules />
+  <ProRules proInfo={proInfo} />
 </MarkdownLayout>

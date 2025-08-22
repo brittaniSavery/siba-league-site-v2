@@ -1,12 +1,20 @@
 import { defineConfig } from "astro/config";
+import {
+  remarkDefinitionList,
+  defListHastHandlers,
+} from "remark-definition-list";
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
-import rehypeExternalLinks from "rehype-external-links";
 
 export default defineConfig({
   integrations: [react(), mdx()],
   markdown: {
-    rehypePlugins: [rehypeExternalLinks],
+    rehypePlugins: [remarkDefinitionList],
+    remarkRehype: {
+      handlers: {
+        ...defListHastHandlers,
+      },
+    },
   },
   site: "https://siba.averyincorporated.com",
 });

@@ -3,6 +3,7 @@
 //Fonts
 @use "@fontsource/fira-sans-condensed";
 @use "@fontsource/fira-sans";
+@use "@fontsource-variable/phudu";
 
 //SIBA Brand Colors
 $siba-blue: #3260a4;
@@ -67,9 +68,23 @@ body > .container {
 }
 
 h1,
-h2,
+h2 {
+  font-family: "Phudu Variable", sans-serif;
+}
+
 h3 {
   font-family: "Fira Sans Condensed", sans-serif;
+}
+
+dt {
+  font-size: iv.$size-4;
+  border-bottom: 1px solid dv.$text;
+  margin-bottom: iv.$size-6;
+}
+
+dd + dt,
+dd + dd {
+  margin-top: iv.$size-6;
 }
 
 // .content {

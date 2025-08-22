@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { LEAGUE, TOURNAMENT_TYPE } from "@lib/constants";
+import type { LEAGUE } from "@lib/constants";
 
 //#region GENERAL TYPES
 export type ChildrenProps = {
