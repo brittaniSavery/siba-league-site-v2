@@ -26,10 +26,10 @@ hobby is spending time with his wife and children.
 
 Fun Facts:
 
-- Dream Job as Kid: Pro Basketball Player
-- Favorite Color: Blue
-- Favorite Animal: Polar Bear
-- Favorite Food: Any Chinese Dish
+- **Dream Job as Kid:** Pro Basketball Player
+- **Favorite Color:** Blue
+- **Favorite Animal:** Polar Bear
+- **Favorite Food:** Any Chinese Dish
 
 ### Brittani Avery
 
@@ -38,7 +38,7 @@ of hobbies, such as reading, writing, crocheting and playing video games. In 201
 
 Fun Facts:
 
-- Dream Job as Kid: Veterinarian
-- Favorite Color: Deep purple
-- Favorite Animal: Black Panther
-- Favorite Food: Shrimp Étouffée or Yum Woosen
+- **Dream Job as Kid:** Veterinarian
+- **Favorite Color:** Deep purple
+- **Favorite Animal:** Black Panther
+- **Favorite Food:** Shrimp Étouffée

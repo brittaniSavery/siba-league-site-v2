@@ -9,7 +9,7 @@ At the end of each SIBA season, reward points are rewarded to teams based on the
 - Each player may only receive 5 points in their potential rating
 - Teams may only use 50 reward points per season
 - Reward points are tradeable
-- Reward points cash-in needs to be done before the draft
+- Reward points cash-in needs to be done before the draft, directly DMing the commissioner
 
 ## Reward Types and Points
 
