@@ -1,0 +1,28 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import type { Member, StrapiCollectionResponse } from "@lib/types";
+import { getDataFromApi } from "@lib/utils";
+
+const strapiMembers = await getDataFromApi<StrapiCollectionResponse<Member>>(
+  `${import.meta.env.PUBLIC_CMS_URL}/general-managers?sort=team&pagination[limit]=32`
+);
+const members = strapiMembers.data;
+---
+
+<BaseLayout content={{ title: "SIBA Owners" }}>
+  <section class="content"><h1>{"SIBA Owners"}</h1></section>
+  <div class="columns is-multiline">
+    {
+      members.map(({ attributes: { team, logo, name } }) => (
+        <div class="column is-3-widescreen is-4-tablet has-text-centered">
+          <img
+            src={`${import.meta.env.SITE}/files/pro/Website/images/${logo}`}
+            alt={`${team} logo`}
+          />
+          <p class="title is-4">{team}</p>
+          <p class="subtitle is-6">{name}</p>
+        </div>
+      ))
+    }
+  </div>
+</BaseLayout>
