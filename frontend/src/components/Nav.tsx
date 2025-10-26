@@ -31,6 +31,14 @@ const navItems = [
     ],
   },
   {
+    title: "DBL",
+    link: "/dbl",
+    sublinks: [
+      { title: "League Standings", link: "/standings" },
+      { title: "League Leaders", link: "/leaders" },
+    ],
+  },
+  {
     title: "College",
     link: "/college",
     sublinks: [
@@ -41,14 +49,6 @@ const navItems = [
       { title: "Pre-season Tier Rankings", link: "/rankings" },
       { title: "Head Coaches", link: "/coaches" },
       { title: "Downloads", link: "/downloads" },
-    ],
-  },
-  {
-    title: "DBL",
-    link: "/dbl",
-    sublinks: [
-      { title: "League Standings", link: "/standings" },
-      { title: "League Leaders", link: "/leaders" },
     ],
   },
   {

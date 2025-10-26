@@ -6,7 +6,7 @@ export const GAME_YEAR_VERSION = 2025;
 export const DISCORD_LINK = "https://discord.com/invite/UqQh3zPBrV";
 export enum LEAGUE {
   pro = "pro",
-  development = "development",
+  development = "dbl",
   european = "european",
   college = "college",
 }
