@@ -1,0 +1,100 @@
+@use "siba";
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/derived-variables" as dv;
+@use "bulma/sass/utilities/mixins";
+
+@mixin calendar-icon($iconCode) {
+  .fc-event-title {
+    &::before {
+      align-items: center;
+      display: inline-flex;
+      justify-content: center;
+      height: 1.5rem;
+      width: 1.5rem;
+      font: var(--fa-font-solid);
+      content: $iconCode;
+    }
+  }
+}
+
+:root {
+  --fc-today-bg-color: transparent;
+  --fc-border-color: var(--bulma-border);
+  --fc-button-bg-color: var(--bulma-background);
+  --fc-button-text-color: var(--bulma-text);
+  --fc-button-border-color: var(--bulma-border);
+}
+
+.fc {
+  a {
+    color: var(--bulma-text);
+  }
+  .fc-col-header-cell {
+    text-align: center;
+    background: var(--bulma-background);
+  }
+  .fc-button:disabled {
+    display: none;
+  }
+  &.fc-media-screen {
+    padding-bottom: var(--bulma-block-spacing);
+  }
+}
+
+.fc-toolbar-title {
+  font-family: siba.$font-secondary;
+}
+
+.fc-event {
+  border: 1px solid transparent;
+  border-radius: 0rem;
+}
+
+// calendar event styles
+.no-recruit {
+  @include calendar-icon("\f00d"); //x mark
+  background-color: #4d4d4d;
+  color: #d2d2d2;
+}
+
+.quiet {
+  @include calendar-icon("\f027"); //speaker with low volume
+  background-color: #2185d0;
+  color: white;
+}
+
+.evaluation {
+  @include calendar-icon("\f002"); //magnifying glass
+  background-color: #f2711c;
+  color: white;
+}
+
+.dead {
+  @include calendar-icon("\f244"); //empty battery
+  background-color: #db2828;
+  color: white;
+}
+
+.contact {
+  @include calendar-icon("\e3af"); //house-chimney
+  background-color: #21ba45;
+  color: white;
+}
+
+.loi {
+  @include calendar-icon("\f305"); //pen
+  background-color: #767676;
+  color: white;
+}
+
+.tournament {
+  @include calendar-icon("\f091"); //trophy
+  background-color: #8f6ead;
+  color: white;
+}
+
+.season {
+  @include calendar-icon("\f06a"); //circle exclamation
+  background-color: #d46959;
+  color: white;
+}
