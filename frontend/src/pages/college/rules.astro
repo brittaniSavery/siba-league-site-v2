@@ -1,13 +1,23 @@
 ---
-import CollegeRules from "@components/RulesPage/CollegeRules.mdx";
-import RulesIntro from "@components/RulesPage/RulesIntro.mdx";
-import MarkdownLayout from "@layouts/MarkdownLayout.astro";
+import CollegeRules from "@components/rules/college/CollegeRules.mdx";
+import CollegeCalender from "@components/rules/college/CollegeCalender";
+import CalenderLegend from "@components/rules/college/CalendarLegend.astro";
+import RulesIntro from "@components/rules/RulesIntro.mdx";
 import { COLLEGE_LEAGUE_INFO } from "@lib/constants";
+import BaseLayout from "@layouts/BaseLayout.astro";
 
 const title = "SICBA (College) Rules";
 ---
 
-<MarkdownLayout content={{ title }}>
-  <RulesIntro leagueInfo={COLLEGE_LEAGUE_INFO} />
-  <CollegeRules />
-</MarkdownLayout>
+<BaseLayout content={{ title }}>
+  <div class="content">
+    <RulesIntro leagueInfo={COLLEGE_LEAGUE_INFO} />
+    <h2>Important Game Dates</h2>
+    <h3>Recruiting Periods Definitions</h3>
+    <CalenderLegend />
+  </div>
+  <CollegeCalender client:idle />
+  <div class="content">
+    <CollegeRules />
+  </div>
+</BaseLayout>

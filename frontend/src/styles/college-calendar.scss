@@ -1,0 +1,50 @@
+@use "siba";
+@use "bulma/sass/utilities/initial-variables" as iv;
+@use "bulma/sass/utilities/derived-variables" as dv;
+@use "bulma/sass/utilities/mixins";
+
+:root {
+  --fc-today-bg-color: transparent;
+  --fc-border-color: var(--bulma-border);
+  --fc-button-bg-color: var(--bulma-background);
+  --fc-button-text-color: var(--bulma-text);
+  --fc-button-border-color: var(--bulma-border);
+}
+
+.fc {
+  a {
+    color: var(--bulma-text);
+  }
+  .fc-col-header-cell {
+    text-align: center;
+    background: var(--bulma-background);
+  }
+  .fc-button {
+    &:disabled {
+      display: none;
+    }
+    &:not(:disabled):hover {
+      background-color: var(--bulma-background-hover);
+      border-color: var(--bulma-border-hover);
+      color: var(--bulma-text);
+    }
+  }
+  &.fc-media-screen {
+    padding-bottom: var(--bulma-block-spacing);
+  }
+}
+
+.fc-toolbar-title {
+  font-family: siba.$font-secondary;
+}
+
+.fc-event {
+  border: 1px solid transparent;
+}
+
+.fc-direction-ltr .fc-daygrid-event.fc-event-start {
+  margin-left: 0rem;
+}
+.fc-direction-ltr .fc-daygrid-event.fc-event-end {
+  margin-right: 0rem;
+}

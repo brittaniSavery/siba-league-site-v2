@@ -1,0 +1,474 @@
+[
+  {
+    "id": "1",
+    "title": "Allocate Facilities Budget",
+    "start": "2022-05-01",
+    "end": "2022-05-02",
+    "classNames": ["season"],
+    "order": 2
+  },
+  {
+    "id": "2",
+    "title": "Player Transfer Portal Sessions",
+    "start": "2022-05-29",
+    "end": "2022-06-23",
+    "classNames": ["season"],
+    "order": 2
+  },
+  {
+    "id": "3",
+    "title": "Schedule Summer Camp Travel",
+    "start": "2022-06-25",
+    "end": "2022-06-26",
+    "classNames": ["season"],
+    "order": 2
+  },
+  {
+    "id": "4",
+    "title": "Recruiting Begins",
+    "start": "2022-06-26",
+    "end": "2022-06-27",
+    "classNames": ["season"],
+    "order": 2
+  },
+  {
+    "id": "5",
+    "title": "National Recruit Camps",
+    "start": "2022-07-04",
+    "end": "2022-07-07",
+    "classNames": ["season"],
+    "order": 2
+  },
+  {
+    "id": "6",
+    "title": "Las Vegas Revue Camp (West Region)",
+    "start": "2022-07-07",
+    "end": "2022-07-10",
+    "classNames": ["season"],
+    "order": 2
+  },
+  {
+    "id": "7",
+    "title": "Houston Classic Camp (Great Plains Region)",
+    "start": "2022-07-11",
+    "end": "2022-07-14",
+    "classNames": ["season"],
+    "order": 2
+  },
+  {
+    "id": "8",
+    "title": "Chicago Prep Revue Camp (Midwest Region)",
+    "start": "2022-07-14",
+    "end": "2022-07-17",
+    "classNames": ["season"],
+    "order": 2
+  },
+  {
+    "id": "9",
+    "title": "Memphis Hoop Summit Camp (Southeast Region)",
+    "start": "2022-07-25",
+    "end": "2022-07-28",
+    "classNames": ["season"],
+    "order": 2
+  },
+  {
+    "id": "10",
+    "title": "Big Apple Showcase Camp (Atlantic East Region)",
+    "start": "2022-07-28",
+    "end": "2022-07-31",
+    "classNames": ["season"],
+    "order": 2
+  },
+  {
+    "id": "11",
+    "title": "Scheduling Decisions",
+    "start": "2022-09-18",
+    "end": "2022-09-19",
+    "classNames": ["season"],
+    "order": 2
+  },
+  {
+    "id": "12",
+    "title": "Practice Begins",
+    "start": "2022-10-02",
+    "end": "2022-10-03",
+    "classNames": ["season"],
+    "order": 2
+  },
+  {
+    "id": "13",
+    "title": "Season Begins",
+    "start": "2022-11-13",
+    "end": "2022-11-14",
+    "classNames": ["season"],
+    "order": 2
+  },
+  {
+    "id": "14",
+    "title": "Preseason Tournaments Begin",
+    "start": "2022-11-13",
+    "end": "2022-11-14",
+    "classNames": ["season"],
+    "order": 2
+  },
+  {
+    "id": "15",
+    "title": "Recruit SAT Scores Finalized",
+    "start": "2023-01-28",
+    "end": "2023-01-29",
+    "classNames": ["season"],
+    "order": 2
+  },
+  {
+    "id": "16",
+    "title": "Conference Tournaments Begin",
+    "start": "2023-03-05",
+    "end": "2023-03-06",
+    "classNames": ["season"],
+    "order": 2
+  },
+  {
+    "id": "17",
+    "title": "Selection Show",
+    "start": "2023-03-12",
+    "end": "2023-03-13",
+    "classNames": ["season"],
+    "order": 2
+  },
+  {
+    "id": "18",
+    "title": "Postseason Tournaments Begin",
+    "start": "2023-03-13",
+    "end": "2023-03-14",
+    "classNames": ["season"],
+    "order": 2
+  },
+  {
+    "id": "19",
+    "title": "League Awards",
+    "start": "2023-04-08",
+    "end": "2023-04-09",
+    "classNames": ["season"],
+    "order": 2
+  },
+  {
+    "id": "20",
+    "title": "Coaching Carousel",
+    "start": "2023-04-09",
+    "end": "2023-04-10",
+    "classNames": ["season"],
+    "order": 2
+  },
+  {
+    "id": "21",
+    "title": "Assistant Coach Hiring",
+    "start": "2023-04-16",
+    "end": "2023-04-17",
+    "classNames": ["season"],
+    "order": 2
+  },
+  {
+    "id": "22",
+    "title": "Year End Tasks",
+    "start": "2023-04-23",
+    "end": "2023-04-24",
+    "classNames": ["season"],
+    "order": 2
+  },
+  {
+    "id": "23",
+    "title": "No Recruiting",
+    "start": "2022-05-01",
+    "end": "2022-06-26",
+    "classNames": ["no-recruit"],
+    "order": 1
+  },
+  {
+    "id": "24",
+    "title": "Quiet",
+    "start": "2022-06-26",
+    "end": "2022-07-03",
+    "classNames": ["quiet"],
+    "order": 1
+  },
+  {
+    "id": "25",
+    "title": "Evaluation",
+    "start": "2022-07-03",
+    "end": "2022-07-17",
+    "classNames": ["evaluation"],
+    "order": 1
+  },
+  {
+    "id": "26",
+    "title": "Dead",
+    "start": "2022-07-17",
+    "end": "2022-07-24",
+    "classNames": ["dead"],
+    "order": 1
+  },
+  {
+    "id": "27",
+    "title": "Evaluation",
+    "start": "2022-07-24",
+    "end": "2022-07-31",
+    "classNames": ["evaluation"],
+    "order": 1
+  },
+  {
+    "id": "28",
+    "title": "Quiet",
+    "start": "2022-07-31",
+    "end": "2022-09-11",
+    "classNames": ["quiet"],
+    "order": 1
+  },
+  {
+    "id": "29",
+    "title": "Contact",
+    "start": "2022-09-11",
+    "end": "2022-10-09",
+    "classNames": ["contact"],
+    "order": 1
+  },
+  {
+    "id": "30",
+    "title": "Quiet",
+    "start": "2022-10-09",
+    "end": "2022-11-20",
+    "classNames": ["quiet"],
+    "order": 1
+  },
+  {
+    "id": "31",
+    "title": "Early LOI Signings",
+    "start": "2022-11-13",
+    "end": "2022-11-20",
+    "classNames": ["loi"],
+    "order": 2
+  },
+  {
+    "id": "32",
+    "title": "Evaluation",
+    "start": "2022-11-20",
+    "end": "2023-03-19",
+    "classNames": ["evaluation"],
+    "order": 1
+  },
+  {
+    "id": "33",
+    "title": "Contact",
+    "start": "2023-03-19",
+    "end": "2023-03-26",
+    "classNames": ["contact"],
+    "order": 1
+  },
+  {
+    "id": "34",
+    "title": "Quiet",
+    "start": "2023-03-26",
+    "end": "2023-04-02",
+    "classNames": ["quiet"],
+    "order": 1
+  },
+  {
+    "id": "35",
+    "title": "Dead",
+    "start": "2023-04-02",
+    "end": "2023-04-09",
+    "classNames": ["dead"],
+    "order": 1
+  },
+  {
+    "id": "36",
+    "title": "Contact",
+    "start": "2023-04-09",
+    "end": "2023-05-01",
+    "classNames": ["contact"],
+    "order": 1
+  },
+  {
+    "id": "37",
+    "title": "Late LOI Signings",
+    "start": "2023-04-09",
+    "end": "2023-05-01",
+    "classNames": ["loi"],
+    "order": 2
+  },
+  {
+    "id": "38",
+    "title": "Coaches Classic",
+    "start": "2022-11-13",
+    "end": "2022-11-20",
+    "classNames": ["tournament"],
+    "order": 3
+  },
+  {
+    "id": "39",
+    "title": "Preseason CBT Tournament",
+    "start": "2022-11-14",
+    "end": "2022-11-21",
+    "classNames": ["tournament"],
+    "order": 3
+  },
+  {
+    "id": "40",
+    "title": "Hawaiian Shootcout",
+    "start": "2022-11-18",
+    "end": "2022-11-21",
+    "classNames": ["tournament"],
+    "order": 3
+  },
+  {
+    "id": "41",
+    "title": "Paradise Invitational",
+    "start": "2022-11-18",
+    "end": "2022-11-21",
+    "classNames": ["tournament"],
+    "order": 3
+  },
+  {
+    "id": "42",
+    "title": "Poseidon's Challenge",
+    "start": "2022-11-21",
+    "end": "2022-11-24",
+    "classNames": ["tournament"],
+    "order": 3
+  },
+  {
+    "id": "43",
+    "title": "WSSN Classic",
+    "start": "2022-11-21",
+    "end": "2022-11-24",
+    "classNames": ["tournament"],
+    "order": 3
+  },
+  {
+    "id": "44",
+    "title": "Cabo Challenge",
+    "start": "2022-11-21",
+    "end": "2022-11-24",
+    "classNames": ["tournament"],
+    "order": 3
+  },
+  {
+    "id": "45",
+    "title": "Alaskan Classic",
+    "start": "2022-11-25",
+    "end": "2022-11-28",
+    "classNames": ["tournament"],
+    "order": 3
+  },
+  {
+    "id": "46",
+    "title": "Palmetto Shootout",
+    "start": "2022-11-25",
+    "end": "2022-11-28",
+    "classNames": ["tournament"],
+    "order": 3
+  },
+  {
+    "id": "47",
+    "title": "Sunshine Shootout",
+    "start": "2022-12-09",
+    "end": "2022-12-12",
+    "classNames": ["tournament"],
+    "order": 3
+  },
+  {
+    "id": "48",
+    "title": "Golden State Classic",
+    "start": "2022-12-09",
+    "end": "2022-12-12",
+    "classNames": ["tournament"],
+    "order": 3
+  },
+  {
+    "id": "49",
+    "title": "Bermuda Bracket",
+    "start": "2022-12-09",
+    "end": "2022-12-12",
+    "classNames": ["tournament"],
+    "order": 3
+  },
+  {
+    "id": "50",
+    "title": "Las Vegas Winter Jam",
+    "start": "2022-12-16",
+    "end": "2022-12-19",
+    "classNames": ["tournament"],
+    "order": 3
+  },
+  {
+    "id": "51",
+    "title": "Caribbean Challenge",
+    "start": "2022-12-16",
+    "end": "2022-12-19",
+    "classNames": ["tournament"],
+    "order": 3
+  },
+  {
+    "id": "52",
+    "title": "Bahama Classic",
+    "start": "2022-12-16",
+    "end": "2022-12-19",
+    "classNames": ["tournament"],
+    "order": 3
+  },
+  {
+    "id": "53",
+    "title": "JAG Holiday Invitational",
+    "start": "2022-12-23",
+    "end": "2022-12-26",
+    "classNames": ["tournament"],
+    "order": 3
+  },
+  {
+    "id": "54",
+    "title": "Military Memorial",
+    "start": "2022-12-23",
+    "end": "2022-12-26",
+    "classNames": ["tournament"],
+    "order": 3
+  },
+  {
+    "id": "55",
+    "title": "South Beach Showcase",
+    "start": "2022-12-23",
+    "end": "2022-12-26",
+    "classNames": ["tournament"],
+    "order": 3
+  },
+  {
+    "id": "56",
+    "title": "SICBA Main Tournament",
+    "start": "2023-05-14",
+    "end": "2023-04-01",
+    "classNames": ["tournament"],
+    "order": 3
+  },
+  {
+    "id": "57",
+    "title": "CBT Tournament",
+    "start": "2023-03-13",
+    "end": "2023-03-31",
+    "classNames": ["tournament"],
+    "order": 3
+  },
+  {
+    "id": "58",
+    "title": "IBI Tournament",
+    "start": "2023-03-13",
+    "end": "2023-03-31",
+    "classNames": ["tournament"],
+    "order": 3
+  },
+  {
+    "id": "59",
+    "title": "USIT Tournament",
+    "start": "2023-03-14",
+    "end": "2023-03-30",
+    "classNames": ["tournament"],
+    "order": 3
+  }
+]

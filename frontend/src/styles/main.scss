@@ -1,21 +1,12 @@
 @charset "utf-8";
 
-//Fonts
-@use "@fontsource/fira-sans-condensed";
-@use "@fontsource/fira-sans";
-@use "@fontsource-variable/phudu";
-
-//SIBA Brand Colors
-$siba-blue: #3260a4;
-$siba-link: #0f85ec;
-$siba-link-visited: #760fec;
-
+@use "siba";
 @use "bulma/sass/utilities/initial-variables" as iv;
 @use "bulma/sass/utilities/derived-variables" as dv with (
-  $primary: $siba-blue,
-  $link: $siba-link,
-  $family-primary: '"Fira Sans", sans-serif',
-  $family-secondary: '"Fira Sans Condensed", sans-serif'
+  $primary: siba.$blue,
+  $link: siba.$link,
+  $family-primary: siba.$font-primary,
+  $family-secondary: siba.$font-secondary
 );
 
 @use "bulma/sass/components/modal" with (
