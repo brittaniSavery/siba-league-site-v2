@@ -4,7 +4,7 @@ This project holds the entire frontend of the main website for the SIBA fictiona
 
 Technologies used:
 
-- Typescript
+- [Typescript](https://www.typescriptlang.org/)
 - [Astro](https://astro.build/)
 - [Bulma CSS](https://bulma.io/)
 - [Base UI](https://base-ui.com/)
@@ -46,15 +46,17 @@ All commands are run from the root of the project, from a terminal:
 | Command           | Action                                           |
 | :---------------- | :----------------------------------------------- |
 | `npm install`     | Installs dependencies                            |
-| `npm run dev`     | Starts local dev server at `localhost:3000`      |
+| `npm run dev`     | Starts local dev server at `localhost:5000`      |
 | `npm run build`   | Builds production site to `./dist/`              |
 | `npm run preview` | Previews current build locally, before deploying |
 
 ## 📋 Current TODOs
 
 - [x] Add important game dates for pro
-- [ ] Add important game dates for college (calendar again?)
+- [x] Add important game dates for college
+- [x] Add legend for college events calendar
 - [ ] Add join page basics
 - [ ] Create team search box component (ComboBox)
 - [ ] Set up preview of teams on join page
 - [ ] Set up validation for college teams (no same region or conference + tier limits)
+- [ ] Create college standings page (searchable to for team/conference)
