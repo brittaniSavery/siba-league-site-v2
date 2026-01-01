@@ -3,6 +3,7 @@ import Layout from "@layouts/BaseLayout.astro";
 import { DISCORD_LINK } from "@lib/constants";
 import type { Article, SiteUpdate, StrapiCollectionResponse } from "@lib/types";
 import { getDataFromApi } from "@lib/utils";
+import ExternalLink from "@components/ExternalLink";
 
 const updatesResponse = await getDataFromApi<
   StrapiCollectionResponse<SiteUpdate>
@@ -43,10 +44,10 @@ const articles = articlesResponse.data.map((a) => a.attributes);
       and test your basketball coaching and management skills! Read the <a
         href="/siba/rules">professional league rules</a
       > and the <a href="/college/rules">college league rules</a> to get a good understanding
-      of the workings of the leagues. Also, be sure to join our <a
-        href={DISCORD_LINK}
-        target="_blank">Discord</a
-      >! We're happy to answer any questions you may have.
+      of the workings of the leagues. Also, be sure to join our <ExternalLink
+        url={DISCORD_LINK}
+        label="Discord"
+      />! We're happy to answer any questions you may have.
     </p>
     <div class="columns">
       <div class="column">

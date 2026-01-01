@@ -6,17 +6,12 @@ type ExternalLinkProps = {
 };
 
 export default function ExternalLink({
-  url: href,
+  url,
   label,
   classes,
 }: ExternalLinkProps) {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={classes}
-    >
+    <a href={url} target="_blank" rel="noopener noreferrer" className={classes}>
       <span className="icon-text">
         <span>{label}</span>
         <span className="icon">
