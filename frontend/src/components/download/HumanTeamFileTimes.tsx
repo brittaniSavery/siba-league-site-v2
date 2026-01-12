@@ -1,4 +1,4 @@
-import * as _ from "radashi";
+import { group } from "radashi";
 import useDataFromApi from "@layouts/hooks/useDataFromApi";
 import { COLLEGE_LEAGUE_INFO, LEAGUE, PRO_LEAGUE_INFO } from "@lib/constants";
 import type { HumanTeam } from "@lib/types";
@@ -34,10 +34,10 @@ export default function HumanTeamFileTimes({
       </progress>
     );
 
-  const fileTimesByTeamID = _.group(data.members, (m) => m.teamID);
+  const fileTimesByTeamID = group(data.members, (m) => m.teamID);
 
   return (
-    <table className="table is-striped">
+    <table className="table is-fullwidth">
       <thead>
         <tr>
           <th>Team</th>
@@ -51,7 +51,16 @@ export default function HumanTeamFileTimes({
             <td>{t.team}</td>
             <td>{t.member}</td>
             <td>
-              <FileTimeDisplay fileTimes={fileTimesByTeamID[t.id]} />
+              {Object.hasOwn(fileTimesByTeamID, t.id) ? (
+                <FileTimeDisplay fileTimes={fileTimesByTeamID[t.id]} />
+              ) : (
+                <span className="icon-text">
+                  <span className="icon has-text-danger">
+                    <i className="fa-solid fa-ban"></i>
+                  </span>
+                  <span>No Exports Found!</span>
+                </span>
+              )}
             </td>
           </tr>
         ))}
@@ -83,7 +92,9 @@ function FileTimeDisplay({ fileTimes }: { fileTimes: TeamFileTime[] }) {
         </select>
       </div>
       <p className="box">
-        {formatRelative(new Date(selected.latestUpload), new Date())}
+        {formatRelative(new Date(selected.latestUpload), new Date(), {
+          weekStartsOn: 1,
+        })}
       </p>
     </>
   );
