@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { LEAGUE } from "@lib/constants";
+import type { LEAGUE, LOW_TO_HIGH, PRO_PERSONALITY } from "@lib/constants";
 
 //#region GENERAL TYPES
 export type ChildrenProps = {
@@ -23,11 +23,6 @@ export type StrapiCollectionResponse<T> = {
 
 export type StrapiSingleTypeResponse<T> = {
   data: StrapiObject<T>;
-};
-
-export type StrapiSimDates = {
-  pro: Date;
-  college: Date;
 };
 
 export type StrapiTeamInfo = {
@@ -121,6 +116,44 @@ export type LeagueInfo = {
   pointLabels: AbilityPoint[];
   pictureFolder: string;
 };
+
+//#region JOIN TYPES
+
+type ProPersonality = (typeof PRO_PERSONALITY)[number];
+type LowToHigh = (typeof LOW_TO_HIGH)[number];
+
+export type NewTeam = {
+  firstName: string;
+  lastName: string;
+  age: number;
+  face: number;
+  outfit: number;
+  offense: number;
+  defense: number;
+  playerDev: number;
+};
+
+export type NewProTeam = NewTeam & {
+  team: ProTeam;
+  gender: "male" | "female";
+  personality: ProPersonality;
+  greed: LowToHigh;
+  potential: number;
+  gameStrategy: number;
+};
+
+export type NewCollegeTeam = NewTeam & {
+  team: School;
+  ambition: LowToHigh;
+  academics: LowToHigh;
+  discipline: LowToHigh;
+  integrity: LowToHigh;
+  temper: LowToHigh;
+  recruiting: number;
+  scouting: number;
+};
+
+//#endregion
 
 //#endregion
 

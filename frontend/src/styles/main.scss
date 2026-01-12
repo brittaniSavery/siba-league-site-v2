@@ -80,6 +80,25 @@ dd + dd {
   margin-top: iv.$size-6;
 }
 
+.teams {
+  border: 1px solid var(--bulma-border);
+  border-radius: var(--bulma-radius);
+  &-header {
+    background: var(--bulma-background);
+  }
+  &-content {
+    padding: 1rem;
+  }
+}
+
+// .card {
+//   border: 1px solid var(--bulma-border);
+//   & .card-header {
+//     background: var(--bulma-background);
+//     border-bottom: 1px solid var(--bulma-border);
+//   }
+// }
+
 // .content {
 //   h1,
 //   h2,

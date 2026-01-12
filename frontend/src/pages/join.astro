@@ -1,0 +1,27 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import JoinForm from "@components/join/JoinForm";
+---
+
+<BaseLayout content={{ title: "Join" }}>
+  <section class="content">
+    <h1>Join</h1>
+    <p>
+      To join the Simulation Internet Basketball Association (SIBA) and/or the
+      Simulation Internet College Basketball Association (SICBA), please fill
+      out the form below and select your preferred professtional team or college
+      program(s). Once received, our league commissioners will review your
+      application as well as verify your Discord account to ensure smooth
+      communication between you and the rest of the SIBA community.
+    </p>
+    <p>
+      All are welcome to apply, whether you are a seasoned basketball simulation
+      veteran or a newcomer looking to get started. We encourage all applicants
+      to read through the <a href="/siba/rules">SIBA Rules</a> and <a
+        href="/college/rules">College Rules</a
+      > prior to submitting an application to ensure you understand the league structure
+      and expectations.
+    </p>
+  </section>
+  <JoinForm client:load />
+</BaseLayout>

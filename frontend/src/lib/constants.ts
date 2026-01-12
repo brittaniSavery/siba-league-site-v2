@@ -35,6 +35,14 @@ export const PlayerDev: AbilityPoint = {
   },
 };
 
+export const LOW_TO_HIGH = [
+  "Very Low",
+  "Low",
+  "Average",
+  "High",
+  "Very High",
+] as const;
+
 //#endregion
 
 //#region PRO CONSTANTS
@@ -76,6 +84,14 @@ export const PRO_LEAGUE_INFO = {
   pictureFolder: "nonplayers",
 };
 
+export const PRO_PERSONALITY = [
+  "Terrible",
+  "Poor",
+  "Normal",
+  "Good",
+  "Great",
+] as const;
+
 //#endregion
 
 //#region COLLEGE CONSTANTS
@@ -93,16 +109,6 @@ export const Recruiting: AbilityPoint = {
     college: "Recruiting Ability",
   },
 };
-
-export enum RECRUITING_STATES {
-  None = "No Recruiting",
-  Quiet = "Quiet",
-  Evaluation = "Evaluation",
-  Dead = "Dead",
-  Contact = "Contact",
-  EarlyLOI = "Early LOI Signings",
-  LateLOI = "Late LOI Signings",
-}
 
 export const COLLEGE_LEAGUE_INFO = {
   name: "Simulation Internet College Basketball",
