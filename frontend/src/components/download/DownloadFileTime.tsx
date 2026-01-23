@@ -1,4 +1,4 @@
-import useDataFromApi from "@layouts/hooks/useDataFromApi";
+import useDataFromApi from "@hooks/useDataFromApi";
 import type { LEAGUE } from "@lib/constants";
 import { format, secondsToMilliseconds } from "date-fns";
 
@@ -16,7 +16,7 @@ export default function DownloadFileTime({
   file,
 }: DownloadFileTimeProps): string {
   const { isLoading, data } = useDataFromApi<FileTimes>(
-    `${import.meta.env.PUBLIC_FILE_TIMES_URL}?league=${league}&file=${file}`
+    `${import.meta.env.PUBLIC_FILE_TIMES_URL}?league=${league}&file=${file}`,
   );
 
   if (isLoading) {
@@ -29,7 +29,7 @@ export default function DownloadFileTime({
 
     const formattedTime = format(
       new Date(fileTime),
-      "MMM dd, yyyy 'at' hh:mm aa"
+      "MMM dd, yyyy 'at' hh:mm aa",
     );
 
     return formattedTime || "Currently unavailable";

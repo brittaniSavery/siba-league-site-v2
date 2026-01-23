@@ -1,5 +1,5 @@
 import { group } from "radashi";
-import useDataFromApi from "@layouts/hooks/useDataFromApi";
+import useDataFromApi from "@hooks/useDataFromApi";
 import { COLLEGE_LEAGUE_INFO, LEAGUE, PRO_LEAGUE_INFO } from "@lib/constants";
 import type { HumanTeam } from "@lib/types";
 import { useState } from "react";
@@ -24,7 +24,7 @@ export default function HumanTeamFileTimes({
     league === LEAGUE.pro ? PRO_LEAGUE_INFO : COLLEGE_LEAGUE_INFO;
 
   const { isLoading, data } = useDataFromApi<{ members: TeamFileTime[] }>(
-    `${import.meta.env.PUBLIC_FILE_TIMES_URL}?league=${league}&file=members`
+    `${import.meta.env.PUBLIC_FILE_TIMES_URL}?league=${league}&file=members`,
   );
 
   if (isLoading)
@@ -78,7 +78,7 @@ function FileTimeDisplay({ fileTimes }: { fileTimes: TeamFileTime[] }) {
         <select
           onChange={(event) => {
             const newValue = fileTimes.find(
-              (u) => u.fileType === event.target.value
+              (u) => u.fileType === event.target.value,
             );
             console.log(newValue?.latestUpload);
             if (newValue) setSelected(newValue);
