@@ -1,21 +1,19 @@
 ---
-import type { StrapiSingleTypeResponse, StrapiProInfo } from "@lib/types";
-import { PRO_LEAGUE_INFO } from "@lib/constants";
-import { getDataFromApi, getFormattedDate } from "@lib/utils";
 import { Content as RewardsIntro } from "@components/RewardsIntro.md";
 import MarkdownLayout from "@layouts/MarkdownLayout.astro";
+import { PRO_LEAGUE_INFO } from "@lib/constants";
+import { getProTeams } from "@lib/utils";
+import { format } from "date-fns";
 
-const proInfo = await getDataFromApi<StrapiSingleTypeResponse<StrapiProInfo>>(
-  `${import.meta.env.PUBLIC_CMS_URL}/pro-info`
-);
-const teams = proInfo.data.attributes.teams;
-const lastUpdated = proInfo.data.attributes.updatedAt;
+const proInfo = await getProTeams();
+const teams = proInfo.teams;
+const lastUpdated = proInfo.lastUpdated;
 ---
 
 <MarkdownLayout content={{ title: `${PRO_LEAGUE_INFO.abbv} Rewards` }}>
   <RewardsIntro />
   <h3>Current Team Reward Points</h3>
-  <p><strong>Last Updated:</strong> {getFormattedDate(lastUpdated)}</p>
+  <p><strong>Last Updated:</strong> {format(lastUpdated, "MMM d, yyyy")}</p>
   <table>
     <tr>
       <th>Team</th>

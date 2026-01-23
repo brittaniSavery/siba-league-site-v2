@@ -1,27 +1,15 @@
 ---
-import BaseLayout from "@layouts/BaseLayout.astro";
 import TierRankings from "@components/TierRankings";
-import { getDataFromApi, getFormattedDate } from "@lib/utils";
-import type {
-  Member,
-  School,
-  StrapiCollectionResponse,
-  StrapiCollegeInfo,
-  StrapiSingleTypeResponse,
-} from "@lib/types";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import type { School } from "@lib/types";
+import { getSchools, getStrapiMembers } from "@lib/utils";
+import { format } from "date-fns";
 
-const teams = await getDataFromApi<StrapiSingleTypeResponse<StrapiCollegeInfo>>(
-  `${import.meta.env.PUBLIC_CMS_URL}/college-info`
-);
-const strapiMembers = await getDataFromApi<StrapiCollectionResponse<Member>>(
-  `${import.meta.env.PUBLIC_CMS_URL}/coaches?sort=team&pagination[limit]=100`
-);
-const members = strapiMembers.data.map(
-  ({ attributes: { team, logo, name } }) => ({ team, logo, name })
-);
+const collegeInfo = await getSchools();
+const members = await getStrapiMembers("college");
 
-const schools: School[] = teams.data.attributes.teams;
-const lastUpdated = teams.data.attributes.updatedAt;
+const schools: School[] = collegeInfo.teams;
+const lastUpdated = collegeInfo.lastUpdated;
 ---
 
 <BaseLayout content={{ title: "SICBA Pre-Season Tier Rankings" }}>
@@ -38,7 +26,7 @@ const lastUpdated = teams.data.attributes.updatedAt;
     </p>
     <p>
       <b>Last Updated:</b>
-      {getFormattedDate(lastUpdated)}
+      {format(lastUpdated, "MMM d, yyyy")}
     </p>
   </section>
   <TierRankings coaches={members} schools={schools} client:idle />

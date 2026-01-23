@@ -3,34 +3,10 @@ import DownloadFileTime from "@components/download/DownloadFileTime";
 import HumanTeamFileTimes from "@components/download/HumanTeamFileTimes";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { GAME_YEAR_VERSION, LEAGUE } from "@lib/constants";
-import type {
-  Member,
-  HumanTeam,
-  StrapiCollectionResponse,
-  StrapiSingleTypeResponse,
-  StrapiTeamInfo,
-} from "@lib/types";
-import { getDataFromApi, mergeArrays } from "@lib/utils";
+import { getCollegeHumansTeams } from "@lib/utils";
 
 const title = "Download SICBA (College) Program Files";
-
-const strapiMembers = await getDataFromApi<StrapiCollectionResponse<Member>>(
-  `${import.meta.env.PUBLIC_CMS_URL}/coaches?sort=team&pagination[limit]=100`
-);
-const members: HumanTeam[] = strapiMembers.data.map((m) => ({
-  team: m.attributes.team,
-  member: m.attributes.name,
-}));
-const teamInfo = await getDataFromApi<StrapiSingleTypeResponse<StrapiTeamInfo>>(
-  `${import.meta.env.PUBLIC_CMS_URL}/college-info`
-);
-const teams: HumanTeam[] =
-  teamInfo.data.attributes.teams.map((t) => ({
-    id: t.id,
-    team: `${t.name} ${t.mascot}`,
-  })) || [];
-
-const humanTeams = mergeArrays(members, teams, "team");
+const humanTeams = await getCollegeHumansTeams();
 ---
 
 <BaseLayout content={{ title }}>
@@ -51,8 +27,8 @@ const humanTeams = mergeArrays(members, teams, "team");
           <a href={`${import.meta.env.SITE}/files/college/SIBA.zip`}
             >League File</a
           >
-          - This file contains all the league information. It should be exported
-          at <code
+          - This file contains all the league information. It should be exported at
+          <code
             >/Wolverine Studios/DDSCB{GAME_YEAR_VERSION}/app/disk/saves/</code
           > folder location.
           <br />
