@@ -92,7 +92,7 @@ function FileTimeDisplay({ fileTimes }: { fileTimes: TeamFileTime[] }) {
         </select>
       </div>
       <p className="box">
-        {formatRelative(new Date(selected.latestUpload), new Date(), {
+        {formatRelative(new Date(`${selected.latestUpload}Z`), new Date(), {
           weekStartsOn: 1,
         })}
       </p>
