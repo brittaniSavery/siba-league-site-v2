@@ -38,7 +38,7 @@ export async function getProTeams() {
 
   return {
     teams: teamInfo.data.attributes.teams,
-    lastUpdated: teamInfo.data.attributes.updatedAt,
+    lastUpdated: new Date(teamInfo.data.attributes.updatedAt),
   };
 }
 
