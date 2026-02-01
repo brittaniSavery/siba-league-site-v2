@@ -1,6 +1,22 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import JoinForm from "@components/join/JoinForm";
+import { getProTeams, getSchools, getStrapiMembers } from "@lib/utils";
+
+const schools = (await getSchools()).teams;
+const proTeams = (await getProTeams()).teams;
+
+const humanProTeams = await getStrapiMembers("pro");
+const humanSchools = await getStrapiMembers("college");
+
+const availableProTeams = proTeams.filter(
+  (team) =>
+    !humanProTeams.some((h) => h.team === `${team.name} ${team.mascot}`),
+);
+const availableSchools = schools.filter(
+  (school) =>
+    !humanSchools.some((h) => h.team === `${school.name} ${school.mascot}`),
+);
 ---
 
 <BaseLayout content={{ title: "Join" }}>
@@ -23,5 +39,9 @@ import JoinForm from "@components/join/JoinForm";
       and expectations.
     </p>
   </section>
-  <JoinForm client:load />
+  <JoinForm
+    availableProTeams={availableProTeams}
+    availableSchools={availableSchools}
+    client:load
+  />
 </BaseLayout>

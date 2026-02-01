@@ -14,16 +14,16 @@ export enum LEAGUE {
 export const Offense: AbilityPoint = {
   key: "offense",
   label: {
-    pro: "Evaluating Offense",
-    college: "Offensive Concepts",
+    pro: "Offense Knowledge",
+    college: "Offensive Knowledge",
   },
 };
 
 export const Defense: AbilityPoint = {
   key: "defense",
   label: {
-    pro: "Evaluating Defense",
-    college: "Defensive Concepts",
+    pro: "Defense Knowledge",
+    college: "Defensive Knowledge",
   },
 };
 
@@ -50,14 +50,14 @@ export const LOW_TO_HIGH = [
 export const Potential: AbilityPoint = {
   key: "potential",
   label: {
-    pro: "Evaluating Potential",
+    pro: "Evaluate Potential",
   },
 };
 
-export const GameStrategy: AbilityPoint = {
-  key: "gameStrategy",
+export const BasketballIQ: AbilityPoint = {
+  key: "bballIQ",
   label: {
-    pro: "Game Strategy",
+    pro: "Basketball IQ",
   },
 };
 
@@ -80,7 +80,7 @@ export const PRO_LEAGUE_INFO = {
     max: 85,
     total: 325,
   },
-  pointLabels: [Offense, Defense, Potential, GameStrategy, PlayerDev],
+  pointLabels: [Offense, Defense, Potential, BasketballIQ, PlayerDev],
   pictureFolder: "nonplayers",
 };
 
@@ -106,7 +106,7 @@ export const Scouting: AbilityPoint = {
 export const Recruiting: AbilityPoint = {
   key: "recruiting",
   label: {
-    college: "Recruiting Ability",
+    college: "Recruiting Skill",
   },
 };
 
@@ -141,7 +141,7 @@ export const COLLEGE_LEAGUE_INFO = {
       total: 150,
     },
   },
-  pointLabels: [Offense, Defense, Scouting, Recruiting, PlayerDev],
+  pointLabels: [Offense, Defense, Recruiting, Scouting, PlayerDev],
   pictureFolder: "coaches",
 };
 

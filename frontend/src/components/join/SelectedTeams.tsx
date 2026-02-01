@@ -1,10 +1,23 @@
+import type { NewCollegeTeam, NewProTeam } from "@lib/types";
 import clsx from "clsx";
 import { useState } from "react";
-import JoinModal from "./JoinModal";
 
-export default function SelectedTeams() {
+type SelectedTeamsProps = {
+  pro?: NewProTeam;
+  college?: NewCollegeTeam[];
+  onAdd: (type: "pro" | "college") => void;
+  onEdit: () => void;
+  onDelete: () => void;
+};
+
+export default function SelectedTeams({
+  pro,
+  college,
+  onAdd,
+  onEdit,
+  onDelete,
+}: SelectedTeamsProps) {
   const [activeTab, setActiveTab] = useState(1);
-  const [isOpen, setIsOpen] = useState(false);
   return (
     <>
       <div className="field teams">
@@ -24,10 +37,11 @@ export default function SelectedTeams() {
           {activeTab === 1 && (
             <>
               <p>You are able to manage only one (1) pro team.</p>
+              {/* Selected pro team would go here */}
               <button
                 type="button"
-                onClick={() => setIsOpen(true)}
-                className="button  mt-2"
+                onClick={() => onAdd("pro")}
+                className="button mt-2"
               >
                 Add pro team
               </button>
@@ -40,9 +54,10 @@ export default function SelectedTeams() {
                 two Tier 2, and two Tier 3. They each must be different
                 recruiting regions <strong>and</strong> different conferences.
               </p>
+              {/* List of selected college teams would go here */}
               <button
                 type="button"
-                onClick={() => setIsOpen(true)}
+                onClick={() => onAdd("college")}
                 className="button mt-2"
               >
                 Add college team
@@ -51,14 +66,6 @@ export default function SelectedTeams() {
           )}
         </div>
       </div>
-      <JoinModal
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
-        title="Select Your Teams"
-        mode="add"
-      >
-        <p>Modal content goes here.</p>
-      </JoinModal>
     </>
   );
 }

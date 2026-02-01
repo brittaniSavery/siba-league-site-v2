@@ -123,6 +123,7 @@ type ProPersonality = (typeof PRO_PERSONALITY)[number];
 type LowToHigh = (typeof LOW_TO_HIGH)[number];
 
 export type NewTeam = {
+  password: string;
   firstName: string;
   lastName: string;
   age: number;
@@ -131,24 +132,25 @@ export type NewTeam = {
   offense: number;
   defense: number;
   playerDev: number;
+  abilityPointsTotal: number;
 };
 
 export type NewProTeam = NewTeam & {
   team: ProTeam;
   gender: "male" | "female";
-  personality: ProPersonality;
-  greed: LowToHigh;
+  personality: ProPersonality | "";
+  greed: LowToHigh | "";
   potential: number;
-  gameStrategy: number;
+  bballIQ: number;
 };
 
 export type NewCollegeTeam = NewTeam & {
   team: School;
-  ambition: LowToHigh;
-  academics: LowToHigh;
-  discipline: LowToHigh;
-  integrity: LowToHigh;
-  temper: LowToHigh;
+  ambition: LowToHigh | "";
+  academics: LowToHigh | "";
+  discipline: LowToHigh | "";
+  integrity: LowToHigh | "";
+  temper: LowToHigh | "";
   recruiting: number;
   scouting: number;
 };
