@@ -1,4 +1,10 @@
-import type { NewCollegeTeam, NewProTeam, ProTeam, School } from "@lib/types";
+import type {
+  NewCollegeTeam,
+  NewProTeam,
+  ProTeam,
+  School,
+  Team,
+} from "@lib/types";
 import {
   useFieldArray,
   useForm,
@@ -9,13 +15,12 @@ import SelectedTeams from "./SelectedTeams";
 import { useState } from "react";
 import NewProTeamForm from "./NewProTeamForm";
 import NewCollegeTeamForm from "./NewCollegeTeamForm";
-import { set } from "date-fns";
 import JoinInput from "./JoinInput";
 import JoinSelect from "./JoinSelect";
 import JoinField from "./JoinField";
 
 type JoinFormProps = {
-  availableProTeams: ProTeam[];
+  availableProTeams: Team[];
   availableSchools: School[];
 };
 
@@ -34,7 +39,7 @@ export default function JoinForm({
   availableSchools,
 }: JoinFormProps) {
   const [currentProTeams, setCurrentProTeams] =
-    useState<ProTeam[]>(availableProTeams);
+    useState<Team[]>(availableProTeams);
   const [currentSchools, setCurrentSchools] =
     useState<School[]>(availableSchools);
   const [mode, setMode] = useState<"add" | "edit">("add");

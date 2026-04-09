@@ -2,9 +2,10 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import JoinForm from "@components/join/JoinForm";
 import { getProTeams, getSchools, getStrapiMembers } from "@lib/utils";
+import type { Team } from "@lib/types";
 
 const schools = (await getSchools()).teams;
-const proTeams = (await getProTeams()).teams;
+const proTeams = (await getProTeams()).teams as Team[];
 
 const humanProTeams = await getStrapiMembers("pro");
 const humanSchools = await getStrapiMembers("college");
@@ -12,7 +13,7 @@ const humanSchools = await getStrapiMembers("college");
 const availableProTeams = proTeams.filter(
   (team) =>
     !humanProTeams.some((h) => h.team === `${team.name} ${team.mascot}`),
-);
+).concat({id:999,name:"D-League Team",mascot:""});
 const availableSchools = schools.filter(
   (school) =>
     !humanSchools.some((h) => h.team === `${school.name} ${school.mascot}`),

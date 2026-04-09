@@ -1,5 +1,5 @@
 import { LOW_TO_HIGH, PRO_LEAGUE_INFO, PRO_PERSONALITY } from "@lib/constants";
-import type { NewProTeam, ProTeam } from "@lib/types";
+import type { NewProTeam, Team } from "@lib/types";
 import { useForm, type Path, type SubmitHandler } from "react-hook-form";
 import JoinField from "./JoinField";
 import JoinInput from "./JoinInput";
@@ -9,7 +9,7 @@ import JoinSelect from "./JoinSelect";
 type NewProTeamFormProps = {
   isOpen: boolean;
   mode: "add" | "edit";
-  availableTeams: ProTeam[];
+  availableTeams: Team[];
   selectedTeam?: NewProTeam;
   onClose: () => void;
   onSubmit: (team: NewProTeam) => void;
@@ -94,8 +94,8 @@ export default function NewProTeamForm({
             label="Team Selection"
             control={control}
             options={availableTeams}
-            renderOptionLabel={(team) => team.name}
-            renderOptionValue={(team) => team.id.toString()}
+            renderOptionLabel={({ name }) => name}
+            renderOptionValue={({ id }) => id.toString()}
           />
           <JoinInput
             name="password"

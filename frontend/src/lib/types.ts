@@ -136,7 +136,7 @@ export type NewTeam = {
 };
 
 export type NewProTeam = NewTeam & {
-  team: ProTeam;
+  team: Team | null;
   gender: "male" | "female";
   personality: ProPersonality | "";
   greed: LowToHigh | "";
@@ -145,7 +145,7 @@ export type NewProTeam = NewTeam & {
 };
 
 export type NewCollegeTeam = NewTeam & {
-  team: School;
+  team: School | null;
   ambition: LowToHigh | "";
   academics: LowToHigh | "";
   discipline: LowToHigh | "";
