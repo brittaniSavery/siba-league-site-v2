@@ -31,7 +31,7 @@ export default function JoinModal({
             onClick={onClose}
           ></button>
         </header>
-        <section className="modal-card-body content">
+        <section className="modal-card-body content mb-0">
           <p>
             This form includes all the details needed for your team and{" "}
             {memberType}. When selecting your {memberType}&apos;s face and
