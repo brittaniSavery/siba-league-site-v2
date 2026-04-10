@@ -3,19 +3,18 @@
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"],
   "compilerOptions": {
-    "baseUrl": "./",
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "resolveJsonModule": true,
     "paths": {
-      "@assets/*": ["src/assets/*"],
-      "@components/*": ["src/components/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@layouts/*": ["src/layouts/*"],
-      "@lib/*": ["src/lib/*"],
-      "@styles/*": ["src/styles/*"],
-      "@pro/*": ["public/files/pro/Website/*"],
-      "@college/*": ["public/files/college/Website/*"]
+      "@assets/*": ["./src/assets/*"],
+      "@components/*": ["./src/components/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@layouts/*": ["./src/layouts/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@pro/*": ["./public/files/pro/Website/*"],
+      "@college/*": ["./public/files/college/Website/*"]
     }
   }
 }
