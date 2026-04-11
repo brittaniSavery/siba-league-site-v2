@@ -39,7 +39,7 @@ const { content, fullWidth } = Astro.props;
   <body class="has-navbar-fixed-top">
     <Nav client:load />
     <main class={clsx(!fullWidth && "container is-max-widescreen mt-2")}>
-      <slot />
+      <div class="root"><slot /></div>
     </main>
     <Footer />
   </body>

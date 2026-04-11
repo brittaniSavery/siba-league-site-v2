@@ -11,6 +11,7 @@ import JoinInput from "./JoinInput";
 import JoinModal from "./JoinModal";
 import JoinSelect from "./JoinSelect";
 import { useState } from "react";
+import JoinCombobox from "./JoinComboBox";
 
 type NewCollegeTeamFormProps = {
   isOpen: boolean;
@@ -103,20 +104,25 @@ export default function NewCollegeTeamForm({
       >
         <h3>Team Basics</h3>
         <div className="columns">
-          <JoinSelect
-            colSize="3"
+          <JoinCombobox
+            colSize="6"
             name="team"
             label="Team Selection"
             control={control}
             options={availableTeams}
-            renderOptionLabel={(team) => team.name}
+            renderOptionLabel={(team) => (
+              <span>
+                {team.name} {team.mascot}
+              </span>
+            )}
             renderOptionValue={(team) => team.id.toString()}
+            help="You can search for your team by school name or mascot."
           />
           <JoinInput
             name="password"
             label="Team Password"
             type="password"
-            colSize="9"
+            colSize="6"
             control={control}
           />
         </div>

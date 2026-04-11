@@ -31,8 +31,8 @@
 @forward "bulma/sass/elements/progress";
 @forward "bulma/sass/elements/table";
 @forward "bulma/sass/elements/tag";
+@use "bulma/sass/form" as form;
 @forward "bulma/sass/elements/title";
-@forward "bulma/sass/form";
 @forward "bulma/sass/grid/columns";
 @forward "bulma/sass/helpers";
 @forward "bulma/sass/layout/container";
@@ -44,13 +44,20 @@ html {
   min-height: 100%;
 }
 
-body > .container {
-  margin-bottom: 10rem;
+body {
+  > .container {
+    margin-bottom: 10rem;
 
-  @include mixins.until(iv.$desktop) {
-    padding-left: 0.75rem;
+    @include mixins.until(iv.$desktop) {
+      padding-left: 0.75rem;
+    }
   }
 }
+
+.root {
+  isolation: isolate;
+}
+
 .footer {
   position: absolute;
   left: 0;
@@ -83,6 +90,47 @@ dd + dd {
   margin-top: iv.$size-6;
 }
 
+.combobox {
+  &-popup {
+    box-sizing: border-box;
+    border-radius: 0.375rem;
+    background-color: canvas;
+    color: var(--color-gray-900);
+    width: var(--anchor-width);
+    max-height: 23rem;
+    max-width: var(--available-width);
+    transition:
+      opacity 0.1s,
+      transform 0.1s;
+    transform-origin: var(--transform-origin);
+
+    &[data-starting-style],
+    &[data-ending-style] {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+  }
+
+  &-input {
+    @include form.input;
+    width: 100%;
+  }
+
+  &-list {
+    box-sizing: border-box;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-block: 0.5rem;
+    scroll-padding-block: 0.5rem;
+    outline: 0;
+    max-height: min(23rem, var(--available-height));
+
+    &[data-empty] {
+      padding: 0;
+    }
+  }
+}
+
 .teams {
   border: 1px solid var(--bulma-border);
   border-radius: var(--bulma-radius);
@@ -93,158 +141,3 @@ dd + dd {
     padding: 1rem;
   }
 }
-
-// .card {
-//   border: 1px solid var(--bulma-border);
-//   & .card-header {
-//     background: var(--bulma-background);
-//     border-bottom: 1px solid var(--bulma-border);
-//   }
-// }
-
-// .content {
-//   h1,
-//   h2,
-//   h3 {
-//     font-family: dv.$family-primary;
-//   }
-// }
-
-// a:not(.navbar-item, .navbar-link) {
-//   &:link {
-//     color: bulma.$link;
-//     text-decoration: underline;
-//   }
-
-//   &:visited {
-//     color: $siba-link-visited;
-//   }
-
-//   &:hover,
-//   &:focus {
-//     color: bulma.$primary;
-//     border: 1px dashed bulma.$primary;
-//   }
-// }
-
-// a.icon-link {
-//   &:link {
-//     text-decoration: none;
-
-//     span.icon-text > span:not(.icon) {
-//       border-bottom: 1px solid bulma.$link;
-//     }
-//   }
-
-//   &:visited:not(:hover, :focus) {
-//     span.icon-text {
-//       color: $siba-link-visited !important;
-//       > span:not(.icon) {
-//         border-bottom: 1px solid $siba-link-visited;
-//       }
-//     }
-//   }
-
-//   &:hover,
-//   &:focus {
-//     span.icon-text > span:not(.icon) {
-//       border-bottom: none;
-//     }
-//   }
-// }
-
-// .is-borderless {
-//   border: none;
-// }
-
-// .card {
-//   border: 1px solid bulma.$grey-lighter;
-
-//   img {
-//     margin: auto 0;
-//   }
-// }
-
-//   ul + ol {
-//     margin-top: 0.5em;
-//   }
-
-//   table {
-//     width: 50% !important;
-//   }
-
-//   dt {
-//     font-size: bulma.$size-4;
-//     border-bottom: 1px solid bulma.$text;
-//     margin-bottom: bulma.$size-6;
-//   }
-
-//   dd + dt,
-//   dd + dd {
-//     margin-top: bulma.$size-6;
-//   }
-// }
-
-// .highlighted {
-//   background-color: #d7e9f6;
-// }
-
-// .owners-grid {
-//   display: block;
-//   text-align: center;
-//   word-wrap: break-word;
-
-//   img {
-//     display: block;
-//     width: 150px;
-//     margin: auto;
-//     max-width: 100%;
-//     height: auto;
-//   }
-// }
-
-// #join .card {
-//   .tabs ul {
-//     border-bottom-color: transparent;
-
-//     li {
-//       &.is-active a {
-//         border-bottom-color: white !important;
-//       }
-
-//       a:hover,
-//       a:focus {
-//         color: $siba-blue;
-//         border: 1px dashed $siba-blue;
-//       }
-//     }
-//   }
-// }
-
-// #downloads {
-//   &-pro::after {
-//     content: "";
-//     display: inline-flex;
-//     position: relative;
-//     top: 0.25rem;
-//     margin: 0 0.5rem;
-//     background-image: url("/images/logo.svg");
-//     background-size: contain;
-//     background-repeat: no-repeat;
-//     height: 1.75rem;
-//     width: 1.75rem;
-//   }
-
-//   &-college::after {
-//     content: "";
-//     display: inline-flex;
-//     position: relative;
-//     top: 0.25rem;
-//     margin: 0 0.5rem;
-//     background-image: url("/images/sicba-logo.svg");
-//     background-size: contain;
-//     background-repeat: no-repeat;
-//     height: 1.75rem;
-//     width: 1.75rem;
-//   }
-// }
