@@ -7,7 +7,7 @@ import JoinField, { type AllFieldProps } from "./JoinField";
 type SelectProps<T extends FieldValues, K> = AllFieldProps<T> &
   UseControllerProps<T> & {
     options: K[];
-    renderOptionValue?: (option: K) => string;
+    renderOptionValue?: (option: K) => string | number | readonly string[];
     renderOptionLabel?: (option: K) => string;
   };
 
@@ -54,7 +54,7 @@ export default function Select<T extends FieldValues, K>(
             const optionValue = renderOptionValue(option);
 
             return (
-              <option key={optionValue} value={optionValue}>
+              <option key={optionValue.toString()} value={optionValue}>
                 {renderOptionLabel(option)}
               </option>
             );

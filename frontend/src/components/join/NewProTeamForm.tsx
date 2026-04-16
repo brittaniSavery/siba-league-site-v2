@@ -38,7 +38,7 @@ export default function NewProTeamForm({
     playerDev: 10,
     potential: 10,
     bballIQ: 10,
-    team: null,
+    teamId: 0,
     abilityPointsTotal: 50,
   };
 
@@ -89,19 +89,19 @@ export default function NewProTeamForm({
         <h3>Team Basics</h3>
         <div className="columns">
           <JoinSelect
-            colSize="3"
-            name="team"
+            colSize="4"
+            name="teamId"
             label="Team Selection"
             control={control}
             options={availableTeams}
             renderOptionLabel={({ name }) => name}
-            renderOptionValue={({ id }) => id.toString()}
+            renderOptionValue={({ id }) => id}
           />
           <JoinInput
             name="password"
             label="Team Password"
             type="password"
-            colSize="9"
+            colSize="8"
             control={control}
           />
         </div>
