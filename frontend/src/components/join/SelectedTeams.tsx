@@ -36,7 +36,13 @@ export default function SelectedTeams({
         <div className="teams-content">
           {activeTab === 1 && (
             <>
-              <p>You are able to manage only one (1) pro team.</p>
+              <p>
+                You are able to manage only one (1) pro team and its
+                corresponding D-League team. Note: it is not necessary to manage
+                a D-League team. However, if you would like more contorl over
+                playing time for your developing, managing your D-League team is
+                highly recommended.
+              </p>
               {/* Selected pro team would go here */}
               <button
                 type="button"

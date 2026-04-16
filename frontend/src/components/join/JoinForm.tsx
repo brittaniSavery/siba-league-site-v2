@@ -1,23 +1,17 @@
-import type {
-  NewCollegeTeam,
-  NewProTeam,
-  ProTeam,
-  School,
-  Team,
-} from "@lib/types";
+import type { NewCollegeTeam, NewProTeam, School, Team } from "@lib/types";
+import { useState } from "react";
 import {
   useFieldArray,
   useForm,
   useWatch,
   type SubmitHandler,
 } from "react-hook-form";
-import SelectedTeams from "./SelectedTeams";
-import { useState } from "react";
-import NewProTeamForm from "./NewProTeamForm";
-import NewCollegeTeamForm from "./NewCollegeTeamForm";
+import JoinField from "./JoinField";
 import JoinInput from "./JoinInput";
 import JoinSelect from "./JoinSelect";
-import JoinField from "./JoinField";
+import NewCollegeTeamForm from "./NewCollegeTeamForm";
+import NewProTeamForm from "./NewProTeamForm";
+import SelectedTeams from "./SelectedTeams";
 
 type JoinFormProps = {
   availableProTeams: Team[];
@@ -38,10 +32,8 @@ export default function JoinForm({
   availableProTeams,
   availableSchools,
 }: JoinFormProps) {
-  const [currentProTeams, setCurrentProTeams] =
-    useState<Team[]>(availableProTeams);
-  const [currentSchools, setCurrentSchools] =
-    useState<School[]>(availableSchools);
+  const [currentProTeams] = useState<Team[]>(availableProTeams);
+  const [currentSchools] = useState<School[]>(availableSchools);
   const [mode, setMode] = useState<"add" | "edit">("add");
   const [type, setType] = useState<"pro" | "college">("pro");
   const [isOpen, setIsOpen] = useState(false);
@@ -52,7 +44,16 @@ export default function JoinForm({
     control,
     setValue,
     formState: { errors },
-  } = useForm<JoinFormInputs>();
+  } = useForm<JoinFormInputs>({
+    defaultValues: {
+      discord: "",
+      email: "",
+      name: "",
+      reason: "",
+      pro: undefined,
+      college: [],
+    },
+  });
   const proTeam = useWatch({ name: "pro", control });
   const {
     fields: collegeTeams,

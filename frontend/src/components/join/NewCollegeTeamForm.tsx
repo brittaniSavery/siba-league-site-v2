@@ -1,17 +1,9 @@
-import {
-  COLLEGE_LEAGUE_INFO,
-  LOW_TO_HIGH,
-  PRO_LEAGUE_INFO,
-  PRO_PERSONALITY,
-} from "@lib/constants";
+import { COLLEGE_LEAGUE_INFO, PRO_LEAGUE_INFO } from "@lib/constants";
 import type { NewCollegeTeam, School } from "@lib/types";
 import { useForm, type Path, type SubmitHandler } from "react-hook-form";
-import JoinField from "./JoinField";
+import JoinCombobox from "./JoinComboBox";
 import JoinInput from "./JoinInput";
 import JoinModal from "./JoinModal";
-import JoinSelect from "./JoinSelect";
-import { useState } from "react";
-import JoinCombobox from "./JoinComboBox";
 
 type NewCollegeTeamFormProps = {
   isOpen: boolean;
@@ -105,17 +97,27 @@ export default function NewCollegeTeamForm({
         <h3>Team Basics</h3>
         <div className="columns">
           <JoinCombobox
-            colSize="6"
             name="team"
             label="Team Selection"
+            colSize="6"
             control={control}
             options={availableTeams}
-            renderOptionLabel={(team) => (
-              <span>
-                {team.name} {team.mascot}
-              </span>
-            )}
-            renderOptionValue={(team) => team.id.toString()}
+            placeholder="e.g. Arizona Wildcats"
+            renderOptionInputDisplay={(team) =>
+              team ? `${team.name} ${team.mascot}` : ""
+            }
+            renderOptionKeyValue={(team) => team?.id.toString()}
+            renderOptionListItem={(team) => {
+              if (!team) return null;
+              return (
+                <>
+                  <p>
+                    {team.name} {team.mascot}
+                  </p>
+                  <p className="is-size-6">{`Tier: ${team.tier} - ${team.conference}`}</p>
+                </>
+              );
+            }}
             help="You can search for your team by school name or mascot."
           />
           <JoinInput

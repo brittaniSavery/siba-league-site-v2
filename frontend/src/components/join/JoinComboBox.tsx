@@ -6,15 +6,19 @@ import { type AllFieldProps } from "./JoinField";
 import { Combobox } from "@base-ui/react/combobox";
 import { capitalize } from "radashi";
 
-type SelectProps<T extends FieldValues, K extends object> = AllFieldProps<T> &
+type JoinComboboxProps<
+  T extends FieldValues,
+  K extends object,
+> = AllFieldProps<T> &
   UseControllerProps<T> & {
     options: K[];
-    renderOptionValue: (option: K) => string;
-    renderOptionLabel: (option: K) => JSX.Element;
+    renderOptionKeyValue: (option: K) => string;
+    renderOptionInputDisplay: (option: K) => string;
+    renderOptionListItem?: (option: K) => JSX.Element;
   };
 
 export default function JoinCombobox<T extends FieldValues, K extends object>(
-  props: SelectProps<T, K> & InputHTMLAttributes<HTMLElement>,
+  props: JoinComboboxProps<T, K> & InputHTMLAttributes<HTMLElement>,
 ) {
   const {
     name,
@@ -24,18 +28,25 @@ export default function JoinCombobox<T extends FieldValues, K extends object>(
     horizontal,
     options,
     control,
-    renderOptionLabel,
-    renderOptionValue,
+    renderOptionInputDisplay,
+    renderOptionKeyValue,
+    renderOptionListItem,
+
     ...rest
   } = props;
 
   const {
-    field,
+    field: { value, onChange, onBlur, ref },
     fieldState: { error },
   } = useController({ name, control });
 
   return (
-    <Combobox.Root items={options}>
+    <Combobox.Root
+      items={options}
+      value={value}
+      onValueChange={onChange}
+      itemToStringLabel={(value) => renderOptionInputDisplay(value)}
+    >
       <div className={clsx("field", colSize && `column is-${colSize}`)}>
         <label htmlFor={name} className="label">
           {label ?? capitalize(name)}
@@ -44,8 +55,10 @@ export default function JoinCombobox<T extends FieldValues, K extends object>(
           <div className="select" style={{ width: "100%" }}>
             <Combobox.Input
               id={name}
-              className={clsx("combobox-input ", error && "is-danger")}
-              placeholder="e.g. Arizona Wildcats"
+              className={clsx("combobox-input", error && "is-danger")}
+              ref={ref}
+              onBlur={onBlur}
+              {...rest}
             />
           </div>
         </Combobox.InputGroup>
@@ -58,10 +71,15 @@ export default function JoinCombobox<T extends FieldValues, K extends object>(
             <Combobox.Empty>No matches</Combobox.Empty>
             <Combobox.List className={"combobox-list"}>
               {(option: K) => {
-                const value = renderOptionValue(option);
                 return (
-                  <Combobox.Item key={`${name}-${value}`} value={value}>
-                    {renderOptionLabel(option)}
+                  <Combobox.Item
+                    className={"combobox-item"}
+                    key={renderOptionKeyValue(option)}
+                    value={option}
+                  >
+                    {renderOptionListItem
+                      ? renderOptionListItem(option)
+                      : renderOptionInputDisplay(option)}
                   </Combobox.Item>
                 );
               }}

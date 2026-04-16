@@ -11,10 +11,10 @@
     "lint": "eslint . --ext .md,.mdx,.js,.jsx,.ts,.tsx,.astro --fix"
   },
   "devDependencies": {
-    "@astrojs/mdx": "^4.3.13",
-    "@astrojs/react": "4.3.0",
+    "@astrojs/mdx": "^5.0.3",
+    "@astrojs/react": "5.0.3",
     "@eslint/js": "^9.39.2",
-    "astro": "5.12.8",
+    "astro": "6.1.6",
     "bulma": "^1.0.4",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
