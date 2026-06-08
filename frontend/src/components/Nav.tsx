@@ -4,19 +4,13 @@ import { useState } from "react";
 const navItems = [
   { title: "About", link: "/about" },
   {
-    title: "SIBA Info",
+    title: "SIBA",
     link: "/siba",
     sublinks: [
       { title: "Rules", link: "/rules" },
       { title: "Owners", link: "/owners" },
       { title: "Rewards", link: "/rewards" },
-      { title: "Downloads", link: "/downloads" },
-    ],
-  },
-  {
-    title: "SIBA Season",
-    link: "/siba",
-    sublinks: [
+      { title: "Downloads", link: "/downloads", divider: true },
       { title: "League Standings", link: "/standings" },
       { title: "League Leaders", link: "/leaders" },
       { title: "Schedule", link: "/schedule" },
@@ -31,12 +25,12 @@ const navItems = [
     link: "/college",
     sublinks: [
       { title: "Rules", link: "/rules" },
+      { title: "Head Coaches", link: "/coaches" },
+      { title: "Pre-season Tier Rankings", link: "/rankings" },
+      { title: "Downloads", link: "/downloads", divider: true },
       { title: "Schedule", link: "/schedule" },
       { title: "League Standings", link: "/standings" },
       { title: "Current Polls", link: "/polls" },
-      { title: "Pre-season Tier Rankings", link: "/rankings" },
-      { title: "Head Coaches", link: "/coaches" },
-      { title: "Downloads", link: "/downloads" },
     ],
   },
   {
@@ -133,17 +127,21 @@ export default function Nav() {
 type NavLinkProps = {
   link: string;
   title: string;
+  divider?: boolean;
 };
 
 type DropDownProps = NavLinkProps & {
   sublinks: NavLinkProps[];
 };
 
-function NavLink({ link, title }: NavLinkProps) {
+function NavLink({ link, title, divider }: NavLinkProps) {
   return (
-    <a className="navbar-item" href={link}>
-      {title}
-    </a>
+    <>
+      <a className="navbar-item" href={link}>
+        {title}
+      </a>
+      {divider && <hr className="navbar-divider"></hr>}
+    </>
   );
 }
 
@@ -166,6 +164,7 @@ function NavDropdown({ link, title, sublinks }: DropDownProps) {
             key={`${title}-${l.title}`}
             link={`${link}${l.link}`}
             title={l.title}
+            divider={l.divider}
           />
         ))}
       </div>

@@ -25,13 +25,13 @@ const { section } = Astro.params;
 const leagueInfo =
   section === LEAGUE.college ? COLLEGE_LEAGUE_INFO : PRO_LEAGUE_INFO;
 const title = `Download ${leagueInfo.abbv} (${capitalize(
-  leagueInfo.type
+  leagueInfo.type,
 )}) Program Files`;
 
 const strapiMembers = await getDataFromApi<StrapiCollectionResponse<Member>>(
   `${import.meta.env.PUBLIC_CMS_URL}/${
     leagueInfo.strapiMembers
-  }?pagination[limit]=100`
+  }?pagination[limit]=100`,
 );
 
 const sortedMembers: Member[] = sortBy(
@@ -40,11 +40,11 @@ const sortedMembers: Member[] = sortBy(
     logo: member.attributes.logo,
     name: member.attributes.name,
   })),
-  ["team"]
+  ["team"],
 );
 
 const teamInfo = await getDataFromApi<StrapiSingleTypeResponse<StrapiTeamInfo>>(
-  `${import.meta.env.PUBLIC_CMS_URL}/${leagueInfo.type}-info`
+  `${import.meta.env.PUBLIC_CMS_URL}/${leagueInfo.type}-info`,
 );
 const teams: Team[] = teamInfo.data.attributes.teams || [];
 ---
@@ -67,8 +67,7 @@ const teams: Team[] = teamInfo.data.attributes.teams || [];
         >
           League File:</a
         >
-      </b> This file runs all the simulation from the league. Add this to your own
-      copy of the program so you have the most updated version of the league.
+      </b> This file runs all the simulation from the {leagueInfo.type} league.
       <br />
       <i
         >Last Modified: <DownloadTimes
@@ -78,6 +77,32 @@ const teams: Team[] = teamInfo.data.attributes.teams || [];
         />
       </i>
     </p>
+    {
+      leagueInfo.type === LEAGUE.pro && (
+        <p>
+          <b>
+            <a
+              href={`${import.meta.env.SITE}files/${leagueInfo.type}/DDS${
+                COLLEGE_LEAGUE_INFO.typeAbbv
+              }2025.zip`}
+              download
+            >
+              College File:
+            </a>
+          </b>
+          This file contians all the information from our college league.
+          Exporting this .zip file to the Wolverine Studios folder, you will be
+          able to view current stats from the concurrent college season. If you
+          would like more information on how to get this setup, please ask in
+          the <code>#siba-chat</code> channel on our Discord server.
+          <br />
+          <i>
+            Last Modified:{" "}
+            <DownloadTimes league={LEAGUE.college} file="main" client:idle />
+          </i>
+        </p>
+      )
+    }
     <p>
       <b
         ><a
@@ -88,8 +113,7 @@ const teams: Team[] = teamInfo.data.attributes.teams || [];
         >
           Graphics File:</a
         >
-      </b> This file runs all the simulation from the league. Add this to your own
-      copy of the program so you have the most updated version of the league.
+      </b> This file contains all the graphics for the {leagueInfo.type} league.
       <br />
       <i
         >Last Modified: <DownloadTimes
