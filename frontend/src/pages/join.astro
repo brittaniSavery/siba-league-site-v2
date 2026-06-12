@@ -20,33 +20,40 @@ const schools: School[] = collegeInfo.data.attributes.teams || [];
 const strapiCoaches = await getDataFromApi<StrapiCollectionResponse<Member>>(
   `${import.meta.env.PUBLIC_CMS_URL}/${
     COLLEGE_LEAGUE_INFO.strapiMembers
-  }?pagination[limit]=100`
+  }?pagination[limit]=100`,
 );
 
 const unavailableSchools = strapiCoaches.data.map(
-  (member) => member.attributes.team
+  (member) => member.attributes.team,
 );
 const availableSchools = schools.filter(
-  (school) => !unavailableSchools.includes(`${school.name} ${school.mascot}`)
+  (school) => !unavailableSchools.includes(`${school.name} ${school.mascot}`),
 );
 
 const proInfo = await getDataFromApi<StrapiSingleTypeResponse<StrapiProInfo>>(
-  `${import.meta.env.PUBLIC_CMS_URL}/pro-info`
+  `${import.meta.env.PUBLIC_CMS_URL}/pro-info`,
 );
 const proTeams = proInfo.data.attributes.teams;
 
 const strapiGMs = await getDataFromApi<StrapiCollectionResponse<Member>>(
   `${import.meta.env.PUBLIC_CMS_URL}/${
     PRO_LEAGUE_INFO.strapiMembers
-  }?pagination[limit]=100`
+  }?pagination[limit]=100`,
 );
 
 const unavailableProTeams = strapiGMs.data.map(
-  (member) => member.attributes.team
+  (member) => member.attributes.team,
 );
 const availableProTeams = proTeams.filter(
-  (team) => !unavailableProTeams.includes(`${team.name} ${team.mascot}`)
+  (team) => !unavailableProTeams.includes(`${team.name} ${team.mascot}`),
 );
+availableProTeams.push({
+  name: "D-League",
+  mascot: "Team",
+  id: 0,
+  points: 0,
+  luxury_tax: 0,
+});
 ---
 
 <Layout content={{ title: "Join" }}>
