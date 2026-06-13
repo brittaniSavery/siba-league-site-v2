@@ -136,7 +136,7 @@ export type NewTeam = {
 };
 
 export type NewProTeam = NewTeam & {
-  team: Team | null;
+  teamId: number;
   gender: "male" | "female";
   personality: ProPersonality | "";
   greed: LowToHigh | "";

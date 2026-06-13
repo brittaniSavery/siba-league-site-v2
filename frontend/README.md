@@ -55,8 +55,9 @@ All commands are run from the root of the project, from a terminal:
 - [x] Add important game dates for pro
 - [x] Add important game dates for college
 - [x] Add legend for college events calendar
-- [ ] Add join page basics
-- [ ] Create team search box component (ComboBox)
+- [x] Add join page basics
+- [ ] Create team search box component (~~ComboBox~~ React-Select)
 - [ ] Set up preview of teams on join page
 - [ ] Set up validation for college teams (no same region or conference + tier limits)
 - [ ] Create college standings page (searchable to for team/conference)
+- [ ] Include D-League add-on for pro team during sign-up

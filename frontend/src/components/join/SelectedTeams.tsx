@@ -39,7 +39,7 @@ export default function SelectedTeams({
               <p>
                 You are able to manage only one (1) pro team and its
                 corresponding D-League team. Note: it is not necessary to manage
-                a D-League team. However, if you would like more contorl over
+                a D-League team. However, if you would like more control over
                 playing time for your developing, managing your D-League team is
                 highly recommended.
               </p>
