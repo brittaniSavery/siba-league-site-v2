@@ -9,9 +9,8 @@ import {
 import JoinField from "./JoinField";
 import JoinInput from "./JoinInput";
 import JoinSelect from "./JoinSelect";
-import NewCollegeTeamForm from "./NewCollegeTeamForm";
-import NewProTeamForm from "./NewProTeamForm";
 import SelectedTeams from "./SelectedTeams";
+import { Dialog } from "@base-ui/react/dialog";
 
 type JoinFormProps = {
   availableProTeams: Team[];
@@ -34,9 +33,11 @@ export default function JoinForm({
 }: JoinFormProps) {
   const [currentProTeams] = useState<Team[]>(availableProTeams);
   const [currentSchools] = useState<School[]>(availableSchools);
-  const [mode, setMode] = useState<"add" | "edit">("add");
-  const [type, setType] = useState<"pro" | "college">("pro");
-  const [isOpen, setIsOpen] = useState(false);
+  const teamFormDialog = Dialog.createHandle<{
+    mode: "create" | "edit";
+    type: "pro" | "college";
+    team?: NewProTeam | NewCollegeTeam;
+  }>();
 
   const {
     register,
@@ -131,19 +132,14 @@ export default function JoinForm({
         <SelectedTeams
           pro={proTeam}
           college={collegeTeams}
-          onAdd={(type: "pro" | "college") => {
-            setType(type);
-            setMode("add");
-            setIsOpen(true);
-          }}
-          onEdit={() => {}}
-          onDelete={() => {}}
+          dialogTrigger={teamFormDialog}
         />
         <button type="submit" className="button is-primary mt-4">
           Join
         </button>
       </form>
-      <NewProTeamForm
+      
+      {/* <NewProTeamForm
         availableTeams={currentProTeams}
         onSubmit={() => {}}
         isOpen={isOpen && type === "pro"}
@@ -156,7 +152,7 @@ export default function JoinForm({
         isOpen={isOpen && type === "college"}
         mode={mode}
         onClose={() => setIsOpen(false)}
-      />
+      /> */}
       {/* Add Delete Confirmation Modal */}
     </>
   );
